@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.TextField;
@@ -23,16 +24,18 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 
 public class TelaCadastroVeiculo extends JFrame {
 
 	private JPanel contentPane;
 	private JLabel lblPlaca;
-	private TextField txtPlaca;
+	private JFormattedTextField formattedTextFieldPlaca;
 	private JLabel lblRenavam;
 	private TextField txtRenavam;
 	private JLabel lblChassi;
@@ -52,6 +55,7 @@ public class TelaCadastroVeiculo extends JFrame {
 	private JCheckBox chkDirecaoEletrica;
 	private JCheckBox chkDuasPortas;
 	private JCheckBox chkQuatroPortas;
+	private JButton btnSalvar;
 	
 	/**
 	 * Launch the application.
@@ -73,8 +77,9 @@ public class TelaCadastroVeiculo extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws ParseException 
 	 */
-	public TelaCadastroVeiculo() {
+	public TelaCadastroVeiculo() throws ParseException {
 		setTitle("Cadastro de Veiculo");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 604, 421);
@@ -84,13 +89,15 @@ public class TelaCadastroVeiculo extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		MaskFormatter mascaraPlaca = new MaskFormatter("UUU-####");
+		
 		lblPlaca = new JLabel("Placa");
 		lblPlaca.setBounds(56, 86, 46, 14);
 		contentPane.add(lblPlaca);
 		
-		txtPlaca = new TextField();
-		txtPlaca.setBounds(56, 101, 146, 22);
-		contentPane.add(txtPlaca);
+		formattedTextFieldPlaca = new JFormattedTextField(mascaraPlaca);
+		formattedTextFieldPlaca.setBounds(56, 101, 146, 22);
+		contentPane.add(formattedTextFieldPlaca);
 		
 		lblRenavam = new JLabel("Renavam");
 		lblRenavam.setBounds(223, 86, 59, 14);
@@ -179,9 +186,8 @@ public class TelaCadastroVeiculo extends JFrame {
 		separator.setBounds(56, 250, 482, 2);
 		contentPane.add(separator);
 		
-		JButton btnSalvar = new JButton(" Salvar");
+		btnSalvar = new JButton(" Salvar");
 		btnSalvar.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				JOptionPane.showMessageDialog(null,"Passou pelo bot�o SALVAR");
 			}
