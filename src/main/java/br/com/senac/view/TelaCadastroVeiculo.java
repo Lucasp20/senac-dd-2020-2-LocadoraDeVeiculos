@@ -166,7 +166,7 @@ public class TelaCadastroVeiculo extends JFrame {
 		btnSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				JOptionPane.showMessageDialog(null,"Passou pelo botão SALVAR");
+				JOptionPane.showMessageDialog(null,"Passou pelo botï¿½o SALVAR");
 			}
 		});
 		btnSalvar.setHorizontalAlignment(SwingConstants.LEFT);
@@ -195,3 +195,5 @@ public class TelaCadastroVeiculo extends JFrame {
 		contentPane.add(comboBox);
 	}
 }
+
+/*teste commit*/
