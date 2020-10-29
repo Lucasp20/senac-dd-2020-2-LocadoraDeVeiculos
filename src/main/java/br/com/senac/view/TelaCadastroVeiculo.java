@@ -13,6 +13,7 @@ import java.awt.SystemColor;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JMenu;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
@@ -24,6 +25,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TelaCadastroVeiculo extends JFrame {
 
@@ -127,39 +130,45 @@ public class TelaCadastroVeiculo extends JFrame {
 		
 		chkArCondicionado = new JCheckBox("Ar condicionado");
 		chkArCondicionado.setBackground(UIManager.getColor("240, 248, 255"));
-		chkArCondicionado.setBounds(56, 250, 123, 23);
+		chkArCondicionado.setBounds(60, 259, 123, 23);
 		contentPane.add(chkArCondicionado);
 		
 		JCheckBox chkDirecaoHidraulica = new JCheckBox("Dire\u00E7\u00E3o Hidraulica");
 		chkDirecaoHidraulica.setBackground((Color) null);
-		chkDirecaoHidraulica.setBounds(217, 250, 129, 23);
+		chkDirecaoHidraulica.setBounds(221, 259, 129, 23);
 		contentPane.add(chkDirecaoHidraulica);
 		
 		JCheckBox chkVidroEletrico = new JCheckBox("Vidro El\u00E9trico");
 		chkVidroEletrico.setBackground((Color) null);
-		chkVidroEletrico.setBounds(387, 276, 111, 23);
+		chkVidroEletrico.setBounds(391, 285, 111, 23);
 		contentPane.add(chkVidroEletrico);
 		
 		JCheckBox chkDirecaoEletrica = new JCheckBox("Dire\u00E7\u00E3o El\u00E9trica");
 		chkDirecaoEletrica.setBackground((Color) null);
-		chkDirecaoEletrica.setBounds(387, 250, 123, 23);
+		chkDirecaoEletrica.setBounds(391, 259, 123, 23);
 		contentPane.add(chkDirecaoEletrica);
 		
 		JCheckBox chkDuasPortas = new JCheckBox("2 Portas");
 		chkDuasPortas.setBackground((Color) null);
-		chkDuasPortas.setBounds(56, 276, 123, 23);
+		chkDuasPortas.setBounds(60, 285, 123, 23);
 		contentPane.add(chkDuasPortas);
 		
 		JCheckBox chkQuatroPortas = new JCheckBox("4 Portas");
 		chkQuatroPortas.setBackground((Color) null);
-		chkQuatroPortas.setBounds(217, 276, 123, 23);
+		chkQuatroPortas.setBounds(221, 285, 123, 23);
 		contentPane.add(chkQuatroPortas);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(52, 241, 482, 2);
+		separator.setBounds(56, 250, 482, 2);
 		contentPane.add(separator);
 		
 		JButton btnSalvar = new JButton(" Salvar");
+		btnSalvar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				JOptionPane.showMessageDialog(null,"Passou pelo botão SALVAR");
+			}
+		});
 		btnSalvar.setHorizontalAlignment(SwingConstants.LEFT);
 		btnSalvar.setIcon(new ImageIcon(TelaCadastroVeiculo.class.getResource("/icons/Salvar.png")));
 		btnSalvar.setForeground(new Color(0, 0, 139));
