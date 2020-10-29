@@ -35,27 +35,27 @@ public class TelaCadastroVeiculo extends JFrame {
 
 	private JPanel contentPane;
 	private JLabel lblPlaca;
-	private JFormattedTextField formattedTextFieldPlaca;
+	private JFormattedTextField txtPlaca;
 	private JLabel lblRenavam;
-	private TextField txtRenavam;
+	private JFormattedTextField txtRenavam;
 	private JLabel lblChassi;
-	private TextField txtChassi;
+	private JFormattedTextField txtChassi;
 	private JLabel lblDadosVeiculo;
-	private TextField txtMarca;
+	private JFormattedTextField txtMarca;
 	private JLabel lblMarca;
-	private TextField txtModelo;
+	private JFormattedTextField txtModelo;
 	private JLabel lblModelo;
-	private TextField txtAno;
+	private JFormattedTextField txtAno;
 	private JLabel lblAno;
 	private JLabel lblCor;
-	private TextField txtCor;
+	private JFormattedTextField txtCor;
 	private JCheckBox chkArCondicionado;
 	private JCheckBox chkDirecaoHidraulica;
 	private JCheckBox chkVidroEletrico;
 	private JCheckBox chkDirecaoEletrica;
 	private JCheckBox chkDuasPortas;
 	private JCheckBox chkQuatroPortas;
-	private JButton btnSalvar;
+	private JFormattedTextField txtMotor;
 	
 	/**
 	 * Launch the application.
@@ -95,15 +95,15 @@ public class TelaCadastroVeiculo extends JFrame {
 		lblPlaca.setBounds(56, 86, 46, 14);
 		contentPane.add(lblPlaca);
 		
-		formattedTextFieldPlaca = new JFormattedTextField(mascaraPlaca);
-		formattedTextFieldPlaca.setBounds(56, 101, 146, 22);
-		contentPane.add(formattedTextFieldPlaca);
+		txtPlaca = new JFormattedTextField(mascaraPlaca);
+		txtPlaca.setBounds(56, 101, 146, 22);
+		contentPane.add(txtPlaca);
 		
 		lblRenavam = new JLabel("Renavam");
 		lblRenavam.setBounds(223, 86, 59, 14);
 		contentPane.add(lblRenavam);
 		
-		txtRenavam = new TextField();
+		txtRenavam = new JFormattedTextField();
 		txtRenavam.setBounds(223, 101, 146, 22);
 		contentPane.add(txtRenavam);
 		
@@ -111,7 +111,7 @@ public class TelaCadastroVeiculo extends JFrame {
 		lblChassi.setBounds(387, 86, 59, 14);
 		contentPane.add(lblChassi);
 		
-		txtChassi = new TextField();
+		txtChassi = new JFormattedTextField();
 		txtChassi.setBounds(388, 101, 146, 22);
 		contentPane.add(txtChassi);
 		
@@ -120,7 +120,7 @@ public class TelaCadastroVeiculo extends JFrame {
 		lblDadosVeiculo.setBounds(21, 31, 146, 14);
 		contentPane.add(lblDadosVeiculo);
 		
-		txtMarca = new TextField();
+		txtMarca = new JFormattedTextField();
 		txtMarca.setBounds(56, 160, 146, 22);
 		contentPane.add(txtMarca);
 		
@@ -128,7 +128,7 @@ public class TelaCadastroVeiculo extends JFrame {
 		lblMarca.setBounds(56, 145, 46, 14);
 		contentPane.add(lblMarca);
 		
-		txtModelo = new TextField();
+		txtModelo = new JFormattedTextField();
 		txtModelo.setBounds(223, 160, 146, 22);
 		contentPane.add(txtModelo);
 		
@@ -136,7 +136,7 @@ public class TelaCadastroVeiculo extends JFrame {
 		lblModelo.setBounds(223, 145, 46, 14);
 		contentPane.add(lblModelo);
 		
-		txtAno = new TextField();
+		txtAno = new JFormattedTextField();
 		txtAno.setBounds(388, 160, 76, 22);
 		contentPane.add(txtAno);
 		
@@ -148,7 +148,7 @@ public class TelaCadastroVeiculo extends JFrame {
 		lblCor.setBounds(470, 145, 46, 14);
 		contentPane.add(lblCor);
 		
-		txtCor = new TextField();
+		txtCor = new JFormattedTextField();
 		txtCor.setBounds(470, 160, 64, 22);
 		contentPane.add(txtCor);
 		
@@ -186,8 +186,9 @@ public class TelaCadastroVeiculo extends JFrame {
 		separator.setBounds(56, 250, 482, 2);
 		contentPane.add(separator);
 		
-		btnSalvar = new JButton(" Salvar");
+		JButton btnSalvar = new JButton(" Salvar");
 		btnSalvar.addMouseListener(new MouseAdapter() {
+			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				JOptionPane.showMessageDialog(null,"Passou pelo bot�o SALVAR");
 			}
@@ -199,7 +200,7 @@ public class TelaCadastroVeiculo extends JFrame {
 		btnSalvar.setBounds(223, 330, 111, 41);
 		contentPane.add(btnSalvar);
 		
-		TextField txtMotor = new TextField();
+		txtMotor = new JFormattedTextField();
 		txtMotor.setBounds(56, 214, 146, 22);
 		contentPane.add(txtMotor);
 		
