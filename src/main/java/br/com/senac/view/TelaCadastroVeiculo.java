@@ -33,7 +33,25 @@ public class TelaCadastroVeiculo extends JFrame {
 	private JPanel contentPane;
 	private JLabel lblPlaca;
 	private TextField txtPlaca;
+	private JLabel lblRenavam;
+	private TextField txtRenavam;
+	private JLabel lblChassi;
+	private TextField txtChassi;
+	private JLabel lblDadosVeiculo;
+	private TextField txtMarca;
+	private JLabel lblMarca;
+	private TextField txtModelo;
+	private JLabel lblModelo;
+	private TextField txtAno;
+	private JLabel lblAno;
+	private JLabel lblCor;
+	private TextField txtCor;
 	private JCheckBox chkArCondicionado;
+	private JCheckBox chkDirecaoHidraulica;
+	private JCheckBox chkVidroEletrico;
+	private JCheckBox chkDirecaoEletrica;
+	private JCheckBox chkDuasPortas;
+	private JCheckBox chkQuatroPortas;
 	
 
 	/**
@@ -75,56 +93,56 @@ public class TelaCadastroVeiculo extends JFrame {
 		txtPlaca.setBounds(56, 101, 146, 22);
 		contentPane.add(txtPlaca);
 		
-		JLabel lblRenavam = new JLabel("Renavam");
+		lblRenavam = new JLabel("Renavam");
 		lblRenavam.setBounds(223, 86, 59, 14);
 		contentPane.add(lblRenavam);
 		
-		TextField txtRenavam = new TextField();
+		txtRenavam = new TextField();
 		txtRenavam.setBounds(223, 101, 146, 22);
 		contentPane.add(txtRenavam);
 		
-		JLabel lblChassi = new JLabel("Chassi");
+		lblChassi = new JLabel("Chassi");
 		lblChassi.setBounds(387, 86, 59, 14);
 		contentPane.add(lblChassi);
 		
-		TextField txtChassi = new TextField();
+		txtChassi = new TextField();
 		txtChassi.setBounds(388, 101, 146, 22);
 		contentPane.add(txtChassi);
 		
-		JLabel lblDadosVeiculo = new JLabel("Dados do Ve\u00EDculo");
+		lblDadosVeiculo = new JLabel("Dados do Ve\u00EDculo");
 		lblDadosVeiculo.setFont(new Font("Arial", Font.BOLD, 15));
 		lblDadosVeiculo.setBounds(21, 31, 146, 14);
 		contentPane.add(lblDadosVeiculo);
 		
-		TextField txtMarca = new TextField();
+		txtMarca = new TextField();
 		txtMarca.setBounds(56, 160, 146, 22);
 		contentPane.add(txtMarca);
 		
-		JLabel lblMarca = new JLabel("Marca");
+		lblMarca = new JLabel("Marca");
 		lblMarca.setBounds(56, 145, 46, 14);
 		contentPane.add(lblMarca);
 		
-		TextField txtModelo = new TextField();
+		txtModelo = new TextField();
 		txtModelo.setBounds(223, 160, 146, 22);
 		contentPane.add(txtModelo);
 		
-		JLabel lblModelo = new JLabel("Modelo");
+		lblModelo = new JLabel("Modelo");
 		lblModelo.setBounds(223, 145, 46, 14);
 		contentPane.add(lblModelo);
 		
-		TextField txtAno = new TextField();
+		txtAno = new TextField();
 		txtAno.setBounds(388, 160, 76, 22);
 		contentPane.add(txtAno);
 		
-		JLabel lblAno = new JLabel("Ano");
+		lblAno = new JLabel("Ano");
 		lblAno.setBounds(388, 145, 46, 14);
 		contentPane.add(lblAno);
 		
-		JLabel lblCor = new JLabel("Cor");
+		lblCor = new JLabel("Cor");
 		lblCor.setBounds(470, 145, 46, 14);
 		contentPane.add(lblCor);
 		
-		TextField txtCor = new TextField();
+		txtCor = new TextField();
 		txtCor.setBounds(470, 160, 64, 22);
 		contentPane.add(txtCor);
 		
@@ -133,27 +151,27 @@ public class TelaCadastroVeiculo extends JFrame {
 		chkArCondicionado.setBounds(60, 259, 123, 23);
 		contentPane.add(chkArCondicionado);
 		
-		JCheckBox chkDirecaoHidraulica = new JCheckBox("Dire\u00E7\u00E3o Hidraulica");
+		chkDirecaoHidraulica = new JCheckBox("Dire\u00E7\u00E3o Hidraulica");
 		chkDirecaoHidraulica.setBackground((Color) null);
 		chkDirecaoHidraulica.setBounds(221, 259, 129, 23);
 		contentPane.add(chkDirecaoHidraulica);
 		
-		JCheckBox chkVidroEletrico = new JCheckBox("Vidro El\u00E9trico");
+		chkVidroEletrico = new JCheckBox("Vidro El\u00E9trico");
 		chkVidroEletrico.setBackground((Color) null);
 		chkVidroEletrico.setBounds(391, 285, 111, 23);
 		contentPane.add(chkVidroEletrico);
 		
-		JCheckBox chkDirecaoEletrica = new JCheckBox("Dire\u00E7\u00E3o El\u00E9trica");
+		chkDirecaoEletrica = new JCheckBox("Dire\u00E7\u00E3o El\u00E9trica");
 		chkDirecaoEletrica.setBackground((Color) null);
 		chkDirecaoEletrica.setBounds(391, 259, 123, 23);
 		contentPane.add(chkDirecaoEletrica);
 		
-		JCheckBox chkDuasPortas = new JCheckBox("2 Portas");
+		chkDuasPortas = new JCheckBox("2 Portas");
 		chkDuasPortas.setBackground((Color) null);
 		chkDuasPortas.setBounds(60, 285, 123, 23);
 		contentPane.add(chkDuasPortas);
 		
-		JCheckBox chkQuatroPortas = new JCheckBox("4 Portas");
+		chkQuatroPortas = new JCheckBox("4 Portas");
 		chkQuatroPortas.setBackground((Color) null);
 		chkQuatroPortas.setBounds(221, 285, 123, 23);
 		contentPane.add(chkQuatroPortas);
