@@ -53,7 +53,6 @@ public class TelaCadastroVeiculo extends JFrame {
 	private JCheckBox chkDuasPortas;
 	private JCheckBox chkQuatroPortas;
 	
-
 	/**
 	 * Launch the application.
 	 */
