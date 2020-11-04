@@ -12,6 +12,7 @@ import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class TelaMenuInicial extends JFrame {
 
@@ -37,13 +38,15 @@ public class TelaMenuInicial extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaMenuInicial() {
+		setTitle("Floricar");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu menuVeiculo = new JMenu("Veículo");
+		JMenu menuVeiculo = new JMenu("Veículos");
+		menuVeiculo.setIcon(new ImageIcon(TelaMenuInicial.class.getResource("/icons/Veiculo.png")));
 		menuBar.add(menuVeiculo);
 		
 		JMenuItem MenuItemCadastroVeiculo = new JMenuItem("Cadastrar");
@@ -61,8 +64,17 @@ public class TelaMenuInicial extends JFrame {
 		});
 		menuVeiculo.add(MenuItemCadastroVeiculo);
 		
-		JMenu mnNewMenu_1 = new JMenu("New menu");
-		menuBar.add(mnNewMenu_1);
+		JMenu menuLocacao = new JMenu("Locação");
+		menuBar.add(menuLocacao);
+		
+		JMenuItem menuItemCadastroLocacao = new JMenuItem("Cadastro");
+		menuLocacao.add(menuItemCadastroLocacao);
+		
+		JMenu menuClientes = new JMenu("Clientes");
+		menuBar.add(menuClientes);
+		
+		JMenuItem menuItemCadastroClientes = new JMenuItem("Cadastro");
+		menuClientes.add(menuItemCadastroClientes);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
