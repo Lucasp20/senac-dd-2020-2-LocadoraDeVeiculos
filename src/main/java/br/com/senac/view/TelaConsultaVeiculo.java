@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class TelaMenuInicial extends JFrame {
+public class TelaConsultaVeiculo extends JFrame {
 
 	private JPanel contentPane;
 
@@ -18,7 +18,7 @@ public class TelaMenuInicial extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaMenuInicial frame = new TelaMenuInicial();
+					TelaConsultaVeiculo frame = new TelaConsultaVeiculo();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,7 +30,7 @@ public class TelaMenuInicial extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaMenuInicial() {
+	public TelaConsultaVeiculo() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
