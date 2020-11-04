@@ -64,18 +64,34 @@ public class TelaMenuInicial extends JFrame {
 		});
 		menuVeiculo.add(MenuItemCadastroVeiculo);
 		
+		JMenuItem menuItemRelatorioVeiculo = new JMenuItem("Relatório");
+		menuItemRelatorioVeiculo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PainelRelatorioVeiculo painelVeiculo = new PainelRelatorioVeiculo();
+				setContentPane(painelVeiculo);
+				revalidate();
+			}
+		});
+		menuVeiculo.add(menuItemRelatorioVeiculo);
+		
 		JMenu menuLocacao = new JMenu("Locação");
 		menuBar.add(menuLocacao);
 		
-		JMenuItem menuItemCadastroLocacao = new JMenuItem("Cadastro");
-		menuLocacao.add(menuItemCadastroLocacao);
+		JMenuItem menuItemReservar = new JMenuItem("Reservar");
+		menuLocacao.add(menuItemReservar);
+		
+		JMenuItem menuItemRelatorioLocacao = new JMenuItem("Relatório");
+		menuLocacao.add(menuItemRelatorioLocacao);
 		
 		JMenu menuClientes = new JMenu("Clientes");
 		menuClientes.setIcon(new ImageIcon(TelaMenuInicial.class.getResource("/icons/User.png")));
 		menuBar.add(menuClientes);
 		
-		JMenuItem menuItemCadastroClientes = new JMenuItem("Cadastro");
+		JMenuItem menuItemCadastroClientes = new JMenuItem("Cadastrar");
 		menuClientes.add(menuItemCadastroClientes);
+		
+		JMenuItem menuItemRelatorioClientes = new JMenuItem("Relatório");
+		menuClientes.add(menuItemRelatorioClientes);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
