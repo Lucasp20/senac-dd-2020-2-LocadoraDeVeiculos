@@ -208,7 +208,7 @@ public class PainelCadastroVeiculo extends JPanel {
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setToolTipText("");
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"            Selecione", "Autom\u00E1tica", "Manual"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"            Selecione", "Automática", "Manual"}));
 		comboBox.setBounds(223, 214, 146, 22);
 		this.add(comboBox);
 	}

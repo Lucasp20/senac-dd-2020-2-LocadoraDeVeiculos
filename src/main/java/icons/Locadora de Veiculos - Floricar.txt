@@ -1,0 +1,14 @@
+PROJETO FINAL - senac-dd-2020-2-LocadoraDeVeiculos
+
+
+TEMA - LOCADORA DE VEICULOS - FLORICAR
+EQUIPE - LUCAS PEREIRA MENDES E LEONARDO ZUNINO SIMONE
+
+
+REGRA DE NEGÓCIO 
+
+1 - Todo veiculo deve possuir renavam valido (11 caracteres númericos)
+2 - Todo veiculo deve possuir chassi valido (17 caracteres númericos e letras)
+3 - Todo veiculo deve possuir marca, modelo e cor
+4 - Todo veiculo deve possuir placa ( três letras e quatro números) 
+

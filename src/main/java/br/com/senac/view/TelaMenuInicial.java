@@ -40,7 +40,7 @@ public class TelaMenuInicial extends JFrame {
 	public TelaMenuInicial() {
 		setTitle("Floricar");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 595, 495);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -71,6 +71,7 @@ public class TelaMenuInicial extends JFrame {
 		menuLocacao.add(menuItemCadastroLocacao);
 		
 		JMenu menuClientes = new JMenu("Clientes");
+		menuClientes.setIcon(new ImageIcon(TelaMenuInicial.class.getResource("/icons/User.png")));
 		menuBar.add(menuClientes);
 		
 		JMenuItem menuItemCadastroClientes = new JMenuItem("Cadastro");
