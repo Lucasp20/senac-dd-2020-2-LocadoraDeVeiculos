@@ -10,9 +10,19 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+import java.awt.FlowLayout;
+import java.awt.BorderLayout;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.border.BevelBorder;
+import javax.swing.JFormattedTextField;
+import javax.swing.JButton;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import java.awt.Font;
 
 public class PainelRelatorioVeiculo extends JPanel {
-	private JTable table;
+	private JTable tblRelatorioVeiculo;
 
 	/**
 	 * Create the panel.
@@ -20,20 +30,54 @@ public class PainelRelatorioVeiculo extends JPanel {
 	public PainelRelatorioVeiculo() {
 		setLayout(null);
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 138, 551, 223);
+		add(scrollPane);
+		
+		tblRelatorioVeiculo = new JTable();
+		tblRelatorioVeiculo.setEnabled(false);
+		tblRelatorioVeiculo.setModel(new DefaultTableModel(
 			new Object[][] {
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
 				{null, null, null, null},
 				{null, null, null, null},
 				{null, null, null, null},
 				{null, null, null, null},
 			},
 			new String[] {
-				"Placa", "New column", "Marca", "Modelo"
+				"Placa", "Marca", "Modelo", "Status"
 			}
 		));
-		table.setBounds(31, 77, 515, 259);
-		add(table);
+		scrollPane.setViewportView(tblRelatorioVeiculo);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel.setBounds(10, 61, 551, 71);
+		add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblRelatorioMarca = new JLabel("Marca: ");
+		lblRelatorioMarca.setBounds(10, 30, 46, 14);
+		panel.add(lblRelatorioMarca);
+		
+		JFormattedTextField txtRelatorioMarca = new JFormattedTextField();
+		txtRelatorioMarca.setBounds(54, 27, 199, 20);
+		panel.add(txtRelatorioMarca);
+		
+		JButton btnRelatorioPesquisa = new JButton("Pesquisar");
+		btnRelatorioPesquisa.setBounds(417, 26, 112, 23);
+		panel.add(btnRelatorioPesquisa);
+		
+		JLabel lblRelatorioVeiculo = new JLabel("Relatório de Veículos");
+		lblRelatorioVeiculo.setFont(new Font("Arial", Font.BOLD, 15));
+		lblRelatorioVeiculo.setBounds(10, 25, 175, 14);
+		add(lblRelatorioVeiculo);
 
 	}
 }

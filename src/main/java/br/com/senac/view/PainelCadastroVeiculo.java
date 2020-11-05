@@ -73,7 +73,7 @@ public class PainelCadastroVeiculo extends JPanel {
 	 * @throws ParseException 
 	 */
 	public PainelCadastroVeiculo() throws ParseException {
-		setBounds(100, 100, 604, 421);
+		setBounds(100, 100, 605, 422);
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);
 		
@@ -144,19 +144,19 @@ public class PainelCadastroVeiculo extends JPanel {
 		separator.setBounds(56, 250, 482, 2);
 		this.add(separator);
 		
-		JButton btnSalvar = new JButton(" Salvar");
-		btnSalvar.addMouseListener(new MouseAdapter() {
+		JButton btnSalvarVeiculo = new JButton(" Salvar");
+		btnSalvarVeiculo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				JOptionPane.showMessageDialog(null,"Passou pelo bot�o SALVAR");
 			}
 		});
-		btnSalvar.setHorizontalAlignment(SwingConstants.LEFT);
-		btnSalvar.setIcon(new ImageIcon(PainelCadastroVeiculo.class.getResource("/icons/Salvar.png")));
-		btnSalvar.setForeground(new Color(0, 0, 139));
-		btnSalvar.setBackground(new Color(240, 248, 255));
-		btnSalvar.setBounds(111, 330, 111, 41);
-		this.add(btnSalvar);
+		btnSalvarVeiculo.setHorizontalAlignment(SwingConstants.LEFT);
+		btnSalvarVeiculo.setIcon(new ImageIcon(PainelCadastroVeiculo.class.getResource("/icons/Salvar.png")));
+		btnSalvarVeiculo.setForeground(new Color(0, 0, 139));
+		btnSalvarVeiculo.setBackground(new Color(240, 248, 255));
+		btnSalvarVeiculo.setBounds(111, 330, 111, 41);
+		this.add(btnSalvarVeiculo);
 		
 		txtMotor = new JFormattedTextField();
 		txtMotor.setBounds(56, 214, 146, 22);

@@ -53,11 +53,25 @@ public class TelaMenuInicial extends JFrame {
 		menuBar.add(menuClientes);
 		
 		JMenuItem menuItemCadastrarClientes = new JMenuItem("Cadastrar");
+		menuItemCadastrarClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PainelCadastroCliente painelCliente = new PainelCadastroCliente();
+				setContentPane(painelCliente);
+				revalidate();
+			}
+		});
 		menuItemCadastrarClientes.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
 		menuItemCadastrarClientes.setIcon(new ImageIcon(TelaMenuInicial.class.getResource("/icons/addUser.png")));
 		menuClientes.add(menuItemCadastrarClientes);
 		
 		JMenuItem menuItemRelatorioClientes = new JMenuItem("Relatórios");
+		menuItemRelatorioClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PainelRelatorioCliente painelCliente = new PainelRelatorioCliente();
+				setContentPane(painelCliente);
+				revalidate();
+			}
+		});
 		menuItemRelatorioClientes.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0));
 		menuItemRelatorioClientes.setIcon(new ImageIcon(TelaMenuInicial.class.getResource("/icons/Relatorio.png")));
 		menuClientes.add(menuItemRelatorioClientes);
@@ -100,10 +114,25 @@ public class TelaMenuInicial extends JFrame {
 		menuBar.add(menuLocacao);
 		
 		JMenuItem menuItemReservaLocacao = new JMenuItem("Reservas");
+		menuItemReservaLocacao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PainelReservaLocacao painelReserva = new PainelReservaLocacao();
+				setContentPane(painelReserva);
+				revalidate();
+			
+			}
+		});
 		menuItemReservaLocacao.setIcon(new ImageIcon(TelaMenuInicial.class.getResource("/icons/Reserva.png")));
 		menuLocacao.add(menuItemReservaLocacao);
 		
 		JMenuItem menuItemRelatorioLocacao = new JMenuItem("Relatórios");
+		menuItemRelatorioLocacao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PainelRelatorioLocacao painelReserva = new PainelRelatorioLocacao();
+				setContentPane(painelReserva);
+				revalidate();
+			}
+		});
 		menuItemRelatorioLocacao.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0));
 		menuItemRelatorioLocacao.setIcon(new ImageIcon(TelaMenuInicial.class.getResource("/icons/Relatorio.png")));
 		menuLocacao.add(menuItemRelatorioLocacao);
