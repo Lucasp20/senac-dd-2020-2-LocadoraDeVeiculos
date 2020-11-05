@@ -48,12 +48,6 @@ public class PainelCadastroVeiculo extends JPanel {
 	private JLabel lblAno;
 	private JLabel lblCor;
 	private JFormattedTextField txtCor;
-	private JCheckBox chkArCondicionado;
-	private JCheckBox chkDirecaoHidraulica;
-	private JCheckBox chkVidroEletrico;
-	private JCheckBox chkDirecaoEletrica;
-	private JCheckBox chkDuasPortas;
-	private JCheckBox chkQuatroPortas;
 	private JFormattedTextField txtMotor;
 	
 	/**
@@ -146,36 +140,6 @@ public class PainelCadastroVeiculo extends JPanel {
 		txtCor.setBounds(470, 160, 64, 22);
 		this.add(txtCor);
 		
-		chkArCondicionado = new JCheckBox("Ar condicionado");
-		chkArCondicionado.setBackground(UIManager.getColor("240, 248, 255"));
-		chkArCondicionado.setBounds(60, 259, 123, 23);
-		this.add(chkArCondicionado);
-		
-		chkDirecaoHidraulica = new JCheckBox("Dire\u00E7\u00E3o Hidraulica");
-		chkDirecaoHidraulica.setBackground((Color) null);
-		chkDirecaoHidraulica.setBounds(221, 259, 129, 23);
-		this.add(chkDirecaoHidraulica);
-		
-		chkVidroEletrico = new JCheckBox("Vidro El\u00E9trico");
-		chkVidroEletrico.setBackground((Color) null);
-		chkVidroEletrico.setBounds(391, 285, 111, 23);
-		this.add(chkVidroEletrico);
-		
-		chkDirecaoEletrica = new JCheckBox("Dire\u00E7\u00E3o El\u00E9trica");
-		chkDirecaoEletrica.setBackground((Color) null);
-		chkDirecaoEletrica.setBounds(391, 259, 123, 23);
-		this.add(chkDirecaoEletrica);
-		
-		chkDuasPortas = new JCheckBox("2 Portas");
-		chkDuasPortas.setBackground((Color) null);
-		chkDuasPortas.setBounds(60, 285, 123, 23);
-		this.add(chkDuasPortas);
-		
-		chkQuatroPortas = new JCheckBox("4 Portas");
-		chkQuatroPortas.setBackground((Color) null);
-		chkQuatroPortas.setBounds(221, 285, 123, 23);
-		this.add(chkQuatroPortas);
-		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(56, 250, 482, 2);
 		this.add(separator);
@@ -191,7 +155,7 @@ public class PainelCadastroVeiculo extends JPanel {
 		btnSalvar.setIcon(new ImageIcon(PainelCadastroVeiculo.class.getResource("/icons/Salvar.png")));
 		btnSalvar.setForeground(new Color(0, 0, 139));
 		btnSalvar.setBackground(new Color(240, 248, 255));
-		btnSalvar.setBounds(223, 330, 111, 41);
+		btnSalvar.setBounds(111, 330, 111, 41);
 		this.add(btnSalvar);
 		
 		txtMotor = new JFormattedTextField();
@@ -211,6 +175,14 @@ public class PainelCadastroVeiculo extends JPanel {
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"            Selecione", "Automática", "Manual"}));
 		comboBox.setBounds(223, 214, 146, 22);
 		this.add(comboBox);
+		
+		JButton btnExcluirVeiculo = new JButton("Excluir");
+		btnExcluirVeiculo.setBounds(382, 330, 111, 41);
+		add(btnExcluirVeiculo);
+		
+		JButton btnEditarVeiculo = new JButton("Editar");
+		btnEditarVeiculo.setBounds(246, 330, 111, 41);
+		add(btnEditarVeiculo);
 	}
 }
 
