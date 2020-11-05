@@ -56,23 +56,23 @@ public class PainelRelatorioVeiculo extends JPanel {
 		));
 		scrollPane.setViewportView(tblRelatorioVeiculo);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel.setBounds(10, 61, 551, 71);
-		add(panel);
-		panel.setLayout(null);
+		JPanel painelRelatorioVeiculo = new JPanel();
+		painelRelatorioVeiculo.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		painelRelatorioVeiculo.setBounds(10, 61, 551, 71);
+		add(painelRelatorioVeiculo);
+		painelRelatorioVeiculo.setLayout(null);
 		
 		JLabel lblRelatorioMarca = new JLabel("Marca: ");
 		lblRelatorioMarca.setBounds(10, 30, 46, 14);
-		panel.add(lblRelatorioMarca);
+		painelRelatorioVeiculo.add(lblRelatorioMarca);
 		
 		JFormattedTextField txtRelatorioMarca = new JFormattedTextField();
 		txtRelatorioMarca.setBounds(54, 27, 199, 20);
-		panel.add(txtRelatorioMarca);
+		painelRelatorioVeiculo.add(txtRelatorioMarca);
 		
 		JButton btnRelatorioPesquisa = new JButton("Pesquisar");
 		btnRelatorioPesquisa.setBounds(417, 26, 112, 23);
-		panel.add(btnRelatorioPesquisa);
+		painelRelatorioVeiculo.add(btnRelatorioPesquisa);
 		
 		JLabel lblRelatorioVeiculo = new JLabel("Relatório de Veículos");
 		lblRelatorioVeiculo.setFont(new Font("Arial", Font.BOLD, 15));

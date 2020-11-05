@@ -16,6 +16,9 @@ import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
 import java.awt.event.InputEvent;
+import javax.swing.border.BevelBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 public class TelaMenuInicial extends JFrame {
 
@@ -114,6 +117,7 @@ public class TelaMenuInicial extends JFrame {
 		menuBar.add(menuLocacao);
 		
 		JMenuItem menuItemReservaLocacao = new JMenuItem("Reservas");
+		menuItemReservaLocacao.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F8, 0));
 		menuItemReservaLocacao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				PainelReservaLocacao painelReserva = new PainelReservaLocacao();
@@ -138,8 +142,35 @@ public class TelaMenuInicial extends JFrame {
 		menuLocacao.add(menuItemRelatorioLocacao);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panel.setBounds(10, 11, 559, 400);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblMenuFloricar = new JLabel("FLORICAR\r ");
+		lblMenuFloricar.setToolTipText("");
+		lblMenuFloricar.setFont(new Font("Castellar", Font.BOLD, 16));
+		lblMenuFloricar.setBounds(10, 11, 132, 41);
+		panel.add(lblMenuFloricar);
+		
+		JLabel lblImagemVeiculoMenu = new JLabel("");
+		lblImagemVeiculoMenu.setIcon(new ImageIcon(TelaMenuInicial.class.getResource("/icons/Veiculo512pix.png")));
+		lblImagemVeiculoMenu.setBounds(36, 36, 513, 390);
+		panel.add(lblImagemVeiculoMenu);
+		
+		JLabel lblMenuLocadoraDeVeiculos = new JLabel("LOCADORA DE VEÍCULOS");
+		lblMenuLocadoraDeVeiculos.setFont(new Font("Tw Cen MT Condensed", Font.BOLD, 15));
+		lblMenuLocadoraDeVeiculos.setBounds(36, 38, 189, 14);
+		panel.add(lblMenuLocadoraDeVeiculos);
+		
+		JLabel lblFloricarEndMenu = new JLabel("Florianópolis | Mauro Ramos, nº 555, Centro - (48) 9999-9999");
+		lblFloricarEndMenu.setFont(new Font("Arial Narrow", Font.PLAIN, 11));
+		lblFloricarEndMenu.setBounds(10, 375, 342, 14);
+		panel.add(lblFloricarEndMenu);
 	}
 
 }
