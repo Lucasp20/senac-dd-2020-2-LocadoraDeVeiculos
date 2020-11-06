@@ -65,8 +65,12 @@ public class PainelRelatorioLocacao extends JPanel {
 		painelRelatorioLocacao.add(formattedTextField);
 		
 		JButton btnRelatorioLocacaoPesquisa = new JButton("Pesquisar");
-		btnRelatorioLocacaoPesquisa.setBounds(411, 115, 112, 23);
+		btnRelatorioLocacaoPesquisa.setBounds(358, 115, 112, 23);
 		painelRelatorioLocacao.add(btnRelatorioLocacaoPesquisa);
+		
+		JButton btnRelatorioLocacaoGerarExcel = new JButton("Gerar Excel");
+		btnRelatorioLocacaoGerarExcel.setBounds(485, 115, 105, 23);
+		painelRelatorioLocacao.add(btnRelatorioLocacaoGerarExcel);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 183, 600, 186);
