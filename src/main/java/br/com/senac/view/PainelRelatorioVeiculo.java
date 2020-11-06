@@ -75,8 +75,12 @@ public class PainelRelatorioVeiculo extends JPanel {
 		painelRelatorioVeiculo.add(txtRelatorioMarca);
 		
 		JButton btnRelatorioPesquisa = new JButton("Pesquisar");
-		btnRelatorioPesquisa.setBounds(417, 26, 112, 23);
+		btnRelatorioPesquisa.setBounds(365, 26, 112, 23);
 		painelRelatorioVeiculo.add(btnRelatorioPesquisa);
+		
+		JButton btnRelatorioVeiculoGerarExcel = new JButton("Gerar Excel");
+		btnRelatorioVeiculoGerarExcel.setBounds(484, 26, 105, 23);
+		painelRelatorioVeiculo.add(btnRelatorioVeiculoGerarExcel);
 		
 		JLabel lblRelatorioVeiculo = new JLabel("Relatório de Veículos");
 		lblRelatorioVeiculo.setFont(new Font("Arial", Font.BOLD, 15));

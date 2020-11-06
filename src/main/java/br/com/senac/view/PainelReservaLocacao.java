@@ -10,6 +10,10 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JSeparator;
+import javax.swing.JButton;
+import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class PainelReservaLocacao extends JPanel {
 
@@ -54,6 +58,7 @@ public class PainelReservaLocacao extends JPanel {
 		add(lblReservaDataLocacao);
 		
 		DatePicker ReservaDataLocacaoVeiculo = new DatePicker();
+		ReservaDataLocacaoVeiculo.getComponentToggleCalendarButton().setIcon(new ImageIcon(PainelReservaLocacao.class.getResource("/icons/Calendario16pix.png")));
 		ReservaDataLocacaoVeiculo.getComponentToggleCalendarButton().setText("");
 		ReservaDataLocacaoVeiculo.getComponentDateTextField().setEditable(false);
 		ReservaDataLocacaoVeiculo.setBounds(55, 168, 182, 25);
@@ -64,6 +69,7 @@ public class PainelReservaLocacao extends JPanel {
 		add(lblReservaLocacaoDataDevolucao);
 		
 		DatePicker ReservaDataDevolucaoVeiculo = new DatePicker();
+		ReservaDataDevolucaoVeiculo.getComponentToggleCalendarButton().setIcon(new ImageIcon(PainelReservaLocacao.class.getResource("/icons/Calendario16pix.png")));
 		ReservaDataDevolucaoVeiculo.getComponentToggleCalendarButton().setText("");
 		ReservaDataDevolucaoVeiculo.getComponentDateTextField().setEditable(false);
 		ReservaDataDevolucaoVeiculo.setBounds(263, 168, 182, 25);
@@ -84,6 +90,18 @@ public class PainelReservaLocacao extends JPanel {
 		JFormattedTextField txtReservaVeiculoKmDevolucao = new JFormattedTextField();
 		txtReservaVeiculoKmDevolucao.setBounds(263, 231, 164, 25);
 		add(txtReservaVeiculoKmDevolucao);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(66, 287, 473, 2);
+		add(separator);
+		
+		JButton btnSalvarReserva = new JButton(" Salvar");
+		btnSalvarReserva.setIcon(new ImageIcon(PainelReservaLocacao.class.getResource("/icons/Salvar.png")));
+		btnSalvarReserva.setHorizontalAlignment(SwingConstants.LEFT);
+		btnSalvarReserva.setForeground(new Color(0, 0, 139));
+		btnSalvarReserva.setBackground(new Color(240, 248, 255));
+		btnSalvarReserva.setBounds(244, 342, 111, 41);
+		add(btnSalvarReserva);
 		
 		
 
