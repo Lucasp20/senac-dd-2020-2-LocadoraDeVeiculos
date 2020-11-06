@@ -84,7 +84,7 @@ public class PainelCadastroVeiculo extends JPanel {
 		this.add(lblPlaca);
 		
 		txtPlaca = new JFormattedTextField(mascaraPlaca);
-		txtPlaca.setBounds(75, 101, 146, 22);
+		txtPlaca.setBounds(75, 101, 146, 27);
 		this.add(txtPlaca);
 		
 		lblRenavam = new JLabel("Renavam");
@@ -92,7 +92,7 @@ public class PainelCadastroVeiculo extends JPanel {
 		this.add(lblRenavam);
 		
 		txtRenavam = new JFormattedTextField();
-		txtRenavam.setBounds(242, 101, 146, 22);
+		txtRenavam.setBounds(242, 101, 146, 27);
 		this.add(txtRenavam);
 		
 		lblChassi = new JLabel("Chassi");
@@ -100,7 +100,7 @@ public class PainelCadastroVeiculo extends JPanel {
 		this.add(lblChassi);
 		
 		txtChassi = new JFormattedTextField();
-		txtChassi.setBounds(407, 101, 146, 22);
+		txtChassi.setBounds(407, 101, 146, 27);
 		this.add(txtChassi);
 		
 		lblDadosVeiculo = new JLabel("Dados do Ve\u00EDculo");
@@ -109,7 +109,7 @@ public class PainelCadastroVeiculo extends JPanel {
 		this.add(lblDadosVeiculo);
 		
 		txtMarca = new JFormattedTextField();
-		txtMarca.setBounds(75, 160, 146, 22);
+		txtMarca.setBounds(75, 160, 146, 27);
 		this.add(txtMarca);
 		
 		lblMarca = new JLabel("Marca");
@@ -117,7 +117,7 @@ public class PainelCadastroVeiculo extends JPanel {
 		this.add(lblMarca);
 		
 		txtModelo = new JFormattedTextField();
-		txtModelo.setBounds(242, 160, 146, 22);
+		txtModelo.setBounds(242, 160, 146, 27);
 		this.add(txtModelo);
 		
 		lblModelo = new JLabel("Modelo");
@@ -125,7 +125,7 @@ public class PainelCadastroVeiculo extends JPanel {
 		this.add(lblModelo);
 		
 		txtAno = new JFormattedTextField();
-		txtAno.setBounds(407, 160, 76, 22);
+		txtAno.setBounds(407, 160, 76, 27);
 		this.add(txtAno);
 		
 		lblAno = new JLabel("Ano");
@@ -137,11 +137,11 @@ public class PainelCadastroVeiculo extends JPanel {
 		this.add(lblCor);
 		
 		txtCor = new JFormattedTextField();
-		txtCor.setBounds(489, 160, 64, 22);
+		txtCor.setBounds(489, 160, 64, 27);
 		this.add(txtCor);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(71, 250, 482, 2);
+		separator.setBounds(71, 263, 482, 2);
 		this.add(separator);
 		
 		JButton btnSalvarVeiculo = new JButton(" Salvar");
@@ -159,7 +159,7 @@ public class PainelCadastroVeiculo extends JPanel {
 		this.add(btnSalvarVeiculo);
 		
 		txtMotor = new JFormattedTextField();
-		txtMotor.setBounds(75, 214, 146, 22);
+		txtMotor.setBounds(75, 214, 146, 27);
 		this.add(txtMotor);
 		
 		JLabel lblMotor = new JLabel("Motor");
@@ -173,7 +173,7 @@ public class PainelCadastroVeiculo extends JPanel {
 		JComboBox comboBox = new JComboBox();
 		comboBox.setToolTipText("");
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"            Selecione", "Automática", "Manual"}));
-		comboBox.setBounds(242, 214, 146, 22);
+		comboBox.setBounds(242, 214, 146, 27);
 		this.add(comboBox);
 		
 		JButton btnExcluirVeiculo = new JButton("Excluir");

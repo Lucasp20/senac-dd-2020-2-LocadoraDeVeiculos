@@ -32,7 +32,7 @@ public class PainelCadastroCliente extends JPanel {
 		add(lblNome);
 		
 		JFormattedTextField txtNomeCliente = new JFormattedTextField();
-		txtNomeCliente.setBounds(81, 100, 135, 20);
+		txtNomeCliente.setBounds(81, 100, 135, 25);
 		add(txtNomeCliente);
 		
 		JLabel lblSobreNome = new JLabel("Sobrenome");
@@ -40,7 +40,7 @@ public class PainelCadastroCliente extends JPanel {
 		add(lblSobreNome);
 		
 		JFormattedTextField txtSobrenomeCliente = new JFormattedTextField();
-		txtSobrenomeCliente.setBounds(247, 100, 135, 20);
+		txtSobrenomeCliente.setBounds(247, 100, 135, 25);
 		add(txtSobrenomeCliente);
 		
 		JLabel lblCPF = new JLabel("CPF");
@@ -48,7 +48,7 @@ public class PainelCadastroCliente extends JPanel {
 		add(lblCPF);
 		
 		JFormattedTextField txtCpfCliente = new JFormattedTextField();
-		txtCpfCliente.setBounds(419, 100, 135, 20);
+		txtCpfCliente.setBounds(419, 100, 135, 25);
 		add(txtCpfCliente);
 		
 		JLabel lblEmail = new JLabel("Email");
@@ -56,7 +56,7 @@ public class PainelCadastroCliente extends JPanel {
 		add(lblEmail);
 		
 		JFormattedTextField txtEmail = new JFormattedTextField();
-		txtEmail.setBounds(81, 160, 135, 20);
+		txtEmail.setBounds(81, 160, 135, 25);
 		add(txtEmail);
 		
 		JLabel lblTelefoneCliente = new JLabel("Telefone");
@@ -64,7 +64,7 @@ public class PainelCadastroCliente extends JPanel {
 		add(lblTelefoneCliente);
 		
 		JFormattedTextField txtTelefoneCliente = new JFormattedTextField();
-		txtTelefoneCliente.setBounds(247, 160, 135, 20);
+		txtTelefoneCliente.setBounds(247, 160, 135, 25);
 		add(txtTelefoneCliente);
 		
 		JLabel lblClienteCNH = new JLabel("CNH");
@@ -72,7 +72,7 @@ public class PainelCadastroCliente extends JPanel {
 		add(lblClienteCNH);
 		
 		JFormattedTextField txtClienteCNH = new JFormattedTextField();
-		txtClienteCNH.setBounds(419, 160, 135, 20);
+		txtClienteCNH.setBounds(419, 160, 135, 25);
 		add(txtClienteCNH);
 		
 		JLabel lblEnderecoCliente = new JLabel("Endereço");
@@ -80,7 +80,7 @@ public class PainelCadastroCliente extends JPanel {
 		add(lblEnderecoCliente);
 		
 		JFormattedTextField txtEnderecoCliente = new JFormattedTextField();
-		txtEnderecoCliente.setBounds(81, 220, 135, 20);
+		txtEnderecoCliente.setBounds(81, 220, 135, 25);
 		add(txtEnderecoCliente);
 		
 		JLabel lblCidadeCliente = new JLabel("Cidade");
@@ -88,7 +88,7 @@ public class PainelCadastroCliente extends JPanel {
 		add(lblCidadeCliente);
 		
 		JFormattedTextField txtCidadeCliente = new JFormattedTextField();
-		txtCidadeCliente.setBounds(247, 220, 135, 20);
+		txtCidadeCliente.setBounds(247, 220, 135, 25);
 		add(txtCidadeCliente);
 		
 		JLabel lblEstadoCliente = new JLabel("Estado");
@@ -97,7 +97,7 @@ public class PainelCadastroCliente extends JPanel {
 		
 		JComboBox cbEstadoCliente = new JComboBox();
 		cbEstadoCliente.setModel(new DefaultComboBoxModel(new String[] {"", "RS", "RJ", "SP", "SC"}));
-		cbEstadoCliente.setBounds(419, 220, 46, 20);
+		cbEstadoCliente.setBounds(419, 220, 46, 25);
 		add(cbEstadoCliente);
 		
 		JLabel lblCEPCliente = new JLabel("CEP");
@@ -105,7 +105,7 @@ public class PainelCadastroCliente extends JPanel {
 		add(lblCEPCliente);
 		
 		JFormattedTextField formattedTextField = new JFormattedTextField();
-		formattedTextField.setBounds(475, 220, 79, 20);
+		formattedTextField.setBounds(475, 220, 79, 25);
 		add(formattedTextField);
 		
 		JSeparator separator = new JSeparator();
