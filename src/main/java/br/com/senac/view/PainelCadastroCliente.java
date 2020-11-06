@@ -28,88 +28,88 @@ public class PainelCadastroCliente extends JPanel {
 		add(lblDadosClientes);
 		
 		JLabel lblNome = new JLabel("Nome");
-		lblNome.setBounds(56, 88, 46, 14);
+		lblNome.setBounds(81, 85, 46, 14);
 		add(lblNome);
 		
 		JFormattedTextField txtNomeCliente = new JFormattedTextField();
-		txtNomeCliente.setBounds(56, 103, 135, 20);
+		txtNomeCliente.setBounds(81, 100, 135, 20);
 		add(txtNomeCliente);
 		
 		JLabel lblSobreNome = new JLabel("Sobrenome");
-		lblSobreNome.setBounds(222, 88, 78, 14);
+		lblSobreNome.setBounds(247, 85, 78, 14);
 		add(lblSobreNome);
 		
 		JFormattedTextField txtSobrenomeCliente = new JFormattedTextField();
-		txtSobrenomeCliente.setBounds(222, 103, 135, 20);
+		txtSobrenomeCliente.setBounds(247, 100, 135, 20);
 		add(txtSobrenomeCliente);
 		
 		JLabel lblCPF = new JLabel("CPF");
-		lblCPF.setBounds(394, 88, 46, 14);
+		lblCPF.setBounds(419, 85, 46, 14);
 		add(lblCPF);
 		
 		JFormattedTextField txtCpfCliente = new JFormattedTextField();
-		txtCpfCliente.setBounds(394, 103, 135, 20);
+		txtCpfCliente.setBounds(419, 100, 135, 20);
 		add(txtCpfCliente);
 		
 		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setBounds(56, 148, 52, 14);
+		lblEmail.setBounds(81, 145, 52, 14);
 		add(lblEmail);
 		
 		JFormattedTextField txtEmail = new JFormattedTextField();
-		txtEmail.setBounds(56, 163, 135, 20);
+		txtEmail.setBounds(81, 160, 135, 20);
 		add(txtEmail);
 		
 		JLabel lblTelefoneCliente = new JLabel("Telefone");
-		lblTelefoneCliente.setBounds(222, 148, 61, 14);
+		lblTelefoneCliente.setBounds(247, 145, 61, 14);
 		add(lblTelefoneCliente);
 		
 		JFormattedTextField txtTelefoneCliente = new JFormattedTextField();
-		txtTelefoneCliente.setBounds(222, 163, 135, 20);
+		txtTelefoneCliente.setBounds(247, 160, 135, 20);
 		add(txtTelefoneCliente);
 		
 		JLabel lblClienteCNH = new JLabel("CNH");
-		lblClienteCNH.setBounds(394, 148, 61, 14);
+		lblClienteCNH.setBounds(419, 145, 61, 14);
 		add(lblClienteCNH);
 		
 		JFormattedTextField txtClienteCNH = new JFormattedTextField();
-		txtClienteCNH.setBounds(394, 163, 135, 20);
+		txtClienteCNH.setBounds(419, 160, 135, 20);
 		add(txtClienteCNH);
 		
 		JLabel lblEnderecoCliente = new JLabel("Endereço");
-		lblEnderecoCliente.setBounds(56, 208, 61, 14);
+		lblEnderecoCliente.setBounds(81, 205, 61, 14);
 		add(lblEnderecoCliente);
 		
 		JFormattedTextField txtEnderecoCliente = new JFormattedTextField();
-		txtEnderecoCliente.setBounds(56, 223, 135, 20);
+		txtEnderecoCliente.setBounds(81, 220, 135, 20);
 		add(txtEnderecoCliente);
 		
 		JLabel lblCidadeCliente = new JLabel("Cidade");
-		lblCidadeCliente.setBounds(222, 208, 61, 14);
+		lblCidadeCliente.setBounds(247, 205, 61, 14);
 		add(lblCidadeCliente);
 		
 		JFormattedTextField txtCidadeCliente = new JFormattedTextField();
-		txtCidadeCliente.setBounds(222, 223, 135, 20);
+		txtCidadeCliente.setBounds(247, 220, 135, 20);
 		add(txtCidadeCliente);
 		
 		JLabel lblEstadoCliente = new JLabel("Estado");
-		lblEstadoCliente.setBounds(394, 208, 46, 14);
+		lblEstadoCliente.setBounds(419, 205, 46, 14);
 		add(lblEstadoCliente);
 		
 		JComboBox cbEstadoCliente = new JComboBox();
 		cbEstadoCliente.setModel(new DefaultComboBoxModel(new String[] {"", "RS", "RJ", "SP", "SC"}));
-		cbEstadoCliente.setBounds(394, 223, 46, 20);
+		cbEstadoCliente.setBounds(419, 220, 46, 20);
 		add(cbEstadoCliente);
 		
 		JLabel lblCEPCliente = new JLabel("CEP");
-		lblCEPCliente.setBounds(450, 208, 46, 14);
+		lblCEPCliente.setBounds(475, 205, 46, 14);
 		add(lblCEPCliente);
 		
 		JFormattedTextField formattedTextField = new JFormattedTextField();
-		formattedTextField.setBounds(450, 223, 79, 20);
+		formattedTextField.setBounds(475, 220, 79, 20);
 		add(formattedTextField);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(56, 275, 473, 2);
+		separator.setBounds(81, 272, 473, 2);
 		add(separator);
 		
 		JButton btnSalvarCliente = new JButton(" Salvar");
@@ -118,7 +118,7 @@ public class PainelCadastroCliente extends JPanel {
 		btnSalvarCliente.setHorizontalAlignment(SwingConstants.LEFT);
 		btnSalvarCliente.setForeground(new Color(0, 0, 139));
 		btnSalvarCliente.setBackground(new Color(240, 248, 255));
-		btnSalvarCliente.setBounds(246, 337, 111, 41);
+		btnSalvarCliente.setBounds(271, 334, 111, 41);
 		add(btnSalvarCliente);
 
 	}

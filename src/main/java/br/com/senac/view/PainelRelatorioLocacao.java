@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class PainelRelatorioLocacao extends JPanel {
 	private JTable table;
@@ -30,7 +31,7 @@ public class PainelRelatorioLocacao extends JPanel {
 		JPanel painelRelatorioLocacao = new JPanel();
 		painelRelatorioLocacao.setLayout(null);
 		painelRelatorioLocacao.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		painelRelatorioLocacao.setBounds(10, 30, 551, 149);
+		painelRelatorioLocacao.setBounds(10, 30, 600, 149);
 		add(painelRelatorioLocacao);
 		
 		JLabel lblRelatorioLocacaoDataRetirada = new JLabel("Data do aluguel do veículo");
@@ -68,10 +69,38 @@ public class PainelRelatorioLocacao extends JPanel {
 		painelRelatorioLocacao.add(btnRelatorioLocacaoPesquisa);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 183, 551, 186);
+		scrollPane.setBounds(10, 183, 600, 186);
 		add(scrollPane);
 		
 		table = new JTable();
+		table.setEnabled(false);
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+			},
+			new String[] {
+				"Cliente", "Marca Ve\u00EDculo", "Data da loca\u00E7\u00E3o", "KM da loca\u00E7\u00E3o", "Data da devolu\u00E7\u00E3o", "KM da devolu\u00E7\u00E3o"
+			}
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, true, true, true, true, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		table.getColumnModel().getColumn(2).setPreferredWidth(94);
+		table.getColumnModel().getColumn(3).setPreferredWidth(96);
+		table.getColumnModel().getColumn(4).setPreferredWidth(114);
+		table.getColumnModel().getColumn(5).setPreferredWidth(105);
 		scrollPane.setViewportView(table);
 
 	}

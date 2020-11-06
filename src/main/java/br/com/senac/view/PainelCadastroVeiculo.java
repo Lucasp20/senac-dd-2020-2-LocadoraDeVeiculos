@@ -73,34 +73,34 @@ public class PainelCadastroVeiculo extends JPanel {
 	 * @throws ParseException 
 	 */
 	public PainelCadastroVeiculo() throws ParseException {
-		setBounds(100, 100, 605, 422);
+		setBounds(100, 100, 609, 410);
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);
 		
 		MaskFormatter mascaraPlaca = new MaskFormatter("UUU-####");
 		
 		lblPlaca = new JLabel("Placa");
-		lblPlaca.setBounds(56, 86, 46, 14);
+		lblPlaca.setBounds(75, 86, 46, 14);
 		this.add(lblPlaca);
 		
 		txtPlaca = new JFormattedTextField(mascaraPlaca);
-		txtPlaca.setBounds(56, 101, 146, 22);
+		txtPlaca.setBounds(75, 101, 146, 22);
 		this.add(txtPlaca);
 		
 		lblRenavam = new JLabel("Renavam");
-		lblRenavam.setBounds(223, 86, 59, 14);
+		lblRenavam.setBounds(242, 86, 59, 14);
 		this.add(lblRenavam);
 		
 		txtRenavam = new JFormattedTextField();
-		txtRenavam.setBounds(223, 101, 146, 22);
+		txtRenavam.setBounds(242, 101, 146, 22);
 		this.add(txtRenavam);
 		
 		lblChassi = new JLabel("Chassi");
-		lblChassi.setBounds(387, 86, 59, 14);
+		lblChassi.setBounds(406, 86, 59, 14);
 		this.add(lblChassi);
 		
 		txtChassi = new JFormattedTextField();
-		txtChassi.setBounds(388, 101, 146, 22);
+		txtChassi.setBounds(407, 101, 146, 22);
 		this.add(txtChassi);
 		
 		lblDadosVeiculo = new JLabel("Dados do Ve\u00EDculo");
@@ -109,39 +109,39 @@ public class PainelCadastroVeiculo extends JPanel {
 		this.add(lblDadosVeiculo);
 		
 		txtMarca = new JFormattedTextField();
-		txtMarca.setBounds(56, 160, 146, 22);
+		txtMarca.setBounds(75, 160, 146, 22);
 		this.add(txtMarca);
 		
 		lblMarca = new JLabel("Marca");
-		lblMarca.setBounds(56, 145, 46, 14);
+		lblMarca.setBounds(75, 145, 46, 14);
 		this.add(lblMarca);
 		
 		txtModelo = new JFormattedTextField();
-		txtModelo.setBounds(223, 160, 146, 22);
+		txtModelo.setBounds(242, 160, 146, 22);
 		this.add(txtModelo);
 		
 		lblModelo = new JLabel("Modelo");
-		lblModelo.setBounds(223, 145, 46, 14);
+		lblModelo.setBounds(242, 145, 46, 14);
 		this.add(lblModelo);
 		
 		txtAno = new JFormattedTextField();
-		txtAno.setBounds(388, 160, 76, 22);
+		txtAno.setBounds(407, 160, 76, 22);
 		this.add(txtAno);
 		
 		lblAno = new JLabel("Ano");
-		lblAno.setBounds(388, 145, 46, 14);
+		lblAno.setBounds(407, 145, 46, 14);
 		this.add(lblAno);
 		
 		lblCor = new JLabel("Cor");
-		lblCor.setBounds(470, 145, 46, 14);
+		lblCor.setBounds(489, 145, 46, 14);
 		this.add(lblCor);
 		
 		txtCor = new JFormattedTextField();
-		txtCor.setBounds(470, 160, 64, 22);
+		txtCor.setBounds(489, 160, 64, 22);
 		this.add(txtCor);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(56, 250, 482, 2);
+		separator.setBounds(71, 250, 482, 2);
 		this.add(separator);
 		
 		JButton btnSalvarVeiculo = new JButton(" Salvar");
@@ -155,33 +155,33 @@ public class PainelCadastroVeiculo extends JPanel {
 		btnSalvarVeiculo.setIcon(new ImageIcon(PainelCadastroVeiculo.class.getResource("/icons/Salvar.png")));
 		btnSalvarVeiculo.setForeground(new Color(0, 0, 139));
 		btnSalvarVeiculo.setBackground(new Color(240, 248, 255));
-		btnSalvarVeiculo.setBounds(111, 330, 111, 41);
+		btnSalvarVeiculo.setBounds(133, 327, 111, 41);
 		this.add(btnSalvarVeiculo);
 		
 		txtMotor = new JFormattedTextField();
-		txtMotor.setBounds(56, 214, 146, 22);
+		txtMotor.setBounds(75, 214, 146, 22);
 		this.add(txtMotor);
 		
 		JLabel lblMotor = new JLabel("Motor");
-		lblMotor.setBounds(56, 199, 76, 14);
+		lblMotor.setBounds(75, 199, 76, 14);
 		this.add(lblMotor);
 		
 		JLabel lblTransmissao = new JLabel("Transmiss\u00E3o");
-		lblTransmissao.setBounds(223, 199, 88, 14);
+		lblTransmissao.setBounds(242, 199, 88, 14);
 		this.add(lblTransmissao);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setToolTipText("");
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"            Selecione", "Automática", "Manual"}));
-		comboBox.setBounds(223, 214, 146, 22);
+		comboBox.setBounds(242, 214, 146, 22);
 		this.add(comboBox);
 		
 		JButton btnExcluirVeiculo = new JButton("Excluir");
-		btnExcluirVeiculo.setBounds(382, 330, 111, 41);
+		btnExcluirVeiculo.setBounds(404, 327, 111, 41);
 		add(btnExcluirVeiculo);
 		
 		JButton btnEditarVeiculo = new JButton("Editar");
-		btnEditarVeiculo.setBounds(246, 330, 111, 41);
+		btnEditarVeiculo.setBounds(268, 327, 111, 41);
 		add(btnEditarVeiculo);
 	}
 }

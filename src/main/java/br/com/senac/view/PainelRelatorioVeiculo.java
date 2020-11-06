@@ -31,7 +31,7 @@ public class PainelRelatorioVeiculo extends JPanel {
 		setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 138, 551, 223);
+		scrollPane.setBounds(10, 134, 599, 223);
 		add(scrollPane);
 		
 		tblRelatorioVeiculo = new JTable();
@@ -51,14 +51,18 @@ public class PainelRelatorioVeiculo extends JPanel {
 				{null, null, null, null},
 			},
 			new String[] {
-				"Placa", "Marca", "Modelo", "Status"
+				"Placa", "Marca", "Modelo", "Situa\u00E7\u00E3o"
 			}
 		));
+		tblRelatorioVeiculo.getColumnModel().getColumn(0).setPreferredWidth(97);
+		tblRelatorioVeiculo.getColumnModel().getColumn(1).setPreferredWidth(99);
+		tblRelatorioVeiculo.getColumnModel().getColumn(2).setPreferredWidth(102);
+		tblRelatorioVeiculo.getColumnModel().getColumn(3).setPreferredWidth(119);
 		scrollPane.setViewportView(tblRelatorioVeiculo);
 		
 		JPanel painelRelatorioVeiculo = new JPanel();
 		painelRelatorioVeiculo.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		painelRelatorioVeiculo.setBounds(10, 61, 551, 71);
+		painelRelatorioVeiculo.setBounds(10, 61, 599, 71);
 		add(painelRelatorioVeiculo);
 		painelRelatorioVeiculo.setLayout(null);
 		

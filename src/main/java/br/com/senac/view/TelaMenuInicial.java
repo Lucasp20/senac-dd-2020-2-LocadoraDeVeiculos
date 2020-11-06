@@ -46,7 +46,7 @@ public class TelaMenuInicial extends JFrame {
 	public TelaMenuInicial() {
 		setTitle("Floricar");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 595, 495);
+		setBounds(100, 100, 638, 495);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -147,23 +147,23 @@ public class TelaMenuInicial extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel.setBounds(10, 11, 559, 400);
+		panel.setBounds(10, 11, 602, 400);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblMenuFloricar = new JLabel("FLORICAR\r ");
 		lblMenuFloricar.setToolTipText("");
-		lblMenuFloricar.setFont(new Font("Castellar", Font.BOLD, 16));
+		lblMenuFloricar.setFont(new Font("Castellar", Font.BOLD, 18));
 		lblMenuFloricar.setBounds(10, 11, 132, 41);
 		panel.add(lblMenuFloricar);
 		
 		JLabel lblImagemVeiculoMenu = new JLabel("");
 		lblImagemVeiculoMenu.setIcon(new ImageIcon(TelaMenuInicial.class.getResource("/icons/Veiculo512pix.png")));
-		lblImagemVeiculoMenu.setBounds(36, 36, 513, 390);
+		lblImagemVeiculoMenu.setBounds(79, 25, 513, 390);
 		panel.add(lblImagemVeiculoMenu);
 		
 		JLabel lblMenuLocadoraDeVeiculos = new JLabel("LOCADORA DE VEÍCULOS");
-		lblMenuLocadoraDeVeiculos.setFont(new Font("Tw Cen MT Condensed", Font.BOLD, 15));
+		lblMenuLocadoraDeVeiculos.setFont(new Font("Tw Cen MT Condensed", Font.BOLD, 17));
 		lblMenuLocadoraDeVeiculos.setBounds(36, 38, 189, 14);
 		panel.add(lblMenuLocadoraDeVeiculos);
 		
