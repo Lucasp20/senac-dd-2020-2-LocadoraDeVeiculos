@@ -3,6 +3,8 @@ package br.com.senac.view;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.text.ParseException;
+
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextPane;
@@ -11,11 +13,15 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSeparator;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import javax.swing.text.MaskFormatter;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 
 public class PainelCadastroCliente extends JPanel {
 
+	private JFormattedTextField txtTelefoneCliente;
+	private JFormattedTextField txtCpfCliente;
+	private JFormattedTextField txtCEPCliente;
 	/**
 	 * Create the panel.
 	 */
@@ -46,11 +52,7 @@ public class PainelCadastroCliente extends JPanel {
 		JLabel lblCPF = new JLabel("CPF");
 		lblCPF.setBounds(419, 85, 46, 14);
 		add(lblCPF);
-		
-		JFormattedTextField txtCpfCliente = new JFormattedTextField();
-		txtCpfCliente.setBounds(419, 100, 135, 25);
-		add(txtCpfCliente);
-		
+				
 		JLabel lblEmail = new JLabel("Email");
 		lblEmail.setBounds(81, 145, 52, 14);
 		add(lblEmail);
@@ -62,11 +64,7 @@ public class PainelCadastroCliente extends JPanel {
 		JLabel lblTelefoneCliente = new JLabel("Telefone");
 		lblTelefoneCliente.setBounds(247, 145, 61, 14);
 		add(lblTelefoneCliente);
-		
-		JFormattedTextField txtTelefoneCliente = new JFormattedTextField();
-		txtTelefoneCliente.setBounds(247, 160, 135, 25);
-		add(txtTelefoneCliente);
-		
+			
 		JLabel lblClienteCNH = new JLabel("CNH");
 		lblClienteCNH.setBounds(419, 145, 61, 14);
 		add(lblClienteCNH);
@@ -103,11 +101,7 @@ public class PainelCadastroCliente extends JPanel {
 		JLabel lblCEPCliente = new JLabel("CEP");
 		lblCEPCliente.setBounds(475, 205, 46, 14);
 		add(lblCEPCliente);
-		
-		JFormattedTextField formattedTextField = new JFormattedTextField();
-		formattedTextField.setBounds(475, 220, 79, 25);
-		add(formattedTextField);
-		
+				
 		JSeparator separator = new JSeparator();
 		separator.setBounds(81, 272, 473, 2);
 		add(separator);
@@ -121,5 +115,25 @@ public class PainelCadastroCliente extends JPanel {
 		btnSalvarCliente.setBounds(271, 334, 111, 41);
 		add(btnSalvarCliente);
 
+		try {
+			MaskFormatter mascaraCpf = new MaskFormatter("###.###.###-##");
+			MaskFormatter mascaraTelefone = new MaskFormatter("(##)#####-####");
+			MaskFormatter mascaraCep = new MaskFormatter("#####-###");
+			
+			txtTelefoneCliente = new JFormattedTextField(mascaraTelefone);
+			txtTelefoneCliente.setBounds(247, 160, 135, 25);
+			add(txtTelefoneCliente);
+			
+			txtCpfCliente = new JFormattedTextField(mascaraCpf);
+			txtCpfCliente.setBounds(419, 100, 135, 25);
+			add(txtCpfCliente);
+			
+			txtCEPCliente = new JFormattedTextField(mascaraCep);
+			txtCEPCliente.setBounds(475, 220, 79, 25);
+			add(txtCEPCliente);
+			
+		} catch (ParseException e) {
+			
+		}
 	}
 }
