@@ -34,5 +34,95 @@ public class VeiculoVO {
 		super();
 		
 	}
+
+	public int getIdVeiculo() {
+		return idVeiculo;
+	}
+
+	public void setIdVeiculo(int idVeiculo) {
+		this.idVeiculo = idVeiculo;
+	}
+
+	public String getPlaca() {
+		return placa;
+	}
+
+	public void setPlaca(String placa) {
+		this.placa = placa;
+	}
+
+	public String getRenavam() {
+		return renavam;
+	}
+
+	public void setRenavam(String renavam) {
+		this.renavam = renavam;
+	}
+
+	public String getChassi() {
+		return chassi;
+	}
+
+	public void setChassi(String chassi) {
+		this.chassi = chassi;
+	}
+
+	public String getMarca() {
+		return marca;
+	}
+
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
+
+	public String getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
+	}
+
+	public int getAno() {
+		return ano;
+	}
+
+	public void setAno(int ano) {
+		this.ano = ano;
+	}
+
+	public String getCor() {
+		return cor;
+	}
+
+	public void setCor(String cor) {
+		this.cor = cor;
+	}
+
+	public int getMotor() {
+		return motor;
+	}
+
+	public void setMotor(int motor) {
+		this.motor = motor;
+	}
+
+	public String getTransmissao() {
+		return transmissao;
+	}
+
+	public void setTransmissao(String transmissao) {
+		this.transmissao = transmissao;
+	}
+
+	public String getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
+	}
+	
+	
 	
 }

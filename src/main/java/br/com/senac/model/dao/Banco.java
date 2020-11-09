@@ -9,12 +9,14 @@ import java.sql.Statement;
 
 public class Banco {
 
-	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-	private static final String BANCODADOS = "dbfloricar";
+	private static final String DRIVER = "com.mysql.cj.jdbc.Driver"; 
+	private static final String BANCODADOS = "covid19";
 	private static final String BUGFIX_HORABR = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-	private static final String CONEXAO = "jdbc:mysql://localhost:3306/" + BANCODADOS + BUGFIX_HORABR;
+	private static final String CONEXAO =  "jdbc:mysql://localhost:3306/" + BANCODADOS  + BUGFIX_HORABR;
 	private static final String USER = "root";
 	private static final String PASSWORD = "1107";
+	
+	public static final int CODIGO_RETORNO_SUCESSO = 1;
 	
 	public static Connection getConnection(){
 		try {
@@ -23,7 +25,7 @@ public class Banco {
 			conn = DriverManager.getConnection(CONEXAO, USER, PASSWORD);
 			return conn;
 		} catch (ClassNotFoundException e) {
-			System.out.println("Classe do Driver não foi encontrada.");
+			System.out.println("Classe do Driver n�o foi encontrada.");
 			System.out.println("Erro: " + e.getMessage());
 			return null;
 		} catch (SQLException e) {
@@ -39,7 +41,7 @@ public class Banco {
 				conn.close();
 			}
 		} catch (SQLException e) {
-			System.out.println("Problema no fechamento da conexão.");
+			System.out.println("Problema no fechamento da conex�o.");
 			System.out.println("Erro: " + e.getMessage());
 		}	
 	}
@@ -76,6 +78,17 @@ public class Banco {
 			return null;
 		}
 	}
+	
+	public static PreparedStatement getPreparedStatementWithGeneratedKeys(Connection conn, String sql){
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			return stmt;
+		} catch (Exception e) {
+			System.out.println("Erro ao obter o PreparedStatement.");
+			System.out.println("Erro: " + e.getMessage());
+			return null;
+		}
+	}
 
 	public static void closePreparedStatement(Statement stmt){
 		try {
@@ -99,4 +112,3 @@ public class Banco {
 		}
 	}
 }
-
