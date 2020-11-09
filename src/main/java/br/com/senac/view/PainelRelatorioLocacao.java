@@ -31,7 +31,7 @@ public class PainelRelatorioLocacao extends JPanel {
 		JPanel painelRelatorioLocacao = new JPanel();
 		painelRelatorioLocacao.setLayout(null);
 		painelRelatorioLocacao.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		painelRelatorioLocacao.setBounds(10, 30, 600, 149);
+		painelRelatorioLocacao.setBounds(10, 30, 676, 149);
 		add(painelRelatorioLocacao);
 		
 		JLabel lblRelatorioLocacaoDataRetirada = new JLabel("Data do aluguel do veículo");
