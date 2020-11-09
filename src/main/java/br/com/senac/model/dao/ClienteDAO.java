@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import model.dao.Banco;
-import model.vo.ClienteVO;
 
 /*
  * 
@@ -42,15 +40,15 @@ public class ClienteDAO {
 
 	try {
 		prepStmt.setString(1, a.getNome());
-		prepStmt.setString(2, a.getMatricula());
-		prepStmt.setDouble(3, a.getNotaProva1());
-		prepStmt.setDouble(4, a.getNotaProva2());
-		prepStmt.setDouble(5, a.getNotaTrabalho1());
-		prepStmt.setDouble(6, a.getNotaTrabalho2());
-		prepStmt.setString(7, a.getSobrenome());
-		prepStmt.setString(8, a.getNivel());
-		prepStmt.setString(9, a.getSituacao());
-		prepStmt.setDouble(10, a.getNotaFinal());
+		prepStmt.setString(2, a.getSobrenome);
+		prepStmt.setString(3, a.getCpf());
+		prepStmt.setString(4, a.getEmail());
+		prepStmt.setString(5, a.getCnh());
+		prepStmt.setString(6, a.getTelefone());
+		prepStmt.setString(7, a.getEndereco());
+		prepStmt.setString(8, a.getCidade());
+		prepStmt.setString(9, a.getEstado());
+		prepStmt.setString(10, a.getCep());
 
 		prepStmt.execute();
 
