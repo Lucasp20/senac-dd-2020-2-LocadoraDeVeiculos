@@ -112,7 +112,7 @@ public class PainelCadastroCliente extends JPanel {
 		btnSalvarCliente.setHorizontalAlignment(SwingConstants.LEFT);
 		btnSalvarCliente.setForeground(new Color(0, 0, 139));
 		btnSalvarCliente.setBackground(new Color(240, 248, 255));
-		btnSalvarCliente.setBounds(164, 334, 111, 41);
+		btnSalvarCliente.setBounds(140, 322, 111, 41);
 		add(btnSalvarCliente);
 
 		try {
@@ -125,7 +125,7 @@ public class PainelCadastroCliente extends JPanel {
 			add(txtTelefoneCliente);
 			
 			txtCpfCliente = new JFormattedTextField(mascaraCpf);
-			txtCpfCliente.setBounds(419, 100, 135, 25);
+			txtCpfCliente.setBounds(419, 100, 135, 26);
 			add(txtCpfCliente);
 			
 			txtCEPCliente = new JFormattedTextField(mascaraCep);
@@ -133,15 +133,16 @@ public class PainelCadastroCliente extends JPanel {
 			add(txtCEPCliente);
 			
 			JButton btnEditarVeiculo = new JButton("Editar");
-			btnEditarVeiculo.setBounds(298, 334, 111, 41);
+			btnEditarVeiculo.setBounds(274, 322, 111, 41);
 			add(btnEditarVeiculo);
 			
 			JButton btnExcluirVeiculo = new JButton("Excluir");
-			btnExcluirVeiculo.setBounds(434, 334, 111, 41);
+			btnExcluirVeiculo.setBounds(410, 322, 111, 41);
 			add(btnExcluirVeiculo);
 			
-			JButton btnConsultarCpfCliente = new JButton("LUPA");
-			btnConsultarCpfCliente.setBounds(564, 100, 71, 25);
+			JButton btnConsultarCpfCliente = new JButton("");
+			btnConsultarCpfCliente.setIcon(new ImageIcon(PainelCadastroCliente.class.getResource("/icons/pesquisapequeno.png")));
+			btnConsultarCpfCliente.setBounds(556, 99, 46, 26);
 			add(btnConsultarCpfCliente);
 			
 		} catch (ParseException e) {

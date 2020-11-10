@@ -48,8 +48,8 @@ public class PainelCadastroVeiculo extends JPanel {
 	private JLabel lblAno;
 	private JLabel lblCor;
 	private JFormattedTextField txtCor;
-	private JFormattedTextField txtMotor;
 	private JButton btnConsultarCpfCliente;
+	private JComboBox cbDadosVeiculoMotor;
 	
 	/**
 	 * Launch the application.
@@ -85,7 +85,7 @@ public class PainelCadastroVeiculo extends JPanel {
 		this.add(lblPlaca);
 		
 		txtPlaca = new JFormattedTextField(mascaraPlaca);
-		txtPlaca.setBounds(75, 101, 88, 27);
+		txtPlaca.setBounds(75, 101, 96, 27);
 		this.add(txtPlaca);
 		
 		lblRenavam = new JLabel("Renavam");
@@ -159,10 +159,6 @@ public class PainelCadastroVeiculo extends JPanel {
 		btnSalvarVeiculo.setBounds(133, 327, 111, 41);
 		this.add(btnSalvarVeiculo);
 		
-		txtMotor = new JFormattedTextField();
-		txtMotor.setBounds(75, 214, 146, 27);
-		this.add(txtMotor);
-		
 		JLabel lblMotor = new JLabel("Motor");
 		lblMotor.setBounds(75, 199, 76, 14);
 		this.add(lblMotor);
@@ -171,11 +167,11 @@ public class PainelCadastroVeiculo extends JPanel {
 		lblTransmissao.setBounds(242, 199, 88, 14);
 		this.add(lblTransmissao);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setToolTipText("");
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"            Selecione", "Automática", "Manual"}));
-		comboBox.setBounds(242, 214, 146, 27);
-		this.add(comboBox);
+		JComboBox cbDadosVeiculoTransmissao = new JComboBox();
+		cbDadosVeiculoTransmissao.setToolTipText("");
+		cbDadosVeiculoTransmissao.setModel(new DefaultComboBoxModel(new String[] {"            Selecione", "Automática", "Manual"}));
+		cbDadosVeiculoTransmissao.setBounds(242, 214, 146, 27);
+		this.add(cbDadosVeiculoTransmissao);
 		
 		JButton btnExcluirVeiculo = new JButton("Excluir");
 		btnExcluirVeiculo.setBounds(404, 327, 111, 41);
@@ -185,9 +181,15 @@ public class PainelCadastroVeiculo extends JPanel {
 		btnEditarVeiculo.setBounds(268, 327, 111, 41);
 		add(btnEditarVeiculo);
 		
-		btnConsultarCpfCliente = new JButton("LUPA");
-		btnConsultarCpfCliente.setBounds(173, 102, 51, 25);
+		btnConsultarCpfCliente = new JButton("");
+		btnConsultarCpfCliente.setIcon(new ImageIcon(PainelCadastroVeiculo.class.getResource("/icons/pesquisapequeno.png")));
+		btnConsultarCpfCliente.setBounds(173, 101, 51, 27);
 		add(btnConsultarCpfCliente);
+		
+		cbDadosVeiculoMotor = new JComboBox();
+		cbDadosVeiculoMotor.setModel(new DefaultComboBoxModel(new String[] {"             Selecione   ", "1.0", "1.4", "1.6", "2.0"}));
+		cbDadosVeiculoMotor.setBounds(75, 214, 146, 27);
+		add(cbDadosVeiculoMotor);
 	}
 }
 
