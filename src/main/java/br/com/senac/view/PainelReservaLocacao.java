@@ -32,17 +32,9 @@ public class PainelReservaLocacao extends JPanel {
 		lblReservaLocacaoCliente.setBounds(55, 90, 46, 14);
 		add(lblReservaLocacaoCliente);
 		
-		JFormattedTextField txtReservaCliente = new JFormattedTextField();
-		txtReservaCliente.setBounds(55, 104, 182, 25);
-		add(txtReservaCliente);
-		
 		JLabel lblReservaLocacaoVeiculo = new JLabel("Veículo");
 		lblReservaLocacaoVeiculo.setBounds(263, 90, 46, 14);
 		add(lblReservaLocacaoVeiculo);
-		
-		JFormattedTextField txtReservaVeiculo = new JFormattedTextField();
-		txtReservaVeiculo.setBounds(263, 104, 182, 25);
-		add(txtReservaVeiculo);
 		
 		JLabel lblReservaLocacaoSituacao = new JLabel("Situação");
 		lblReservaLocacaoSituacao.setBounds(437, 217, 57, 14);
@@ -100,8 +92,24 @@ public class PainelReservaLocacao extends JPanel {
 		btnSalvarReserva.setHorizontalAlignment(SwingConstants.LEFT);
 		btnSalvarReserva.setForeground(new Color(0, 0, 139));
 		btnSalvarReserva.setBackground(new Color(240, 248, 255));
-		btnSalvarReserva.setBounds(244, 342, 111, 41);
+		btnSalvarReserva.setBounds(145, 340, 111, 41);
 		add(btnSalvarReserva);
+		
+		JButton btnEditarVeiculo = new JButton("Editar");
+		btnEditarVeiculo.setBounds(284, 340, 111, 41);
+		add(btnEditarVeiculo);
+		
+		JButton btnExcluirVeiculo = new JButton("Excluir");
+		btnExcluirVeiculo.setBounds(420, 340, 111, 41);
+		add(btnExcluirVeiculo);
+		
+		JComboBox cbCliente = new JComboBox();
+		cbCliente.setBounds(55, 106, 182, 20);
+		add(cbCliente);
+		
+		JComboBox cbVeiculo = new JComboBox();
+		cbVeiculo.setBounds(263, 106, 182, 20);
+		add(cbVeiculo);
 		
 		
 

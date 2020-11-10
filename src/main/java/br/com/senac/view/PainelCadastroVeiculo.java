@@ -49,6 +49,7 @@ public class PainelCadastroVeiculo extends JPanel {
 	private JLabel lblCor;
 	private JFormattedTextField txtCor;
 	private JFormattedTextField txtMotor;
+	private JButton btnConsultarCpfCliente;
 	
 	/**
 	 * Launch the application.
@@ -84,7 +85,7 @@ public class PainelCadastroVeiculo extends JPanel {
 		this.add(lblPlaca);
 		
 		txtPlaca = new JFormattedTextField(mascaraPlaca);
-		txtPlaca.setBounds(75, 101, 146, 27);
+		txtPlaca.setBounds(75, 101, 88, 27);
 		this.add(txtPlaca);
 		
 		lblRenavam = new JLabel("Renavam");
@@ -183,6 +184,10 @@ public class PainelCadastroVeiculo extends JPanel {
 		JButton btnEditarVeiculo = new JButton("Editar");
 		btnEditarVeiculo.setBounds(268, 327, 111, 41);
 		add(btnEditarVeiculo);
+		
+		btnConsultarCpfCliente = new JButton("LUPA");
+		btnConsultarCpfCliente.setBounds(173, 102, 51, 25);
+		add(btnConsultarCpfCliente);
 	}
 }
 

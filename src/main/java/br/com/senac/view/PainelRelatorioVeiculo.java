@@ -71,7 +71,7 @@ public class PainelRelatorioVeiculo extends JPanel {
 		painelRelatorioVeiculo.add(lblRelatorioMarca);
 		
 		JFormattedTextField txtRelatorioMarca = new JFormattedTextField();
-		txtRelatorioMarca.setBounds(54, 27, 199, 20);
+		txtRelatorioMarca.setBounds(54, 27, 98, 20);
 		painelRelatorioVeiculo.add(txtRelatorioMarca);
 		
 		JButton btnRelatorioPesquisa = new JButton("Pesquisar");
@@ -81,6 +81,22 @@ public class PainelRelatorioVeiculo extends JPanel {
 		JButton btnRelatorioVeiculoGerarExcel = new JButton("Gerar Excel");
 		btnRelatorioVeiculoGerarExcel.setBounds(484, 26, 105, 23);
 		painelRelatorioVeiculo.add(btnRelatorioVeiculoGerarExcel);
+		
+		JLabel lblAno = new JLabel("Ano");
+		lblAno.setBounds(162, 11, 46, 14);
+		painelRelatorioVeiculo.add(lblAno);
+		
+		JFormattedTextField txtAno = new JFormattedTextField();
+		txtAno.setBounds(162, 26, 76, 27);
+		painelRelatorioVeiculo.add(txtAno);
+		
+		JLabel lblCor = new JLabel("Cor");
+		lblCor.setBounds(244, 11, 46, 14);
+		painelRelatorioVeiculo.add(lblCor);
+		
+		JFormattedTextField txtCor = new JFormattedTextField();
+		txtCor.setBounds(244, 26, 64, 27);
+		painelRelatorioVeiculo.add(txtCor);
 		
 		JLabel lblRelatorioVeiculo = new JLabel("Relatório de Veículos");
 		lblRelatorioVeiculo.setFont(new Font("Arial", Font.BOLD, 15));

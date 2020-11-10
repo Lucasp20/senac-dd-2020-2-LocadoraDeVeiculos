@@ -112,7 +112,7 @@ public class PainelCadastroCliente extends JPanel {
 		btnSalvarCliente.setHorizontalAlignment(SwingConstants.LEFT);
 		btnSalvarCliente.setForeground(new Color(0, 0, 139));
 		btnSalvarCliente.setBackground(new Color(240, 248, 255));
-		btnSalvarCliente.setBounds(271, 334, 111, 41);
+		btnSalvarCliente.setBounds(164, 334, 111, 41);
 		add(btnSalvarCliente);
 
 		try {
@@ -131,6 +131,18 @@ public class PainelCadastroCliente extends JPanel {
 			txtCEPCliente = new JFormattedTextField(mascaraCep);
 			txtCEPCliente.setBounds(475, 220, 79, 25);
 			add(txtCEPCliente);
+			
+			JButton btnEditarVeiculo = new JButton("Editar");
+			btnEditarVeiculo.setBounds(298, 334, 111, 41);
+			add(btnEditarVeiculo);
+			
+			JButton btnExcluirVeiculo = new JButton("Excluir");
+			btnExcluirVeiculo.setBounds(434, 334, 111, 41);
+			add(btnExcluirVeiculo);
+			
+			JButton btnConsultarCpfCliente = new JButton("LUPA");
+			btnConsultarCpfCliente.setBounds(564, 100, 71, 25);
+			add(btnConsultarCpfCliente);
 			
 		} catch (ParseException e) {
 			
