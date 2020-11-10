@@ -7,28 +7,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import br.com.senac.model.vo.ClienteVO;
+import br.com.senac.model.dao.Banco;
 
-/*
- * 
- * public ClienteVO(int idCliente, String nome, String sobrenome, String cpf, String email, String cnh,
-			String telefone, String endereco, String cidade, String estado, String cep) {
-		super();
-		this.idCliente = idCliente;
-		this.nome = nome;
-		this.sobrenome = sobrenome;
-		this.cpf = cpf;
-		this.email = email;
-		this.cnh = cnh;
-		this.telefone = telefone;
-		this.endereco = endereco;
-		this.cidade = cidade;
-		this.estado = estado;
-		this.cep = cep;
-	 * 
- */
 
 public class ClienteDAO {
 	
+	public int inserir(ClienteVO cliente){
 	int novoId = -1;
 
 	String sql = " INSERT INTO CLIENTE (NOME, SOBRENOME, CPF, EMAIL, CNH, TELEFONE, ENDERECO, CIDADE, ESTADO, CEP) "
@@ -36,11 +21,49 @@ public class ClienteDAO {
 
 	Connection conexao = Banco.getConnection();
 	PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql, 
-			java.sql.Statement.RETURN_GENERATED_KEYS);}
+			java.sql.Statement.RETURN_GENERATED_KEYS);
+
+	try {
+		prepStmt.setString(1, cliente.getNome());
+		prepStmt.setString(2, cliente.getSobrenome());
+		prepStmt.setString(3, cliente.getCpf());
+		prepStmt.setString(4, cliente.getEmail());
+		prepStmt.setString(5, cliente.getCnh());
+		prepStmt.setString(6, cliente.getTelefone());
+		prepStmt.setString(7, cliente.getEndereco());
+		prepStmt.setString(8, cliente.getCidade());
+		prepStmt.setString(9, cliente.getEstado());
+		prepStmt.setString(10, cliente.getCep());
+
+		prepStmt.execute();
+
+		ResultSet generatedKeys = prepStmt.getGeneratedKeys();
+		if (generatedKeys.next()) {
+			novoId = generatedKeys.getInt(1);
+		}
+	} catch (SQLException e) {
+		System.out.println("Erro ao inserir Cliente. Causa: \n:" + e.getCause());
+	} finally{
+		Banco.closePreparedStatement(prepStmt);
+		Banco.closeConnection(conexao);
+	}
+
+	return novoId;
+}
+
+public boolean atualizar(ClienteVO a){
+	boolean sucessoUpdate = false;
+
+	String sql = " UPDATE CLIENTE P SET NOME=?, SOBRENOME=?, CPF=?, EMAIL=?, CNH=?, TELEFONE=?, "
+			+ "ENDERECO=?, CIDADE=?, ESTADO=?, CEP=? "
+			+ " WHERE ID = ? ";
+
+	Connection conexao = Banco.getConnection();
+	PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
 
 	try {
 		prepStmt.setString(1, a.getNome());
-		prepStmt.setString(2, a.getSobrenome);
+		prepStmt.setString(2, a.getSobrenome());
 		prepStmt.setString(3, a.getCpf());
 		prepStmt.setString(4, a.getEmail());
 		prepStmt.setString(5, a.getCnh());
@@ -50,44 +73,6 @@ public class ClienteDAO {
 		prepStmt.setString(9, a.getEstado());
 		prepStmt.setString(10, a.getCep());
 
-		prepStmt.execute();
-
-		ResultSet generatedKeys = prepStmt.getGeneratedKeys();
-		if (generatedKeys.next()) {
-			novoId = generatedKeys.getInt(1);
-		}
-	} catch (SQLException e) {
-		System.out.println("Erro ao inserir aluno. Causa: \n:" + e.getCause());
-	} finally{
-		Banco.closePreparedStatement(prepStmt);
-		Banco.closeConnection(conexao);
-	}
-
-	return novoId;
-}
-
-public boolean atualizar(Aluno a){
-	boolean sucessoUpdate = false;
-
-	String sql = " UPDATE ALUNO P SET NOME=?, MATRICULA=?, NOTA_P1=?, NOTA_P2=?, NOTA_T1=?, NOTA_T2=?, "
-			+ "SOBRENOME=?, NIVEL=?, SITUACAO=?, NOTA_FINAL=? "
-			+ " WHERE ID = ? ";
-
-	Connection conexao = Banco.getConnection();
-	PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
-
-	try {
-		prepStmt.setString(1, a.getNome());
-		prepStmt.setString(2, a.getMatricula());
-		prepStmt.setDouble(3, a.getNotaProva1());
-		prepStmt.setDouble(4, a.getNotaProva2());
-		prepStmt.setDouble(5, a.getId());
-		prepStmt.setDouble(6, a.getNotaTrabalho2());
-		prepStmt.setString(7, a.getSobrenome());
-		prepStmt.setString(8, a.getNivel());
-		prepStmt.setString(9, a.getSituacao());
-		prepStmt.setDouble(10, a.getNotaFinal());
-
 		int codigoRetorno = prepStmt.executeUpdate();
 
 		if(codigoRetorno == 1){
@@ -95,7 +80,7 @@ public boolean atualizar(Aluno a){
 		}
 
 	} catch (SQLException e) {
-		System.out.println("Erro ao atualizar aluno. Causa: \n:" + e.getCause());
+		System.out.println("Erro ao atualizar CLiente. Causa: \n:" + e.getCause());
 	}finally{
 		Banco.closePreparedStatement(prepStmt);
 		Banco.closeConnection(conexao);
@@ -104,22 +89,22 @@ public boolean atualizar(Aluno a){
 	return sucessoUpdate;
 }
 
-public boolean remover(int id){
+public boolean remover(int idCliente){
 	boolean sucessoDelete = false;
 
-	String sql = " DELETE FROM ALUNO "
+	String sql = " DELETE FROM CLIENTE "
 			+ " WHERE ID = ? ";
 
 	Connection conexao = Banco.getConnection();
 	PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
 	try {
-		prepStmt.setInt(1, id);
+		prepStmt.setInt(1, idCliente);
 		int codigoRetorno = prepStmt.executeUpdate();
-		if(codigoRetorno == 1){//1 - sucesso na execuÃ§Ã£o
+		if(codigoRetorno == 1){//1 - sucesso na execução
 			sucessoDelete = true;
 		}
 	} catch (SQLException e) {
-		System.out.println("Erro ao remover aluno. Causa: \n:" + e.getCause());
+		System.out.println("Erro ao remover Cliente. Causa: \n:" + e.getCause());
 	}finally{
 		Banco.closePreparedStatement(prepStmt);
 		Banco.closeConnection(conexao);
@@ -127,70 +112,70 @@ public boolean remover(int id){
 	return sucessoDelete;
 }
 
-public ArrayList<Aluno> listarTodos(){
-	String sql = " SELECT * FROM ALUNO ";
+public ArrayList<ClienteVO> listarTodos(){
+	String sql = " SELECT * FROM CLIENTE ";
 	
 	Connection conexao = Banco.getConnection();
 	PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
-	ArrayList<Aluno> alunos = new ArrayList<Aluno>();
+	ArrayList<ClienteVO> clientes = new ArrayList<ClienteVO>();
 	
 	try {
 		ResultSet result = prepStmt.executeQuery();
 		
 		while(result.next()){
-			Aluno aluno = new Aluno();
+			ClienteVO cliente = new ClienteVO();
 			
-			aluno.setId(result.getInt("ID"));
-			aluno.setNome(result.getString("NOME"));
-			aluno.setMatricula(result.getString("MATRICULA"));
-			aluno.setNotaProva1(result.getDouble("NOTA_P1"));
-			aluno.setNotaProva2(result.getDouble("NOTA_P2"));
-			aluno.setNotaTrabalho1(result.getDouble("NOTA_T1"));
-			aluno.setNotaTrabalho2(result.getDouble("NOTA_T2"));
-			aluno.setSobrenome(result.getString("SOBRENOME"));
-			aluno.setNivel(result.getString("NIVEL"));
-			aluno.setSituacao(result.getString("SITUACAO"));
-			aluno.setNotaFinal(result.getDouble("NOTA_FINAL"));
+			cliente.setIdCliente(result.getInt("ID"));
+			cliente.setNome(result.getString("NOME"));
+			cliente.setSobrenome(result.getString("SOBRENOME"));
+			cliente.setCpf(result.getString("CPF"));
+			cliente.setEmail(result.getString("EMAIL"));
+			cliente.setCnh(result.getString("CNH"));
+			cliente.setTelefone(result.getString("TELEFONE"));
+			cliente.setEndereco(result.getString("ENDERECO"));
+			cliente.setCidade(result.getString("CIDADE"));
+			cliente.setEstado(result.getString("ESTADO"));
+			cliente.setCep(result.getString("CEP"));
 			
-			alunos.add(aluno);
+			clientes.add(cliente);
 		}
 	} catch (SQLException e) {
 		System.out.println("Erro listar todos os alunos. Causa: \n:" + e.getCause());
 	}
-	return alunos;
+	return clientes;
 }
 
-public Aluno obterPorId(int id){
+public ClienteVO obterPorId(int idCliente){
 	String sql = " SELECT * FROM ALUNO "
 			+ " WHERE ID=?";
 	
 	Connection conexao = Banco.getConnection();
 	PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
-	Aluno aluno = null;
+	ClienteVO cliente = null;
 	
 	try {
-		prepStmt.setInt(1, id);
+		prepStmt.setInt(1, idCliente);
 		ResultSet result = prepStmt.executeQuery();
 		
 		while(result.next()){
-			aluno = new Aluno();
+			cliente = new ClienteVO();
 			
-			aluno.setId(result.getInt("ID"));
-			aluno.setNome(result.getString("NOME"));
-			aluno.setMatricula(result.getString("MATRICULA"));
-			aluno.setNotaProva1(result.getDouble("NOTA_P1"));
-			aluno.setNotaProva2(result.getDouble("NOTA_P2"));
-			aluno.setNotaTrabalho1(result.getDouble("NOTA_T1"));
-			aluno.setNotaTrabalho2(result.getDouble("NOTA_T2"));
-			aluno.setSobrenome(result.getString("SOBRENOME"));
-			aluno.setNivel(result.getString("NIVEL"));
-			aluno.setSituacao(result.getString("SITUACAO"));
-			aluno.setNotaFinal(result.getDouble("NOTA_FINAL"));
+			cliente.setIdCliente(result.getInt("ID"));
+			cliente.setNome(result.getString("NOME"));
+			cliente.setSobrenome(result.getString("SOBRENOME"));
+			cliente.setCpf(result.getString("CPF"));
+			cliente.setEmail(result.getString("EMAIL"));
+			cliente.setCnh(result.getString("CNH"));
+			cliente.setTelefone(result.getString("TELEFONE"));
+			cliente.setEndereco(result.getString("ENDERECO"));
+			cliente.setCidade(result.getString("CIDADE"));
+			cliente.setEstado(result.getString("ESTADO"));
+			cliente.setCep(result.getString("CEP"));
 		}
 	} catch (SQLException e) {
-		System.out.println("Erro buscar um aluno. Causa: \n:" + e.getCause());
+		System.out.println("Erro buscar um CLiente. Causa: \n:" + e.getCause());
 	}
-	return aluno;
+	return cliente;
 }
 	
 	
