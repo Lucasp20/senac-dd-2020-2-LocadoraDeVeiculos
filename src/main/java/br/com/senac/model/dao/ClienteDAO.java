@@ -20,8 +20,7 @@ public class ClienteDAO {
 			+ " VALUES (?,?,?,?,?,?,?,?,?,?) ";
 
 	Connection conexao = Banco.getConnection();
-	PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql, 
-			java.sql.Statement.RETURN_GENERATED_KEYS);
+	PreparedStatement prepStmt = Banco.getPreparedStatementWithGeneratedKeys(conexao, sql);
 
 	try {
 		prepStmt.setString(1, cliente.getNome());
@@ -51,7 +50,7 @@ public class ClienteDAO {
 	return novoId;
 }
 
-public boolean atualizar(ClienteVO a){
+public boolean atualizar(ClienteVO cliente){
 	boolean sucessoUpdate = false;
 
 	String sql = " UPDATE CLIENTE P SET NOME=?, SOBRENOME=?, CPF=?, EMAIL=?, CNH=?, TELEFONE=?, "
@@ -62,16 +61,16 @@ public boolean atualizar(ClienteVO a){
 	PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
 
 	try {
-		prepStmt.setString(1, a.getNome());
-		prepStmt.setString(2, a.getSobrenome());
-		prepStmt.setString(3, a.getCpf());
-		prepStmt.setString(4, a.getEmail());
-		prepStmt.setString(5, a.getCnh());
-		prepStmt.setString(6, a.getTelefone());
-		prepStmt.setString(7, a.getEndereco());
-		prepStmt.setString(8, a.getCidade());
-		prepStmt.setString(9, a.getEstado());
-		prepStmt.setString(10, a.getCep());
+		prepStmt.setString(1, cliente.getNome());
+		prepStmt.setString(2, cliente.getSobrenome());
+		prepStmt.setString(3, cliente.getCpf());
+		prepStmt.setString(4, cliente.getEmail());
+		prepStmt.setString(5, cliente.getCnh());
+		prepStmt.setString(6, cliente.getTelefone());
+		prepStmt.setString(7, cliente.getEndereco());
+		prepStmt.setString(8, cliente.getCidade());
+		prepStmt.setString(9, cliente.getEstado());
+		prepStmt.setString(10, cliente.getCep());
 
 		int codigoRetorno = prepStmt.executeUpdate();
 
