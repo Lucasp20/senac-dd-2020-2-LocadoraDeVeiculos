@@ -14,14 +14,30 @@ import javax.swing.JSeparator;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
+
+import br.com.senac.controller.ClienteController;
+import br.com.senac.model.vo.ClienteVO;
+
+
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PainelCadastroCliente extends JPanel {
 
+	
+	private JFormattedTextField txtNomeCliente;
+	private JFormattedTextField txtSobrenomeCliente;
+	private JFormattedTextField txtEmail;
+	private JFormattedTextField txtClienteCNH;
+	private JFormattedTextField txtEnderecoCliente;
+	private JFormattedTextField txtClienteCpf;
+	private JFormattedTextField txtCidadeCliente;
 	private JFormattedTextField txtTelefoneCliente;
-	private JFormattedTextField txtCpfCliente;
-	private JFormattedTextField txtCEPCliente;
+	private JFormattedTextField txtEstadoClienteField;
+	private JFormattedTextField txtCepCliente;
+	
 	/**
 	 * Create the panel.
 	 */
@@ -107,6 +123,18 @@ public class PainelCadastroCliente extends JPanel {
 		add(separator);
 		
 		JButton btnSalvarCliente = new JButton(" Salvar");
+		btnSalvarCliente.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+						
+				ClienteController controlador = new ClienteController();
+				
+				ClienteVO novoCliente = construirNovoCliente();
+				String situacao = controlador.salvar(novoCliente);
+				
+			}
+
+		});
 		btnSalvarCliente.setVerticalAlignment(SwingConstants.TOP);
 		btnSalvarCliente.setIcon(new ImageIcon(PainelCadastroCliente.class.getResource("/icons/Salvar.png")));
 		btnSalvarCliente.setHorizontalAlignment(SwingConstants.LEFT);
@@ -124,11 +152,11 @@ public class PainelCadastroCliente extends JPanel {
 			txtTelefoneCliente.setBounds(247, 160, 135, 25);
 			add(txtTelefoneCliente);
 			
-			txtCpfCliente = new JFormattedTextField(mascaraCpf);
+			JFormattedTextField txtCpfCliente = new JFormattedTextField(mascaraCpf);
 			txtCpfCliente.setBounds(419, 100, 135, 25);
 			add(txtCpfCliente);
 			
-			txtCEPCliente = new JFormattedTextField(mascaraCep);
+			JFormattedTextField txtCEPCliente = new JFormattedTextField(mascaraCep);
 			txtCEPCliente.setBounds(475, 220, 79, 25);
 			add(txtCEPCliente);
 			
@@ -147,5 +175,22 @@ public class PainelCadastroCliente extends JPanel {
 		} catch (ParseException e) {
 			
 		}
+		
+	}
+	private ClienteVO construirNovoCliente() {
+		ClienteVO novoCliente = new ClienteVO();
+		novoCliente.setNome(txtNomeCliente.getText());
+		novoCliente.setSobrenome(txtSobrenomeCliente.getText());
+		novoCliente.setTelefone(txtTelefoneCliente.getText());
+		novoCliente.setCep(txtCepCliente.getText());
+		novoCliente.setCidade(txtCidadeCliente.getText());
+		novoCliente.setEstado(txtEstadoClienteField.getText());
+		novoCliente.setCnh(txtClienteCNH.getText());
+		novoCliente.setEndereco(txtEnderecoCliente.getText());
+		novoCliente.setEmail(txtEmail.getText());
+		novoCliente.setCpf(txtClienteCpf.getText());
+		
+		return novoCliente;
+		
 	}
 }
