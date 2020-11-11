@@ -29,62 +29,53 @@ public class PainelReservaLocacao extends JPanel {
 		add(lblDadosDaReserva);
 		
 		JLabel lblReservaLocacaoCliente = new JLabel("Cliente");
-		lblReservaLocacaoCliente.setBounds(55, 90, 46, 14);
+		lblReservaLocacaoCliente.setBounds(90, 90, 46, 14);
 		add(lblReservaLocacaoCliente);
 		
 		JLabel lblReservaLocacaoVeiculo = new JLabel("Veículo");
-		lblReservaLocacaoVeiculo.setBounds(263, 90, 46, 14);
+		lblReservaLocacaoVeiculo.setBounds(298, 90, 46, 14);
 		add(lblReservaLocacaoVeiculo);
 		
-		JLabel lblReservaLocacaoSituacao = new JLabel("Situação");
-		lblReservaLocacaoSituacao.setBounds(437, 217, 57, 14);
-		add(lblReservaLocacaoSituacao);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"", "Locado", "Disponível"}));
-		comboBox.setBounds(437, 231, 146, 24);
-		add(comboBox);
-		
 		JLabel lblReservaDataLocacao = new JLabel("Data da Locação");
-		lblReservaDataLocacao.setBounds(55, 154, 95, 14);
+		lblReservaDataLocacao.setBounds(90, 154, 95, 14);
 		add(lblReservaDataLocacao);
 		
 		DatePicker ReservaDataLocacaoVeiculo = new DatePicker();
 		ReservaDataLocacaoVeiculo.getComponentToggleCalendarButton().setIcon(new ImageIcon(PainelReservaLocacao.class.getResource("/icons/Calendario16pix.png")));
 		ReservaDataLocacaoVeiculo.getComponentToggleCalendarButton().setText("");
 		ReservaDataLocacaoVeiculo.getComponentDateTextField().setEditable(false);
-		ReservaDataLocacaoVeiculo.setBounds(55, 168, 182, 25);
+		ReservaDataLocacaoVeiculo.setBounds(90, 168, 182, 25);
 		add(ReservaDataLocacaoVeiculo);
 		
 		JLabel lblReservaLocacaoDataDevolucao = new JLabel("Data da Devolução");
-		lblReservaLocacaoDataDevolucao.setBounds(263, 154, 105, 14);
+		lblReservaLocacaoDataDevolucao.setBounds(298, 154, 105, 14);
 		add(lblReservaLocacaoDataDevolucao);
 		
 		DatePicker ReservaDataDevolucaoVeiculo = new DatePicker();
 		ReservaDataDevolucaoVeiculo.getComponentToggleCalendarButton().setIcon(new ImageIcon(PainelReservaLocacao.class.getResource("/icons/Calendario16pix.png")));
 		ReservaDataDevolucaoVeiculo.getComponentToggleCalendarButton().setText("");
 		ReservaDataDevolucaoVeiculo.getComponentDateTextField().setEditable(false);
-		ReservaDataDevolucaoVeiculo.setBounds(263, 168, 182, 25);
+		ReservaDataDevolucaoVeiculo.setBounds(298, 168, 182, 25);
 		add(ReservaDataDevolucaoVeiculo);
 		
 		JLabel lblReservaLocacaoKmAtual = new JLabel("KM Atual");
-		lblReservaLocacaoKmAtual.setBounds(55, 217, 57, 14);
+		lblReservaLocacaoKmAtual.setBounds(90, 219, 57, 14);
 		add(lblReservaLocacaoKmAtual);
 		
 		JFormattedTextField txtReservaVeiculoKmAtual = new JFormattedTextField();
-		txtReservaVeiculoKmAtual.setBounds(55, 231, 182, 25);
+		txtReservaVeiculoKmAtual.setBounds(90, 233, 182, 25);
 		add(txtReservaVeiculoKmAtual);
 		
 		JLabel lblReservaLocacaoKmDevolucao = new JLabel("KM Devolução");
-		lblReservaLocacaoKmDevolucao.setBounds(263, 217, 105, 14);
+		lblReservaLocacaoKmDevolucao.setBounds(298, 219, 105, 14);
 		add(lblReservaLocacaoKmDevolucao);
 		
 		JFormattedTextField txtReservaVeiculoKmDevolucao = new JFormattedTextField();
-		txtReservaVeiculoKmDevolucao.setBounds(263, 231, 164, 25);
+		txtReservaVeiculoKmDevolucao.setBounds(298, 233, 182, 25);
 		add(txtReservaVeiculoKmDevolucao);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(66, 287, 473, 2);
+		separator.setBounds(66, 287, 464, 2);
 		add(separator);
 		
 		JButton btnSalvarReserva = new JButton("Reservar");
@@ -92,19 +83,28 @@ public class PainelReservaLocacao extends JPanel {
 		btnSalvarReserva.setHorizontalAlignment(SwingConstants.LEFT);
 		btnSalvarReserva.setForeground(new Color(0, 0, 139));
 		btnSalvarReserva.setBackground(new Color(240, 248, 255));
+<<<<<<< HEAD
 		btnSalvarReserva.setBounds(127, 340, 129, 41);
+=======
+		btnSalvarReserva.setBounds(144, 325, 111, 41);
+>>>>>>> branch 'master' of https://github.com/Lucasp20/senac-dd-2020-2-LocadoraDeVeiculos.git
 		add(btnSalvarReserva);
 		
+<<<<<<< HEAD
 		JButton btnEditarVeiculo = new JButton("Devolver");
 		btnEditarVeiculo.setBounds(284, 340, 111, 41);
+=======
+		JButton btnEditarVeiculo = new JButton("Editar");
+		btnEditarVeiculo.setBounds(283, 325, 111, 41);
+>>>>>>> branch 'master' of https://github.com/Lucasp20/senac-dd-2020-2-LocadoraDeVeiculos.git
 		add(btnEditarVeiculo);
 		
 		JComboBox cbCliente = new JComboBox();
-		cbCliente.setBounds(55, 106, 182, 20);
+		cbCliente.setBounds(90, 106, 182, 25);
 		add(cbCliente);
 		
 		JComboBox cbVeiculo = new JComboBox();
-		cbVeiculo.setBounds(263, 106, 182, 20);
+		cbVeiculo.setBounds(298, 106, 182, 25);
 		add(cbVeiculo);
 		
 		

@@ -20,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class PainelRelatorioVeiculo extends JPanel {
 	private JTable tblRelatorioVeiculo;
@@ -31,7 +32,7 @@ public class PainelRelatorioVeiculo extends JPanel {
 		setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 134, 599, 223);
+		scrollPane.setBounds(10, 150, 599, 223);
 		add(scrollPane);
 		
 		tblRelatorioVeiculo = new JTable();
@@ -62,40 +63,41 @@ public class PainelRelatorioVeiculo extends JPanel {
 		
 		JPanel painelRelatorioVeiculo = new JPanel();
 		painelRelatorioVeiculo.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		painelRelatorioVeiculo.setBounds(10, 61, 599, 71);
+		painelRelatorioVeiculo.setBounds(10, 43, 599, 104);
 		add(painelRelatorioVeiculo);
 		painelRelatorioVeiculo.setLayout(null);
 		
-		JLabel lblRelatorioMarca = new JLabel("Marca: ");
-		lblRelatorioMarca.setBounds(10, 30, 46, 14);
+		JLabel lblRelatorioMarca = new JLabel("Marca:");
+		lblRelatorioMarca.setVerticalAlignment(SwingConstants.TOP);
+		lblRelatorioMarca.setBounds(10, 17, 46, 14);
 		painelRelatorioVeiculo.add(lblRelatorioMarca);
 		
 		JFormattedTextField txtRelatorioMarca = new JFormattedTextField();
-		txtRelatorioMarca.setBounds(54, 27, 98, 20);
+		txtRelatorioMarca.setBounds(54, 11, 98, 27);
 		painelRelatorioVeiculo.add(txtRelatorioMarca);
 		
 		JButton btnRelatorioPesquisa = new JButton("Pesquisar");
-		btnRelatorioPesquisa.setBounds(365, 26, 112, 23);
+		btnRelatorioPesquisa.setBounds(344, 62, 112, 31);
 		painelRelatorioVeiculo.add(btnRelatorioPesquisa);
 		
 		JButton btnRelatorioVeiculoGerarExcel = new JButton("Gerar Excel");
-		btnRelatorioVeiculoGerarExcel.setBounds(484, 26, 105, 23);
+		btnRelatorioVeiculoGerarExcel.setBounds(466, 62, 105, 31);
 		painelRelatorioVeiculo.add(btnRelatorioVeiculoGerarExcel);
 		
-		JLabel lblAno = new JLabel("Ano");
-		lblAno.setBounds(162, 11, 46, 14);
-		painelRelatorioVeiculo.add(lblAno);
+		JLabel lblRelatorioVeiculoAno = new JLabel("Ano:");
+		lblRelatorioVeiculoAno.setBounds(10, 50, 46, 14);
+		painelRelatorioVeiculo.add(lblRelatorioVeiculoAno);
 		
 		JFormattedTextField txtAno = new JFormattedTextField();
-		txtAno.setBounds(162, 26, 76, 27);
+		txtAno.setBounds(54, 42, 76, 27);
 		painelRelatorioVeiculo.add(txtAno);
 		
-		JLabel lblCor = new JLabel("Cor");
-		lblCor.setBounds(244, 11, 46, 14);
-		painelRelatorioVeiculo.add(lblCor);
+		JLabel lblRelatorioVeiculoCor = new JLabel("Cor:");
+		lblRelatorioVeiculoCor.setBounds(10, 79, 46, 14);
+		painelRelatorioVeiculo.add(lblRelatorioVeiculoCor);
 		
 		JFormattedTextField txtCor = new JFormattedTextField();
-		txtCor.setBounds(244, 26, 64, 27);
+		txtCor.setBounds(54, 73, 64, 27);
 		painelRelatorioVeiculo.add(txtCor);
 		
 		JLabel lblRelatorioVeiculo = new JLabel("Relatório de Veículos");

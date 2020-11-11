@@ -28,31 +28,31 @@ public class PainelRelatorioCliente extends JPanel {
 		JPanel painelRelatorioCliente = new JPanel();
 		painelRelatorioCliente.setLayout(null);
 		painelRelatorioCliente.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		painelRelatorioCliente.setBounds(10, 60, 599, 78);
+		painelRelatorioCliente.setBounds(10, 52, 599, 86);
 		add(painelRelatorioCliente);
 		
 		JButton btnRelatorioClientePesquisa = new JButton("Pesquisar");
-		btnRelatorioClientePesquisa.setBounds(362, 31, 112, 23);
+		btnRelatorioClientePesquisa.setBounds(362, 44, 112, 31);
 		painelRelatorioCliente.add(btnRelatorioClientePesquisa);
 		
 		JButton btnRelatorioClienteGerarExcel = new JButton("Gerar Excel");
-		btnRelatorioClienteGerarExcel.setBounds(484, 31, 105, 23);
+		btnRelatorioClienteGerarExcel.setBounds(484, 44, 105, 31);
 		painelRelatorioCliente.add(btnRelatorioClienteGerarExcel);
 		
-		JLabel lblCidadeCliente = new JLabel("Cidade");
-		lblCidadeCliente.setBounds(20, 14, 61, 14);
+		JLabel lblCidadeCliente = new JLabel("Cidade:");
+		lblCidadeCliente.setBounds(10, 14, 61, 14);
 		painelRelatorioCliente.add(lblCidadeCliente);
 		
 		JFormattedTextField txtCidadeCliente = new JFormattedTextField();
-		txtCidadeCliente.setBounds(20, 29, 72, 25);
+		txtCidadeCliente.setBounds(63, 9, 72, 25);
 		painelRelatorioCliente.add(txtCidadeCliente);
 		
-		JLabel lblEstadoCliente = new JLabel("Estado");
-		lblEstadoCliente.setBounds(125, 14, 46, 14);
+		JLabel lblEstadoCliente = new JLabel("Estado:");
+		lblEstadoCliente.setBounds(10, 52, 46, 14);
 		painelRelatorioCliente.add(lblEstadoCliente);
 		
 		JComboBox cbEstadoCliente = new JComboBox();
-		cbEstadoCliente.setBounds(125, 29, 46, 25);
+		cbEstadoCliente.setBounds(63, 44, 72, 25);
 		painelRelatorioCliente.add(cbEstadoCliente);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -62,33 +62,34 @@ public class PainelRelatorioCliente extends JPanel {
 		tblRelatorioCliente = new JTable();
 		tblRelatorioCliente.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
 			},
 			new String[] {
-				"Nome", "CPF", "CNH", "Telefone", "Endere\u00E7o"
+				"Nome", "CPF", "CNH", "Telefone", "Cidade", "Estado"
 			}
 		) {
 			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false
+				false, false, false, false, false, true
 			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
 		});
-		tblRelatorioCliente.getColumnModel().getColumn(0).setPreferredWidth(116);
-		tblRelatorioCliente.getColumnModel().getColumn(1).setPreferredWidth(116);
-		tblRelatorioCliente.getColumnModel().getColumn(2).setPreferredWidth(118);
-		tblRelatorioCliente.getColumnModel().getColumn(3).setPreferredWidth(122);
-		tblRelatorioCliente.getColumnModel().getColumn(4).setPreferredWidth(113);
+		tblRelatorioCliente.getColumnModel().getColumn(0).setPreferredWidth(89);
+		tblRelatorioCliente.getColumnModel().getColumn(1).setPreferredWidth(88);
+		tblRelatorioCliente.getColumnModel().getColumn(2).setPreferredWidth(79);
+		tblRelatorioCliente.getColumnModel().getColumn(3).setPreferredWidth(90);
+		tblRelatorioCliente.getColumnModel().getColumn(4).setPreferredWidth(96);
+		tblRelatorioCliente.getColumnModel().getColumn(5).setPreferredWidth(91);
 		scrollPane.setViewportView(tblRelatorioCliente);
 
 	}
