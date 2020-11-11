@@ -87,21 +87,17 @@ public class PainelReservaLocacao extends JPanel {
 		separator.setBounds(66, 287, 473, 2);
 		add(separator);
 		
-		JButton btnSalvarReserva = new JButton(" Salvar");
+		JButton btnSalvarReserva = new JButton("Reservar");
 		btnSalvarReserva.setIcon(new ImageIcon(PainelReservaLocacao.class.getResource("/icons/Salvar.png")));
 		btnSalvarReserva.setHorizontalAlignment(SwingConstants.LEFT);
 		btnSalvarReserva.setForeground(new Color(0, 0, 139));
 		btnSalvarReserva.setBackground(new Color(240, 248, 255));
-		btnSalvarReserva.setBounds(145, 340, 111, 41);
+		btnSalvarReserva.setBounds(127, 340, 129, 41);
 		add(btnSalvarReserva);
 		
-		JButton btnEditarVeiculo = new JButton("Editar");
+		JButton btnEditarVeiculo = new JButton("Devolver");
 		btnEditarVeiculo.setBounds(284, 340, 111, 41);
 		add(btnEditarVeiculo);
-		
-		JButton btnExcluirVeiculo = new JButton("Excluir");
-		btnExcluirVeiculo.setBounds(420, 340, 111, 41);
-		add(btnExcluirVeiculo);
 		
 		JComboBox cbCliente = new JComboBox();
 		cbCliente.setBounds(55, 106, 182, 20);
