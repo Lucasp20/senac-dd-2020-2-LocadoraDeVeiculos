@@ -48,8 +48,9 @@ public class PainelCadastroCliente extends JPanel {
 	
 	/**
 	 * Create the panel.
+	 * @throws ParseException 
 	 */
-	public PainelCadastroCliente() {
+	public PainelCadastroCliente(){
 		setLayout(null);
 		
 		JLabel lblDadosClientes = new JLabel("Dados do Cliente");
@@ -76,7 +77,7 @@ public class PainelCadastroCliente extends JPanel {
 		JLabel lblCPF = new JLabel("CPF");
 		lblCPF.setBounds(419, 85, 46, 14);
 		add(lblCPF);
-				
+						
 		JLabel lblEmail = new JLabel("Email");
 		lblEmail.setBounds(81, 145, 52, 14);
 		add(lblEmail);
@@ -166,7 +167,7 @@ public class PainelCadastroCliente extends JPanel {
 			MaskFormatter mascaraCpf = new MaskFormatter("###.###.###-##");
 			MaskFormatter mascaraTelefone = new MaskFormatter("(##)#####-####");
 			MaskFormatter mascaraCep = new MaskFormatter("#####-###");
-			
+					
 			txtCpfCliente = new JFormattedTextField(mascaraCpf);
 			txtCpfCliente.setBounds(419, 100, 135, 26);
 			add(txtCpfCliente);
