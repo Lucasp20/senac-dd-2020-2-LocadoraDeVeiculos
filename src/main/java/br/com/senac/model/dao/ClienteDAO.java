@@ -13,7 +13,7 @@ import br.com.senac.model.dao.Banco;
 
 public class ClienteDAO {
 	
-	public int inserir(ClienteVO cliente){
+	public static int inserir(ClienteVO cliente){
 	int novoId = -1;
 
 	String sql = " INSERT INTO CLIENTE (NOME, SOBRENOME, CPF, EMAIL, CNH, TELEFONE, ENDERECO, CIDADE, ESTADO, CEP) "
@@ -32,7 +32,7 @@ public class ClienteDAO {
 		prepStmt.setString(7, cliente.getEndereco());
 		prepStmt.setString(8, cliente.getCidade());
 		prepStmt.setString(9, cliente.getEstado());
-		prepStmt.setString(10, cliente.getCep());
+		prepStmt.setString(10,cliente.getCep());
 
 		prepStmt.execute();
 

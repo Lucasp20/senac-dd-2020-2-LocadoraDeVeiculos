@@ -2,6 +2,8 @@ package br.com.senac.view;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.text.ParseException;
 
@@ -12,12 +14,13 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSeparator;
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 
 import br.com.senac.controller.ClienteController;
 import br.com.senac.model.vo.ClienteVO;
-
 
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
@@ -37,6 +40,8 @@ public class PainelCadastroCliente extends JPanel {
 	private JFormattedTextField txtTelefoneCliente;
 	private JFormattedTextField txtEstadoClienteField;
 	private JFormattedTextField txtCepCliente;
+	private JPanel contentPane;
+
 	
 	/**
 	 * Create the panel.
@@ -53,7 +58,7 @@ public class PainelCadastroCliente extends JPanel {
 		lblNome.setBounds(81, 85, 46, 14);
 		add(lblNome);
 		
-		JFormattedTextField txtNomeCliente = new JFormattedTextField();
+		txtNomeCliente = new JFormattedTextField();
 		txtNomeCliente.setBounds(81, 100, 135, 25);
 		add(txtNomeCliente);
 		
@@ -61,7 +66,7 @@ public class PainelCadastroCliente extends JPanel {
 		lblSobreNome.setBounds(247, 85, 78, 14);
 		add(lblSobreNome);
 		
-		JFormattedTextField txtSobrenomeCliente = new JFormattedTextField();
+		txtSobrenomeCliente = new JFormattedTextField();
 		txtSobrenomeCliente.setBounds(247, 100, 135, 25);
 		add(txtSobrenomeCliente);
 		
@@ -73,7 +78,7 @@ public class PainelCadastroCliente extends JPanel {
 		lblEmail.setBounds(81, 145, 52, 14);
 		add(lblEmail);
 		
-		JFormattedTextField txtEmail = new JFormattedTextField();
+		txtEmail = new JFormattedTextField();
 		txtEmail.setBounds(81, 160, 135, 25);
 		add(txtEmail);
 		
@@ -85,7 +90,7 @@ public class PainelCadastroCliente extends JPanel {
 		lblClienteCNH.setBounds(419, 145, 61, 14);
 		add(lblClienteCNH);
 		
-		JFormattedTextField txtClienteCNH = new JFormattedTextField();
+		txtClienteCNH = new JFormattedTextField();
 		txtClienteCNH.setBounds(419, 160, 135, 25);
 		add(txtClienteCNH);
 		
@@ -93,7 +98,7 @@ public class PainelCadastroCliente extends JPanel {
 		lblEnderecoCliente.setBounds(81, 205, 61, 14);
 		add(lblEnderecoCliente);
 		
-		JFormattedTextField txtEnderecoCliente = new JFormattedTextField();
+		txtEnderecoCliente = new JFormattedTextField();
 		txtEnderecoCliente.setBounds(81, 220, 135, 25);
 		add(txtEnderecoCliente);
 		
@@ -101,7 +106,7 @@ public class PainelCadastroCliente extends JPanel {
 		lblCidadeCliente.setBounds(247, 205, 61, 14);
 		add(lblCidadeCliente);
 		
-		JFormattedTextField txtCidadeCliente = new JFormattedTextField();
+		txtCidadeCliente = new JFormattedTextField();
 		txtCidadeCliente.setBounds(247, 220, 135, 25);
 		add(txtCidadeCliente);
 		
@@ -124,15 +129,17 @@ public class PainelCadastroCliente extends JPanel {
 		
 		JButton btnSalvarCliente = new JButton(" Salvar");
 		btnSalvarCliente.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseClicked(MouseEvent arg0) {
-						
+												
+				ClienteVO novoCliente = construirNovoCliente();
+				
 				ClienteController controlador = new ClienteController();
 				
-				ClienteVO novoCliente = construirNovoCliente();
-				String situacao = controlador.salvar(novoCliente);
+				String cpf = txtCPF.getText().replace("-", "").replace(".", "");
 				
-			}
+				String mensagem = controlador.salvar(novoCliente);
+				JOptionPane.showMessageDialog(contentPane, mensagem); 
+			} 
 
 		});
 		btnSalvarCliente.setVerticalAlignment(SwingConstants.TOP);
@@ -152,13 +159,11 @@ public class PainelCadastroCliente extends JPanel {
 			txtTelefoneCliente.setBounds(247, 160, 135, 25);
 			add(txtTelefoneCliente);
 			
-<<<<<<< HEAD
 			JFormattedTextField txtCpfCliente = new JFormattedTextField(mascaraCpf);
 			txtCpfCliente.setBounds(419, 100, 135, 25);
-=======
+
 			txtCpfCliente = new JFormattedTextField(mascaraCpf);
 			txtCpfCliente.setBounds(419, 100, 135, 26);
->>>>>>> branch 'master' of https://github.com/Lucasp20/senac-dd-2020-2-LocadoraDeVeiculos.git
 			add(txtCpfCliente);
 			
 			JFormattedTextField txtCEPCliente = new JFormattedTextField(mascaraCep);
@@ -183,6 +188,7 @@ public class PainelCadastroCliente extends JPanel {
 		}
 		
 	}
+	
 	private ClienteVO construirNovoCliente() {
 		ClienteVO novoCliente = new ClienteVO();
 		novoCliente.setNome(txtNomeCliente.getText());
@@ -196,7 +202,7 @@ public class PainelCadastroCliente extends JPanel {
 		novoCliente.setEmail(txtEmail.getText());
 		novoCliente.setCpf(txtClienteCpf.getText());
 		
-		return novoCliente;
 		
+		return novoCliente; 
 	}
 }

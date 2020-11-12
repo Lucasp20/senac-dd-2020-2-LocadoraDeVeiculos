@@ -83,20 +83,15 @@ public class PainelReservaLocacao extends JPanel {
 		btnSalvarReserva.setHorizontalAlignment(SwingConstants.LEFT);
 		btnSalvarReserva.setForeground(new Color(0, 0, 139));
 		btnSalvarReserva.setBackground(new Color(240, 248, 255));
-<<<<<<< HEAD
+
 		btnSalvarReserva.setBounds(127, 340, 129, 41);
-=======
+
 		btnSalvarReserva.setBounds(144, 325, 111, 41);
->>>>>>> branch 'master' of https://github.com/Lucasp20/senac-dd-2020-2-LocadoraDeVeiculos.git
+
 		add(btnSalvarReserva);
 		
-<<<<<<< HEAD
 		JButton btnEditarVeiculo = new JButton("Devolver");
-		btnEditarVeiculo.setBounds(284, 340, 111, 41);
-=======
-		JButton btnEditarVeiculo = new JButton("Editar");
 		btnEditarVeiculo.setBounds(283, 325, 111, 41);
->>>>>>> branch 'master' of https://github.com/Lucasp20/senac-dd-2020-2-LocadoraDeVeiculos.git
 		add(btnEditarVeiculo);
 		
 		JComboBox cbCliente = new JComboBox();
