@@ -4,12 +4,6 @@ import br.com.senac.model.dao.ClienteDAO;
 import br.com.senac.model.vo.ClienteVO;
 
 
-/*
- * 
- * 
- * 
- */
-
 public class ClienteBO {
 
 	private ClienteDAO clienteDAO = new ClienteDAO();

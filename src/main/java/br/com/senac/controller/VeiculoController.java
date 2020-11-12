@@ -1,6 +1,11 @@
 package br.com.senac.controller;
 
+import br.com.senac.model.bo.VeiculoBO;
+import br.com.senac.model.vo.VeiculoVO;
+
 public class VeiculoController {
+
+	
 	
 	/*
 	 * 
@@ -10,5 +15,12 @@ public class VeiculoController {
 	 * 
 	 * 
 	 */
-
+	private VeiculoBO bo = new VeiculoBO();
+	
+	public String salvar(VeiculoVO novoVeiculo) {
+		String situacao;
+		situacao = "AQUI VÃO SER TRABALHADOS OS CONTROLLERS - apenas testandooo";
+		return situacao;
+		
+	}
 }

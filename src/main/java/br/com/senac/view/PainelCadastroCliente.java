@@ -2,6 +2,8 @@ package br.com.senac.view;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.text.ParseException;
 
@@ -131,6 +133,7 @@ public class PainelCadastroCliente extends JPanel {
 				
 				ClienteVO novoCliente = construirNovoCliente();
 				String situacao = controlador.salvar(novoCliente);
+				JOptionPane.showMessageDialog(null, situacao);
 				
 			}
 
@@ -152,13 +155,13 @@ public class PainelCadastroCliente extends JPanel {
 			txtTelefoneCliente.setBounds(247, 160, 135, 25);
 			add(txtTelefoneCliente);
 			
-<<<<<<< HEAD
+
 			JFormattedTextField txtCpfCliente = new JFormattedTextField(mascaraCpf);
 			txtCpfCliente.setBounds(419, 100, 135, 25);
-=======
+
 			txtCpfCliente = new JFormattedTextField(mascaraCpf);
 			txtCpfCliente.setBounds(419, 100, 135, 26);
->>>>>>> branch 'master' of https://github.com/Lucasp20/senac-dd-2020-2-LocadoraDeVeiculos.git
+
 			add(txtCpfCliente);
 			
 			JFormattedTextField txtCEPCliente = new JFormattedTextField(mascaraCep);
