@@ -139,14 +139,14 @@ public class PainelCadastroCliente extends JPanel {
 				
 				novoCliente.setNome(txtNomeCliente.getText());
 				novoCliente.setSobrenome(txtSobrenomeCliente.getText());
-				novoCliente.setCpf(txtClienteCpf.getText().replace("-", "").replace(".", ""));
+			/*	novoCliente.setCpf(txtClienteCpf.getText().replace("-", "").replace(".", ""));
 				novoCliente.setEmail(txtEmail.getText());
 				novoCliente.setCnh(txtClienteCNH.getText());
 				novoCliente.setTelefone(txtTelefoneCliente.getText());
 				novoCliente.setEndereco(txtEnderecoCliente.getText());
 				novoCliente.setCidade(txtCidadeCliente.getText());
 				novoCliente.setEstado(txtEstadoClienteField.getText());
-				novoCliente.setCep(txtCepCliente.getText());   
+				novoCliente.setCep(txtCepCliente.getText());   */
 							
 				
 				ClienteController clienteController = new ClienteController();
