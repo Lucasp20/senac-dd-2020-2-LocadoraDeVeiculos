@@ -42,6 +42,8 @@ public class PainelCadastroCliente extends JPanel {
 	private JFormattedTextField txtCepCliente;
 	private JPanel contentPane;
 	private JFormattedTextField txtCpfCliente;
+	private JButton btnSalvarCliente;
+	private JFormattedTextField txtCEPCliente;
 
 	
 	/**
@@ -126,17 +128,28 @@ public class PainelCadastroCliente extends JPanel {
 				
 		JSeparator separator = new JSeparator();
 		separator.setBounds(81, 272, 473, 2);
-		add(separator);
+		add(separator); 
 		
-		JButton btnSalvarCliente = new JButton(" Salvar");
+		btnSalvarCliente = new JButton(" Salvar");
 		btnSalvarCliente.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
 				ClienteVO novoCliente = new ClienteVO();
+					
+				String cpf = txtClienteCpf.getText().replace("-", "").replace(".", "");
 				
-				String cpf = txtCpfCliente.getText().replace("-", "").replace(".", "");
-								
-				ClienteController clienteController = new ClienteController();
+				novoCliente.setNome(txtNomeCliente.getText());
+				novoCliente.setSobrenome(txtSobrenomeCliente.getText());
+				novoCliente.setCpf(txtClienteCpf.getText().replace("-", "").replace(".", ""));
+				novoCliente.setEmail(txtEmail.getText());
+				novoCliente.setCnh(txtClienteCNH.getText());
+				novoCliente.setTelefone(txtTelefoneCliente.getText());
+				novoCliente.setEndereco(txtEnderecoCliente.getText());
+				novoCliente.setCidade(txtCidadeCliente.getText());
+				novoCliente.setEstado(txtEstadoClienteField.getText());
+				novoCliente.setCep(txtCepCliente.getText());   
 							
+				
+				ClienteController clienteController = new ClienteController();
 				JOptionPane.showMessageDialog(null, clienteController.salvar(novoCliente));
 			} 
 
@@ -154,19 +167,15 @@ public class PainelCadastroCliente extends JPanel {
 			MaskFormatter mascaraTelefone = new MaskFormatter("(##)#####-####");
 			MaskFormatter mascaraCep = new MaskFormatter("#####-###");
 			
-			txtTelefoneCliente = new JFormattedTextField(mascaraTelefone);
-			txtTelefoneCliente.setBounds(247, 160, 135, 25);
-			add(txtTelefoneCliente);
-			
-
-			txtCpfCliente = new JFormattedTextField(mascaraCpf);
-			txtCpfCliente.setBounds(419, 100, 135, 25);
-
 			txtCpfCliente = new JFormattedTextField(mascaraCpf);
 			txtCpfCliente.setBounds(419, 100, 135, 26);
 			add(txtCpfCliente);
 			
-			JFormattedTextField txtCEPCliente = new JFormattedTextField(mascaraCep);
+			txtTelefoneCliente = new JFormattedTextField(mascaraTelefone);
+			txtTelefoneCliente.setBounds(247, 160, 135, 25);
+			add(txtTelefoneCliente);
+						
+			txtCEPCliente = new JFormattedTextField(mascaraCep);
 			txtCEPCliente.setBounds(475, 220, 79, 25);
 			add(txtCEPCliente);
 			
@@ -184,12 +193,13 @@ public class PainelCadastroCliente extends JPanel {
 			add(btnConsultarCpfCliente);
 			
 		} catch (ParseException e) {
-			
+			JOptionPane.showMessageDialog(null, "Ocorreu um erro no sistema, entre em contato com o administrador.");
+			System.out.println("Causa da exceÃ§Ã£o: " + e.getMessage());
 		}
 		
 	}
 	
-	protected ClienteVO construirNovoCliente() {
+	/*	protected ClienteVO construirNovoCliente() {
 		ClienteVO novoCliente = new ClienteVO();
 		
 		novoCliente.setNome(txtNomeCliente.getText());
@@ -201,8 +211,8 @@ public class PainelCadastroCliente extends JPanel {
 		novoCliente.setEndereco(txtEnderecoCliente.getText());
 		novoCliente.setCidade(txtCidadeCliente.getText());
 		novoCliente.setEstado(txtEstadoClienteField.getText());
-		novoCliente.setCep(txtCepCliente.getText());
+		novoCliente.setCep(txtCepCliente.getText()); 
 					
-		return novoCliente; 
-	}
+		return novoCliente;  
+	} */
 }

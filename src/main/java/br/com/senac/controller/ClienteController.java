@@ -36,8 +36,10 @@ public class ClienteController {
 				&& validarCidade(novoCliente)
 				&& validarEstado(novoCliente)
 				&& validarCep(novoCliente)){
+			ClienteDAO clienteDAO = new ClienteDAO();
+			clienteDAO.inserir(novoCliente);
 			
-			mensagem = "Cliente cadastrada com sucesso";
+			mensagem = "Cliente cadastrado com sucesso";
 
 	}
 		return mensagem;
