@@ -16,7 +16,7 @@ public class VeiculoDAO {
 	public VeiculoVO inserir(VeiculoVO veiculo) {
 		Connection conexao = Banco.getConnection();
 
-		String sql = "INSERT INTO PESSOA (PLACA, RENAVAM, CHASSI, MARCA, MODELO, ANO, COR, MOTOR,TRANSMISSAO, SITUACAO) "
+		String sql = "INSERT INTO PESSOA (PLACA, RENAVAM, CHASSI, MARCA, MODELO, ANO, COR, MOTOR,TRANSMISSAO) "
 				+ "VALUES (?,?,?,?,?,?,?,?,?,?)";
 
 		PreparedStatement query = Banco.getPreparedStatementWithGeneratedKeys(conexao, sql);
@@ -30,9 +30,9 @@ public class VeiculoDAO {
 			query.setString(5, veiculo.getModelo());
 			query.setInt(6, veiculo.getAno());
 			query.setString(7, veiculo.getCor());
-			query.setInt(8, veiculo.getMotor());
+			query.setString(8, veiculo.getMotor());
 			query.setString(9, veiculo.getTransmissao());
-			query.setString(10, veiculo.getSituacao());
+			
 
 			int codigoRetorno = query.executeUpdate();
 
@@ -77,7 +77,7 @@ public class VeiculoDAO {
 
 	public boolean alterar (VeiculoVO veiculo) {
 			String sql = "UPDATE VEICULO " 
-							+ "SET PLACA=?, RENAVAM=?, CHASSI=?, MARCA=?, MODELO=?, ANO=?, COR=?, MOTOR=?,TRANSMISSAO=?, SITUACAO=?"
+							+ "SET PLACA=?, RENAVAM=?, CHASSI=?, MARCA=?, MODELO=?, ANO=?, COR=?, MOTOR=?,TRANSMISSAO=?"
 							+ "WHERE idVeiculo=? ";
 			
 			boolean alterou = false;
@@ -91,9 +91,9 @@ public class VeiculoDAO {
 				query.setString(5, veiculo.getModelo());
 				query.setInt(6, veiculo.getAno());
 				query.setString(7, veiculo.getCor());
-				query.setInt(8, veiculo.getMotor());
+				query.setString(8, veiculo.getMotor());
 				query.setString(9, veiculo.getTransmissao());
-				query.setString(10, veiculo.getSituacao());
+				
 				
 				int codigoRetorno = query.executeUpdate();
 				alterou = (codigoRetorno == Banco.CODIGO_RETORNO_SUCESSO);
@@ -158,11 +158,10 @@ public class VeiculoDAO {
 		veiculoBuscado.setModelo(conjuntoResultante.getString("modelo"));
 		veiculoBuscado.setAno(conjuntoResultante.getInt("ano"));
 		veiculoBuscado.setCor(conjuntoResultante.getString("cor"));
-		veiculoBuscado.setMotor(conjuntoResultante.getInt("morto"));
+		veiculoBuscado.setMotor(conjuntoResultante.getString("motor"));
 		veiculoBuscado.setChassi(conjuntoResultante.getString("chassi"));
 		veiculoBuscado.setTransmissao(conjuntoResultante.getString("transmissao"));
-		veiculoBuscado.setSituacao(conjuntoResultante.getString("situacao"));
-		
+				
 		return veiculoBuscado;
 	}
 	

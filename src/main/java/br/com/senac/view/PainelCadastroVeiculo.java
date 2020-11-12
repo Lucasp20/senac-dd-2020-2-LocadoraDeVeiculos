@@ -7,6 +7,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
+
+import br.com.senac.controller.ClienteController;
+import br.com.senac.controller.VeiculoController;
+import br.com.senac.model.vo.ClienteVO;
+import br.com.senac.model.vo.VeiculoVO;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.TextField;
@@ -50,7 +56,7 @@ public class PainelCadastroVeiculo extends JPanel {
 	private JFormattedTextField txtCor;
 	private JButton btnConsultarCpfCliente;
 	private JComboBox cbDadosVeiculoMotor;
-	
+	private JComboBox cbDadosVeiculoTransmissao;
 	/**
 	 * Launch the application.
 	 */
@@ -150,7 +156,16 @@ public class PainelCadastroVeiculo extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				JOptionPane.showMessageDialog(null,"Passou pelo bot�o SALVAR");
+				
+				VeiculoController controlador = new VeiculoController();
+				VeiculoVO novoVeiculo = construirNovoVeiculo();
+				String situacao = controlador.salvar(novoVeiculo);
+				JOptionPane.showMessageDialog(null, situacao);		
+				
+				
+				
 			}
+
 		});
 		btnSalvarVeiculo.setHorizontalAlignment(SwingConstants.LEFT);
 		btnSalvarVeiculo.setIcon(new ImageIcon(PainelCadastroVeiculo.class.getResource("/icons/Salvar.png")));
@@ -190,6 +205,20 @@ public class PainelCadastroVeiculo extends JPanel {
 		cbDadosVeiculoMotor.setModel(new DefaultComboBoxModel(new String[] {"             Selecione   ", "1.0", "1.4", "1.6", "2.0"}));
 		cbDadosVeiculoMotor.setBounds(75, 214, 146, 27);
 		add(cbDadosVeiculoMotor);
+	}
+	private VeiculoVO construirNovoVeiculo() {
+		VeiculoVO novoVeiculo = new VeiculoVO();
+		novoVeiculo.setMarca(txtMarca.getText());
+		novoVeiculo.setAno(Integer.parseInt(txtAno.getText()));
+		novoVeiculo.setChassi(txtChassi.getText());
+		novoVeiculo.setModelo(txtModelo.getText());
+		novoVeiculo.setCor(txtCor.getText());
+		novoVeiculo.setMotor((String) cbDadosVeiculoMotor.getSelectedItem());
+		novoVeiculo.setPlaca(txtPlaca.getText());
+		novoVeiculo.setRenavam(txtRenavam.getText());
+		novoVeiculo.setTransmissao((String) cbDadosVeiculoTransmissao.getSelectedItem());
+				
+		return novoVeiculo;
 	}
 }
 

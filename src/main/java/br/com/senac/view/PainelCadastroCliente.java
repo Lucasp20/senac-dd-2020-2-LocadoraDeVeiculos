@@ -135,7 +135,13 @@ public class PainelCadastroCliente extends JPanel {
 				
 				ClienteController controlador = new ClienteController();
 				
+<<<<<<< HEAD
 				String cpf = txtCPF.getText().replace("-", "").replace(".", "");
+=======
+				ClienteVO novoCliente = construirNovoCliente();
+				String situacao = controlador.salvar(novoCliente);
+				JOptionPane.showMessageDialog(null, situacao);
+>>>>>>> branch 'master' of https://github.com/Lucasp20/senac-dd-2020-2-LocadoraDeVeiculos.git
 				
 				String mensagem = controlador.salvar(novoCliente);
 				JOptionPane.showMessageDialog(contentPane, mensagem); 
@@ -159,11 +165,19 @@ public class PainelCadastroCliente extends JPanel {
 			txtTelefoneCliente.setBounds(247, 160, 135, 25);
 			add(txtTelefoneCliente);
 			
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/Lucasp20/senac-dd-2020-2-LocadoraDeVeiculos.git
 			JFormattedTextField txtCpfCliente = new JFormattedTextField(mascaraCpf);
 			txtCpfCliente.setBounds(419, 100, 135, 25);
 
 			txtCpfCliente = new JFormattedTextField(mascaraCpf);
 			txtCpfCliente.setBounds(419, 100, 135, 26);
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/Lucasp20/senac-dd-2020-2-LocadoraDeVeiculos.git
 			add(txtCpfCliente);
 			
 			JFormattedTextField txtCEPCliente = new JFormattedTextField(mascaraCep);

@@ -10,12 +10,11 @@ public class VeiculoVO {
 	private String modelo;
 	private int ano;
 	private String cor;
-	private int motor;
+	private String motor;
 	private String transmissao; 
-	private String situacao;
-
+	
 	public VeiculoVO(int idVeiculo, String placa, String renavam, String chassi, String marca, String modelo, int ano,
-			String cor, int motor, String transmissao, String situacao) {
+			String cor, String motor, String transmissao) {
 		super();
 		this.idVeiculo = idVeiculo;
 		this.placa = placa;
@@ -27,7 +26,7 @@ public class VeiculoVO {
 		this.cor = cor;
 		this.motor = motor;
 		this.transmissao = transmissao;
-		this.situacao = situacao;
+		
 	}
 	
 	public VeiculoVO() {
@@ -99,11 +98,11 @@ public class VeiculoVO {
 		this.cor = cor;
 	}
 
-	public int getMotor() {
+	public String getMotor() {
 		return motor;
 	}
 
-	public void setMotor(int motor) {
+	public void setMotor(String motor) {
 		this.motor = motor;
 	}
 
@@ -115,13 +114,7 @@ public class VeiculoVO {
 		this.transmissao = transmissao;
 	}
 
-	public String getSituacao() {
-		return situacao;
-	}
-
-	public void setSituacao(String situacao) {
-		this.situacao = situacao;
-	}
+	
 	
 	
 	
