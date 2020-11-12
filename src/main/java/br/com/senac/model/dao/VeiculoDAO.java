@@ -138,7 +138,7 @@ public class VeiculoDAO {
 			veiculosBuscados.add(veiculoBuscado);
 			}
 		} catch (SQLException e) {
-			System.out.println("Erro ao consultar todos os vacina .\nCausa: " + e.getMessage());
+			System.out.println("Erro ao consultar todos os veiculos .\nCausa: " + e.getMessage());
 		}finally {			
 			Banco.closeStatement(consulta);			
 			Banco.closeConnection(conexao);

@@ -15,17 +15,16 @@ public class ClienteController {
 	 * 
 	 * 
 	 */
-	private ClienteBO bo = new ClienteBO();
+	/*private ClienteBO bo = new ClienteBO();*/
 	
-	public String salvar(ClienteVO cliente) {
+	/* public String salvar(ClienteVO cliente) {
 		String situacao;
 		situacao = "AQUI VÃO SER TRABALHADOS OS CONTROLLERS - apenas testandooo";
 		cliente = bo.salvarCliente(cliente);
-		return situacao;
-
+		return situacao; */
+	private String mensagem ="";
 
 	public String salvar(ClienteVO novoCliente) {
-		String mensagem ="";
 		
 		if(validarNome(novoCliente) 
 				&& validarSobrenome(novoCliente) 
@@ -38,15 +37,13 @@ public class ClienteController {
 				&& validarEstado(novoCliente)
 				&& validarCep(novoCliente)){
 			
-			mensagem= "Cliente cadastrada com sucesso";
-
+			mensagem = "Cliente cadastrada com sucesso";
 
 	}
 		return mensagem;
 }
 	
 	private boolean validarNome(ClienteVO novoCliente) {
-		String mensagem ="";
 		if(novoCliente.getNome().trim().length() < 3 
 				|| novoCliente.getNome().isEmpty() ) {
 			mensagem = "Nome deve conter ao menos três catacteres";
@@ -54,51 +51,89 @@ public class ClienteController {
 		}
 		return true;
 	}
+	
+	private boolean validarSobrenome(ClienteVO novoCliente) {
+		if(novoCliente.getSobrenome().trim().length() < 3 
+				|| novoCliente.getSobrenome().isEmpty() ) {
+			mensagem = "Sobrenome deve conter ao menos três catacteres";
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean validarCpf(ClienteVO cpf) {
+		if(cpf.getCpf().trim().length() != 11
+				|| cpf.getCpf().isEmpty()) {
+			
+			mensagem = "CPF deve possuir tamanho 11 e somente números";
+			return false;
+		}
+		return true;
+	} 
 
-	private boolean validarCep(ClienteVO novoCliente) {
-		// TODO Auto-generated method stub
-		return false;
+	private boolean validarEmail(ClienteVO novoCliente) {
+		if(novoCliente.getEmail().trim().length() < 3 
+				|| novoCliente.getEmail().isEmpty() ) {
+			mensagem = "Email deve conter ao menos três catacteres";
+			return false;
+		}
+		return true;
+	}
+
+	private boolean validarCnh(ClienteVO cnh) {
+		if(cnh.getCnh().trim().length() != 11
+				|| cnh.getCnh().isEmpty()) {
+			
+			mensagem = "CPF deve possuir tamanho 11 e somente números";
+			return false;
+		}
+		return true;
+	} 
+	
+	private boolean validarCep(ClienteVO cep) {
+		if(cep.getCep().trim().length() != 8
+				|| cep.getCep().isEmpty()) {
+			
+			mensagem = "CPF deve possuir tamanho 11 e somente números";
+			return false;
+		}
+		return true;
+	} 
+	
+	private boolean validarTefone(ClienteVO telefone) {
+		if(telefone.getTelefone().trim().length() != 11
+				|| telefone.getTelefone().isEmpty()) {
+			
+			mensagem = "CPF deve possuir tamanho 11 e somente números";
+			return false;
+		}
+		return true;
+	} 
+	
+	private boolean validarEndereco(ClienteVO novoCliente) {
+		if(novoCliente.getEndereco().trim().length() < 3 
+				|| novoCliente.getEndereco().isEmpty() ) {
+			mensagem = "Endereco deve conter ao menos três catacteres";
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean validarCidade(ClienteVO novoCliente) {
+		if(novoCliente.getCidade().trim().length() < 3 
+				|| novoCliente.getCidade().isEmpty() ) {
+			mensagem = "Cidade deve conter ao menos três catacteres";
+			return false;
+		}
+		return true;
 	}
 
 	private boolean validarEstado(ClienteVO novoCliente) {
-		// TODO Auto-generated method stub
-		return false;
+		if(novoCliente.getEstado().isEmpty() ) {
+			mensagem = "Deve preencher o campo estado";
+			return false;
+		}
+		return true;
 	}
-
-	private boolean validarCidade(ClienteVO novoCliente) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	private boolean validarEndereco(ClienteVO novoCliente) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	private boolean validarTefone(ClienteVO novoCliente) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	private boolean validarCnh(ClienteVO novoCliente) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	private boolean validarEmail(ClienteVO novoCliente) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	private boolean validarCpf(ClienteVO novoCliente) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	private boolean validarSobrenome(ClienteVO novoCliente) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-		
 	
 }

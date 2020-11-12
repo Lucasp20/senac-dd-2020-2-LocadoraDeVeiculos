@@ -6,7 +6,7 @@ import br.com.senac.model.vo.ClienteVO;
 
 public class ClienteBO {
 
-	private ClienteDAO clienteDAO = new ClienteDAO();
+	/*private ClienteDAO clienteDAO = new ClienteDAO();
 	
 	public boolean salvarCliente(ClienteVO novoCliente) {
 		boolean salvou = false;
@@ -14,6 +14,6 @@ public class ClienteBO {
 		
 		salvou = (chaveGerada > 0);
 		
-		return salvou;
+		return salvou; */
 	}	
-}
+

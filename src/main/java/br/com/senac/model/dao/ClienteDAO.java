@@ -6,176 +6,166 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import br.com.senac.model.vo.ClienteVO;
+import br.com.senac.model.vo.VeiculoVO;
 import br.com.senac.model.dao.Banco;
 
 
 public class ClienteDAO {
 	
-	public static int inserir(ClienteVO cliente){
-	int novoId = -1;
+	public ClienteVO inserir(ClienteVO cliente){
+	Connection conexao = Banco.getConnection();
 
 	String sql = " INSERT INTO CLIENTE (NOME, SOBRENOME, CPF, EMAIL, CNH, TELEFONE, ENDERECO, CIDADE, ESTADO, CEP) "
 			+ " VALUES (?,?,?,?,?,?,?,?,?,?) ";
 
-	Connection conexao = Banco.getConnection();
-	PreparedStatement prepStmt = Banco.getPreparedStatementWithGeneratedKeys(conexao, sql);
+	PreparedStatement query = Banco.getPreparedStatementWithGeneratedKeys(conexao, sql);
 
 	try {
-		prepStmt.setString(1, cliente.getNome());
-		prepStmt.setString(2, cliente.getSobrenome());
-		prepStmt.setString(3, cliente.getCpf());
-		prepStmt.setString(4, cliente.getEmail());
-		prepStmt.setString(5, cliente.getCnh());
-		prepStmt.setString(6, cliente.getTelefone());
-		prepStmt.setString(7, cliente.getEndereco());
-		prepStmt.setString(8, cliente.getCidade());
-		prepStmt.setString(9, cliente.getEstado());
-		prepStmt.setString(10,cliente.getCep());
+		query.setString(1, cliente.getNome());
+		query.setString(2, cliente.getSobrenome());
+		query.setString(3, cliente.getCpf());
+		query.setString(4, cliente.getEmail());
+		query.setString(5, cliente.getCnh());
+		query.setString(6, cliente.getTelefone());
+		query.setString(7, cliente.getEndereco());
+		query.setString(8, cliente.getCidade());
+		query.setString(9, cliente.getEstado());
+		query.setString(10,cliente.getCep());
 
-		prepStmt.execute();
+		int codigoRetorno = query.executeUpdate();
 
-		ResultSet generatedKeys = prepStmt.getGeneratedKeys();
-		if (generatedKeys.next()) {
-			novoId = generatedKeys.getInt(1);
+		if (codigoRetorno == Banco.CODIGO_RETORNO_SUCESSO) {
+			ResultSet resultado = query.getGeneratedKeys();
+			int chaveGerada = resultado.getInt(1);
+
+			cliente.setIdCliente(chaveGerada);
 		}
+
 	} catch (SQLException e) {
-		System.out.println("Erro ao inserir Cliente. Causa: \n:" + e.getCause());
-	} finally{
-		Banco.closePreparedStatement(prepStmt);
+		System.out.println("Erro ao inserir cliente.\nCausa: " + e.getMessage());
+	} finally {
+		Banco.closeStatement(query);
 		Banco.closeConnection(conexao);
 	}
 
-	return novoId;
-}
-
-public boolean atualizar(ClienteVO cliente){
-	boolean sucessoUpdate = false;
-
-	String sql = " UPDATE CLIENTE P SET NOME=?, SOBRENOME=?, CPF=?, EMAIL=?, CNH=?, TELEFONE=?, "
-			+ "ENDERECO=?, CIDADE=?, ESTADO=?, CEP=? "
-			+ " WHERE ID = ? ";
-
-	Connection conexao = Banco.getConnection();
-	PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
-
-	try {
-		prepStmt.setString(1, cliente.getNome());
-		prepStmt.setString(2, cliente.getSobrenome());
-		prepStmt.setString(3, cliente.getCpf());
-		prepStmt.setString(4, cliente.getEmail());
-		prepStmt.setString(5, cliente.getCnh());
-		prepStmt.setString(6, cliente.getTelefone());
-		prepStmt.setString(7, cliente.getEndereco());
-		prepStmt.setString(8, cliente.getCidade());
-		prepStmt.setString(9, cliente.getEstado());
-		prepStmt.setString(10, cliente.getCep());
-
-		int codigoRetorno = prepStmt.executeUpdate();
-
-		if(codigoRetorno == 1){
-			sucessoUpdate = true;
-		}
-
-	} catch (SQLException e) {
-		System.out.println("Erro ao atualizar CLiente. Causa: \n:" + e.getCause());
-	}finally{
-		Banco.closePreparedStatement(prepStmt);
-		Banco.closeConnection(conexao);
-	}
-
-	return sucessoUpdate;
-}
-
-public boolean remover(int idCliente){
-	boolean sucessoDelete = false;
-
-	String sql = " DELETE FROM CLIENTE "
-			+ " WHERE ID = ? ";
-
-	Connection conexao = Banco.getConnection();
-	PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
-	try {
-		prepStmt.setInt(1, idCliente);
-		int codigoRetorno = prepStmt.executeUpdate();
-		if(codigoRetorno == 1){//1 - sucesso na execução
-			sucessoDelete = true;
-		}
-	} catch (SQLException e) {
-		System.out.println("Erro ao remover Cliente. Causa: \n:" + e.getCause());
-	}finally{
-		Banco.closePreparedStatement(prepStmt);
-		Banco.closeConnection(conexao);
-	}
-	return sucessoDelete;
-}
-
-public ArrayList<ClienteVO> listarTodos(){
-	String sql = " SELECT * FROM CLIENTE ";
-	
-	Connection conexao = Banco.getConnection();
-	PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
-	ArrayList<ClienteVO> clientes = new ArrayList<ClienteVO>();
-	
-	try {
-		ResultSet result = prepStmt.executeQuery();
-		
-		while(result.next()){
-			ClienteVO cliente = new ClienteVO();
-			
-			cliente.setIdCliente(result.getInt("ID"));
-			cliente.setNome(result.getString("NOME"));
-			cliente.setSobrenome(result.getString("SOBRENOME"));
-			cliente.setCpf(result.getString("CPF"));
-			cliente.setEmail(result.getString("EMAIL"));
-			cliente.setCnh(result.getString("CNH"));
-			cliente.setTelefone(result.getString("TELEFONE"));
-			cliente.setEndereco(result.getString("ENDERECO"));
-			cliente.setCidade(result.getString("CIDADE"));
-			cliente.setEstado(result.getString("ESTADO"));
-			cliente.setCep(result.getString("CEP"));
-			
-			clientes.add(cliente);
-		}
-	} catch (SQLException e) {
-		System.out.println("Erro listar todos os alunos. Causa: \n:" + e.getCause());
-	}
-	return clientes;
-}
-
-public ClienteVO obterPorId(int idCliente){
-	String sql = " SELECT * FROM ALUNO "
-			+ " WHERE ID=?";
-	
-	Connection conexao = Banco.getConnection();
-	PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
-	ClienteVO cliente = null;
-	
-	try {
-		prepStmt.setInt(1, idCliente);
-		ResultSet result = prepStmt.executeQuery();
-		
-		while(result.next()){
-			cliente = new ClienteVO();
-			
-			cliente.setIdCliente(result.getInt("ID"));
-			cliente.setNome(result.getString("NOME"));
-			cliente.setSobrenome(result.getString("SOBRENOME"));
-			cliente.setCpf(result.getString("CPF"));
-			cliente.setEmail(result.getString("EMAIL"));
-			cliente.setCnh(result.getString("CNH"));
-			cliente.setTelefone(result.getString("TELEFONE"));
-			cliente.setEndereco(result.getString("ENDERECO"));
-			cliente.setCidade(result.getString("CIDADE"));
-			cliente.setEstado(result.getString("ESTADO"));
-			cliente.setCep(result.getString("CEP"));
-		}
-	} catch (SQLException e) {
-		System.out.println("Erro buscar um CLiente. Causa: \n:" + e.getCause());
-	}
 	return cliente;
 }
 	
+	public boolean excluir(int idCliente){
+		Connection conexao = Banco.getConnection();
+
+		String sql = "DELETE FROM cliente WHERE idPessoa = " + idCliente;
+
+		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
+		boolean excluiu = false;
+		
+		try {
+			
+			int codigoRetorno = query.executeUpdate();
+			excluiu = (codigoRetorno == Banco.CODIGO_RETORNO_SUCESSO);
+		} catch (SQLException e) {
+			System.out.println("Erro ao excluir Pessoa (id: " + idCliente + ") .\nCausa: " + e.getMessage());
+		}finally {
+			Banco.closeStatement(query);
+			Banco.closeConnection(conexao);
+		}
+				
+		return excluiu;
+	}
+
+public boolean alterar(ClienteVO cliente){
 	
+	String sql = " UPDATE CLIENTE "
+			+ " SET NOME=?, SOBRENOME=?, CPF=?, EMAIL=?, CNH=?, TELEFONE=?, ENDERECO=?, CIDADE=?, ESTADO=?, CEP=? "
+			+ " WHERE IDCLIENTE = ? ";
+
+	boolean alterou = false;
+	
+	
+
+	try (Connection conexao = Banco.getConnection();
+			PreparedStatement query = Banco.getPreparedStatement(conexao, sql);) {
+		query.setString(1, cliente.getNome());
+		query.setString(2, cliente.getSobrenome());
+		query.setString(3, cliente.getCpf());
+		query.setString(4, cliente.getEmail());
+		query.setString(5, cliente.getCnh());
+		query.setString(6, cliente.getTelefone());
+		query.setString(7, cliente.getEndereco());
+		query.setString(8, cliente.getCidade());
+		query.setString(9, cliente.getEstado());
+		query.setString(10, cliente.getCep());
+
+		int codigoRetorno = query.executeUpdate();
+		alterou = (codigoRetorno == Banco.CODIGO_RETORNO_SUCESSO);
+	} catch (SQLException e) {
+		System.out.println("Erro ao alterar cliente.\nCausa: " + e.getMessage());
+	}
+			
+	return alterou;
 }
+
+public static ClienteVO pesquisarPorId(int id) {
+	String sql = " SELECT * FROM CLIENTE WHERE id=? ";
+	ClienteVO clientebuscado = null;
+	
+	try (Connection conexao = Banco.getConnection();
+		PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);) {
+		consulta.setInt(1, id);
+		ResultSet conjuntoResultante = consulta.executeQuery();
+		
+		if(conjuntoResultante.next()) {
+			clientebuscado = contruirVeiculoDoResultSet(conjuntoResultante);
+		}
+	} catch (SQLException e) {
+		System.out.println("Erro ao consultar veiculo por Id (id: " + id + ") .\nCausa: " + e.getMessage());
+	}
+	
+	return clientebuscado;
+	}
+
+public static List<ClienteVO> pesquisarTodos() {
+	Connection conexao = Banco.getConnection();
+	String sql = "SQL * FROM VEICULO ";
+
+	PreparedStatement consulta = Banco.getPreparedStatement(conexao,  sql);
+	List<ClienteVO> clientesBuscados = new ArrayList<ClienteVO>();
+
+	try { 
+		ResultSet conjuntoResultante = consulta.executeQuery();
+		while(conjuntoResultante.next()) {
+		ClienteVO veiculoBuscado = contruirVeiculoDoResultSet(conjuntoResultante);					
+		clientesBuscados.add(veiculoBuscado);
+		}
+	} catch (SQLException e) {
+		System.out.println("Erro ao consultar todos os clientes .\nCausa: " + e.getMessage());
+	}finally {			
+		Banco.closeStatement(consulta);			
+		Banco.closeConnection(conexao);
+	}	
+		return clientesBuscados;
+}
+
+private static ClienteVO contruirVeiculoDoResultSet(ResultSet conjuntoResultante) throws SQLException{
+
+	ClienteVO clienteBuscado = new ClienteVO();
+	clienteBuscado.setIdCliente(conjuntoResultante.getInt("idCliente"));
+	clienteBuscado.setNome(conjuntoResultante.getString("Nome"));
+	clienteBuscado.setSobrenome(conjuntoResultante.getString("sobrenome"));
+	clienteBuscado.setCpf(conjuntoResultante.getString("cpf"));
+	clienteBuscado.setEmail(conjuntoResultante.getString("email"));
+	clienteBuscado.setCnh(conjuntoResultante.getString("cnh"));
+	clienteBuscado.setTelefone(conjuntoResultante.getString("telefone"));
+	clienteBuscado.setEndereco(conjuntoResultante.getString("endereco"));
+	clienteBuscado.setCidade(conjuntoResultante.getString("cidade"));
+	clienteBuscado.setEstado(conjuntoResultante.getString("estado"));
+	clienteBuscado.setCep(conjuntoResultante.getString("cep"));
+			
+	return clienteBuscado;
+	}
+}
+
+
