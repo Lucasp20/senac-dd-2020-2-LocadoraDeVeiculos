@@ -17,13 +17,7 @@ public class ClienteController {
 	 */
 	private ClienteBO bo = new ClienteBO();
 	
-	public String salvar(ClienteVO cliente) {
-		String situacao;
-		situacao = "AQUI VÃO SER TRABALHADOS OS CONTROLLERS - apenas testandooo";
-		cliente = bo.salvarCliente(cliente);
-		return situacao;
-
-
+	
 	public String salvar(ClienteVO novoCliente) {
 		String mensagem ="";
 		
