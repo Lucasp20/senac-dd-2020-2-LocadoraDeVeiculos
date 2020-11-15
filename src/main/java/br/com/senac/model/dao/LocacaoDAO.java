@@ -34,8 +34,8 @@ public class LocacaoDAO {
 			Date dataEntregaConvertidaParaSQL = java.sql.Date.valueOf(novaLocacao.getDataEntrega());
 			query.setDate(3, dataEntregaConvertidaParaSQL);
 			query.setInt(4, novaLocacao.getKmEntrega());
-			query.setInt(5, nomeDoCliente.getIdCliente());
-			query.setInt(6, nomeDoVeiculo.getIdVeiculo());
+			query.setString(5, nomeDoCliente.getNome());
+			query.setString(6, nomeDoVeiculo.getMarca());
 			
 			int codigoRetorno = query.executeUpdate();
 			if(codigoRetorno == Banco.CODIGO_RETORNO_SUCESSO) {
@@ -73,8 +73,8 @@ public class LocacaoDAO {
 			Date dataEntregaConvertidaParaSQL = java.sql.Date.valueOf(locacao.getDataEntrega());
 			query.setDate(3, dataEntregaConvertidaParaSQL);
 			query.setInt(4, locacao.getKmEntrega());
-			query.setInt(5, nomeDoCliente.getIdCliente());
-			query.setInt(6, nomeDoVeiculo.getIdVeiculo());
+			query.setString(5, nomeDoCliente.getNome());
+			query.setString(6, nomeDoVeiculo.getMarca());
 			
 			int codigoRetorno = query.executeUpdate();
 			alterou = (codigoRetorno == Banco.CODIGO_RETORNO_SUCESSO);

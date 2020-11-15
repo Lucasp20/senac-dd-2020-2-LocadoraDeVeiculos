@@ -33,6 +33,7 @@ public class PainelReservaLocacao extends JPanel {
 	private JLabel lblReservaLocacaoDataDevolucao;
 	private JComboBox cbCliente;
 	private JComboBox cbVeiculo;
+	private JFormattedTextField txtReservaVeiculoKmDevolucao;
 	
 	/**
 	 * Create the panel.
@@ -88,7 +89,7 @@ public class PainelReservaLocacao extends JPanel {
 		lblReservaLocacaoKmDevolucao.setBounds(298, 219, 105, 14);
 		add(lblReservaLocacaoKmDevolucao);
 		
-		JFormattedTextField txtReservaVeiculoKmDevolucao = new JFormattedTextField();
+		txtReservaVeiculoKmDevolucao = new JFormattedTextField();
 		txtReservaVeiculoKmDevolucao.setBounds(298, 233, 182, 25);
 		add(txtReservaVeiculoKmDevolucao);
 		
@@ -102,18 +103,16 @@ public class PainelReservaLocacao extends JPanel {
 				LocacaoVO novaLocacao = new LocacaoVO();
 				
 				novaLocacao.setDataLocacao(ReservaDataLocacaoVeiculo.getDate());
-				novaLocacao.setKmLocacao(txtReservaVeiculoKmAtual.get());
+			/*	novaLocacao.setKmLocacao((int)txtReservaVeiculoKmAtual.getValue());
 				novaLocacao.setDataEntrega(ReservaDataDevolucaoVeiculo.getDate());
-				novaLocacao.setKmEntrega(ReservaDataDevolucaoVeiculo());
+				novaLocacao.setKmLocacao((int)txtReservaVeiculoKmDevolucao.getValue());
 				novaLocacao.setCliente((ClienteVO) cbCliente.getSelectedItem());
-				novaLocacao.setVeiculo((VeiculoVO) cbVeiculo.getSelectedItem());
+				novaLocacao.setVeiculo((VeiculoVO) cbVeiculo.getSelectedItem());  */
 			
 				LocacaoController controller = new LocacaoController();
-				
+
 				String mensagem = controller.salvar(novaLocacao);
-				
 				JOptionPane.showMessageDialog(null, mensagem);
-			
 			}
 		});
 		btnSalvarReserva.setIcon(new ImageIcon(PainelReservaLocacao.class.getResource("/icons/Salvar.png")));
@@ -136,7 +135,5 @@ public class PainelReservaLocacao extends JPanel {
 		cbVeiculo.setBounds(298, 106, 182, 25);
 		add(cbVeiculo);
 		
-		
-
 	}
 }

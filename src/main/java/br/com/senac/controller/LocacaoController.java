@@ -12,7 +12,7 @@ public class LocacaoController {
 	 * Km de entrega deve ser maior que km de de retirada 
 	 * 
 	 */
-	private String mensagem = "";
+	private String mensagem = " ";
 	
 	public String salvar(LocacaoVO novaLocacao) {
 		
@@ -39,24 +39,28 @@ public class LocacaoController {
 	return true;
 	}
 
-	private boolean validarKmLocacao(LocacaoVO locacao) {
-		// TODO Auto-generated method stub
+	private boolean validarKmLocacao(LocacaoVO kmlocacao) {
+		if(kmlocacao == null ) {
+			mensagem = "Deve preencher a atual KM";
 		return false;
+		}
+	return true;
 	}
-
-
 
 	private boolean validarDataEntrega(LocacaoVO locacao) {
 		if(locacao.getDataEntrega() == null) {
-			mensagem = "Data da entrega não é uma data valida";
+			mensagem = "Data da devoluçao não é uma data valida";
 		return false;
 		}
 	return true;
 	}
 
 	private boolean validarKmEntrega(LocacaoVO kmentrega) {
-		// TODO Auto-generated method stub
+		if(kmentrega == null) {
+			mensagem = "Deve preencher o KM de entrega do veículo";
 		return false;
+		}
+		return true;
 	}
 
 }
