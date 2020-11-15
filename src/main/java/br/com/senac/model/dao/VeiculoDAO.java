@@ -104,20 +104,20 @@ public class VeiculoDAO {
 			return alterou;
 		}
 	
-	public static VeiculoVO pesquisarPorId(int id) {
-		String sql = " SELECT * FROM VEICULO WHERE id=? ";
+	public static VeiculoVO pesquisarPorMarca(String marca) {
+		String sql = " SELECT * FROM VEICULO WHERE MARCA=? ";
 		VeiculoVO veiculobuscado = null;
 		
 		try (Connection conexao = Banco.getConnection();
 			PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);) {
-			consulta.setInt(1, id);
+			consulta.setString(1, marca);
 			ResultSet conjuntoResultante = consulta.executeQuery();
 			
 			if(conjuntoResultante.next()) {
 				veiculobuscado = contruirVeiculoDoResultSet(conjuntoResultante);
 			}
 		} catch (SQLException e) {
-			System.out.println("Erro ao consultar veiculo por Id (id: " + id + ") .\nCausa: " + e.getMessage());
+			System.out.println("Erro ao consultar veiculo por Id (id: " + marca + ") .\nCausa: " + e.getMessage());
 		}
 		
 		return veiculobuscado;

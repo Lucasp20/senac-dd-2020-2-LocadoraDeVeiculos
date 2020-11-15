@@ -108,20 +108,20 @@ public boolean alterar(ClienteVO cliente){
 	return alterou;
 }
 
-public static ClienteVO pesquisarPorId(int id) {
-	String sql = " SELECT * FROM CLIENTE WHERE id=? ";
+public static ClienteVO pesquisarPorNome(String nome) {
+	String sql = " SELECT * FROM CLIENTE WHERE NOME=? ";
 	ClienteVO clientebuscado = null;
 	
 	try (Connection conexao = Banco.getConnection();
 		PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);) {
-		consulta.setInt(1, id);
+		consulta.setString(1, nome);
 		ResultSet conjuntoResultante = consulta.executeQuery();
 		
 		if(conjuntoResultante.next()) {
 			clientebuscado = contruirVeiculoDoResultSet(conjuntoResultante);
 		}
 	} catch (SQLException e) {
-		System.out.println("Erro ao consultar veiculo por Id (id: " + id + ") .\nCausa: " + e.getMessage());
+		System.out.println("Erro ao consultar cliente por nome (id: " + nome + ") .\nCausa: " + e.getMessage());
 	}
 	
 	return clientebuscado;

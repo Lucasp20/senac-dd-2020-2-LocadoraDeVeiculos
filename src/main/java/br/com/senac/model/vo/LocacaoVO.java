@@ -9,26 +9,24 @@ public class LocacaoVO {
 	private int kmLocacao;
 	private LocalDate dataEntrega;
 	private int kmEntrega;
-	private String situacao;
 	private ClienteVO cliente;
 	private VeiculoVO veiculo;
-	
+
 	public LocacaoVO(int idLocacao, LocalDate dataLocacao, int kmLocacao, LocalDate dataEntrega, int kmEntrega,
-			String situacao, ClienteVO cliente, VeiculoVO veiculo) {
+			ClienteVO cliente, VeiculoVO veiculo) {
 		super();
 		this.idLocacao = idLocacao;
 		this.dataLocacao = dataLocacao;
 		this.kmLocacao = kmLocacao;
 		this.dataEntrega = dataEntrega;
 		this.kmEntrega = kmEntrega;
-		this.situacao = situacao;
 		this.cliente = cliente;
 		this.veiculo = veiculo;
 	}
 	
 	public LocacaoVO() {
 		super();
-	
+		
 	}
 
 	public int getIdLocacao() {
@@ -69,14 +67,6 @@ public class LocacaoVO {
 
 	public void setKmEntrega(int kmEntrega) {
 		this.kmEntrega = kmEntrega;
-	}
-
-	public String getSituacao() {
-		return situacao;
-	}
-
-	public void setSituacao(String situacao) {
-		this.situacao = situacao;
 	}
 
 	public ClienteVO getCliente() {

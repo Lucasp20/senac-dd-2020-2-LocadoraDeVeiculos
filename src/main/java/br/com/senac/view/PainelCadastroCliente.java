@@ -136,7 +136,7 @@ public class PainelCadastroCliente extends JPanel {
 			public void mouseClicked(MouseEvent arg0) {
 				ClienteVO novoCliente = new ClienteVO();
 					
-				String cpf = txtClienteCpf.getText().replace("-", "").replace(".", "");
+			/*	String cpf = txtClienteCpf.getText().replace("-", "").replace(".", "");  */
 				
 				novoCliente.setNome(txtNomeCliente.getText());
 				novoCliente.setSobrenome(txtSobrenomeCliente.getText());
@@ -149,9 +149,11 @@ public class PainelCadastroCliente extends JPanel {
 				novoCliente.setEstado(txtEstadoClienteField.getText());
 				novoCliente.setCep(txtCepCliente.getText());   */
 							
+				ClienteController controller = new ClienteController();
 				
-				ClienteController clienteController = new ClienteController();
-				JOptionPane.showMessageDialog(null, clienteController.salvar(novoCliente));
+				String mensagem = controller.salvar(novoCliente);
+				
+				JOptionPane.showMessageDialog(null, mensagem);
 			} 
 
 		});
