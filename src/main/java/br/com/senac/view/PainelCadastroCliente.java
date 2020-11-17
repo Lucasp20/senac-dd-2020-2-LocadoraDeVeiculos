@@ -136,11 +136,11 @@ public class PainelCadastroCliente extends JPanel {
 			public void mouseClicked(MouseEvent arg0) {
 				ClienteVO novoCliente = new ClienteVO();
 					
-			/*	String cpf = txtClienteCpf.getText().replace("-", "").replace(".", "");  */
+				String cpf = txtClienteCpf.getText().replace("-"," ").replace("."," ");
 				
 				novoCliente.setNome(txtNomeCliente.getText());
 				novoCliente.setSobrenome(txtSobrenomeCliente.getText());
-				novoCliente.setCpf(txtClienteCpf.getText().replace(".", "").replace("-", ""));
+				novoCliente.setCpf(txtClienteCpf.getText().replace("."," ").replace("-"," "));
 				novoCliente.setEmail(txtEmail.getText());
 				novoCliente.setCnh(txtClienteCNH.getText());
 				novoCliente.setTelefone(txtTelefoneCliente.getText());
