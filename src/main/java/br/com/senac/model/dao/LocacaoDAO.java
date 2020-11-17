@@ -30,10 +30,10 @@ public class LocacaoDAO {
 			
 			Date dataLocacaoConvertidaParaSQL = java.sql.Date.valueOf(novaLocacao.getDataLocacao());
 			query.setDate(1, dataLocacaoConvertidaParaSQL);
-			query.setInt(2, novaLocacao.getKmLocacao());
+			query.setDouble(2, novaLocacao.getKmLocacao());
 			Date dataEntregaConvertidaParaSQL = java.sql.Date.valueOf(novaLocacao.getDataEntrega());
 			query.setDate(3, dataEntregaConvertidaParaSQL);
-			query.setInt(4, novaLocacao.getKmEntrega());
+			query.setDouble(4, novaLocacao.getKmEntrega());
 			query.setString(5, nomeDoCliente.getNome());
 			query.setString(6, nomeDoVeiculo.getMarca());
 			
@@ -69,10 +69,10 @@ public class LocacaoDAO {
 			PreparedStatement query = Banco.getPreparedStatement(conexao, sql);) {
 			Date dataLocacaoConvertidaParaSQL = java.sql.Date.valueOf(locacao.getDataLocacao());
 			query.setDate(1, dataLocacaoConvertidaParaSQL);
-			query.setInt(2, locacao.getKmLocacao());
+			query.setDouble(2, locacao.getKmLocacao());
 			Date dataEntregaConvertidaParaSQL = java.sql.Date.valueOf(locacao.getDataEntrega());
 			query.setDate(3, dataEntregaConvertidaParaSQL);
-			query.setInt(4, locacao.getKmEntrega());
+			query.setDouble(4, locacao.getKmEntrega());
 			query.setString(5, nomeDoCliente.getNome());
 			query.setString(6, nomeDoVeiculo.getMarca());
 			
@@ -181,11 +181,11 @@ public class LocacaoDAO {
 		Date datalocacao = conjuntoResultante.getDate("data_locacao");
 		LocalDate dataLocacao = datalocacao.toLocalDate();
 		locacaoBuscada.setDataLocacao(dataLocacao);
-		locacaoBuscada.setKmLocacao(conjuntoResultante.getInt("kmlocacao"));
+		locacaoBuscada.setKmLocacao(conjuntoResultante.getDouble("kmlocacao"));
 		Date dataentrega = conjuntoResultante.getDate("data_entrega");
 		LocalDate dataEntrega = dataentrega.toLocalDate();
 		locacaoBuscada.setDataEntrega(dataEntrega);
-		locacaoBuscada.setKmEntrega(conjuntoResultante.getInt("kmentrega"));
+		locacaoBuscada.setKmEntrega(conjuntoResultante.getDouble("kmentrega"));
 					
 		//Preenche o nome do cliente
 		ClienteDAO clienteDAO = new ClienteDAO();
