@@ -167,5 +167,3 @@ private static ClienteVO contruirVeiculoDoResultSet(ResultSet conjuntoResultante
 	return clienteBuscado;
 	}
 }
-
-
