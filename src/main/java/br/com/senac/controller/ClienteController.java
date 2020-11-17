@@ -1,5 +1,7 @@
 package br.com.senac.controller;
 
+import java.util.List;
+
 import br.com.senac.model.bo.ClienteBO;
 import br.com.senac.model.dao.ClienteDAO;
 import br.com.senac.model.vo.ClienteVO;
@@ -48,7 +50,7 @@ public class ClienteController {
 	private boolean validarNome(ClienteVO novoCliente) {
 		if(novoCliente.getNome().trim().length() < 3 
 				|| novoCliente.getNome().isEmpty() ) {
-			mensagem = "Nome deve conter ao menos três catacteres";
+			mensagem = "Nome deve conter ao menos três caracteres";
 			return false;
 		}
 		return true;
@@ -57,7 +59,7 @@ public class ClienteController {
 	private boolean validarSobrenome(ClienteVO novoCliente) {
 		if(novoCliente.getSobrenome().trim().length() < 3 
 				|| novoCliente.getSobrenome().isEmpty() ) {
-			mensagem = "Sobrenome deve conter ao menos três catacteres";
+			mensagem = "Sobrenome deve conter ao menos três caracteres";
 			return false;
 		}
 		return true;
@@ -76,7 +78,7 @@ public class ClienteController {
 	private boolean validarEmail(ClienteVO novoCliente) {
 		if(novoCliente.getEmail().trim().length() < 3 
 				|| novoCliente.getEmail().isEmpty() ) {
-			mensagem = "Email deve conter ao menos três catacteres";
+			mensagem = "Email deve conter ao menos três caracteres";
 			return false;
 		}
 		return true;
@@ -86,7 +88,7 @@ public class ClienteController {
 		if(cnh.getCnh().trim().length() != 11
 				|| cnh.getCnh().isEmpty()) {
 			
-			mensagem = "CPF deve possuir tamanho 11 e somente números";
+			mensagem = "CNH deve possuir tamanho 11 e somente números";
 			return false;
 		}
 		return true;
@@ -115,7 +117,7 @@ public class ClienteController {
 	private boolean validarEndereco(ClienteVO novoCliente) {
 		if(novoCliente.getEndereco().trim().length() < 3 
 				|| novoCliente.getEndereco().isEmpty() ) {
-			mensagem = "Endereco deve conter ao menos três catacteres";
+			mensagem = "Endereco deve conter ao menos três caracteres";
 			return false;
 		}
 		return true;
@@ -124,7 +126,7 @@ public class ClienteController {
 	private boolean validarCidade(ClienteVO novoCliente) {
 		if(novoCliente.getCidade().trim().length() < 3 
 				|| novoCliente.getCidade().isEmpty() ) {
-			mensagem = "Cidade deve conter ao menos três catacteres";
+			mensagem = "Cidade deve conter ao menos três caracteres";
 			return false;
 		}
 		return true;
@@ -136,6 +138,11 @@ public class ClienteController {
 			return false;
 		}
 		return true;
+	}
+
+	public String gerarPlanilha(List<ClienteVO> dadosConsultados, String caminho) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

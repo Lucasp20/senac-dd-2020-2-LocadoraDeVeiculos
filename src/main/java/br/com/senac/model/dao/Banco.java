@@ -14,7 +14,7 @@ public class Banco {
 	private static final String BUGFIX_HORABR = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	private static final String CONEXAO =  "jdbc:mysql://localhost:3306/" + BANCODADOS  + BUGFIX_HORABR;
 	private static final String USER = "root";
-	private static final String PASSWORD = "1107";
+	private static final String PASSWORD = "availeo86";
 	
 	public static final int CODIGO_RETORNO_SUCESSO = 1;
 	

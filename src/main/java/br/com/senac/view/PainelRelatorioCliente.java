@@ -9,10 +9,20 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import br.com.senac.controller.ClienteController;
+
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
 
 public class PainelRelatorioCliente extends JPanel {
 	private JTable tblRelatorioCliente;
+
+	private List<br.com.senac.model.vo.ClienteVO> DadosConsultados;
 
 	/**
 	 * Create the panel.
@@ -36,6 +46,19 @@ public class PainelRelatorioCliente extends JPanel {
 		painelRelatorioCliente.add(btnRelatorioClientePesquisa);
 		
 		JButton btnRelatorioClienteGerarExcel = new JButton("Gerar Excel");
+		btnRelatorioClienteGerarExcel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				JFileChooser janelaArquivos = new JFileChooser();
+
+				int opcaoSelecionada = janelaArquivos.showSaveDialog(null);
+
+				if (opcaoSelecionada == JFileChooser.APPROVE_OPTION) {
+					String caminho = janelaArquivos.getSelectedFile().getAbsolutePath();
+				ClienteController controller = new ClienteController();
+				String salvouPlanilha = controller.gerarPlanilha(DadosConsultados, caminho);
+			}}
+			});
 		btnRelatorioClienteGerarExcel.setBounds(484, 44, 105, 31);
 		painelRelatorioCliente.add(btnRelatorioClienteGerarExcel);
 		
