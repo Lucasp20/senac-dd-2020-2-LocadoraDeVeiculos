@@ -84,7 +84,7 @@ public class PainelCadastroVeiculo extends JPanel {
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);
 		
-		MaskFormatter mascaraPlaca = new MaskFormatter("UUU-####");
+		MaskFormatter mascaraPlaca = new MaskFormatter("UUU-#*##");
 		
 		lblPlaca = new JLabel("Placa");
 		lblPlaca.setBounds(75, 86, 46, 14);
@@ -153,17 +153,24 @@ public class PainelCadastroVeiculo extends JPanel {
 		
 		JButton btnSalvarVeiculo = new JButton(" Salvar");
 		btnSalvarVeiculo.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				JOptionPane.showMessageDialog(null,"Passou pelo bot�o SALVAR");
+				VeiculoVO novoVeiculo = new VeiculoVO();
 				
-				VeiculoController controlador = new VeiculoController();
-				VeiculoVO novoVeiculo = construirNovoVeiculo();
-				String situacao = controlador.salvar(novoVeiculo);
-				JOptionPane.showMessageDialog(null, situacao);		
-				
-				
-				
+				novoVeiculo.setPlaca(txtPlaca.getText());
+				novoVeiculo.setRenavam(txtRenavam.getText());
+				novoVeiculo.setChassi(txtChassi.getText());
+				novoVeiculo.setMarca(txtMarca.getText());
+				novoVeiculo.setModelo(txtModelo.getText());
+				novoVeiculo.setAno(Integer.parseInt(txtAno.getText()));
+				novoVeiculo.setCor(txtCor.getText());
+			/*	novoVeiculo.setMotor((String) cbDadosVeiculoMotor.getSelectedItem());
+				novoVeiculo.setTransmissao((String) cbDadosVeiculoTransmissao.getSelectedItem());
+								
+						*/		
+							
+				VeiculoController veiculoController = new VeiculoController();
+				JOptionPane.showMessageDialog(null, veiculoController.cadastrarVeiculo(novoVeiculo));
+					
 			}
 
 		});
@@ -206,7 +213,8 @@ public class PainelCadastroVeiculo extends JPanel {
 		cbDadosVeiculoMotor.setBounds(75, 214, 146, 27);
 		add(cbDadosVeiculoMotor);
 	}
-	private VeiculoVO construirNovoVeiculo() {
+	
+	/*private VeiculoVO construirNovoVeiculo() {
 		VeiculoVO novoVeiculo = new VeiculoVO();
 		novoVeiculo.setMarca(txtMarca.getText());
 		novoVeiculo.setAno(Integer.parseInt(txtAno.getText()));
@@ -219,7 +227,7 @@ public class PainelCadastroVeiculo extends JPanel {
 		novoVeiculo.setTransmissao((String) cbDadosVeiculoTransmissao.getSelectedItem());
 				
 		return novoVeiculo;
-	}
+	}*/
 }
 
 /*teste commit*/

@@ -38,11 +38,10 @@ public class TelaMenuInicial extends JFrame {
 				}
 			}
 		});
-	}
-
+	} 
 	/**
 	 * Create the frame.
-	 */
+	 */ 
 	public TelaMenuInicial() {
 		setTitle("Floricar");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,7 +61,7 @@ public class TelaMenuInicial extends JFrame {
 				setContentPane(painelCliente);
 				revalidate();
 			}
-		});
+		}); 
 		menuItemCadastrarClientes.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
 		menuItemCadastrarClientes.setIcon(new ImageIcon(TelaMenuInicial.class.getResource("/icons/addUser.png")));
 		menuClientes.add(menuItemCadastrarClientes);
@@ -109,7 +108,7 @@ public class TelaMenuInicial extends JFrame {
 				setContentPane(painelVeiculo);
 				revalidate();
 			}
-		});
+		}); 
 		menuVeiculo.add(menuItemRelatorioVeiculo);
 		
 		JMenu menuLocacao = new JMenu("Locação");
@@ -172,5 +171,6 @@ public class TelaMenuInicial extends JFrame {
 		lblFloricarEndMenu.setBounds(10, 375, 342, 14);
 		panel.add(lblFloricarEndMenu);
 	}
-
+ 
 }
+ 
