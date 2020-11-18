@@ -46,17 +46,17 @@ public class PainelCadastroVeiculo extends JPanel {
 	private JLabel lblChassi;
 	private JFormattedTextField txtChassi;
 	private JLabel lblDadosVeiculo;
-	private JFormattedTextField txtMarca;
 	private JLabel lblMarca;
 	private JFormattedTextField txtModelo;
 	private JLabel lblModelo;
-	private JFormattedTextField txtAno;
 	private JLabel lblAno;
 	private JLabel lblCor;
 	private JFormattedTextField txtCor;
 	private JButton btnConsultarCpfCliente;
 	private JComboBox cbDadosVeiculoMotor;
 	private JComboBox cbDadosVeiculoTransmissao;
+	private JComboBox cbMarcaVeiculo;
+	private JComboBox cbAnoVeiculo;
 	/**
 	 * Launch the application.
 	 */
@@ -115,14 +115,10 @@ public class PainelCadastroVeiculo extends JPanel {
 		lblDadosVeiculo.setBounds(21, 31, 146, 14);
 		this.add(lblDadosVeiculo);
 		
-		txtMarca = new JFormattedTextField();
-		txtMarca.setBounds(75, 160, 146, 27);
-		this.add(txtMarca);
-		
 		lblMarca = new JLabel("Marca");
 		lblMarca.setBounds(75, 145, 46, 14);
 		this.add(lblMarca);
-		
+				
 		txtModelo = new JFormattedTextField();
 		txtModelo.setBounds(242, 160, 146, 27);
 		this.add(txtModelo);
@@ -130,10 +126,6 @@ public class PainelCadastroVeiculo extends JPanel {
 		lblModelo = new JLabel("Modelo");
 		lblModelo.setBounds(242, 145, 46, 14);
 		this.add(lblModelo);
-		
-		txtAno = new JFormattedTextField();
-		txtAno.setBounds(407, 160, 76, 27);
-		this.add(txtAno);
 		
 		lblAno = new JLabel("Ano");
 		lblAno.setBounds(407, 145, 46, 14);
@@ -159,15 +151,14 @@ public class PainelCadastroVeiculo extends JPanel {
 				novoVeiculo.setPlaca(txtPlaca.getText());
 				novoVeiculo.setRenavam(txtRenavam.getText());
 				novoVeiculo.setChassi(txtChassi.getText());
-				novoVeiculo.setMarca(txtMarca.getText());
+				novoVeiculo.setMarca((String)(cbMarcaVeiculo.getSelectedItem()));
 				novoVeiculo.setModelo(txtModelo.getText());
-				novoVeiculo.setAno(Integer.parseInt(txtAno.getText()));
+				novoVeiculo.setAno((int)(cbAnoVeiculo.getSelectedItem()));
 				novoVeiculo.setCor(txtCor.getText());
 			/*	novoVeiculo.setMotor((String) cbDadosVeiculoMotor.getSelectedItem());
 				novoVeiculo.setTransmissao((String) cbDadosVeiculoTransmissao.getSelectedItem());
 								
-						*/		
-							
+						*/				
 				VeiculoController veiculoController = new VeiculoController();
 				JOptionPane.showMessageDialog(null, veiculoController.cadastrarVeiculo(novoVeiculo));
 					
@@ -190,44 +181,45 @@ public class PainelCadastroVeiculo extends JPanel {
 		this.add(lblTransmissao);
 		
 		JComboBox cbDadosVeiculoTransmissao = new JComboBox();
+		cbDadosVeiculoTransmissao.setFont(new Font("Tahoma", Font.BOLD, 11));
 		cbDadosVeiculoTransmissao.setToolTipText("");
 		cbDadosVeiculoTransmissao.setModel(new DefaultComboBoxModel(new String[] {"            Selecione", "Automática", "Manual"}));
 		cbDadosVeiculoTransmissao.setBounds(242, 214, 146, 27);
 		this.add(cbDadosVeiculoTransmissao);
 		
 		JButton btnExcluirVeiculo = new JButton("Excluir");
+		btnExcluirVeiculo.setForeground(new Color(0, 0, 139));
 		btnExcluirVeiculo.setBounds(404, 327, 111, 41);
-		add(btnExcluirVeiculo);
+		this.add(btnExcluirVeiculo);
 		
 		JButton btnEditarVeiculo = new JButton("Editar");
+		btnEditarVeiculo.setForeground(new Color(0, 0, 139));
 		btnEditarVeiculo.setBounds(268, 327, 111, 41);
-		add(btnEditarVeiculo);
+		this.add(btnEditarVeiculo);
 		
 		btnConsultarCpfCliente = new JButton("");
 		btnConsultarCpfCliente.setIcon(new ImageIcon(PainelCadastroVeiculo.class.getResource("/icons/pesquisapequeno.png")));
 		btnConsultarCpfCliente.setBounds(173, 101, 51, 27);
-		add(btnConsultarCpfCliente);
+		this.add(btnConsultarCpfCliente);
 		
 		cbDadosVeiculoMotor = new JComboBox();
+		cbDadosVeiculoMotor.setFont(new Font("Tahoma", Font.BOLD, 11));
 		cbDadosVeiculoMotor.setModel(new DefaultComboBoxModel(new String[] {"             Selecione   ", "1.0", "1.4", "1.6", "2.0"}));
 		cbDadosVeiculoMotor.setBounds(75, 214, 146, 27);
-		add(cbDadosVeiculoMotor);
+		this.add(cbDadosVeiculoMotor);
+
+		cbMarcaVeiculo = new JComboBox();
+		cbMarcaVeiculo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		cbMarcaVeiculo.setModel(new DefaultComboBoxModel(new String[] {"               Selecione", "Audi", "BMW", "Citroën", "Dodge", "Fiat", 
+															"Ford", "Chevrolet", "Honda", "Hyndai", "Jac", "Jeep", "Kia", "Nissan", "Peugeot", "Renault", "Toyota"}));
+		cbMarcaVeiculo.setBounds(73, 160, 151, 27);
+		this.add(cbMarcaVeiculo);
+		
+		cbAnoVeiculo = new JComboBox();
+		cbAnoVeiculo.setModel(new DefaultComboBoxModel(new String[] {"  \t  Ano", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"}));
+		cbAnoVeiculo.setBounds(406, 160, 73, 27);
+		this.add(cbAnoVeiculo);
 	}
-	
-	/*private VeiculoVO construirNovoVeiculo() {
-		VeiculoVO novoVeiculo = new VeiculoVO();
-		novoVeiculo.setMarca(txtMarca.getText());
-		novoVeiculo.setAno(Integer.parseInt(txtAno.getText()));
-		novoVeiculo.setChassi(txtChassi.getText());
-		novoVeiculo.setModelo(txtModelo.getText());
-		novoVeiculo.setCor(txtCor.getText());
-		novoVeiculo.setMotor((String) cbDadosVeiculoMotor.getSelectedItem());
-		novoVeiculo.setPlaca(txtPlaca.getText());
-		novoVeiculo.setRenavam(txtRenavam.getText());
-		novoVeiculo.setTransmissao((String) cbDadosVeiculoTransmissao.getSelectedItem());
-				
-		return novoVeiculo;
-	}*/
 }
 
 /*teste commit*/
