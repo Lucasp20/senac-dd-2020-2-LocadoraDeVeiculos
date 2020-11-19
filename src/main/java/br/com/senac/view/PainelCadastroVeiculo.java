@@ -51,12 +51,12 @@ public class PainelCadastroVeiculo extends JPanel {
 	private JLabel lblModelo;
 	private JLabel lblAno;
 	private JLabel lblCor;
-	private JFormattedTextField txtCor;
 	private JButton btnConsultarCpfCliente;
 	private JComboBox cbDadosVeiculoMotor;
 	private JComboBox cbDadosVeiculoTransmissao;
 	private JComboBox cbMarcaVeiculo;
 	private JComboBox cbAnoVeiculo;
+	private JComboBox cbCorVeiculo ;
 
 	/**
 	 * Launch the application.
@@ -136,10 +136,6 @@ public class PainelCadastroVeiculo extends JPanel {
 		lblCor.setBounds(489, 145, 46, 14);
 		this.add(lblCor);
 		
-		txtCor = new JFormattedTextField();
-		txtCor.setBounds(489, 160, 64, 27);
-		this.add(txtCor);
-		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(71, 263, 482, 2);
 		this.add(separator);
@@ -177,6 +173,11 @@ public class PainelCadastroVeiculo extends JPanel {
 		cbAnoVeiculo.setBounds(406, 160, 73, 27);
 		this.add(cbAnoVeiculo);
 		
+		cbCorVeiculo = new JComboBox();
+		cbCorVeiculo.setModel(new DefaultComboBoxModel(new String[] {"", "Branco", "Prata", "Preto", "Vermelho"}));
+		cbCorVeiculo.setBounds(487, 160, 66, 27);
+		add(cbCorVeiculo);
+		
 		JButton btnSalvarVeiculo = new JButton(" Salvar");
 		btnSalvarVeiculo.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
@@ -188,7 +189,7 @@ public class PainelCadastroVeiculo extends JPanel {
 				novoVeiculo.setMarca((String)(cbMarcaVeiculo.getSelectedItem()));
 				novoVeiculo.setModelo(txtModelo.getText());
 				novoVeiculo.setAno(Integer.parseInt(cbAnoVeiculo.getSelectedItem().toString()));
-				novoVeiculo.setCor(txtCor.getText());
+				novoVeiculo.setCor((String) cbCorVeiculo.getSelectedItem());
 				novoVeiculo.setMotor((String) cbDadosVeiculoMotor.getSelectedItem());
 				novoVeiculo.setTransmissao((String) cbDadosVeiculoTransmissao.getSelectedItem());
 										
@@ -219,8 +220,7 @@ public class PainelCadastroVeiculo extends JPanel {
 		btnConsultarCpfCliente.setIcon(new ImageIcon(PainelCadastroVeiculo.class.getResource("/icons/pesquisapequeno.png")));
 		btnConsultarCpfCliente.setBounds(173, 101, 51, 27);
 		this.add(btnConsultarCpfCliente);
-		
-		
+				
 	}
 }
 
