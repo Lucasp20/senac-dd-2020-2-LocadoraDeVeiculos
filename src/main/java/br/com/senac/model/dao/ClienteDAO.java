@@ -67,7 +67,7 @@ public class ClienteDAO {
 			int codigoRetorno = query.executeUpdate();
 			excluiu = (codigoRetorno == Banco.CODIGO_RETORNO_SUCESSO);
 		} catch (SQLException e) {
-			System.out.println("Erro ao excluir Pessoa (id: " + idCliente + ") .\nCausa: " + e.getMessage());
+			System.out.println("Erro ao excluir Cliente (id: " + idCliente + ") .\nCausa: " + e.getMessage());
 		}finally {
 			Banco.closeStatement(query);
 			Banco.closeConnection(conexao);

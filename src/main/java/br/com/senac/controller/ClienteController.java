@@ -66,9 +66,8 @@ public class ClienteController {
 	}
 	
 	private boolean validarCpf(ClienteVO cpf) {
-		if(cpf.getCpf().trim().length() != 11
-				|| cpf.getCpf().isEmpty()) {
-			
+		if(cpf.getCpf().isEmpty() 
+			|| cpf.getCpf().length() < 11) {
 			mensagem = "CPF deve possuir tamanho 11 e somente números";
 			return false;
 		}
@@ -93,22 +92,12 @@ public class ClienteController {
 		}
 		return true;
 	} 
-	
-	private boolean validarCep(ClienteVO cep) {
-		if(cep.getCep().trim().length() != 8
-				|| cep.getCep().isEmpty()) {
-			
-			mensagem = "CPF deve possuir tamanho 11 e somente números";
-			return false;
-		}
-		return true;
-	} 
-	
+		
 	private boolean validarTefone(ClienteVO telefone) {
-		if(telefone.getTelefone().trim().length() != 11
+		if(telefone.getTelefone().trim().length() != 14
 				|| telefone.getTelefone().isEmpty()) {
 			
-			mensagem = "CPF deve possuir tamanho 11 e somente números";
+			mensagem = "Telefone deve possuir tamanho 11 e somente números";
 			return false;
 		}
 		return true;
@@ -139,6 +128,15 @@ public class ClienteController {
 		}
 		return true;
 	}
+	private boolean validarCep(ClienteVO cep) {
+		if(cep.getCep().trim().length() < 8
+				|| cep.getCep().isEmpty()) {
+			
+			mensagem = "CEP deve possuir 8 caracteres númericos";
+			return false;
+		}
+		return true;
+} 
 
 	public String gerarPlanilha(List<ClienteVO> dadosConsultados, String caminho) {
 		// TODO Auto-generated method stub
