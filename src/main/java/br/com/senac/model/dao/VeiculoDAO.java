@@ -33,7 +33,6 @@ public class VeiculoDAO {
 			query.setString(8, veiculo.getMotor());
 			query.setString(9, veiculo.getTransmissao());
 			
-
 			int codigoRetorno = query.executeUpdate();
 
 			if (codigoRetorno == Banco.CODIGO_RETORNO_SUCESSO) {
@@ -44,7 +43,7 @@ public class VeiculoDAO {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("Erro ao inserir pessoa.\nCausa: " + e.getMessage());
+			System.out.println("Erro ao inserir veiculo.\nCausa: " + e.getMessage());
 		} finally {
 			Banco.closeStatement(query);
 			Banco.closeConnection(conexao);

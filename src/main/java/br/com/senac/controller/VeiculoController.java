@@ -84,8 +84,8 @@ public class VeiculoController {
 		return true;
 	}
 
-	private boolean validarAno(VeiculoVO novoVeiculo) {
-		if(novoVeiculo.getAno() !=3) {
+	private boolean validarAno(VeiculoVO ano) {
+		if(ano == null) {
 			mensagem = "Ano não é valido";
 			return false;
 		}

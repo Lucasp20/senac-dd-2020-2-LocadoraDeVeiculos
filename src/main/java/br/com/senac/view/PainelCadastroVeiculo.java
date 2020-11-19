@@ -57,6 +57,7 @@ public class PainelCadastroVeiculo extends JPanel {
 	private JComboBox cbDadosVeiculoTransmissao;
 	private JComboBox cbMarcaVeiculo;
 	private JComboBox cbAnoVeiculo;
+
 	/**
 	 * Launch the application.
 	 */
@@ -143,35 +144,6 @@ public class PainelCadastroVeiculo extends JPanel {
 		separator.setBounds(71, 263, 482, 2);
 		this.add(separator);
 		
-		JButton btnSalvarVeiculo = new JButton(" Salvar");
-		btnSalvarVeiculo.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent arg0) {
-				VeiculoVO novoVeiculo = new VeiculoVO();
-				
-				novoVeiculo.setPlaca(txtPlaca.getText());
-				novoVeiculo.setRenavam(txtRenavam.getText());
-				novoVeiculo.setChassi(txtChassi.getText());
-				novoVeiculo.setMarca((String)(cbMarcaVeiculo.getSelectedItem()));
-				novoVeiculo.setModelo(txtModelo.getText());
-				novoVeiculo.setAno((int)(cbAnoVeiculo.getSelectedItem()));
-				novoVeiculo.setCor(txtCor.getText());
-			/*	novoVeiculo.setMotor((String) cbDadosVeiculoMotor.getSelectedItem());
-				novoVeiculo.setTransmissao((String) cbDadosVeiculoTransmissao.getSelectedItem());
-								
-						*/				
-				VeiculoController veiculoController = new VeiculoController();
-				JOptionPane.showMessageDialog(null, veiculoController.cadastrarVeiculo(novoVeiculo));
-					
-			}
-
-		});
-		btnSalvarVeiculo.setHorizontalAlignment(SwingConstants.LEFT);
-		btnSalvarVeiculo.setIcon(new ImageIcon(PainelCadastroVeiculo.class.getResource("/icons/Salvar.png")));
-		btnSalvarVeiculo.setForeground(new Color(0, 0, 139));
-		btnSalvarVeiculo.setBackground(new Color(240, 248, 255));
-		btnSalvarVeiculo.setBounds(133, 327, 111, 41);
-		this.add(btnSalvarVeiculo);
-		
 		JLabel lblMotor = new JLabel("Motor");
 		lblMotor.setBounds(75, 199, 76, 14);
 		this.add(lblMotor);
@@ -180,27 +152,12 @@ public class PainelCadastroVeiculo extends JPanel {
 		lblTransmissao.setBounds(242, 199, 88, 14);
 		this.add(lblTransmissao);
 		
-		JComboBox cbDadosVeiculoTransmissao = new JComboBox();
+		cbDadosVeiculoTransmissao = new JComboBox();
 		cbDadosVeiculoTransmissao.setFont(new Font("Tahoma", Font.BOLD, 11));
 		cbDadosVeiculoTransmissao.setToolTipText("");
 		cbDadosVeiculoTransmissao.setModel(new DefaultComboBoxModel(new String[] {"            Selecione", "Automática", "Manual"}));
 		cbDadosVeiculoTransmissao.setBounds(242, 214, 146, 27);
 		this.add(cbDadosVeiculoTransmissao);
-		
-		JButton btnExcluirVeiculo = new JButton("Excluir");
-		btnExcluirVeiculo.setForeground(new Color(0, 0, 139));
-		btnExcluirVeiculo.setBounds(404, 327, 111, 41);
-		this.add(btnExcluirVeiculo);
-		
-		JButton btnEditarVeiculo = new JButton("Editar");
-		btnEditarVeiculo.setForeground(new Color(0, 0, 139));
-		btnEditarVeiculo.setBounds(268, 327, 111, 41);
-		this.add(btnEditarVeiculo);
-		
-		btnConsultarCpfCliente = new JButton("");
-		btnConsultarCpfCliente.setIcon(new ImageIcon(PainelCadastroVeiculo.class.getResource("/icons/pesquisapequeno.png")));
-		btnConsultarCpfCliente.setBounds(173, 101, 51, 27);
-		this.add(btnConsultarCpfCliente);
 		
 		cbDadosVeiculoMotor = new JComboBox();
 		cbDadosVeiculoMotor.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -216,9 +173,54 @@ public class PainelCadastroVeiculo extends JPanel {
 		this.add(cbMarcaVeiculo);
 		
 		cbAnoVeiculo = new JComboBox();
-		cbAnoVeiculo.setModel(new DefaultComboBoxModel(new String[] {"  \t  Ano", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"}));
+		cbAnoVeiculo.setModel(new DefaultComboBoxModel(new String[] {"2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"}));
 		cbAnoVeiculo.setBounds(406, 160, 73, 27);
 		this.add(cbAnoVeiculo);
+		
+		JButton btnSalvarVeiculo = new JButton(" Salvar");
+		btnSalvarVeiculo.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				VeiculoVO novoVeiculo = new VeiculoVO();
+				
+				novoVeiculo.setPlaca(txtPlaca.getText());
+				novoVeiculo.setRenavam(txtRenavam.getText());
+				novoVeiculo.setChassi(txtChassi.getText());
+				novoVeiculo.setMarca((String)(cbMarcaVeiculo.getSelectedItem()));
+				novoVeiculo.setModelo(txtModelo.getText());
+				novoVeiculo.setAno(Integer.parseInt(cbAnoVeiculo.getSelectedItem().toString()));
+				novoVeiculo.setCor(txtCor.getText());
+				novoVeiculo.setMotor((String) cbDadosVeiculoMotor.getSelectedItem());
+				novoVeiculo.setTransmissao((String) cbDadosVeiculoTransmissao.getSelectedItem());
+										
+				VeiculoController veiculoController = new VeiculoController();
+				JOptionPane.showMessageDialog(null, veiculoController.cadastrarVeiculo(novoVeiculo));
+					
+			}
+
+		});
+		btnSalvarVeiculo.setHorizontalAlignment(SwingConstants.LEFT);
+		btnSalvarVeiculo.setIcon(new ImageIcon(PainelCadastroVeiculo.class.getResource("/icons/Salvar.png")));
+		btnSalvarVeiculo.setForeground(new Color(0, 0, 139));
+		btnSalvarVeiculo.setBackground(new Color(240, 248, 255));
+		btnSalvarVeiculo.setBounds(133, 327, 111, 41);
+		this.add(btnSalvarVeiculo);
+				
+		JButton btnExcluirVeiculo = new JButton("Excluir");
+		btnExcluirVeiculo.setForeground(new Color(0, 0, 139));
+		btnExcluirVeiculo.setBounds(404, 327, 111, 41);
+		this.add(btnExcluirVeiculo);
+		
+		JButton btnEditarVeiculo = new JButton("Editar");
+		btnEditarVeiculo.setForeground(new Color(0, 0, 139));
+		btnEditarVeiculo.setBounds(268, 327, 111, 41);
+		this.add(btnEditarVeiculo);
+		
+		btnConsultarCpfCliente = new JButton("");
+		btnConsultarCpfCliente.setIcon(new ImageIcon(PainelCadastroVeiculo.class.getResource("/icons/pesquisapequeno.png")));
+		btnConsultarCpfCliente.setBounds(173, 101, 51, 27);
+		this.add(btnConsultarCpfCliente);
+		
+		
 	}
 }
 
