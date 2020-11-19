@@ -16,8 +16,8 @@ public class VeiculoDAO {
 	public VeiculoVO inserir(VeiculoVO veiculo) {
 		Connection conexao = Banco.getConnection();
 
-		String sql = "INSERT INTO PESSOA (PLACA, RENAVAM, CHASSI, MARCA, MODELO, ANO, COR, MOTOR,TRANSMISSAO) "
-				+ "VALUES (?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO VEICULO (PLACA, RENAVAM, CHASSI, MARCA, MODELO, ANO, COR, MOTOR,TRANSMISSAO) "
+				+ "VALUES (?,?,?,?,?,?,?,?,?)";
 
 		PreparedStatement query = Banco.getPreparedStatementWithGeneratedKeys(conexao, sql);
 

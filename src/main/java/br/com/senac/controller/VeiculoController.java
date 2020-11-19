@@ -59,7 +59,7 @@ public class VeiculoController {
 	}
 
 	private boolean validarChassi(VeiculoVO novoVeiculo) {
-		if(novoVeiculo.getChassi().trim().length() !=11
+		if(novoVeiculo.getChassi().trim().length() !=17
 				|| novoVeiculo.getChassi().isEmpty() ) {
 			mensagem = "Chassi deve conter 11 caracteres";
 			return false;
@@ -67,7 +67,7 @@ public class VeiculoController {
 		return true;
 	}
 	private boolean validarMarca(VeiculoVO novoVeiculo) {
-		if(novoVeiculo.getMarca().trim().length() < 3 
+		if(novoVeiculo.getMarca() == null 
 				|| novoVeiculo.getPlaca().isEmpty() ) {
 			mensagem = "Deve preencher o campo Marca";
 			return false;

@@ -99,15 +99,19 @@ public class PainelCadastroVeiculo extends JPanel {
 		lblRenavam.setBounds(242, 86, 59, 14);
 		this.add(lblRenavam);
 		
-		txtRenavam = new JFormattedTextField();
+		MaskFormatter mascaraRenavam = new MaskFormatter("###########");
+		
+		txtRenavam = new JFormattedTextField(mascaraRenavam);
 		txtRenavam.setBounds(242, 101, 146, 27);
 		this.add(txtRenavam);
+		
+		MaskFormatter mascaraChassi = new MaskFormatter("#UU###UU#*U######");
 		
 		lblChassi = new JLabel("Chassi");
 		lblChassi.setBounds(406, 86, 59, 14);
 		this.add(lblChassi);
 		
-		txtChassi = new JFormattedTextField();
+		txtChassi = new JFormattedTextField(mascaraChassi);
 		txtChassi.setBounds(407, 101, 146, 27);
 		this.add(txtChassi);
 		
@@ -178,6 +182,9 @@ public class PainelCadastroVeiculo extends JPanel {
 		cbCorVeiculo.setBounds(487, 160, 66, 27);
 		add(cbCorVeiculo);
 		
+		VeiculoVO novoVeiculo = new VeiculoVO();
+		novoVeiculo.setMarca((String)(cbMarcaVeiculo.getSelectedItem()));
+		
 		JButton btnSalvarVeiculo = new JButton(" Salvar");
 		btnSalvarVeiculo.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
@@ -186,7 +193,7 @@ public class PainelCadastroVeiculo extends JPanel {
 				novoVeiculo.setPlaca(txtPlaca.getText());
 				novoVeiculo.setRenavam(txtRenavam.getText());
 				novoVeiculo.setChassi(txtChassi.getText());
-				novoVeiculo.setMarca((String)(cbMarcaVeiculo.getSelectedItem()));
+			/*	novoVeiculo.setMarca((String)(cbMarcaVeiculo.getSelectedItem())); */
 				novoVeiculo.setModelo(txtModelo.getText());
 				novoVeiculo.setAno(Integer.parseInt(cbAnoVeiculo.getSelectedItem().toString()));
 				novoVeiculo.setCor((String) cbCorVeiculo.getSelectedItem());
