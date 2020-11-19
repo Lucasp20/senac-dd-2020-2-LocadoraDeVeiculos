@@ -18,6 +18,7 @@ import javax.swing.JFileChooser;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 
 public class PainelRelatorioCliente extends JPanel {
 	private JTable tblRelatorioCliente;
@@ -67,7 +68,7 @@ public class PainelRelatorioCliente extends JPanel {
 		painelRelatorioCliente.add(lblCidadeCliente);
 		
 		JFormattedTextField txtCidadeCliente = new JFormattedTextField();
-		txtCidadeCliente.setBounds(63, 9, 72, 25);
+		txtCidadeCliente.setBounds(63, 9, 96, 25);
 		painelRelatorioCliente.add(txtCidadeCliente);
 		
 		JLabel lblEstadoCliente = new JLabel("Estado:");
@@ -75,8 +76,17 @@ public class PainelRelatorioCliente extends JPanel {
 		painelRelatorioCliente.add(lblEstadoCliente);
 		
 		JComboBox cbEstadoCliente = new JComboBox();
-		cbEstadoCliente.setBounds(63, 44, 72, 25);
+		cbEstadoCliente.setModel(new DefaultComboBoxModel(new String[] {"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"}));
+		cbEstadoCliente.setBounds(63, 44, 52, 25);
 		painelRelatorioCliente.add(cbEstadoCliente);
+		
+		JLabel lblNomeCliente = new JLabel("Nome:");
+		lblNomeCliente.setBounds(210, 14, 61, 14);
+		painelRelatorioCliente.add(lblNomeCliente);
+		
+		JFormattedTextField txtNomeCliente = new JFormattedTextField();
+		txtNomeCliente.setBounds(264, 9, 112, 25);
+		painelRelatorioCliente.add(txtNomeCliente);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 144, 600, 215);
