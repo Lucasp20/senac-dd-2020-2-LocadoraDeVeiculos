@@ -104,11 +104,7 @@ public class PainelCadastroCliente extends JPanel {
 		lblClienteCNH = new JLabel("CNH");
 		lblClienteCNH.setBounds(419, 145, 61, 14);
 		this.add(lblClienteCNH);
-		
-		txtClienteCNH = new JFormattedTextField();
-		txtClienteCNH.setBounds(419, 160, 135, 25);
-		this.add(txtClienteCNH);
-		
+				
 		lblEnderecoCliente = new JLabel("Endereço");
 		lblEnderecoCliente.setBounds(81, 205, 61, 14);
 		this.add(lblEnderecoCliente);
@@ -146,6 +142,7 @@ public class PainelCadastroCliente extends JPanel {
 			MaskFormatter mascaraCpf = new MaskFormatter("###.###.###-##");
 			MaskFormatter mascaraTelefone = new MaskFormatter("(##)#####-####");
 			MaskFormatter mascaraCep = new MaskFormatter("#####-###");
+			MaskFormatter mascaraCnh = new MaskFormatter("###########");
 					
 			txtClienteCpf = new JFormattedTextField(mascaraCpf);
 			txtClienteCpf.setBounds(419, 100, 135, 26);
@@ -158,6 +155,10 @@ public class PainelCadastroCliente extends JPanel {
 			txtCEPCliente = new JFormattedTextField(mascaraCep);
 			txtCEPCliente.setBounds(475, 220, 79, 25);
 			this.add(txtCEPCliente);
+			
+			txtClienteCNH = new JFormattedTextField(mascaraCnh);
+			txtClienteCNH.setBounds(419, 160, 135, 25);
+			this.add(txtClienteCNH);
 			
 			btnEditarVeiculo = new JButton("Editar");
 			btnEditarVeiculo.setBounds(274, 322, 111, 41);

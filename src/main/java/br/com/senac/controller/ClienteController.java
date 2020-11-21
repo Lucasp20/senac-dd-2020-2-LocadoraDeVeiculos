@@ -2,6 +2,7 @@ package br.com.senac.controller;
 
 import java.util.List;
 
+import br.com.senac.constante.Mensagens;
 import br.com.senac.model.bo.ClienteBO;
 import br.com.senac.model.dao.ClienteDAO;
 import br.com.senac.model.vo.ClienteVO;
@@ -41,7 +42,7 @@ public class ClienteController {
 			ClienteDAO clienteDAO = new ClienteDAO();
 			clienteDAO.inserir(novoCliente);
 			
-			mensagem = "Cliente cadastrado com sucesso";
+			mensagem = Mensagens.CLIENTE_SUCESSO;
 
 	}
 		return mensagem;
@@ -50,7 +51,7 @@ public class ClienteController {
 	private boolean validarNome(ClienteVO novoCliente) {
 		if(novoCliente.getNome().trim().length() < 3 
 				|| novoCliente.getNome().isEmpty() ) {
-			mensagem = "Nome deve conter ao menos três caracteres";
+			mensagem = Mensagens.CLIENTE_ERRO_NOME;
 			return false;
 		}
 		return true;
@@ -59,7 +60,7 @@ public class ClienteController {
 	private boolean validarSobrenome(ClienteVO novoCliente) {
 		if(novoCliente.getSobrenome().trim().length() < 3 
 				|| novoCliente.getSobrenome().isEmpty() ) {
-			mensagem = "Sobrenome deve conter ao menos três caracteres";
+			mensagem = Mensagens.CLIENTE_ERRO_SOBRENOME;
 			return false;
 		}
 		return true;
@@ -68,7 +69,7 @@ public class ClienteController {
 	private boolean validarCpf(ClienteVO cpf) {
 		if(cpf.getCpf().isEmpty() 
 			|| cpf.getCpf().length() < 11) {
-			mensagem = "CPF deve possuir tamanho 11 e somente números";
+			mensagem = Mensagens.CLIENTE_ERRO_CPF;
 			return false;
 		}
 		return true;
@@ -77,7 +78,7 @@ public class ClienteController {
 	private boolean validarEmail(ClienteVO novoCliente) {
 		if(novoCliente.getEmail().trim().length() < 3 
 				|| novoCliente.getEmail().isEmpty() ) {
-			mensagem = "Email deve conter ao menos três caracteres";
+			mensagem = Mensagens.CLIENTE_ERRO_EMAIL;
 			return false;
 		}
 		return true;
@@ -87,7 +88,7 @@ public class ClienteController {
 		if(cnh.getCnh().trim().length() != 11
 				|| cnh.getCnh().isEmpty()) {
 			
-			mensagem = "CNH deve possuir tamanho 11 e somente números";
+			mensagem = Mensagens.CLIENTE_ERRO_CNH;
 			return false;
 		}
 		return true;
@@ -97,7 +98,7 @@ public class ClienteController {
 		if(telefone.getTelefone().trim().length() != 14
 				|| telefone.getTelefone().isEmpty()) {
 			
-			mensagem = "Telefone deve possuir tamanho 11 e somente números";
+			mensagem = Mensagens.CLIENTE_ERRO_TELFONE;
 			return false;
 		}
 		return true;
@@ -106,7 +107,7 @@ public class ClienteController {
 	private boolean validarEndereco(ClienteVO novoCliente) {
 		if(novoCliente.getEndereco().trim().length() < 3 
 				|| novoCliente.getEndereco().isEmpty() ) {
-			mensagem = "Endereco deve conter ao menos três caracteres";
+			mensagem = Mensagens.CLIENTE_ERRO_ENDERECO;
 			return false;
 		}
 		return true;
@@ -115,7 +116,7 @@ public class ClienteController {
 	private boolean validarCidade(ClienteVO novoCliente) {
 		if(novoCliente.getCidade().trim().length() < 3 
 				|| novoCliente.getCidade().isEmpty() ) {
-			mensagem = "Cidade deve conter ao menos três caracteres";
+			mensagem = Mensagens.CLIENTE_ERRO_CIDADE;
 			return false;
 		}
 		return true;
@@ -123,7 +124,7 @@ public class ClienteController {
 
 	private boolean validarEstado(ClienteVO novoCliente) {
 		if(novoCliente.getEstado().isEmpty() ) {
-			mensagem = "Deve preencher o campo estado";
+			mensagem = Mensagens.CLIENTE_ERRO_ESTADO;
 			return false;
 		}
 		return true;
@@ -132,7 +133,7 @@ public class ClienteController {
 		if(cep.getCep().trim().length() < 8
 				|| cep.getCep().isEmpty()) {
 			
-			mensagem = "CEP deve possuir 8 caracteres númericos";
+			mensagem = Mensagens.CLIENTE_ERRO_CEP;
 			return false;
 		}
 		return true;

@@ -171,17 +171,20 @@ public class PainelCadastroVeiculo extends JPanel {
 
 		cbMarcaVeiculo = new JComboBox();
 		cbMarcaVeiculo.setFont(new Font("Tahoma", Font.BOLD, 11));
-		cbMarcaVeiculo.setModel(new DefaultComboBoxModel(new String[] {"", "Audi", "BMW", "Citroën", "Dodge", "Fiat", "Ford", "Chevrolet", "Honda", "Hyndai", "Jac", "Jeep", "Kia", "Nissan", "Peugeot", "Renault", "Toyota"}));
+		cbMarcaVeiculo.setModel(new DefaultComboBoxModel(new String[] {"",Mensagens.MARCA_AUDI,Mensagens.MARCA_BMW,Mensagens.MARCA_CHEVROLET,Mensagens.MARCA_CITROEN,Mensagens.MARCA_FIAT,
+				Mensagens.MARCA_FORD,Mensagens.MARCA_HONDA,Mensagens.MARCA_HYNDAI,Mensagens.MARCA_KIA,Mensagens.MARCA_NISSAN,Mensagens.MARCA_PEUGEOT,Mensagens.MARCA_RENAULT,Mensagens.MARCA_TOYOTA}));
 		cbMarcaVeiculo.setBounds(73, 160, 151, 27);
 		this.add(cbMarcaVeiculo);
 		
 		cbAnoVeiculo = new JComboBox();
-		cbAnoVeiculo.setModel(new DefaultComboBoxModel(new String[] {"2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"}));
+		cbAnoVeiculo.setModel(new DefaultComboBoxModel(new String[] {Mensagens.ANO_2010,Mensagens.ANO_2011,Mensagens.ANO_2012,Mensagens.ANO_2013,Mensagens.ANO_2014,Mensagens.ANO_2015,
+				Mensagens.ANO_2016,Mensagens.ANO_2017,Mensagens.ANO_2018,Mensagens.ANO_2019,Mensagens.ANO_2020}));
 		cbAnoVeiculo.setBounds(406, 160, 73, 27);
 		this.add(cbAnoVeiculo);
 		
 		cbCorVeiculo = new JComboBox();
-		cbCorVeiculo.setModel(new DefaultComboBoxModel(new String[] {"", "Azul", "Branco", "Preto", "Prata", "Vermelho"}));
+		cbCorVeiculo.setModel(new DefaultComboBoxModel(new String[] {"", Mensagens.COR_AZUL,Mensagens.COR_BRANCO,Mensagens.COR_PRATA,
+				Mensagens.COR_PRETO,Mensagens.COR_VERMELHO}));
 		cbCorVeiculo.setBounds(487, 160, 66, 27);
 		add(cbCorVeiculo);
 				
