@@ -8,10 +8,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
+import br.com.senac.constante.Mensagens;
 import br.com.senac.controller.ClienteController;
 import br.com.senac.controller.VeiculoController;
 import br.com.senac.model.vo.ClienteVO;
 import br.com.senac.model.vo.VeiculoVO;
+
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -37,6 +39,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
 
+
 public class PainelCadastroVeiculo extends JPanel {
 
 	private JLabel lblPlaca;
@@ -56,7 +59,8 @@ public class PainelCadastroVeiculo extends JPanel {
 	private JComboBox cbDadosVeiculoTransmissao;
 	private JComboBox cbMarcaVeiculo;
 	private JComboBox cbAnoVeiculo;
-	private JComboBox cbCorVeiculo ;
+	private JComboBox cbCorVeiculo;
+	
 
 	/**
 	 * Launch the application.
@@ -155,20 +159,19 @@ public class PainelCadastroVeiculo extends JPanel {
 		cbDadosVeiculoTransmissao = new JComboBox();
 		cbDadosVeiculoTransmissao.setFont(new Font("Tahoma", Font.BOLD, 11));
 		cbDadosVeiculoTransmissao.setToolTipText("");
-		cbDadosVeiculoTransmissao.setModel(new DefaultComboBoxModel(new String[] {"            Selecione", "Automática", "Manual"}));
+		cbDadosVeiculoTransmissao.setModel(new DefaultComboBoxModel(new String[] {"", "Automática", "Manual"}));
 		cbDadosVeiculoTransmissao.setBounds(242, 214, 146, 27);
 		this.add(cbDadosVeiculoTransmissao);
 		
 		cbDadosVeiculoMotor = new JComboBox();
 		cbDadosVeiculoMotor.setFont(new Font("Tahoma", Font.BOLD, 11));
-		cbDadosVeiculoMotor.setModel(new DefaultComboBoxModel(new String[] {"             Selecione   ", "1.0", "1.4", "1.6", "2.0"}));
+		cbDadosVeiculoMotor.setModel(new DefaultComboBoxModel(new String[] {"", "1.0", "1.4", "1.6", "2.0"}));
 		cbDadosVeiculoMotor.setBounds(75, 214, 146, 27);
 		this.add(cbDadosVeiculoMotor);
 
 		cbMarcaVeiculo = new JComboBox();
 		cbMarcaVeiculo.setFont(new Font("Tahoma", Font.BOLD, 11));
-		cbMarcaVeiculo.setModel(new DefaultComboBoxModel(new String[] {"               Selecione", "Audi", "BMW", "Citroën", "Dodge", "Fiat", 
-															"Ford", "Chevrolet", "Honda", "Hyndai", "Jac", "Jeep", "Kia", "Nissan", "Peugeot", "Renault", "Toyota"}));
+		cbMarcaVeiculo.setModel(new DefaultComboBoxModel(new String[] {"", "Audi", "BMW", "Citroën", "Dodge", "Fiat", "Ford", "Chevrolet", "Honda", "Hyndai", "Jac", "Jeep", "Kia", "Nissan", "Peugeot", "Renault", "Toyota"}));
 		cbMarcaVeiculo.setBounds(73, 160, 151, 27);
 		this.add(cbMarcaVeiculo);
 		
@@ -178,13 +181,10 @@ public class PainelCadastroVeiculo extends JPanel {
 		this.add(cbAnoVeiculo);
 		
 		cbCorVeiculo = new JComboBox();
-		cbCorVeiculo.setModel(new DefaultComboBoxModel(new String[] {"", "Branco", "Prata", "Preto", "Vermelho"}));
+		cbCorVeiculo.setModel(new DefaultComboBoxModel(new String[] {"", "Azul", "Branco", "Preto", "Prata", "Vermelho"}));
 		cbCorVeiculo.setBounds(487, 160, 66, 27);
 		add(cbCorVeiculo);
-		
-		VeiculoVO novoVeiculo = new VeiculoVO();
-		novoVeiculo.setMarca((String)(cbMarcaVeiculo.getSelectedItem()));
-		
+				
 		JButton btnSalvarVeiculo = new JButton(" Salvar");
 		btnSalvarVeiculo.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
@@ -193,11 +193,11 @@ public class PainelCadastroVeiculo extends JPanel {
 				novoVeiculo.setPlaca(txtPlaca.getText());
 				novoVeiculo.setRenavam(txtRenavam.getText());
 				novoVeiculo.setChassi(txtChassi.getText());
-			/*	novoVeiculo.setMarca((String)(cbMarcaVeiculo.getSelectedItem())); */
+				novoVeiculo.setMarca((String)(cbMarcaVeiculo.getSelectedItem())); 
 				novoVeiculo.setModelo(txtModelo.getText());
 				novoVeiculo.setAno(Integer.parseInt(cbAnoVeiculo.getSelectedItem().toString()));
-				novoVeiculo.setCor((String) cbCorVeiculo.getSelectedItem());
-				novoVeiculo.setMotor((String) cbDadosVeiculoMotor.getSelectedItem());
+				novoVeiculo.setCor((String)(cbCorVeiculo.getSelectedItem()));
+				novoVeiculo.setMotor((String)(cbDadosVeiculoMotor.getSelectedItem()));
 				novoVeiculo.setTransmissao((String) cbDadosVeiculoTransmissao.getSelectedItem());
 										
 				VeiculoController veiculoController = new VeiculoController();
@@ -230,5 +230,3 @@ public class PainelCadastroVeiculo extends JPanel {
 				
 	}
 }
-
-/*teste commit*/
