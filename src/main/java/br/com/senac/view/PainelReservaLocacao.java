@@ -5,6 +5,8 @@ import javax.swing.JPanel;
 import com.github.lgooddatepicker.components.DatePicker;
 
 import br.com.senac.controller.LocacaoController;
+import br.com.senac.model.dao.Banco;
+import br.com.senac.model.dao.ClienteDAO;
 import br.com.senac.model.vo.ClienteVO;
 import br.com.senac.model.vo.LocacaoVO;
 import br.com.senac.model.vo.VeiculoVO;
@@ -26,7 +28,14 @@ import javax.swing.text.MaskFormatter;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.awt.event.ItemEvent;
 
 public class PainelReservaLocacao extends JPanel {
 
@@ -38,10 +47,12 @@ public class PainelReservaLocacao extends JPanel {
 	private JComboBox cbCliente;
 	private JComboBox cbVeiculo;
 	private JFormattedTextField txtReservaVeiculoKmDevolucao;
+	private JPanel tela;
 	
 	/**
 	 * Create the panel.
 	 */
+	
 	public PainelReservaLocacao() {
 		setLayout(null);
 				
@@ -92,7 +103,7 @@ public class PainelReservaLocacao extends JPanel {
 		JSeparator separator = new JSeparator();
 		separator.setBounds(66, 287, 464, 2);
 		this.add(separator);
-		
+						
 		try {
 			MaskFormatter mascaraKmAtual = new MaskFormatter("######");
 			MaskFormatter mascaraKmDevolucao = new MaskFormatter("######");
@@ -104,7 +115,7 @@ public class PainelReservaLocacao extends JPanel {
 			txtReservaVeiculoKmDevolucao = new JFormattedTextField(mascaraKmDevolucao);
 			txtReservaVeiculoKmDevolucao.setBounds(298, 233, 182, 25);
 			this.add(txtReservaVeiculoKmDevolucao);
-			
+		
 			btnSalvarReserva = new JButton("  Reservar");
 			btnSalvarReserva.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -113,17 +124,17 @@ public class PainelReservaLocacao extends JPanel {
 					novaLocacao.setCliente((ClienteVO)cbCliente.getSelectedItem());
 					novaLocacao.setVeiculo((VeiculoVO)cbVeiculo.getSelectedItem()); 
 					novaLocacao.setDataLocacao(ReservaDataLocacaoVeiculo.getDate());
-				/*	novaLocacao.setKmLocacao(Integer.parseInt(txtReservaVeiculoKmAtual.getValue().toString()));
-					novaLocacao.setDataEntrega(ReservaDataDevolucaoVeiculo.getDate());
-					novaLocacao.setKmLocacao(Double.parseDouble(txtReservaVeiculoKmDevolucao.getText().toString()));;
-					novaLocacao.setCliente((ClienteVO) cbCliente.getSelectedItem());
-					novaLocacao.setVeiculo((VeiculoVO) cbVeiculo.getSelectedItem());  */
-				
+					novaLocacao.setKmLocacao((int)txtReservaVeiculoKmAtual.getValue());
+				/*	novaLocacao.setDataEntrega(ReservaDataDevolucaoVeiculo.getDate());
+					novaLocacao.setKmLocacao(Integer.parseInt(txtReservaVeiculoKmDevolucao.getValue().toString()));;  */
+							
 					LocacaoController controller = new LocacaoController();
 
 					String mensagem = controller.salvar(novaLocacao);
 					JOptionPane.showMessageDialog(null, mensagem);
+				
 				}
+					
 			});
 			btnSalvarReserva.setIcon(new ImageIcon(PainelReservaLocacao.class.getResource("/icons/Salvar.png")));
 			btnSalvarReserva.setHorizontalAlignment(SwingConstants.LEFT);
@@ -136,36 +147,46 @@ public class PainelReservaLocacao extends JPanel {
 			JButton btnEditarVeiculo = new JButton("Devolver");
 			btnEditarVeiculo.setBounds(292, 326, 111, 41);
 			this.add(btnEditarVeiculo);
-		
+				
 		} catch (ParseException e) {
 			JOptionPane.showMessageDialog(null, "Ocorreu um erro no sistema, entre em contato com o administrador.");
 			System.out.println("Causa da exceÃ§Ã£o: " + e.getMessage());
-		}
+	}
+		        
 		
-	/*	ArrayList<ClienteVO> clientes = obterClientesMock();*/
+		
+	/*	ArrayList<ClienteVO> clientes = obterClientesMock(); */
 		cbCliente = new JComboBox();
 		cbCliente.setBounds(90, 106, 182, 25);
 		this.add(cbCliente);
-		
-		ArrayList<VeiculoVO> veiculos = obterVeiculosMock();
-		cbVeiculo = new JComboBox(veiculos.toArray());
+					
+	/*	ArrayList<VeiculoVO> veiculos = obterVeiculosMock(); */
+		cbVeiculo = new JComboBox();
 		cbVeiculo.setBounds(298, 106, 182, 25);
 		this.add(cbVeiculo);
-		
-	}
 
-	/*private ArrayList<ClienteVO>obterClientesMock() {
+		ClienteDAO clientes = new ClienteDAO();
+		for(ClienteVO cliente: clientes.pesquisarTodos()) {
+		
+			cbCliente.addItem(cliente);
+		}
+	}
+	
+	
+
+	/*
+	public ArrayList<ClienteVO>obterClientesMock() {
 	ArrayList<ClienteVO> clientes = new ArrayList<ClienteVO>();
 		clientes.add(new ClienteVO(1, "Lucas", "Pereira","88888888","Lucas@","2222222",
 					"48984853925","Mauro","Fpolis","sc","9999999"));
 		
 		return clientes; 
-	} */
+	} 
 	
-	private ArrayList<VeiculoVO> obterVeiculosMock() {
+	public ArrayList<VeiculoVO> obterVeiculosMock() {
 		ArrayList<VeiculoVO> veiculos = new ArrayList<VeiculoVO>();
 		veiculos.add(new VeiculoVO(1,"MLZ-1160","3222","222","PEUGEOT","308",2020,"branco","1","manual"));
 		
 		return veiculos;
-	}
+	} */
 }

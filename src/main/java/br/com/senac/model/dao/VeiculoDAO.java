@@ -125,7 +125,7 @@ public class VeiculoDAO {
 
 	public static List<VeiculoVO> pesquisarTodos() {
 		Connection conexao = Banco.getConnection();
-		String sql = "SQL * FROM VEICULO ";
+		String sql = "SELECT * FROM VEICULO ";
 
 		PreparedStatement consulta = Banco.getPreparedStatement(conexao,  sql);
 		List<VeiculoVO> veiculosBuscados = new ArrayList<VeiculoVO>();

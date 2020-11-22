@@ -1,11 +1,12 @@
 package br.com.senac.controller;
 
+import java.sql.SQLException;
+
 import br.com.senac.constante.Mensagens;
 import br.com.senac.model.dao.LocacaoDAO;
 import br.com.senac.model.vo.LocacaoVO;
 
 public class LocacaoController {
-
 	/*
 	 * 
 	 * Locacao deve possuir data de entrega posterior a data de retirada
@@ -27,7 +28,7 @@ public class LocacaoController {
 				LocacaoDAO locacaoDAO = new LocacaoDAO();
 				locacaoDAO.inserir(novaLocacao);
 	
-			mensagem = "Locacao salva com sucesso! Id gerado: ";
+			mensagem = "Locacao salva com sucesso!";
 	} 
 	
 	return mensagem;
@@ -57,28 +58,28 @@ public class LocacaoController {
 	return true;
 	}
 
-	private boolean validarKmLocacao(LocacaoVO novaLocacao) {
-		if(novaLocacao == null ) {
+	private boolean validarKmLocacao(LocacaoVO kmLocacao) {
+		if(kmLocacao == null) {
 			mensagem = "Deve preencher a atual KM";
 		return false;
 		}
-	return true;
+		return true;
 	}
 
-	private boolean validarDataEntrega(LocacaoVO locacao) {
-		if(locacao.getDataEntrega() == null) {
+	private boolean validarDataEntrega(LocacaoVO novaLocacao) {
+		if(novaLocacao.getDataEntrega() == null) {
 			mensagem = "Data da devoluçao não é uma data valida";
 		return false;
 		}
 	return true;
 	}
 
-	private boolean validarKmEntrega(LocacaoVO kmentrega) {
-		if(kmentrega == null) {
+	private boolean validarKmEntrega(LocacaoVO novaLocacao) {
+		if(novaLocacao == null) {
 			mensagem = "Deve preencher o KM de entrega do veículo";
 		return false;
 		}
-		return true;
+	return true;
 	}
 
 }

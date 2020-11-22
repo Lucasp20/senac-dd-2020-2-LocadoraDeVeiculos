@@ -11,7 +11,7 @@ import java.util.List;
 import br.com.senac.model.vo.ClienteVO;
 import br.com.senac.model.vo.VeiculoVO;
 import br.com.senac.model.dao.Banco;
-
+import br.com.senac.view.PainelRelatorioLocacao;
 
 public class ClienteDAO {
 	
@@ -118,8 +118,9 @@ public static ClienteVO pesquisarPorNome(String nome) {
 		ResultSet conjuntoResultante = consulta.executeQuery();
 		
 		if(conjuntoResultante.next()) {
-			clientebuscado = contruirVeiculoDoResultSet(conjuntoResultante);
+			clientebuscado = contruirClienteDoResultSet(conjuntoResultante);
 		}
+	
 	} catch (SQLException e) {
 		System.out.println("Erro ao consultar cliente por nome (id: " + nome + ") .\nCausa: " + e.getMessage());
 	}
@@ -129,16 +130,18 @@ public static ClienteVO pesquisarPorNome(String nome) {
 
 public static List<ClienteVO> pesquisarTodos() {
 	Connection conexao = Banco.getConnection();
-	String sql = "SQL * FROM CLIENTE ";
-
-	PreparedStatement consulta = Banco.getPreparedStatement(conexao,  sql);
+	String sql = "SELECT * FROM CLIENTE";
+	
+	PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);
 	List<ClienteVO> clientesBuscados = new ArrayList<ClienteVO>();
 
+	
 	try { 
+		
 		ResultSet conjuntoResultante = consulta.executeQuery();
-		while(conjuntoResultante.next()) {
-		ClienteVO veiculoBuscado = contruirVeiculoDoResultSet(conjuntoResultante);					
-		clientesBuscados.add(veiculoBuscado);
+	while(conjuntoResultante.next()) {	
+		ClienteVO clienteBuscado = contruirClienteDoResultSet(conjuntoResultante);					
+		clientesBuscados.add(clienteBuscado);
 		}
 	} catch (SQLException e) {
 		System.out.println("Erro ao consultar todos os clientes .\nCausa: " + e.getMessage());
@@ -149,7 +152,7 @@ public static List<ClienteVO> pesquisarTodos() {
 		return clientesBuscados;
 }
 
-private static ClienteVO contruirVeiculoDoResultSet(ResultSet conjuntoResultante) throws SQLException{
+private static ClienteVO contruirClienteDoResultSet(ResultSet conjuntoResultante) throws SQLException{
 
 	ClienteVO clienteBuscado = new ClienteVO();
 	clienteBuscado.setIdCliente(conjuntoResultante.getInt("idCliente"));
@@ -166,4 +169,9 @@ private static ClienteVO contruirVeiculoDoResultSet(ResultSet conjuntoResultante
 			
 	return clienteBuscado;
 	}
+
+public Object read() {
+	// TODO Auto-generated method stub
+	return null;
+}
 }

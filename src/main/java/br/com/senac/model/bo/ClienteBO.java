@@ -18,11 +18,7 @@ public class ClienteBO {
 		salvou = (chaveGerada > 0);
 		
 		return salvou; */
-
-	public List<ClienteVO> pesquisarPorNome(){
-		return clienteDAO.pesquisarTodos(); 
 		
 	}
 	
-}	
 
