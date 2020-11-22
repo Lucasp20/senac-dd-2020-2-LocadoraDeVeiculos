@@ -35,6 +35,14 @@ public class ClienteVO {
 		super();
 		
 	}
+	
+	
+
+	@Override
+	public String toString() {
+		return nome + " " + sobrenome;
+	}
+
 
 	public int getIdCliente() {
 		return idCliente;

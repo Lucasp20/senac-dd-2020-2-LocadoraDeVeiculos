@@ -129,7 +129,7 @@ public static ClienteVO pesquisarPorNome(String nome) {
 
 public static List<ClienteVO> pesquisarTodos() {
 	Connection conexao = Banco.getConnection();
-	String sql = "SQL * FROM VEICULO ";
+	String sql = "SQL * FROM CLIENTE ";
 
 	PreparedStatement consulta = Banco.getPreparedStatement(conexao,  sql);
 	List<ClienteVO> clientesBuscados = new ArrayList<ClienteVO>();

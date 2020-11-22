@@ -30,10 +30,10 @@ public class LocacaoDAO {
 			
 			Date dataLocacaoConvertidaParaSQL = java.sql.Date.valueOf(novaLocacao.getDataLocacao());
 			query.setDate(1, dataLocacaoConvertidaParaSQL);
-			query.setDouble(2, novaLocacao.getKmLocacao());
+			query.setInt(2, novaLocacao.getKmLocacao());
 			Date dataEntregaConvertidaParaSQL = java.sql.Date.valueOf(novaLocacao.getDataEntrega());
 			query.setDate(3, dataEntregaConvertidaParaSQL);
-			query.setDouble(4, novaLocacao.getKmEntrega());
+			query.setInt(4, novaLocacao.getKmEntrega());
 			query.setString(5, nomeDoCliente.getNome());
 			query.setString(6, nomeDoVeiculo.getMarca());
 			
@@ -69,10 +69,10 @@ public class LocacaoDAO {
 			PreparedStatement query = Banco.getPreparedStatement(conexao, sql);) {
 			Date dataLocacaoConvertidaParaSQL = java.sql.Date.valueOf(locacao.getDataLocacao());
 			query.setDate(1, dataLocacaoConvertidaParaSQL);
-			query.setDouble(2, locacao.getKmLocacao());
+			query.setInt(2, locacao.getKmLocacao());
 			Date dataEntregaConvertidaParaSQL = java.sql.Date.valueOf(locacao.getDataEntrega());
 			query.setDate(3, dataEntregaConvertidaParaSQL);
-			query.setDouble(4, locacao.getKmEntrega());
+			query.setInt(4, locacao.getKmEntrega());
 			query.setString(5, nomeDoCliente.getNome());
 			query.setString(6, nomeDoVeiculo.getMarca());
 			
@@ -108,7 +108,7 @@ public class LocacaoDAO {
 	}
 	
 	public LocacaoVO pesquisarPorNome(String nome) {
-		String sql = "SELECT * FROM CLIENTE WHERE NOME=? ";
+		String sql = "SELECT * FROM LOCACAO WHERE NOME=? ";
 		LocacaoVO locacaoBuscada = null;
 		
 		try (Connection conexao = Banco.getConnection();
@@ -181,11 +181,11 @@ public class LocacaoDAO {
 		Date datalocacao = conjuntoResultante.getDate("data_locacao");
 		LocalDate dataLocacao = datalocacao.toLocalDate();
 		locacaoBuscada.setDataLocacao(dataLocacao);
-		locacaoBuscada.setKmLocacao(conjuntoResultante.getDouble("kmlocacao"));
+		locacaoBuscada.setKmLocacao(conjuntoResultante.getInt("kmlocacao"));
 		Date dataentrega = conjuntoResultante.getDate("data_entrega");
 		LocalDate dataEntrega = dataentrega.toLocalDate();
 		locacaoBuscada.setDataEntrega(dataEntrega);
-		locacaoBuscada.setKmEntrega(conjuntoResultante.getDouble("kmentrega"));
+		locacaoBuscada.setKmEntrega(conjuntoResultante.getInt("kmentrega"));
 					
 		//Preenche o nome do cliente
 		ClienteDAO clienteDAO = new ClienteDAO();

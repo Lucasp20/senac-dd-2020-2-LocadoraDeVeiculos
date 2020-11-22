@@ -1,5 +1,6 @@
 package br.com.senac.controller;
 
+import br.com.senac.constante.Mensagens;
 import br.com.senac.model.dao.LocacaoDAO;
 import br.com.senac.model.vo.LocacaoVO;
 
@@ -12,18 +13,19 @@ public class LocacaoController {
 	 * Km de entrega deve ser maior que km de de retirada 
 	 * 
 	 */
-	private String mensagem = " ";
+	private String mensagem = "";
 	
 	public String salvar(LocacaoVO novaLocacao) {
 		
 		
-		if(validarDataLocacao(novaLocacao)
+		if(validarCliente(novaLocacao)
+				&& validarVeiculo(novaLocacao)
+				&& validarDataLocacao(novaLocacao)
 				&& validarKmLocacao(novaLocacao)
 				&& validarDataEntrega(novaLocacao)
 				&& validarKmEntrega(novaLocacao)) {
-			
-			LocacaoDAO locacaoDAO = new LocacaoDAO();
-			locacaoDAO.inserir(novaLocacao);
+				LocacaoDAO locacaoDAO = new LocacaoDAO();
+				locacaoDAO.inserir(novaLocacao);
 	
 			mensagem = "Locacao salva com sucesso! Id gerado: ";
 	} 
@@ -31,16 +33,32 @@ public class LocacaoController {
 	return mensagem;
 }
 
-	private boolean validarDataLocacao(LocacaoVO locacao) {
-		if(locacao.getDataLocacao() == null) {
+	private boolean validarCliente(LocacaoVO novaLocacao) {
+		if(novaLocacao.getCliente() == null ){
+			mensagem = "Deve Preencher o Campo Cliente";
+			return false;
+		}
+		return true;
+	}
+
+	private boolean validarVeiculo(LocacaoVO novaLocacao) {
+		if(novaLocacao.getVeiculo() == null ){
+			mensagem = "Deve Preencher o Campo Veículo";
+			return false;
+		}
+		return true;
+	}
+
+	private boolean validarDataLocacao(LocacaoVO novaLocacao) {
+		if(novaLocacao.getDataLocacao() == null) {
 			mensagem = "Data da locação não é uma data valida";
 		return false;
 		}
 	return true;
 	}
 
-	private boolean validarKmLocacao(LocacaoVO kmlocacao) {
-		if(kmlocacao == null ) {
+	private boolean validarKmLocacao(LocacaoVO novaLocacao) {
+		if(novaLocacao == null ) {
 			mensagem = "Deve preencher a atual KM";
 		return false;
 		}

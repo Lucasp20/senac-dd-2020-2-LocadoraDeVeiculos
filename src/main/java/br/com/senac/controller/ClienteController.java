@@ -27,7 +27,7 @@ public class ClienteController {
 		return situacao; */
 	private String mensagem ="";
 
-	public String salvar(ClienteVO novoCliente) {
+	public String cadastrarCliente(ClienteVO novoCliente) {
 		
 		if(validarNome(novoCliente) 
 				&& validarSobrenome(novoCliente) 
@@ -67,8 +67,8 @@ public class ClienteController {
 	}
 	
 	private boolean validarCpf(ClienteVO cpf) {
-		if(cpf.getCpf().isEmpty() 
-			|| cpf.getCpf().length() < 11) {
+		if( cpf.getCpf().length() < 11
+			|| cpf.getCpf().isEmpty()) {
 			mensagem = Mensagens.CLIENTE_ERRO_CPF;
 			return false;
 		}

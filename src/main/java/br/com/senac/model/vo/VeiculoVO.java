@@ -33,6 +33,11 @@ public class VeiculoVO {
 		super();
 		
 	}
+	
+	@Override
+	public String toString() {
+		return marca+" - "+ modelo+", "+placa+"";
+	}
 
 	public int getIdVeiculo() {
 		return idVeiculo;
