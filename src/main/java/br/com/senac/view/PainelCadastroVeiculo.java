@@ -213,17 +213,12 @@ public class PainelCadastroVeiculo extends JPanel {
 		btnSalvarVeiculo.setIcon(new ImageIcon(PainelCadastroVeiculo.class.getResource("/icons/Salvar.png")));
 		btnSalvarVeiculo.setForeground(new Color(0, 0, 139));
 		btnSalvarVeiculo.setBackground(new Color(240, 248, 255));
-		btnSalvarVeiculo.setBounds(133, 327, 111, 41);
+		btnSalvarVeiculo.setBounds(185, 323, 111, 41);
 		this.add(btnSalvarVeiculo);
-				
-		JButton btnExcluirVeiculo = new JButton("Excluir");
-		btnExcluirVeiculo.setForeground(new Color(0, 0, 139));
-		btnExcluirVeiculo.setBounds(404, 327, 111, 41);
-		this.add(btnExcluirVeiculo);
 		
 		JButton btnEditarVeiculo = new JButton("Editar");
 		btnEditarVeiculo.setForeground(new Color(0, 0, 139));
-		btnEditarVeiculo.setBounds(268, 327, 111, 41);
+		btnEditarVeiculo.setBounds(320, 323, 111, 41);
 		this.add(btnEditarVeiculo);
 		
 		btnConsultarCpfCliente = new JButton("");
