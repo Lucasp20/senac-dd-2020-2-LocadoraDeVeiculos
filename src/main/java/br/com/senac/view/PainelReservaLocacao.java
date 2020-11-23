@@ -153,7 +153,7 @@ public class PainelReservaLocacao extends JPanel {
 			JOptionPane.showMessageDialog(null, "Ocorreu um erro no sistema, entre em contato com o administrador.");
 			System.out.println("Causa da exceÃ§Ã£o: " + e.getMessage());
 	}
-	/*	ArrayList<ClienteVO> clientes = obterClientesMock(); */
+	
 		cbCliente = new JComboBox();
 		cbCliente.setBounds(90, 106, 182, 25);
 		this.add(cbCliente);
@@ -162,7 +162,6 @@ public class PainelReservaLocacao extends JPanel {
 		for(ClienteVO cliente: clientes.pesquisarTodos()) {
 		cbCliente.addItem(cliente);
 					
-	/*	ArrayList<VeiculoVO> veiculos = obterVeiculosMock(); */
 		cbVeiculo = new JComboBox();
 		cbVeiculo.setBounds(298, 106, 182, 25);
 		this.add(cbVeiculo);
@@ -173,21 +172,8 @@ public class PainelReservaLocacao extends JPanel {
 		
 		}
 	}
-	}
 }
-	
-	/*
-	public ArrayList<ClienteVO>obterClientesMock() {
-	ArrayList<ClienteVO> clientes = new ArrayList<ClienteVO>();
-		clientes.add(new ClienteVO(1, "Lucas", "Pereira","88888888","Lucas@","2222222",
-					"48984853925","Mauro","Fpolis","sc","9999999"));
-		
-		return clientes; 
-	} 
-	
-	public ArrayList<VeiculoVO> obterVeiculosMock() {
-		ArrayList<VeiculoVO> veiculos = new ArrayList<VeiculoVO>();
-		veiculos.add(new VeiculoVO(1,"MLZ-1160","3222","222","PEUGEOT","308",2020,"branco","1","manual"));
-		
-		return veiculos;
-	} */
+}
+
+
+

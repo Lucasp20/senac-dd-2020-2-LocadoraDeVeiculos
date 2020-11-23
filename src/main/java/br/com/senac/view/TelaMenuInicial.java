@@ -15,15 +15,18 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
+import java.net.URL;
 import java.awt.event.InputEvent;
 import javax.swing.border.BevelBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Toolkit;
 
 public class TelaMenuInicial extends JFrame {
 
 	private JPanel contentPane;
-
+	private JMenu menuSobre;
+	private JMenuItem menuItemSobre;
 	/**
 	 * Launch the application.
 	 */
@@ -46,10 +49,10 @@ public class TelaMenuInicial extends JFrame {
 		setTitle("Floricar");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 638, 495);
-		
+				
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-		
+				
 		JMenu menuClientes = new JMenu("Clientes");
 		menuClientes.setIcon(new ImageIcon(TelaMenuInicial.class.getResource("/icons/User.png")));
 		menuBar.add(menuClientes);
@@ -139,6 +142,22 @@ public class TelaMenuInicial extends JFrame {
 		menuItemRelatorioLocacao.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0));
 		menuItemRelatorioLocacao.setIcon(new ImageIcon(TelaMenuInicial.class.getResource("/icons/Relatorio.png")));
 		menuLocacao.add(menuItemRelatorioLocacao);
+		
+		menuSobre = new JMenu("Sobre");
+		menuSobre.setIcon(new ImageIcon(TelaMenuInicial.class.getResource("/icons/sobre.png")));
+		menuBar.add(menuSobre);
+		
+		menuItemSobre = new JMenuItem("Autores");
+		menuItemSobre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PainelSobre painelSobre = new PainelSobre();
+				setContentPane(painelSobre);
+				revalidate();
+			}
+		});
+		menuItemSobre.setIcon(new ImageIcon(TelaMenuInicial.class.getResource("/icons/autores.png")));
+		menuItemSobre.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F12, 0));
+		menuSobre.add(menuItemSobre);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -170,7 +189,9 @@ public class TelaMenuInicial extends JFrame {
 		lblFloricarEndMenu.setFont(new Font("Arial Narrow", Font.PLAIN, 11));
 		lblFloricarEndMenu.setBounds(10, 375, 342, 14);
 		panel.add(lblFloricarEndMenu);
+	
+		
 	}
- 
 }
+
  
