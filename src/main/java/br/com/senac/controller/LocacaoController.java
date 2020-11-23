@@ -28,7 +28,7 @@ public class LocacaoController {
 				LocacaoDAO locacaoDAO = new LocacaoDAO();
 				locacaoDAO.inserir(novaLocacao);
 	
-			mensagem = "Locacao salva com sucesso!";
+			mensagem = Mensagens.LOCACAO_SUCESSO;
 	} 
 	
 	return mensagem;
@@ -36,7 +36,7 @@ public class LocacaoController {
 
 	private boolean validarCliente(LocacaoVO novaLocacao) {
 		if(novaLocacao.getCliente() == null ){
-			mensagem = "Deve Preencher o Campo Cliente";
+			mensagem = Mensagens.LOCACAO_ERRO_CLIENTE;
 			return false;
 		}
 		return true;
@@ -44,7 +44,7 @@ public class LocacaoController {
 
 	private boolean validarVeiculo(LocacaoVO novaLocacao) {
 		if(novaLocacao.getVeiculo() == null ){
-			mensagem = "Deve Preencher o Campo Veículo";
+			mensagem = Mensagens.LOCACAO_ERRO_VEICULO;
 			return false;
 		}
 		return true;
@@ -52,7 +52,7 @@ public class LocacaoController {
 
 	private boolean validarDataLocacao(LocacaoVO novaLocacao) {
 		if(novaLocacao.getDataLocacao() == null) {
-			mensagem = "Data da locação não é uma data valida";
+			mensagem = Mensagens.LOCACAO_ERRO_DATALOCACAO;
 		return false;
 		}
 	return true;
@@ -60,7 +60,7 @@ public class LocacaoController {
 
 	private boolean validarKmLocacao(LocacaoVO kmLocacao) {
 		if(kmLocacao == null) {
-			mensagem = "Deve preencher a atual KM";
+			mensagem = Mensagens.LOCACAO_ERRO_KMLOCACAO;
 		return false;
 		}
 		return true;
@@ -68,7 +68,7 @@ public class LocacaoController {
 
 	private boolean validarDataEntrega(LocacaoVO novaLocacao) {
 		if(novaLocacao.getDataEntrega() == null) {
-			mensagem = "Data da devoluçao não é uma data valida";
+			mensagem = Mensagens.LOCACAO_ERRO_DATAENTREGA;
 		return false;
 		}
 	return true;
@@ -76,7 +76,7 @@ public class LocacaoController {
 
 	private boolean validarKmEntrega(LocacaoVO novaLocacao) {
 		if(novaLocacao == null) {
-			mensagem = "Deve preencher o KM de entrega do veículo";
+			mensagem = Mensagens.LOCACAO_ERRO_KMENTREGA;
 		return false;
 		}
 	return true;

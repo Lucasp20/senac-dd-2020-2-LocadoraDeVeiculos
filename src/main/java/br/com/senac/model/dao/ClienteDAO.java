@@ -130,15 +130,12 @@ public static ClienteVO pesquisarPorNome(String nome) {
 
 public static List<ClienteVO> pesquisarTodos() {
 	Connection conexao = Banco.getConnection();
-	String sql = "SELECT * FROM CLIENTE";
+	String sql = "SELECT * FROM CLIENTE ";
 	
 	PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);
 	List<ClienteVO> clientesBuscados = new ArrayList<ClienteVO>();
-
 	
-	try { 
-		
-		ResultSet conjuntoResultante = consulta.executeQuery();
+	try { ResultSet conjuntoResultante = consulta.executeQuery();
 	while(conjuntoResultante.next()) {	
 		ClienteVO clienteBuscado = contruirClienteDoResultSet(conjuntoResultante);					
 		clientesBuscados.add(clienteBuscado);
@@ -170,8 +167,4 @@ private static ClienteVO contruirClienteDoResultSet(ResultSet conjuntoResultante
 	return clienteBuscado;
 	}
 
-public Object read() {
-	// TODO Auto-generated method stub
-	return null;
-}
 }

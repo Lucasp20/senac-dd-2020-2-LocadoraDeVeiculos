@@ -130,8 +130,7 @@ public class VeiculoDAO {
 		PreparedStatement consulta = Banco.getPreparedStatement(conexao,  sql);
 		List<VeiculoVO> veiculosBuscados = new ArrayList<VeiculoVO>();
 	
-		try { 
-			ResultSet conjuntoResultante = consulta.executeQuery();
+		try { ResultSet conjuntoResultante = consulta.executeQuery();
 			while(conjuntoResultante.next()) {
 			VeiculoVO veiculoBuscado = contruirVeiculoDoResultSet(conjuntoResultante);					
 			veiculosBuscados.add(veiculoBuscado);

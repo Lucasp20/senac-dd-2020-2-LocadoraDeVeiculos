@@ -7,6 +7,7 @@ import com.github.lgooddatepicker.components.DatePicker;
 import br.com.senac.controller.LocacaoController;
 import br.com.senac.model.dao.Banco;
 import br.com.senac.model.dao.ClienteDAO;
+import br.com.senac.model.dao.VeiculoDAO;
 import br.com.senac.model.vo.ClienteVO;
 import br.com.senac.model.vo.LocacaoVO;
 import br.com.senac.model.vo.VeiculoVO;
@@ -152,28 +153,29 @@ public class PainelReservaLocacao extends JPanel {
 			JOptionPane.showMessageDialog(null, "Ocorreu um erro no sistema, entre em contato com o administrador.");
 			System.out.println("Causa da exceÃ§Ã£o: " + e.getMessage());
 	}
-		        
-		
-		
 	/*	ArrayList<ClienteVO> clientes = obterClientesMock(); */
 		cbCliente = new JComboBox();
 		cbCliente.setBounds(90, 106, 182, 25);
 		this.add(cbCliente);
+		
+		ClienteDAO clientes = new ClienteDAO();
+		for(ClienteVO cliente: clientes.pesquisarTodos()) {
+		cbCliente.addItem(cliente);
 					
 	/*	ArrayList<VeiculoVO> veiculos = obterVeiculosMock(); */
 		cbVeiculo = new JComboBox();
 		cbVeiculo.setBounds(298, 106, 182, 25);
 		this.add(cbVeiculo);
-
-		ClienteDAO clientes = new ClienteDAO();
-		for(ClienteVO cliente: clientes.pesquisarTodos()) {
 		
-			cbCliente.addItem(cliente);
+		VeiculoDAO veiculos = new VeiculoDAO();
+		for(VeiculoVO veiculo: veiculos.pesquisarTodos()) {
+		cbVeiculo.addItem(veiculo);		
+		
 		}
 	}
+	}
+}
 	
-	
-
 	/*
 	public ArrayList<ClienteVO>obterClientesMock() {
 	ArrayList<ClienteVO> clientes = new ArrayList<ClienteVO>();
@@ -189,4 +191,3 @@ public class PainelReservaLocacao extends JPanel {
 		
 		return veiculos;
 	} */
-}

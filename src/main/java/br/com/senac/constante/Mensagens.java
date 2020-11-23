@@ -61,5 +61,17 @@ public class Mensagens {
 	public static final String CLIENTE_ERRO_ESTADO =  "Deve preencher o campo estado";
 	public static final String CLIENTE_ERRO_CEP = "CEP deve possuir 8 caracteres númericos";
 	public static final String CLIENTE_SUCESSO = "Cliente cadastrado com sucesso";
+	
+	
+	
+	/*Reserva de locação*/
+	public static final String LOCACAO_ERRO_CLIENTE = "Deve Preencher o Campo Cliente"; 
+	public static final String LOCACAO_ERRO_VEICULO = "Deve Preencher o Campo Veículo";;
+	public static final String LOCACAO_ERRO_DATALOCACAO = "Data da locação não é uma data valida";
+	public static final String LOCACAO_ERRO_KMLOCACAO = "Deve preencher a atual KM";
+	public static final String LOCACAO_ERRO_DATAENTREGA = "Data da devoluçao não é uma data valida";
+	public static final String LOCACAO_ERRO_KMENTREGA = "Deve preencher o KM de entrega do veículo";
+	public static final String LOCACAO_SUCESSO = "Locacao salva com sucesso!";
+	
 
 }
