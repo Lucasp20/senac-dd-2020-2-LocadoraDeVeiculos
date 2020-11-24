@@ -107,6 +107,7 @@ public class ClienteDAO {
 
 		return alterou;
 	}
+	
 
 	public ClienteVO pesquisarPorNome(String nome) {
 		String sql = "SELECT * FROM CLIENTE WHERE NOME=?";
@@ -149,6 +150,37 @@ public class ClienteDAO {
 		}
 		return clientesBuscados;
 	}
+	
+	public boolean cpfJaCadastrado(ClienteVO cliente) {
+		boolean cpfcadastrado = false;
+		
+		Connection conexao = Banco.getConnection();
+		
+		String sql = "SELECT count(id) FROM CLIENTE WHERE CPF = ?";
+		
+		if(cliente.getIdCliente() > 0) {
+			sql += "AND ID <> ? ";
+		}
+
+		PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);
+	
+		try {
+			consulta.setString(1, cliente.getCpf());
+			
+			if(cliente.getIdCliente() > 0) {
+				consulta.setInt(2, cliente.getIdCliente());
+			}
+			ResultSet conjuntoResultante = consulta.executeQuery();
+			cpfcadastrado = conjuntoResultante.next();
+		} catch (SQLException e) {
+			System.out.println("Erro ao verificar se CPF (" + cliente.getCpf() + ") jÃ¡ foi usado .\nCausa: " + e.getMessage());
+		}finally {
+			Banco.closeStatement(consulta);
+			Banco.closeConnection(conexao);
+		}
+		
+		return cpfcadastrado;
+	} 
 
 	private static ClienteVO contruirClienteDoResultSet(ResultSet conjuntoResultante) throws SQLException {
 

@@ -6,6 +6,7 @@ import br.com.senac.constante.Mensagens;
 import br.com.senac.model.bo.ClienteBO;
 import br.com.senac.model.dao.ClienteDAO;
 import br.com.senac.model.vo.ClienteVO;
+import model.exception.CpfJaCadastradoException;
 
 
 public class ClienteController {
@@ -46,7 +47,7 @@ public class ClienteController {
 
 	}
 		return mensagem;
-}
+	}
 	
 	private boolean validarNome(ClienteVO novoCliente) {
 		if(novoCliente.getNome().trim().length() < 3 
@@ -138,7 +139,7 @@ public class ClienteController {
 		}
 		return true;
 } 
-
+	
 	public String gerarPlanilha(List<ClienteVO> dadosConsultados, String caminho) {
 		// TODO Auto-generated method stub
 		return null;

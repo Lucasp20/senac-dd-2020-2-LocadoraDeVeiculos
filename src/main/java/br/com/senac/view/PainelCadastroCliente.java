@@ -23,6 +23,7 @@ import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 
 import br.com.senac.controller.ClienteController;
+import br.com.senac.model.dao.Banco;
 import br.com.senac.model.dao.ClienteDAO;
 import br.com.senac.model.vo.ClienteVO;
 
@@ -30,6 +31,10 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -60,6 +65,7 @@ public class PainelCadastroCliente extends JPanel {
 	private JLabel lblEnderecoCliente;
 	private JLabel lblCidadeCliente;
 	private JLabel lblEstadoCliente;
+	private JButton btnClienteNovo;
 
 	
 	/**
@@ -79,6 +85,7 @@ public class PainelCadastroCliente extends JPanel {
 		this.add(lblNome);
 		
 		txtNomeCliente = new JFormattedTextField();
+		txtNomeCliente.setEnabled(false);
 		txtNomeCliente.setBounds(81, 100, 135, 25);
 		this.add(txtNomeCliente);
 		
@@ -87,6 +94,7 @@ public class PainelCadastroCliente extends JPanel {
 		this.add(lblSobreNome);
 		
 		txtSobrenomeCliente = new JFormattedTextField();
+		txtSobrenomeCliente.setEnabled(false);
 		txtSobrenomeCliente.setBounds(247, 100, 135, 25);
 		this.add(txtSobrenomeCliente);
 		
@@ -99,6 +107,7 @@ public class PainelCadastroCliente extends JPanel {
 		this.add(lblEmail);
 		
 		txtEmail = new JFormattedTextField();
+		txtEmail.setEnabled(false);
 		txtEmail.setBounds(81, 160, 135, 25);
 		this.add(txtEmail);
 		
@@ -115,6 +124,7 @@ public class PainelCadastroCliente extends JPanel {
 		this.add(lblEnderecoCliente);
 		
 		txtEnderecoCliente = new JFormattedTextField();
+		txtEnderecoCliente.setEnabled(false);
 		txtEnderecoCliente.setBounds(81, 220, 135, 25);
 		this.add(txtEnderecoCliente);
 		
@@ -123,6 +133,7 @@ public class PainelCadastroCliente extends JPanel {
 		this.add(lblCidadeCliente);
 		
 		txtCidadeCliente = new JFormattedTextField();
+		txtCidadeCliente.setEnabled(false);
 		txtCidadeCliente.setBounds(247, 220, 135, 25);
 		this.add(txtCidadeCliente);
 		
@@ -131,6 +142,7 @@ public class PainelCadastroCliente extends JPanel {
 		this.add(lblEstadoCliente);
 		
 		cbEstadoCliente = new JComboBox();
+		cbEstadoCliente.setEnabled(false);
 		cbEstadoCliente.setModel(new DefaultComboBoxModel(new String[] {"", "RS", "RJ", "SP", "SC"}));
 		cbEstadoCliente.setBounds(419, 220, 46, 25);
 		this.add(cbEstadoCliente);
@@ -154,76 +166,70 @@ public class PainelCadastroCliente extends JPanel {
 			this.add(txtClienteCpf);
 			
 			txtTelefoneCliente = new JFormattedTextField(mascaraTelefone);
+			txtTelefoneCliente.setEnabled(false);
 			txtTelefoneCliente.setBounds(247, 160, 135, 25);
 			this.add(txtTelefoneCliente);
 						
 			txtCEPCliente = new JFormattedTextField(mascaraCep);
+			txtCEPCliente.setEnabled(false);
 			txtCEPCliente.setBounds(475, 220, 79, 25);
 			this.add(txtCEPCliente);
 			
 			txtClienteCNH = new JFormattedTextField(mascaraCnh);
+			txtClienteCNH.setEnabled(false);
 			txtClienteCNH.setBounds(419, 160, 135, 25);
 			this.add(txtClienteCNH);
 			
 			btnEditarVeiculo = new JButton("Editar");
-			btnEditarVeiculo.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent arg0) {
-					
-					JOptionPane.showMessageDialog(null, "Passou pelo botão Editar");
+			btnEditarVeiculo.setEnabled(false);
+			btnEditarVeiculo.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					txtNomeCliente.setEnabled(true);
+					txtSobrenomeCliente.setEnabled(true);
+					txtClienteCpf.setEnabled(true);
+					txtEmail.setEnabled(true);
+					txtClienteCNH.setEnabled(true);
+					txtTelefoneCliente.setEnabled(true);
+					txtEnderecoCliente.setEnabled(true);
+					cbEstadoCliente.setEnabled(true);
+					txtCidadeCliente.setEnabled(true);
+					txtCEPCliente.setEnabled(true);
 				}
 			});
-			btnEditarVeiculo.setBounds(315, 322, 111, 41);
+		
+			btnEditarVeiculo.setBounds(267, 322, 111, 41);
 			this.add(btnEditarVeiculo);
 			
-			
-			btnConsultarCpfCliente = new JButton("");
+			btnConsultarCpfCliente = new JButton("");	
 			btnConsultarCpfCliente.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-				
-					try {
-					String nome = txtNomeCliente.getText();
-					
+					btnEditarVeiculo.setEnabled(true);
+								
+					String cpf = txtClienteCpf.getText();
+									
 					ClienteDAO dao = new ClienteDAO();
-					ClienteVO pesquisarPorNome = dao.pesquisarPorNome(nome);					
+					List<ClienteVO> clientes = dao.pesquisarTodos();
 					
-					for (ClienteVO n : dao.pesquisarPorNome(nome)) {
-						txtNomeCliente.setText(n.getNome());
+												
+					for (ClienteVO c: dao.pesquisarTodos()) {
+						
+						txtNomeCliente.setText(c.getNome());
+						txtSobrenomeCliente.setText(c.getSobrenome());
+						txtClienteCpf.setText(c.getCpf());
+						txtEmail.setText(c.getEmail());
+						txtTelefoneCliente.setText(c.getTelefone());
+						txtClienteCNH.setText(c.getCnh());
+						txtEnderecoCliente.setText(c.getEndereco());
+						txtCidadeCliente.setText(c.getCidade());
+						cbEstadoCliente.setSelectedItem(c.getEstado());
+						txtCEPCliente.setText(c.getCep()); 
 					}
-					
-				}catch (Exception e) {
-				}
 			}
-			});
+		});   
+					
 			btnConsultarCpfCliente.setIcon(new ImageIcon(PainelCadastroCliente.class.getResource("/icons/pesquisapequeno.png")));
 			btnConsultarCpfCliente.setBounds(555, 100, 24, 25);
-			this.add(btnConsultarCpfCliente);
-			/*		public void actionPerformed(ActionEvent arg0) {
-					
-				try { 
-					String nome = txtNomeCliente.getText();
-								
-				ClienteDAO cpfs = new ClienteDAO();
-				List<ClienteVO> listaclientes = cpfs.pesquisarTodos();
-				
-				for (ClienteVO cpf : listaclientes) {
-					
-					txtNomeCliente.setText(cpf.getNome());
-					txtSobrenomeCliente.setText(cpf.getSobrenome());
-					txtClienteCpf.setText(cpf.getCpf());
-					txtEmail.setText(cpf.getEmail());
-					txtTelefoneCliente.setText(cpf.getTelefone());
-					txtClienteCNH.setText(cpf.getCnh());
-					txtEnderecoCliente.setText(cpf.getEndereco());
-					txtCidadeCliente.setText(cpf.getCidade());
-					cbEstadoCliente.setSelectedItem(cpf.getEstado());
-					txtCEPCliente.setText(cpf.getCep());
-				}
-				
-				}catch(Exception e) {
-			}
-		} 
-	});   */
-			
+			this.add(btnConsultarCpfCliente);			
 			
 			btnSalvarCliente = new JButton(" Salvar");
 			btnSalvarCliente.addMouseListener(new MouseAdapter() {
@@ -253,8 +259,30 @@ public class PainelCadastroCliente extends JPanel {
 			btnSalvarCliente.setHorizontalAlignment(SwingConstants.LEFT);
 			btnSalvarCliente.setForeground(new Color(0, 0, 139));
 			btnSalvarCliente.setBackground(new Color(240, 248, 255));
-			btnSalvarCliente.setBounds(181, 322, 111, 41);
+			btnSalvarCliente.setBounds(405, 322, 111, 41);
 			add(btnSalvarCliente);
+			
+			btnClienteNovo = new JButton("Novo");
+			btnClienteNovo.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					txtNomeCliente.setEnabled(true);
+					txtSobrenomeCliente.setEnabled(true);
+					txtClienteCpf.setEnabled(true);
+					txtEmail.setEnabled(true);
+					txtClienteCNH.setEnabled(true);
+					txtTelefoneCliente.setEnabled(true);
+					txtEnderecoCliente.setEnabled(true);
+					cbEstadoCliente.setEnabled(true);
+					txtCidadeCliente.setEnabled(true);
+					txtCEPCliente.setEnabled(true);
+					 
+				
+				}
+			});
+			btnClienteNovo.setForeground(new Color(0, 0, 139));
+			btnClienteNovo.setBackground(new Color(240, 248, 255));
+			btnClienteNovo.setBounds(131, 322, 111, 41);
+			add(btnClienteNovo);
 			
 		} catch (ParseException e) {
 			JOptionPane.showMessageDialog(null, "Ocorreu um erro no sistema, entre em contato com o administrador.");
@@ -262,5 +290,4 @@ public class PainelCadastroCliente extends JPanel {
 		}
 		
 	}
-
 }
