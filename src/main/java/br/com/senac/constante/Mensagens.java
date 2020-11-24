@@ -58,7 +58,7 @@ public class Mensagens {
 	public static final String CLIENTE_ERRO_TELFONE = "Telefone deve possuir tamanho 11 e somente números";
 	public static final String CLIENTE_ERRO_ENDERECO = "Campo Estado Deve Ser Preenchido";
 	public static final String CLIENTE_ERRO_CIDADE = "Cidade deve conter ao menos três caracteres";
-	public static final String CLIENTE_ERRO_ESTADO =  "Deve preencher o campo estado";
+	public static final String CLIENTE_ERRO_ESTADO = "Deve preencher o campo estado";
 	public static final String CLIENTE_ERRO_CEP = "CEP deve possuir 8 caracteres númericos";
 	public static final String CLIENTE_SUCESSO = "Cliente cadastrado com sucesso";
 	

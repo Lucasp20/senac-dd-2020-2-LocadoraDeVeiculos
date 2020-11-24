@@ -37,6 +37,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.event.ItemEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PainelReservaLocacao extends JPanel {
 
@@ -146,6 +148,13 @@ public class PainelReservaLocacao extends JPanel {
 			this.add(btnSalvarReserva);
 			
 			JButton btnEditarVeiculo = new JButton("Devolver");
+			btnEditarVeiculo.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					
+					JOptionPane.showMessageDialog(null, "Passou pelo botão Devolver");
+				}
+			});
 			btnEditarVeiculo.setBounds(292, 326, 111, 41);
 			this.add(btnEditarVeiculo);
 				

@@ -217,6 +217,13 @@ public class PainelCadastroVeiculo extends JPanel {
 		this.add(btnSalvarVeiculo);
 		
 		JButton btnEditarVeiculo = new JButton("Editar");
+		btnEditarVeiculo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				JOptionPane.showMessageDialog(null, "Passou pelo botão Editar");
+			}
+		});
 		btnEditarVeiculo.setForeground(new Color(0, 0, 139));
 		btnEditarVeiculo.setBounds(320, 323, 111, 41);
 		this.add(btnEditarVeiculo);

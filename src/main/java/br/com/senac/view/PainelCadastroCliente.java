@@ -5,7 +5,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Dialog.ModalExclusionType;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
@@ -20,12 +23,15 @@ import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 
 import br.com.senac.controller.ClienteController;
+import br.com.senac.model.dao.ClienteDAO;
 import br.com.senac.model.vo.ClienteVO;
 
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PainelCadastroCliente extends JPanel {
 
@@ -160,13 +166,47 @@ public class PainelCadastroCliente extends JPanel {
 			this.add(txtClienteCNH);
 			
 			btnEditarVeiculo = new JButton("Editar");
+			btnEditarVeiculo.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent arg0) {
+					
+					JOptionPane.showMessageDialog(null, "Passou pelo botão Editar");
+				}
+			});
 			btnEditarVeiculo.setBounds(315, 322, 111, 41);
 			this.add(btnEditarVeiculo);
 			
 			
 			btnConsultarCpfCliente = new JButton("");
+			btnConsultarCpfCliente.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					
+				try { 
+					String nome = txtNomeCliente.getText();
+								
+				ClienteDAO cpfs = new ClienteDAO();
+				List<ClienteVO> listaclientes = cpfs.pesquisarTodos();
+				
+				for (ClienteVO cpf : listaclientes) {
+					
+					txtNomeCliente.setText(cpf.getNome());
+					txtSobrenomeCliente.setText(cpf.getSobrenome());
+					txtClienteCpf.setText(cpf.getCpf());
+					txtEmail.setText(cpf.getEmail());
+					txtTelefoneCliente.setText(cpf.getTelefone());
+					txtClienteCNH.setText(cpf.getCnh());
+					txtEnderecoCliente.setText(cpf.getEndereco());
+					txtCidadeCliente.setText(cpf.getCidade());
+					cbEstadoCliente.setSelectedItem(cpf.getEstado());
+					txtCEPCliente.setText(cpf.getCep());
+				}
+				
+				}catch(Exception e) {
+			}
+		}
+	});   
+			
 			btnConsultarCpfCliente.setIcon(new ImageIcon(PainelCadastroCliente.class.getResource("/icons/pesquisapequeno.png")));
-			btnConsultarCpfCliente.setBounds(556, 99, 46, 26);
+			btnConsultarCpfCliente.setBounds(555, 100, 24, 25);
 			this.add(btnConsultarCpfCliente);
 		
 			btnSalvarCliente = new JButton(" Salvar");
