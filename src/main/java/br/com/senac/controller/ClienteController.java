@@ -6,7 +6,6 @@ import br.com.senac.constante.Mensagens;
 import br.com.senac.model.bo.ClienteBO;
 import br.com.senac.model.dao.ClienteDAO;
 import br.com.senac.model.vo.ClienteVO;
-import model.exception.CpfJaCadastradoException;
 
 
 public class ClienteController {

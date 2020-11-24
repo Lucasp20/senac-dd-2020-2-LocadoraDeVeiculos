@@ -58,7 +58,7 @@ public class PainelCadastroCliente extends JPanel {
 	private JPanel contentPane;
 	private JButton btnSalvarCliente;
 	private JFormattedTextField txtCEPCliente;
-	private JButton btnEditarVeiculo;
+	private JButton btnEditarCliente;
 	private JButton btnConsultarCpfCliente;
 	private JLabel lblTelefoneCliente; 
 	private JLabel lblClienteCNH;
@@ -180,9 +180,9 @@ public class PainelCadastroCliente extends JPanel {
 			txtClienteCNH.setBounds(419, 160, 135, 25);
 			this.add(txtClienteCNH);
 			
-			btnEditarVeiculo = new JButton("Editar");
-			btnEditarVeiculo.setEnabled(false);
-			btnEditarVeiculo.addActionListener(new ActionListener() {
+			btnEditarCliente = new JButton("Editar");
+			btnEditarCliente.setEnabled(false);
+			btnEditarCliente.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					txtNomeCliente.setEnabled(true);
 					txtSobrenomeCliente.setEnabled(true);
@@ -197,13 +197,13 @@ public class PainelCadastroCliente extends JPanel {
 				}
 			});
 		
-			btnEditarVeiculo.setBounds(267, 322, 111, 41);
-			this.add(btnEditarVeiculo);
+			btnEditarCliente.setBounds(258, 322, 111, 41);
+			this.add(btnEditarCliente);
 			
 			btnConsultarCpfCliente = new JButton("");	
 			btnConsultarCpfCliente.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					btnEditarVeiculo.setEnabled(true);
+					btnEditarCliente.setEnabled(true);
 								
 					String cpf = txtClienteCpf.getText();
 									
@@ -259,7 +259,7 @@ public class PainelCadastroCliente extends JPanel {
 			btnSalvarCliente.setHorizontalAlignment(SwingConstants.LEFT);
 			btnSalvarCliente.setForeground(new Color(0, 0, 139));
 			btnSalvarCliente.setBackground(new Color(240, 248, 255));
-			btnSalvarCliente.setBounds(405, 322, 111, 41);
+			btnSalvarCliente.setBounds(396, 322, 111, 41);
 			add(btnSalvarCliente);
 			
 			btnClienteNovo = new JButton("Novo");
@@ -281,7 +281,7 @@ public class PainelCadastroCliente extends JPanel {
 			});
 			btnClienteNovo.setForeground(new Color(0, 0, 139));
 			btnClienteNovo.setBackground(new Color(240, 248, 255));
-			btnClienteNovo.setBounds(131, 322, 111, 41);
+			btnClienteNovo.setBounds(122, 322, 111, 41);
 			add(btnClienteNovo);
 			
 		} catch (ParseException e) {
