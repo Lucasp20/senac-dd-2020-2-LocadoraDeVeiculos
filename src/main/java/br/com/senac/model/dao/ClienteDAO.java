@@ -162,8 +162,8 @@ public class ClienteDAO {
 		if(cliente.getIdCliente() > 0) {
 			sql += "AND ID <> ? ";
 		}
+	}
 
-<<<<<<< HEAD
 public ArrayList<ClienteVO> listarComSeletor(ClienteSeletor seletor){
 	String sql = "SELECT * FROM CLIENTE ";
 	
