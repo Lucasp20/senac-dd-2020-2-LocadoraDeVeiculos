@@ -5,6 +5,7 @@ import java.util.List;
 import br.com.senac.constante.Mensagens;
 import br.com.senac.model.bo.ClienteBO;
 import br.com.senac.model.dao.ClienteDAO;
+import br.com.senac.model.seletores.ClienteSeletor;
 import br.com.senac.model.vo.ClienteVO;
 
 
@@ -142,6 +143,12 @@ public class ClienteController {
 	public String gerarPlanilha(List<ClienteVO> dadosConsultados, String caminho) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public List<ClienteVO> listarClientesFiltro(ClienteSeletor seletor) {
+		ClienteDAO dao = new ClienteDAO();
+		
+		return dao.listarComSeletor(seletor);
 	}
 	
 }

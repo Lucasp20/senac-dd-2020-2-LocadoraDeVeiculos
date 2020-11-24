@@ -11,6 +11,7 @@ import java.util.List;
 import br.com.senac.model.vo.ClienteVO;
 import br.com.senac.model.vo.VeiculoVO;
 import br.com.senac.model.dao.Banco;
+import br.com.senac.model.seletores.ClienteSeletor;
 import br.com.senac.view.PainelRelatorioLocacao;
 
 public class ClienteDAO {
@@ -147,6 +148,61 @@ public static List<ClienteVO> pesquisarTodos() {
 		Banco.closeConnection(conexao);
 	}	
 		return clientesBuscados;
+}
+
+public ArrayList<ClienteVO> listarComSeletor(ClienteSeletor seletor){
+	String sql = "SELECT * FROM CLIENTE ";
+	
+	if(seletor.temFiltro()) {
+		sql = criarFiltros(seletor, sql);
+	}
+	Connection conexao = Banco.getConnection();
+		
+	PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);
+	ArrayList<ClienteVO> clientesBuscados = new ArrayList<ClienteVO>();
+	
+	try { ResultSet conjuntoResultante = consulta.executeQuery();
+		while(conjuntoResultante.next()) {	
+			ClienteVO clienteBuscado = contruirClienteDoResultSet(conjuntoResultante);					
+			clientesBuscados.add(clienteBuscado);
+		}
+	} catch (SQLException e) {
+		System.out.println("Erro ao consultar clientes com filtros .\nCausa: " + e.getMessage());
+	}finally {			
+		Banco.closeStatement(consulta);			
+		Banco.closeConnection(conexao);
+	}
+	return clientesBuscados;
+}
+
+private String criarFiltros(ClienteSeletor seletor, String sql) {
+	sql +=" WHERE ";
+	boolean primeiro = true;
+	
+	if((seletor.getNomeFiltro() !=null) && (seletor.getNomeFiltro().trim().length() > 0)){
+		if(!primeiro) {
+			sql+= " AND ";
+		}
+		sql += "CLIENTE.NOME LIKE '%= " + seletor.getNomeFiltro() + "%'";
+		primeiro = false;
+	}
+	
+	if((seletor.getCidadeFiltro() !=null) && (seletor.getCidadeFiltro().trim().length() > 0)){
+		if(!primeiro) {
+			sql+= " AND ";
+		}
+		sql += "CLIENTE.CIDADE LIKE '%= " + seletor.getCidadeFiltro() + "%'";
+		primeiro = false;
+	}
+	
+	if((seletor.getEstadoFiltro() !=null) && (seletor.getEstadoFiltro().trim().length() > 0)){
+		if(!primeiro) {
+			sql+= " AND ";
+		}
+		sql += "CLIENTE.ESTADO = " + seletor.getEstadoFiltro();
+		primeiro = false;
+	}
+	return sql;
 }
 
 private static ClienteVO contruirClienteDoResultSet(ResultSet conjuntoResultante) throws SQLException{

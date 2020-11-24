@@ -10,6 +10,14 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+
+import br.com.senac.controller.ClienteController;
+import br.com.senac.controller.VeiculoController;
+import br.com.senac.model.seletores.ClienteSeletor;
+import br.com.senac.model.seletores.VeiculoSeletor;
+import br.com.senac.model.vo.ClienteVO;
+import br.com.senac.model.vo.VeiculoVO;
+
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
@@ -21,9 +29,15 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
 
 public class PainelRelatorioVeiculo extends JPanel {
 	private JTable tblRelatorioVeiculo;
+	private JFormattedTextField txtAno;
+	private JFormattedTextField txtRelatorioMarca;
+	private JFormattedTextField txtCor;
 
 	/**
 	 * Create the panel.
@@ -72,23 +86,31 @@ public class PainelRelatorioVeiculo extends JPanel {
 		lblRelatorioMarca.setBounds(10, 17, 46, 14);
 		painelRelatorioVeiculo.add(lblRelatorioMarca);
 		
-		JFormattedTextField txtRelatorioMarca = new JFormattedTextField();
+		txtRelatorioMarca = new JFormattedTextField();
 		txtRelatorioMarca.setBounds(54, 11, 98, 27);
 		painelRelatorioVeiculo.add(txtRelatorioMarca);
 		
 		JButton btnRelatorioPesquisa = new JButton("Pesquisar");
-		btnRelatorioPesquisa.setBounds(344, 62, 112, 31);
+		btnRelatorioPesquisa.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				consultarCliente();
+			}
+
+			
+		});
+		btnRelatorioPesquisa.setBounds(230, 42, 112, 31);
 		painelRelatorioVeiculo.add(btnRelatorioPesquisa);
 		
 		JButton btnRelatorioVeiculoGerarExcel = new JButton("Gerar Excel");
-		btnRelatorioVeiculoGerarExcel.setBounds(466, 62, 105, 31);
+		btnRelatorioVeiculoGerarExcel.setBounds(383, 42, 112, 31);
 		painelRelatorioVeiculo.add(btnRelatorioVeiculoGerarExcel);
 		
 		JLabel lblRelatorioVeiculoAno = new JLabel("Ano:");
 		lblRelatorioVeiculoAno.setBounds(10, 50, 46, 14);
 		painelRelatorioVeiculo.add(lblRelatorioVeiculoAno);
 		
-		JFormattedTextField txtAno = new JFormattedTextField();
+		txtAno = new JFormattedTextField();
 		txtAno.setBounds(54, 42, 76, 27);
 		painelRelatorioVeiculo.add(txtAno);
 		
@@ -96,7 +118,7 @@ public class PainelRelatorioVeiculo extends JPanel {
 		lblRelatorioVeiculoCor.setBounds(10, 79, 46, 14);
 		painelRelatorioVeiculo.add(lblRelatorioVeiculoCor);
 		
-		JFormattedTextField txtCor = new JFormattedTextField();
+		txtCor = new JFormattedTextField();
 		txtCor.setBounds(54, 73, 64, 27);
 		painelRelatorioVeiculo.add(txtCor);
 		
@@ -106,4 +128,16 @@ public class PainelRelatorioVeiculo extends JPanel {
 		add(lblRelatorioVeiculo);
 
 	}
+	private void consultarCliente() {
+		VeiculoController controlador = new VeiculoController();
+		VeiculoSeletor seletor = new VeiculoSeletor();
+			seletor.setAnoFiltro(txtAno.getText());
+			seletor.setCorFiltro(txtCor.getText());
+			seletor.setMarcaFiltro(txtRelatorioMarca.getText());
+		
+		List<VeiculoVO> veiculos = controlador.listarClientesFiltro(seletor);
+		//TODO ATUALIZAR TABELA		
+		
+		
+			}
 }
