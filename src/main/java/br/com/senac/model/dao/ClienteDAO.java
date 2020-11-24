@@ -14,6 +14,8 @@ import br.com.senac.model.dao.Banco;
 import br.com.senac.view.PainelRelatorioLocacao;
 
 public class ClienteDAO {
+	
+	
 
 	public ClienteVO inserir(ClienteVO cliente) {
 		Connection conexao = Banco.getConnection();

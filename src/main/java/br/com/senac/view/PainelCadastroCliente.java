@@ -179,6 +179,25 @@ public class PainelCadastroCliente extends JPanel {
 			btnConsultarCpfCliente = new JButton("");
 			btnConsultarCpfCliente.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+				
+					try {
+					String nome = txtNomeCliente.getText();
+					
+					ClienteDAO dao = new ClienteDAO();
+					ClienteVO pesquisarPorNome = dao.pesquisarPorNome(nome);					
+					
+					for (ClienteVO n : dao.pesquisarPorNome(nome)) {
+						txtNomeCliente.setText(n.getNome());
+					}
+					
+				}catch (Exception e) {
+				}
+			}
+			});
+			btnConsultarCpfCliente.setIcon(new ImageIcon(PainelCadastroCliente.class.getResource("/icons/pesquisapequeno.png")));
+			btnConsultarCpfCliente.setBounds(555, 100, 24, 25);
+			this.add(btnConsultarCpfCliente);
+			/*		public void actionPerformed(ActionEvent arg0) {
 					
 				try { 
 					String nome = txtNomeCliente.getText();
@@ -202,13 +221,10 @@ public class PainelCadastroCliente extends JPanel {
 				
 				}catch(Exception e) {
 			}
-		}
-	});   
+		} 
+	});   */
 			
-			btnConsultarCpfCliente.setIcon(new ImageIcon(PainelCadastroCliente.class.getResource("/icons/pesquisapequeno.png")));
-			btnConsultarCpfCliente.setBounds(555, 100, 24, 25);
-			this.add(btnConsultarCpfCliente);
-		
+			
 			btnSalvarCliente = new JButton(" Salvar");
 			btnSalvarCliente.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent arg0) {
