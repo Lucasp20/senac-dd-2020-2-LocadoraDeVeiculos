@@ -38,6 +38,8 @@ import javax.swing.JTextArea;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class PainelCadastroVeiculo extends JPanel {
@@ -60,6 +62,7 @@ public class PainelCadastroVeiculo extends JPanel {
 	private JComboBox cbMarcaVeiculo;
 	private JComboBox cbAnoVeiculo;
 	private JComboBox cbCorVeiculo;
+	private JButton btnEditarVeiculo;
 	
 
 	/**
@@ -85,7 +88,7 @@ public class PainelCadastroVeiculo extends JPanel {
 	 * @throws ParseException 
 	 */
 	public PainelCadastroVeiculo() throws ParseException {
-		setBounds(100, 100, 609, 410);
+		setBounds(100, 100, 595, 410);
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);
 		
@@ -106,6 +109,7 @@ public class PainelCadastroVeiculo extends JPanel {
 		MaskFormatter mascaraRenavam = new MaskFormatter("###########");
 		
 		txtRenavam = new JFormattedTextField(mascaraRenavam);
+		txtRenavam.setEnabled(false);
 		txtRenavam.setBounds(242, 101, 146, 27);
 		this.add(txtRenavam);
 		
@@ -116,6 +120,7 @@ public class PainelCadastroVeiculo extends JPanel {
 		this.add(lblChassi);
 		
 		txtChassi = new JFormattedTextField(mascaraChassi);
+		txtChassi.setEnabled(false);
 		txtChassi.setBounds(407, 101, 146, 27);
 		this.add(txtChassi);
 		
@@ -129,6 +134,7 @@ public class PainelCadastroVeiculo extends JPanel {
 		this.add(lblMarca);
 				
 		txtModelo = new JFormattedTextField();
+		txtModelo.setEnabled(false);
 		txtModelo.setBounds(242, 160, 146, 27);
 		this.add(txtModelo);
 		
@@ -157,6 +163,7 @@ public class PainelCadastroVeiculo extends JPanel {
 		this.add(lblTransmissao);
 		
 		cbDadosVeiculoTransmissao = new JComboBox();
+		cbDadosVeiculoTransmissao.setEnabled(false);
 		cbDadosVeiculoTransmissao.setFont(new Font("Tahoma", Font.BOLD, 11));
 		cbDadosVeiculoTransmissao.setToolTipText("");
 		cbDadosVeiculoTransmissao.setModel(new DefaultComboBoxModel(new String[] {"", "Automática", "Manual"}));
@@ -164,12 +171,14 @@ public class PainelCadastroVeiculo extends JPanel {
 		this.add(cbDadosVeiculoTransmissao);
 		
 		cbDadosVeiculoMotor = new JComboBox();
+		cbDadosVeiculoMotor.setEnabled(false);
 		cbDadosVeiculoMotor.setFont(new Font("Tahoma", Font.BOLD, 11));
 		cbDadosVeiculoMotor.setModel(new DefaultComboBoxModel(new String[] {"", "1.0", "1.4", "1.6", "2.0"}));
 		cbDadosVeiculoMotor.setBounds(75, 214, 146, 27);
 		this.add(cbDadosVeiculoMotor);
 
 		cbMarcaVeiculo = new JComboBox();
+		cbMarcaVeiculo.setEnabled(false);
 		cbMarcaVeiculo.setFont(new Font("Tahoma", Font.BOLD, 11));
 		cbMarcaVeiculo.setModel(new DefaultComboBoxModel(new String[] {"",Mensagens.MARCA_AUDI,Mensagens.MARCA_BMW,Mensagens.MARCA_CHEVROLET,Mensagens.MARCA_CITROEN,Mensagens.MARCA_FIAT,
 				Mensagens.MARCA_FORD,Mensagens.MARCA_HONDA,Mensagens.MARCA_HYNDAI,Mensagens.MARCA_KIA,Mensagens.MARCA_NISSAN,Mensagens.MARCA_PEUGEOT,Mensagens.MARCA_RENAULT,Mensagens.MARCA_TOYOTA}));
@@ -177,12 +186,14 @@ public class PainelCadastroVeiculo extends JPanel {
 		this.add(cbMarcaVeiculo);
 		
 		cbAnoVeiculo = new JComboBox();
+		cbAnoVeiculo.setEnabled(false);
 		cbAnoVeiculo.setModel(new DefaultComboBoxModel(new String[] {Mensagens.ANO_2010,Mensagens.ANO_2011,Mensagens.ANO_2012,Mensagens.ANO_2013,Mensagens.ANO_2014,Mensagens.ANO_2015,
 				Mensagens.ANO_2016,Mensagens.ANO_2017,Mensagens.ANO_2018,Mensagens.ANO_2019,Mensagens.ANO_2020}));
 		cbAnoVeiculo.setBounds(406, 160, 73, 27);
 		this.add(cbAnoVeiculo);
 		
 		cbCorVeiculo = new JComboBox();
+		cbCorVeiculo.setEnabled(false);
 		cbCorVeiculo.setModel(new DefaultComboBoxModel(new String[] {"", Mensagens.COR_AZUL,Mensagens.COR_BRANCO,Mensagens.COR_PRATA,
 				Mensagens.COR_PRETO,Mensagens.COR_VERMELHO}));
 		cbCorVeiculo.setBounds(487, 160, 66, 27);
@@ -213,18 +224,60 @@ public class PainelCadastroVeiculo extends JPanel {
 		btnSalvarVeiculo.setIcon(new ImageIcon(PainelCadastroVeiculo.class.getResource("/icons/Salvar.png")));
 		btnSalvarVeiculo.setForeground(new Color(0, 0, 139));
 		btnSalvarVeiculo.setBackground(new Color(240, 248, 255));
-		btnSalvarVeiculo.setBounds(185, 323, 111, 41);
+		btnSalvarVeiculo.setBounds(368, 323, 111, 41);
 		this.add(btnSalvarVeiculo);
 		
-		JButton btnEditarVeiculo = new JButton("Editar");
+		btnEditarVeiculo = new JButton("Editar");
+		btnEditarVeiculo.setEnabled(false);
+		btnEditarVeiculo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtPlaca.setEnabled(true);
+				txtRenavam.setEnabled(true);
+				txtChassi.setEnabled(true);
+				cbMarcaVeiculo.setEnabled(true);
+				txtModelo.setEnabled(true);
+				cbAnoVeiculo.setEnabled(true);
+				cbCorVeiculo.setEnabled(true);
+				cbDadosVeiculoMotor.setEnabled(true);
+				cbDadosVeiculoTransmissao.setEnabled(true);
+				
+			}
+		});
+	
+		
 		btnEditarVeiculo.setForeground(new Color(0, 0, 139));
-		btnEditarVeiculo.setBounds(320, 323, 111, 41);
+		btnEditarVeiculo.setBounds(234, 323, 111, 41);
 		this.add(btnEditarVeiculo);
 		
 		btnConsultarCpfCliente = new JButton("");
+		btnConsultarCpfCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnEditarVeiculo.setEnabled(true);
+			
+			}
+		});
 		btnConsultarCpfCliente.setIcon(new ImageIcon(PainelCadastroVeiculo.class.getResource("/icons/pesquisapequeno.png")));
 		btnConsultarCpfCliente.setBounds(173, 101, 51, 27);
 		this.add(btnConsultarCpfCliente);
+		
+		JButton btnVeiculoNovo = new JButton("Novo");
+		btnVeiculoNovo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtPlaca.setEnabled(true);
+				txtRenavam.setEnabled(true);
+				txtChassi.setEnabled(true);
+				cbMarcaVeiculo.setEnabled(true);
+				txtModelo.setEnabled(true);
+				cbAnoVeiculo.setEnabled(true);
+				cbCorVeiculo.setEnabled(true);
+				cbDadosVeiculoMotor.setEnabled(true);
+				cbDadosVeiculoTransmissao.setEnabled(true);
+			}
+		});
+		btnVeiculoNovo.setForeground(new Color(0, 0, 139));
+		btnVeiculoNovo.setBackground(new Color(240, 248, 255));
+		btnVeiculoNovo.setBounds(102, 323, 111, 41);
+		add(btnVeiculoNovo);
 				
 	}
 }
