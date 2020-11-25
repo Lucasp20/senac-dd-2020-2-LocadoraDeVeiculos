@@ -15,8 +15,6 @@ import br.com.senac.model.seletores.ClienteSeletor;
 import br.com.senac.view.PainelRelatorioLocacao;
 
 public class ClienteDAO {
-	
-	
 
 	public ClienteVO inserir(ClienteVO cliente) {
 		Connection conexao = Banco.getConnection();
@@ -108,11 +106,10 @@ public class ClienteDAO {
 
 		return alterou;
 	}
-	
 
 	public ClienteVO pesquisarPorNome(String nome) {
 		String sql = "SELECT * FROM CLIENTE WHERE NOME=?";
-			ClienteVO clientebuscado = null;
+		ClienteVO clientebuscado = null;
 
 		try (Connection conexao = Banco.getConnection();
 				PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);) {
@@ -132,7 +129,7 @@ public class ClienteDAO {
 
 	public static List<ClienteVO> pesquisarTodos() {
 		Connection conexao = Banco.getConnection();
-		String sql = "SELECT * FROM CLIENTE " ;
+		String sql = "SELECT * FROM CLIENTE ";
 
 		PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);
 		List<ClienteVO> clientesBuscados = new ArrayList<ClienteVO>();
@@ -151,73 +148,75 @@ public class ClienteDAO {
 		}
 		return clientesBuscados;
 	}
-	
+
 	public boolean cpfJaCadastrado(ClienteVO cliente) {
 		boolean cpfcadastrado = false;
-		
+
 		Connection conexao = Banco.getConnection();
-		
+
 		String sql = "SELECT count(id) FROM CLIENTE WHERE CPF = ?";
-		
-		if(cliente.getIdCliente() > 0) {
+
+		if (cliente.getIdCliente() > 0) {
 			sql += "AND ID <> ? ";
 		}
+		return true;
 	}
 
-public ArrayList<ClienteVO> listarComSeletor(ClienteSeletor seletor){
-	String sql = "SELECT * FROM CLIENTE ";
-	
-	if(seletor.temFiltro()) {
-		sql = criarFiltros(seletor, sql);
-	}
-	Connection conexao = Banco.getConnection();
-		
-	PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);
-	ArrayList<ClienteVO> clientesBuscados = new ArrayList<ClienteVO>();
-	
-	try { ResultSet conjuntoResultante = consulta.executeQuery();
-		while(conjuntoResultante.next()) {	
-			ClienteVO clienteBuscado = contruirClienteDoResultSet(conjuntoResultante);					
-			clientesBuscados.add(clienteBuscado);
-		}
-	} catch (SQLException e) {
-		System.out.println("Erro ao consultar clientes com filtros .\nCausa: " + e.getMessage());
-	}finally {			
-		Banco.closeStatement(consulta);			
-		Banco.closeConnection(conexao);
-	}
-	return clientesBuscados;
-}
+	public ArrayList<ClienteVO> listarComSeletor(ClienteSeletor seletor) {
+		String sql = "SELECT * FROM CLIENTE ";
 
-private String criarFiltros(ClienteSeletor seletor, String sql) {
-	sql +=" WHERE ";
-	boolean primeiro = true;
-	
-	if((seletor.getNomeFiltro() !=null) && (seletor.getNomeFiltro().trim().length() > 0)){
-		if(!primeiro) {
-			sql+= " AND ";
+		if (seletor.temFiltro()) {
+			sql = criarFiltros(seletor, sql);
 		}
-		sql += "CLIENTE.NOME LIKE '%= " + seletor.getNomeFiltro() + "%'";
-		primeiro = false;
-	}
-	
-	if((seletor.getCidadeFiltro() !=null) && (seletor.getCidadeFiltro().trim().length() > 0)){
-		if(!primeiro) {
-			sql+= " AND ";
+		Connection conexao = Banco.getConnection();
+
+		PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);
+		ArrayList<ClienteVO> clientesBuscados = new ArrayList<ClienteVO>();
+
+		try {
+			ResultSet conjuntoResultante = consulta.executeQuery();
+			while (conjuntoResultante.next()) {
+				ClienteVO clienteBuscado = contruirClienteDoResultSet(conjuntoResultante);
+				clientesBuscados.add(clienteBuscado);
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao consultar clientes com filtros .\nCausa: " + e.getMessage());
+		} finally {
+			Banco.closeStatement(consulta);
+			Banco.closeConnection(conexao);
 		}
-		sql += "CLIENTE.CIDADE LIKE '%= " + seletor.getCidadeFiltro() + "%'";
-		primeiro = false;
+		return clientesBuscados;
 	}
-	
-	if((seletor.getEstadoFiltro() !=null) && (seletor.getEstadoFiltro().trim().length() > 0)){
-		if(!primeiro) {
-			sql+= " AND ";
+
+	private String criarFiltros(ClienteSeletor seletor, String sql) {
+		sql += " WHERE ";
+		boolean primeiro = true;
+
+		if ((seletor.getNomeFiltro() != null) && (seletor.getNomeFiltro().trim().length() > 0)) {
+			if (!primeiro) {
+				sql += " AND ";
+			}
+			sql += "CLIENTE.NOME LIKE '%= " + seletor.getNomeFiltro() + "%'";
+			primeiro = false;
 		}
-		sql += "CLIENTE.ESTADO = " + seletor.getEstadoFiltro();
-		primeiro = false;
+
+		if ((seletor.getCidadeFiltro() != null) && (seletor.getCidadeFiltro().trim().length() > 0)) {
+			if (!primeiro) {
+				sql += " AND ";
+			}
+			sql += "CLIENTE.CIDADE LIKE '%= " + seletor.getCidadeFiltro() + "%'";
+			primeiro = false;
+		}
+
+		if ((seletor.getEstadoFiltro() != null) && (seletor.getEstadoFiltro().trim().length() > 0)) {
+			if (!primeiro) {
+				sql += " AND ";
+			}
+			sql += "CLIENTE.ESTADO = " + seletor.getEstadoFiltro();
+			primeiro = false;
+		}
+		return sql;
 	}
-	return sql;
-}
 
 private static ClienteVO contruirClienteDoResultSet(ResultSet conjuntoResultante) throws SQLException{
 
@@ -233,44 +232,27 @@ private static ClienteVO contruirClienteDoResultSet(ResultSet conjuntoResultante
 	clienteBuscado.setCidade(conjuntoResultante.getString("cidade"));
 	clienteBuscado.setEstado(conjuntoResultante.getString("estado"));
 	clienteBuscado.setCep(conjuntoResultante.getString("cep"));
-=======
+
 		PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);
 	
 		try {
-			consulta.setString(1, cliente.getCpf());
->>>>>>> branch 'master' of https://github.com/Lucasp20/senac-dd-2020-2-LocadoraDeVeiculos.git
+			consulta.setString(1, clienteBuscado.getCpf());
+
 			
-			if(cliente.getIdCliente() > 0) {
-				consulta.setInt(2, cliente.getIdCliente());
+			if(clienteBuscado.getIdCliente() > 0) {
+				consulta.setInt(2, clienteBuscado.getIdCliente());
 			}
 			ResultSet conjuntoResultante = consulta.executeQuery();
 			cpfcadastrado = conjuntoResultante.next();
 		} catch (SQLException e) {
-			System.out.println("Erro ao verificar se CPF (" + cliente.getCpf() + ") jÃ¡ foi usado .\nCausa: " + e.getMessage());
+			System.out.println("Erro ao verificar se CPF (" + clienteBuscado.getCpf() + ") jÃ¡ foi usado .\nCausa: " + e.getMessage());
 		}finally {
 			Banco.closeStatement(consulta);
 			Banco.closeConnection(conexao);
 		}
 		
 		return cpfcadastrado;
-	} 
-
-	private static ClienteVO contruirClienteDoResultSet(ResultSet conjuntoResultante) throws SQLException {
-
-		ClienteVO clienteBuscado = new ClienteVO();
-		clienteBuscado.setIdCliente(conjuntoResultante.getInt("idCliente"));
-		clienteBuscado.setNome(conjuntoResultante.getString("Nome"));
-		clienteBuscado.setSobrenome(conjuntoResultante.getString("sobrenome"));
-		clienteBuscado.setCpf(conjuntoResultante.getString("cpf"));
-		clienteBuscado.setEmail(conjuntoResultante.getString("email"));
-		clienteBuscado.setCnh(conjuntoResultante.getString("cnh"));
-		clienteBuscado.setTelefone(conjuntoResultante.getString("telefone"));
-		clienteBuscado.setEndereco(conjuntoResultante.getString("endereco"));
-		clienteBuscado.setCidade(conjuntoResultante.getString("cidade"));
-		clienteBuscado.setEstado(conjuntoResultante.getString("estado"));
-		clienteBuscado.setCep(conjuntoResultante.getString("cep"));
-
-		return clienteBuscado;
 	}
 
+	
 }

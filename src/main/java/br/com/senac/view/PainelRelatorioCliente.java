@@ -25,7 +25,7 @@ import javax.swing.DefaultComboBoxModel;
 public class PainelRelatorioCliente extends JPanel {
 	private JTable tblRelatorioCliente;
 
-	private List<br.com.senac.model.vo.ClienteVO> DadosConsultados;
+	private List<br.com.senac.model.vo.ClienteVO> dadosConsultados;
 
 	private JFormattedTextField txtCidadeCliente;
 	private JFormattedTextField txtNomeCliente;
@@ -55,7 +55,6 @@ public class PainelRelatorioCliente extends JPanel {
 				consultarCliente();
 			}
 
-
 		});
 		btnRelatorioClientePesquisa.setBounds(362, 44, 112, 31);
 		painelRelatorioCliente.add(btnRelatorioClientePesquisa);
@@ -71,8 +70,9 @@ public class PainelRelatorioCliente extends JPanel {
 				if (opcaoSelecionada == JFileChooser.APPROVE_OPTION) {
 					String caminho = janelaArquivos.getSelectedFile().getAbsolutePath();
 					ClienteController controller = new ClienteController();
-					String salvouPlanilha = controller.gerarPlanilha(DadosConsultados, caminho);
-				}}
+					String salvouPlanilha = controller.gerarPlanilha(dadosConsultados, caminho);
+				}
+			}
 		});
 		btnRelatorioClienteGerarExcel.setBounds(484, 44, 105, 31);
 		painelRelatorioCliente.add(btnRelatorioClienteGerarExcel);
@@ -90,7 +90,7 @@ public class PainelRelatorioCliente extends JPanel {
 		painelRelatorioCliente.add(lblEstadoCliente);
 
 		cbEstadoCliente = new JComboBox();
-		cbEstadoCliente.setModel(new DefaultComboBoxModel(new String[] {"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"}));
+		cbEstadoCliente.setModel(new DefaultComboBoxModel(new String[] { "", "RS", "RJ", "SP", "SC" }));
 		cbEstadoCliente.setBounds(63, 44, 52, 25);
 		painelRelatorioCliente.add(cbEstadoCliente);
 
@@ -108,25 +108,14 @@ public class PainelRelatorioCliente extends JPanel {
 
 		tblRelatorioCliente = new JTable();
 		tblRelatorioCliente.setModel(new DefaultTableModel(
-				new Object[][] {
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-				},
-				new String[] {
-						"Nome", "CPF", "CNH", "Telefone", "Cidade", "Estado"
-				}
-				) {
-			boolean[] columnEditables = new boolean[] {
-					false, false, false, false, false, true
-			};
+				new Object[][] { { null, null, null, null, null, null }, { null, null, null, null, null, null },
+						{ null, null, null, null, null, null }, { null, null, null, null, null, null },
+						{ null, null, null, null, null, null }, { null, null, null, null, null, null },
+						{ null, null, null, null, null, null }, { null, null, null, null, null, null },
+						{ null, null, null, null, null, null }, { null, null, null, null, null, null }, },
+				new String[] { "Nome", "CPF", "CNH", "Telefone", "Cidade", "Estado" }) {
+			boolean[] columnEditables = new boolean[] { false, false, false, false, false, true };
+
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
@@ -140,16 +129,36 @@ public class PainelRelatorioCliente extends JPanel {
 		scrollPane.setViewportView(tblRelatorioCliente);
 
 	}
+
 	private void consultarCliente() {
 		ClienteController controlador = new ClienteController();
 		ClienteSeletor seletor = new ClienteSeletor();
-			seletor.setCidadeFiltro(txtCidadeCliente.getText());
-			seletor.setEstadoFiltro((cbEstadoCliente.getSelectedItem().toString()));
-			seletor.setNomeFiltro(txtNomeCliente.getText());
-		
+		seletor.setCidadeFiltro(txtCidadeCliente.getText());
+		seletor.setEstadoFiltro((cbEstadoCliente.getSelectedItem().toString()));
+		seletor.setNomeFiltro(txtNomeCliente.getText());
+
 		List<ClienteVO> clientes = controlador.listarClientesFiltro(seletor);
-		//TODO ATUALIZAR TABELA
-		
+		atualizarTabelaClientes(clientes);
 
 	}
+
+	private void atualizarTabelaClientes(List<ClienteVO> clientes) {
+		dadosConsultados = clientes;
+		this.limparTabela();
+		DefaultTableModel modelo = (DefaultTableModel) tblRelatorioCliente.getModel();
+		for (ClienteVO cliente : clientes) {
+
+			String[] novaLinha = new String[] { cliente.getNome() + "", cliente.getCpf(), cliente.getCnh(),
+					cliente.getTelefone() + "", cliente.getCidade(), cliente.getEstado() };
+			modelo.addRow(novaLinha);
+		}
+
+	}
+
+	private void limparTabela() {
+		tblRelatorioCliente.setModel(
+				new DefaultTableModel(new String[][] { { "Nome", "CPF", "CNH", "Telefone", "Cidade", "Estado" }, },
+						new String[] { "Nome", "CPF", "CNH", "Telefone", "Cidade", "Estado" }));
+	}
+
 }

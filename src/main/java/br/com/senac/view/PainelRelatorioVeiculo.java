@@ -38,6 +38,7 @@ public class PainelRelatorioVeiculo extends JPanel {
 	private JFormattedTextField txtAno;
 	private JFormattedTextField txtRelatorioMarca;
 	private JFormattedTextField txtCor;
+	private List<br.com.senac.model.vo.VeiculoVO> dadosConsultados;
 
 	/**
 	 * Create the panel.
@@ -66,7 +67,7 @@ public class PainelRelatorioVeiculo extends JPanel {
 				{null, null, null, null},
 			},
 			new String[] {
-				"Placa", "Marca", "Modelo", "Situa\u00E7\u00E3o"
+				"Placa", "Marca", "Modelo", "Cor"
 			}
 		));
 		tblRelatorioVeiculo.getColumnModel().getColumn(0).setPreferredWidth(97);
@@ -136,7 +137,28 @@ public class PainelRelatorioVeiculo extends JPanel {
 			seletor.setMarcaFiltro(txtRelatorioMarca.getText());
 		
 		List<VeiculoVO> veiculos = controlador.listarClientesFiltro(seletor);
-		//TODO ATUALIZAR TABELA		
+		atualizarTabelaVeiculos(veiculos);
+
+	}
+
+	private void atualizarTabelaVeiculos(List<VeiculoVO> veiculos) {
+		dadosConsultados = veiculos;
+		this.limparTabela();
+		DefaultTableModel modelo = (DefaultTableModel) tblRelatorioVeiculo.getModel();
+		for (VeiculoVO veiculo : veiculos) {
+
+			String[] novaLinha = new String[] { veiculo.getPlaca() + "", veiculo.getMarca(), veiculo.getModelo(),
+					veiculo.getCor() };
+			modelo.addRow(novaLinha);
+		}
+
+	}
+
+	private void limparTabela() {
+		tblRelatorioVeiculo.setModel(
+				new DefaultTableModel(new String[][] { { "Placa", "Marca", "Modelo", "Cor" }, },
+						new String[] { "Placa", "Marca", "Modelo", "Cor" }));
+	}
 		
 		
 			}
