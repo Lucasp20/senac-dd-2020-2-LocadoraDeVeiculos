@@ -61,7 +61,7 @@ public class ClienteDAO {
 	public boolean excluir(ClienteVO cpf) {
 		Connection conexao = Banco.getConnection();
 
-		String sql = "DELETE FROM cliente WHERE CPF = " + cpf;
+		String sql = "DELETE FROM CLIENTE WHERE CPF = " + cpf;
 
 		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
 		boolean excluiu = false;

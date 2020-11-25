@@ -144,12 +144,6 @@ public class ClienteController {
 		return true;
 } 
 	
-	public boolean Excluir(ClienteVO cpf) {
-		
-		
-		return null;
-		
-	}
 
 	
 	public String gerarPlanilha(List<ClienteVO> dadosConsultados, String caminho) {
