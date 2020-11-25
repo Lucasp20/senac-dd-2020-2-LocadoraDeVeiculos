@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import br.com.senac.model.vo.ClienteVO;
 import br.com.senac.model.vo.VeiculoVO;
 import br.com.senac.model.dao.Banco;
@@ -56,20 +58,21 @@ public class ClienteDAO {
 		return cliente;
 	}
 
-	public boolean excluir(int idCliente) {
+	public boolean excluir(ClienteVO cpf) {
 		Connection conexao = Banco.getConnection();
 
-		String sql = "DELETE FROM cliente WHERE idPessoa = " + idCliente;
+		String sql = "DELETE FROM cliente WHERE CPF = " + cpf;
 
 		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
 		boolean excluiu = false;
 
 		try {
-
+			query.setString(1, cpf.getCpf());
 			int codigoRetorno = query.executeUpdate();
+			JOptionPane.showMessageDialog(null, "Dados Excluidos com sucesso ");
 			excluiu = (codigoRetorno == Banco.CODIGO_RETORNO_SUCESSO);
 		} catch (SQLException e) {
-			System.out.println("Erro ao excluir Cliente (id: " + idCliente + ") .\nCausa: " + e.getMessage());
+			System.out.println("Erro ao excluir Cliente (cpf: " + cpf + ") .\nCausa: " + e.getMessage());
 		} finally {
 			Banco.closeStatement(query);
 			Banco.closeConnection(conexao);
@@ -112,8 +115,7 @@ public class ClienteDAO {
 	public static ClienteVO pesquisarPorCpf(String cpf) {
 		String sql = " SELECT * FROM CLIENTE WHERE CPF=? ";
 		ClienteVO clienteBuscado = null;
-		
-		
+				
 		try (Connection conexao = Banco.getConnection();
 			PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);) {
 			consulta.setString(1, cpf);
@@ -171,7 +173,6 @@ public class ClienteDAO {
 		}
 		return clientesBuscados;
 	}
-
 	public boolean cpfJaCadastrado(ClienteVO cliente) {
 		boolean cpfcadastrado = false;
 

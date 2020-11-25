@@ -2,6 +2,8 @@ package br.com.senac.controller;
 
 import java.util.List;
 
+import javax.swing.JFormattedTextField;
+
 import br.com.senac.constante.Mensagens;
 import br.com.senac.model.bo.ClienteBO;
 import br.com.senac.model.dao.ClienteDAO;
@@ -10,6 +12,8 @@ import br.com.senac.model.vo.ClienteVO;
 
 
 public class ClienteController {
+	
+	private ClienteDAO clienteDAO;
 
 	/*
 	 * 	situacao = "AQUI VÃO SER TRABALHADOS OS CONTROLLERS - apenas testandooo";
@@ -140,6 +144,14 @@ public class ClienteController {
 		return true;
 } 
 	
+	public boolean Excluir(ClienteVO cpf) {
+		
+		
+		return null;
+		
+	}
+
+	
 	public String gerarPlanilha(List<ClienteVO> dadosConsultados, String caminho) {
 		// TODO Auto-generated method stub
 		return null;
@@ -150,5 +162,7 @@ public class ClienteController {
 		
 		return dao.listarComSeletor(seletor);
 	}
+
+
 	
 }

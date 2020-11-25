@@ -37,9 +37,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
 
 public class PainelCadastroCliente extends JPanel {
 
+	private ClienteVO clienteVO;
+	private ClienteDAO clienteDAO;
 	private JLabel lblNome;
 	private JLabel lblDadosClientes;
 	private JLabel lblSobreNome;
@@ -66,6 +69,7 @@ public class PainelCadastroCliente extends JPanel {
 	private JLabel lblCidadeCliente;
 	private JLabel lblEstadoCliente;
 	private JButton btnClienteNovo;
+	private JButton btnClienteExcluir;
 
 	
 	/**
@@ -181,6 +185,8 @@ public class PainelCadastroCliente extends JPanel {
 			this.add(txtClienteCNH);
 			
 			btnEditarCliente = new JButton("Editar");
+			btnEditarCliente.setForeground(new Color(0, 0, 139));
+			btnEditarCliente.setBackground(new Color(240, 248, 255));
 			btnEditarCliente.setEnabled(false);
 			btnEditarCliente.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -197,41 +203,12 @@ public class PainelCadastroCliente extends JPanel {
 				}
 			});
 		
-			btnEditarCliente.setBounds(258, 322, 111, 41);
+			btnEditarCliente.setBounds(200, 322, 109, 41);
+			btnEditarCliente.setBackground(new Color(240, 248, 255));
 			this.add(btnEditarCliente);
-			
-			btnConsultarCpfCliente = new JButton("");	
-			btnConsultarCpfCliente.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					btnEditarCliente.setEnabled(true);
-								
-					String pesqcpf = txtClienteCpf.getText(); 
-									
-					ClienteDAO dao = new ClienteDAO();
-					ClienteVO cliente = dao.pesquisarPorCpf(pesqcpf);
-					
-												
-					for (ClienteVO cpf: dao.pesquisarTodos()) {
-						
-						txtNomeCliente.setText(cpf.getNome());
-						txtSobrenomeCliente.setText(cpf.getSobrenome());
-						txtClienteCpf.setText(cpf.getCpf());
-						txtEmail.setText(cpf.getEmail());
-						txtTelefoneCliente.setText(cpf.getTelefone());
-						txtClienteCNH.setText(cpf.getCnh());
-						txtEnderecoCliente.setText(cpf.getEndereco());
-						txtCidadeCliente.setText(cpf.getCidade());
-						cbEstadoCliente.setSelectedItem(cpf.getEstado());
-						txtCEPCliente.setText(cpf.getCep()); 
-					}
-			}
-		});   
-					
-			btnConsultarCpfCliente.setIcon(new ImageIcon(PainelCadastroCliente.class.getResource("/icons/pesquisapequeno.png")));
-			btnConsultarCpfCliente.setBounds(555, 100, 24, 25);
-			this.add(btnConsultarCpfCliente);			
-			
+											
 			btnSalvarCliente = new JButton(" Salvar");
+			btnSalvarCliente.setVerticalAlignment(SwingConstants.TOP);
 			btnSalvarCliente.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent arg0) {
 					ClienteVO novoCliente = new ClienteVO();
@@ -251,16 +228,48 @@ public class PainelCadastroCliente extends JPanel {
 								
 					ClienteController veiculoController = new ClienteController();
 					JOptionPane.showMessageDialog(null, veiculoController.cadastrarCliente(novoCliente));
+				
+					
 				} 
 
 			});
-			btnSalvarCliente.setVerticalAlignment(SwingConstants.TOP);
 			btnSalvarCliente.setIcon(new ImageIcon(PainelCadastroCliente.class.getResource("/icons/Salvar.png")));
 			btnSalvarCliente.setHorizontalAlignment(SwingConstants.LEFT);
 			btnSalvarCliente.setForeground(new Color(0, 0, 139));
 			btnSalvarCliente.setBackground(new Color(240, 248, 255));
-			btnSalvarCliente.setBounds(396, 322, 111, 41);
+			btnSalvarCliente.setBounds(436, 322, 109, 41);
 			add(btnSalvarCliente);
+			
+			btnConsultarCpfCliente = new JButton("");	
+			btnConsultarCpfCliente.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					btnEditarCliente.setEnabled(true);
+					btnClienteExcluir.setEnabled(true);
+					
+					String cpf = txtClienteCpf.getText(); 
+									
+					ClienteDAO dao = new ClienteDAO();
+					ClienteVO cliente = dao.pesquisarPorCpf(cpf);
+									
+					for (ClienteVO c: dao.pesquisarTodos()) {
+						
+						txtNomeCliente.setText(c.getNome());
+						txtSobrenomeCliente.setText(c.getSobrenome());
+						txtClienteCpf.setText(c.getCpf());
+						txtEmail.setText(c.getEmail());
+						txtTelefoneCliente.setText(c.getTelefone());
+						txtClienteCNH.setText(c.getCnh());
+						txtEnderecoCliente.setText(c.getEndereco());
+						txtCidadeCliente.setText(c.getCidade());
+						cbEstadoCliente.setSelectedItem(c.getEstado());
+						txtCEPCliente.setText(c.getCep()); 
+					}
+			}
+		});   
+			
+			btnConsultarCpfCliente.setIcon(new ImageIcon(PainelCadastroCliente.class.getResource("/icons/pesquisapequeno.png")));
+			btnConsultarCpfCliente.setBounds(555, 100, 24, 25);
+			this.add(btnConsultarCpfCliente);	
 			
 			btnClienteNovo = new JButton("Novo");
 			btnClienteNovo.addActionListener(new ActionListener() {
@@ -276,18 +285,47 @@ public class PainelCadastroCliente extends JPanel {
 					txtCidadeCliente.setEnabled(true);
 					txtCEPCliente.setEnabled(true);
 					 
-				
+					limparTela();
 				}
 			});
 			btnClienteNovo.setForeground(new Color(0, 0, 139));
 			btnClienteNovo.setBackground(new Color(240, 248, 255));
-			btnClienteNovo.setBounds(122, 322, 111, 41);
+			btnClienteNovo.setBounds(81, 322, 109, 41);
 			add(btnClienteNovo);
+			
+			btnClienteExcluir = new JButton("Excluir");
+			btnClienteExcluir.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					
+					int resposta =0;
+					resposta = JOptionPane.showConfirmDialog(getRootPane(), "Deseja Realmente Excluir o Cadastro? ");
+					
+					if(resposta == JOptionPane.YES_NO_OPTION) {
+						
+					}
+				}
+			});
+			btnClienteExcluir.setBackground(new Color(240, 248, 255));
+			btnClienteExcluir.setForeground(new Color(0, 0, 139));
+			btnClienteExcluir.setEnabled(false);
+			btnClienteExcluir.setBounds(319, 322, 109, 41);
+			add(btnClienteExcluir);
 			
 		} catch (ParseException e) {
 			JOptionPane.showMessageDialog(null, "Ocorreu um erro no sistema, entre em contato com o administrador.");
 			System.out.println("Causa da exceÃ§Ã£o: " + e.getMessage());
 		}
-		
 	}
+		protected void limparTela() {
+			txtNomeCliente.setText("");
+			txtSobrenomeCliente.setText("");
+			txtClienteCpf.setText("");
+			txtEmail.setText("");
+			txtClienteCNH.setText("");
+			txtTelefoneCliente.setText("");
+			txtEnderecoCliente.setText("");
+			cbEstadoCliente.setSelectedItem("");
+			txtCidadeCliente.setText("");
+			txtCEPCliente.setText("");
+		}
 }

@@ -106,7 +106,7 @@ public class PainelReservaLocacao extends JPanel {
 		JSeparator separator = new JSeparator();
 		separator.setBounds(66, 287, 464, 2);
 		this.add(separator);
-								
+									
 		try {
 			MaskFormatter mascaraKmAtual = new MaskFormatter("######");
 			MaskFormatter mascaraKmDevolucao = new MaskFormatter("######");
@@ -169,8 +169,8 @@ public class PainelReservaLocacao extends JPanel {
 		
 		ClienteDAO clientes = new ClienteDAO();
 		for(ClienteVO cliente: clientes.pesquisarTodos()) {
-		cbCliente.addItem(cliente); 
-		
+		cbCliente.addItem(cliente);
+					
 		}
 		
 		cbVeiculo = new JComboBox();

@@ -125,7 +125,6 @@ public class TelaMenuInicial extends JFrame {
 				PainelReservaLocacao painelReserva = new PainelReservaLocacao();
 				setContentPane(painelReserva);
 				revalidate();
-			
 			}
 		});
 		menuItemReservaLocacao.setIcon(new ImageIcon(TelaMenuInicial.class.getResource("/icons/Reserva.png")));

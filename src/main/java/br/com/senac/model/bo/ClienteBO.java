@@ -2,6 +2,7 @@ package br.com.senac.model.bo;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.senac.controller.ClienteController;
 import br.com.senac.model.dao.ClienteDAO;
 import br.com.senac.model.vo.ClienteVO;
 
@@ -19,6 +20,12 @@ public class ClienteBO {
 		
 		return salvou; */
 		
-	}
 	
+	public boolean excluir(ClienteVO cliente) {
+		ClienteController clienteController = new ClienteController();
+		return clienteController.Excluir(cliente);
+
+	}
+}
+
 
