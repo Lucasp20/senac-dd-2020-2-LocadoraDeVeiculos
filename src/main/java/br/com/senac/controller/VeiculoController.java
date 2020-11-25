@@ -1,8 +1,11 @@
 package br.com.senac.controller;
 
+import java.util.List;
+
 import br.com.senac.constante.Mensagens;
 import br.com.senac.model.bo.VeiculoBO;
 import br.com.senac.model.dao.VeiculoDAO;
+import br.com.senac.model.seletores.VeiculoSeletor;
 import br.com.senac.model.vo.VeiculoVO;
 
 public class VeiculoController {
@@ -117,6 +120,11 @@ public class VeiculoController {
 			return false;
 		}
 		return true;
+	}
+
+	public List<VeiculoVO> listarClientesFiltro(VeiculoSeletor seletor) {
+		VeiculoDAO dao = new VeiculoDAO();
+		return dao.listarComSeletor(seletor);
 	}
 
 }

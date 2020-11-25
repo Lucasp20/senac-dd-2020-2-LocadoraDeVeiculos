@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.senac.model.seletores.VeiculoSeletor;
+import br.com.senac.model.vo.ClienteVO;
 import br.com.senac.model.vo.VeiculoVO;
 
 
@@ -182,6 +184,62 @@ public class VeiculoDAO {
 				
 		return veiculoBuscado;
 	}
+
+	public List<VeiculoVO> listarComSeletor(VeiculoSeletor seletor) {
+		String sql = "SELECT * FROM CLIENTE ";
+		
+		if(seletor.temFiltro()) {
+			sql = criarFiltros(seletor, sql);
+		}
+		Connection conexao = Banco.getConnection();
+			
+		PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);
+		ArrayList<VeiculoVO> veiculosBuscados = new ArrayList<VeiculoVO>();
+		
+		try { ResultSet conjuntoResultante = consulta.executeQuery();
+			while(conjuntoResultante.next()) {	
+				VeiculoVO veiculoBuscado = contruirVeiculoDoResultSet(conjuntoResultante);					
+				veiculosBuscados.add(veiculoBuscado);
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao consultar clientes com filtros .\nCausa: " + e.getMessage());
+		}finally {			
+			Banco.closeStatement(consulta);			
+			Banco.closeConnection(conexao);
+		}
+		return veiculosBuscados;
+	}
+
+	private String criarFiltros(VeiculoSeletor seletor, String sql) {
+		sql +=" WHERE ";
+		boolean primeiro = true;
+		
+		if((seletor.getAnoFiltro() !=null)){
+			if(!primeiro) {
+				sql+= " AND ";
+			}
+			sql += "VEICULO.ANO LIKE '%= " + seletor.getAnoFiltro() + "%'";
+			primeiro = false;
+		}
+		
+		if((seletor.getCorFiltro() !=null) && (seletor.getCorFiltro().trim().length() > 0)){
+			if(!primeiro) {
+				sql+= " AND ";
+			}
+			sql += "VEICULO.COR LIKE '%= " + seletor.getCorFiltro() + "%'";
+			primeiro = false;
+		}
+		
+		if((seletor.getMarcaFiltro() !=null) && (seletor.getMarcaFiltro().trim().length() > 0)){
+			if(!primeiro) {
+				sql+= " AND ";
+			}
+			sql += "VEICULO.MARCA = " + seletor.getMarcaFiltro();
+			primeiro = false;
+		}
+		return sql;
+	}
+	
 	
 }
 
