@@ -11,6 +11,7 @@ import javax.swing.text.MaskFormatter;
 import br.com.senac.constante.Mensagens;
 import br.com.senac.controller.ClienteController;
 import br.com.senac.controller.VeiculoController;
+import br.com.senac.model.dao.VeiculoDAO;
 import br.com.senac.model.vo.ClienteVO;
 import br.com.senac.model.vo.VeiculoVO;
 
@@ -44,6 +45,7 @@ import java.awt.event.ActionEvent;
 
 public class PainelCadastroVeiculo extends JPanel {
 
+	protected static final int VeiculoVO = 0;
 	private JLabel lblPlaca;
 	private JFormattedTextField txtPlaca;
 	private JLabel lblRenavam;
@@ -99,7 +101,7 @@ public class PainelCadastroVeiculo extends JPanel {
 		this.add(lblPlaca);
 		
 		txtPlaca = new JFormattedTextField(mascaraPlaca);
-		txtPlaca.setBounds(75, 101, 96, 27);
+		txtPlaca.setBounds(75, 101, 111, 27);
 		this.add(txtPlaca);
 		
 		lblRenavam = new JLabel("Renavam");
@@ -253,17 +255,34 @@ public class PainelCadastroVeiculo extends JPanel {
 		btnConsultarCpfCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnEditarVeiculo.setEnabled(true);
+				
+				String placa = txtPlaca.getText();
+				
+				VeiculoDAO dao = new VeiculoDAO();
+				VeiculoVO veiculo = dao.pesquisarPorPlaca(placa);
 			
-			}
-		});
+				for(VeiculoVO v: dao.pesquisarTodos()); {
+				
+				txtPlaca.setText(veiculo.getPlaca());
+				txtRenavam.setText(veiculo.getRenavam());
+				txtChassi.setText(veiculo.getChassi());
+				cbMarcaVeiculo.setSelectedItem(veiculo.getMarca());
+				txtModelo.setText(veiculo.getModelo());
+				cbAnoVeiculo.setSelectedItem(veiculo.getAno());
+				cbCorVeiculo.setSelectedItem(veiculo.getCor());
+				cbDadosVeiculoMotor.setSelectedItem(veiculo.getMotor());
+				cbDadosVeiculoTransmissao.setSelectedItem(veiculo.getTransmissao());
+			} 
+		}
+	});
 		btnConsultarCpfCliente.setIcon(new ImageIcon(PainelCadastroVeiculo.class.getResource("/icons/pesquisapequeno.png")));
-		btnConsultarCpfCliente.setBounds(173, 101, 51, 27);
+		btnConsultarCpfCliente.setBounds(188, 101, 36, 27);
 		this.add(btnConsultarCpfCliente);
 		
 		JButton btnVeiculoNovo = new JButton("Novo");
 		btnVeiculoNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				txtPlaca.setEnabled(true);
+				lblPlaca.setEnabled(true);
 				txtRenavam.setEnabled(true);
 				txtChassi.setEnabled(true);
 				cbMarcaVeiculo.setEnabled(true);

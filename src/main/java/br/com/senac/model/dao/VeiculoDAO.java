@@ -12,6 +12,7 @@ import br.com.senac.model.vo.VeiculoVO;
 
 
 public class VeiculoDAO {
+	
 
 	public VeiculoVO inserir(VeiculoVO veiculo) {
 		Connection conexao = Banco.getConnection();
@@ -102,6 +103,25 @@ public class VeiculoDAO {
 					
 			return alterou;
 		}
+	
+	public static VeiculoVO pesquisarPorPlaca(String placa) {
+		String sql = " SELECT * FROM VEICULO WHERE PLACA=? ";
+		VeiculoVO veiculobuscado = null;
+		
+		try (Connection conexao = Banco.getConnection();
+			PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);) {
+			consulta.setString(1, placa);
+			ResultSet conjuntoResultante = consulta.executeQuery();
+			
+			if(conjuntoResultante.next()) {
+				veiculobuscado = contruirVeiculoDoResultSet(conjuntoResultante);
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao consultar veiculo por placa (placa: " + placa + ") .\nCausa: " + e.getMessage());
+		}
+		
+		return veiculobuscado;
+	}
 	
 	public static VeiculoVO pesquisarPorMarca(String marca) {
 		String sql = " SELECT * FROM VEICULO WHERE MARCA=? ";

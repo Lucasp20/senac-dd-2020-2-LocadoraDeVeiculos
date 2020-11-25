@@ -13,6 +13,7 @@ import br.com.senac.model.vo.VeiculoVO;
 import br.com.senac.model.dao.Banco;
 import br.com.senac.view.PainelRelatorioLocacao;
 
+
 public class ClienteDAO {
 	
 	
@@ -106,6 +107,26 @@ public class ClienteDAO {
 		}
 
 		return alterou;
+	}
+	
+	public static ClienteVO pesquisarPorCpf(String cpf) {
+		String sql = " SELECT * FROM CLIENTE WHERE CPF=? ";
+		ClienteVO clienteBuscado = null;
+		
+		
+		try (Connection conexao = Banco.getConnection();
+			PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);) {
+			consulta.setString(1, cpf);
+			ResultSet conjuntoResultante = consulta.executeQuery();
+			
+			if(conjuntoResultante.next()) {
+				clienteBuscado = contruirClienteDoResultSet(conjuntoResultante);
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao consultar cliente por CPF (" + cpf + ") .\nCausa: " + e.getMessage());
+		}
+		
+		return clienteBuscado;
 	}
 	
 

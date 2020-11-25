@@ -205,24 +205,24 @@ public class PainelCadastroCliente extends JPanel {
 				public void actionPerformed(ActionEvent arg0) {
 					btnEditarCliente.setEnabled(true);
 								
-					String cpf = txtClienteCpf.getText();
+					String pesqcpf = txtClienteCpf.getText(); 
 									
 					ClienteDAO dao = new ClienteDAO();
-					List<ClienteVO> clientes = dao.pesquisarTodos();
+					ClienteVO cliente = dao.pesquisarPorCpf(pesqcpf);
 					
 												
-					for (ClienteVO c: dao.pesquisarTodos()) {
+					for (ClienteVO cpf: dao.pesquisarTodos()) {
 						
-						txtNomeCliente.setText(c.getNome());
-						txtSobrenomeCliente.setText(c.getSobrenome());
-						txtClienteCpf.setText(c.getCpf());
-						txtEmail.setText(c.getEmail());
-						txtTelefoneCliente.setText(c.getTelefone());
-						txtClienteCNH.setText(c.getCnh());
-						txtEnderecoCliente.setText(c.getEndereco());
-						txtCidadeCliente.setText(c.getCidade());
-						cbEstadoCliente.setSelectedItem(c.getEstado());
-						txtCEPCliente.setText(c.getCep()); 
+						txtNomeCliente.setText(cpf.getNome());
+						txtSobrenomeCliente.setText(cpf.getSobrenome());
+						txtClienteCpf.setText(cpf.getCpf());
+						txtEmail.setText(cpf.getEmail());
+						txtTelefoneCliente.setText(cpf.getTelefone());
+						txtClienteCNH.setText(cpf.getCnh());
+						txtEnderecoCliente.setText(cpf.getEndereco());
+						txtCidadeCliente.setText(cpf.getCidade());
+						cbEstadoCliente.setSelectedItem(cpf.getEstado());
+						txtCEPCliente.setText(cpf.getCep()); 
 					}
 			}
 		});   
