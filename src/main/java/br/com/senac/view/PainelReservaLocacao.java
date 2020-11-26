@@ -42,148 +42,144 @@ import java.awt.event.MouseEvent;
 
 public class PainelReservaLocacao extends JPanel {
 
+	
+	private JLabel lblDadosDaReserva;
+	private JLabel lblReservaLocacaoCliente;
+	private	JLabel lblReservaLocacaoVeiculo;
+	private JLabel lblReservaDataLocacao;
 	private JButton btnSalvarReserva;
 	private DatePicker ReservaDataLocacaoVeiculo;
 	private DatePicker ReservaDataDevolucaoVeiculo;
-	private JFormattedTextField txtReservaVeiculoKmAtual;
 	private JLabel lblReservaLocacaoDataDevolucao;
 	private JComboBox cbCliente;
 	private JComboBox cbVeiculo;
-	private JFormattedTextField txtReservaVeiculoKmDevolucao;
 	private JPanel tela;
+	private JFormattedTextField txtReservaVeiculoKmAtual;
+	private JFormattedTextField txtReservaVeiculoKmDevolucao;
+	private JLabel lblReservaLocacaoKmDevolucao;
+	private JLabel lblReservaLocacaoKmAtual;
 	
 	/**
 	 * Create the panel.
 	 */
-	
+
 	public PainelReservaLocacao() {
 		setLayout(null);
-				
-		JLabel lblDadosDaReserva = new JLabel("Dados da Reserva");
+
+		lblDadosDaReserva = new JLabel("Dados da Reserva");
 		lblDadosDaReserva.setFont(new Font("Arial", Font.BOLD, 15));
 		lblDadosDaReserva.setBounds(23, 35, 146, 14);
 		this.add(lblDadosDaReserva);
-		
-		JLabel lblReservaLocacaoCliente = new JLabel("Cliente");
+
+		lblReservaLocacaoCliente = new JLabel("Cliente");
 		lblReservaLocacaoCliente.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblReservaLocacaoCliente.setBounds(90, 90, 46, 14);
 		this.add(lblReservaLocacaoCliente);
-		
-		JLabel lblReservaLocacaoVeiculo = new JLabel("Veículo");
+
+		lblReservaLocacaoVeiculo = new JLabel("Veículo");
 		lblReservaLocacaoVeiculo.setBounds(298, 90, 46, 14);
 		this.add(lblReservaLocacaoVeiculo);
-		
-		JLabel lblReservaDataLocacao = new JLabel("Data da Locação");
+
+		lblReservaDataLocacao = new JLabel("Data da Locação");
 		lblReservaDataLocacao.setBounds(90, 154, 95, 14);
 		this.add(lblReservaDataLocacao);
-		
+
 		ReservaDataLocacaoVeiculo = new DatePicker();
-		ReservaDataLocacaoVeiculo.getComponentToggleCalendarButton().setIcon(new ImageIcon(PainelReservaLocacao.class.getResource("/icons/Calendario16pix.png")));
+		ReservaDataLocacaoVeiculo.getComponentToggleCalendarButton()
+				.setIcon(new ImageIcon(PainelReservaLocacao.class.getResource("/icons/Calendario16pix.png")));
 		ReservaDataLocacaoVeiculo.getComponentToggleCalendarButton().setText("");
 		ReservaDataLocacaoVeiculo.getComponentDateTextField().setEditable(false);
 		ReservaDataLocacaoVeiculo.setBounds(90, 168, 182, 25);
 		this.add(ReservaDataLocacaoVeiculo);
-		
+
 		lblReservaLocacaoDataDevolucao = new JLabel("Data da Devolução");
 		lblReservaLocacaoDataDevolucao.setBounds(298, 154, 105, 14);
 		this.add(lblReservaLocacaoDataDevolucao);
-		
+
 		ReservaDataDevolucaoVeiculo = new DatePicker();
-		ReservaDataDevolucaoVeiculo.getComponentToggleCalendarButton().setIcon(new ImageIcon(PainelReservaLocacao.class.getResource("/icons/Calendario16pix.png")));
+		ReservaDataDevolucaoVeiculo.getComponentToggleCalendarButton()
+				.setIcon(new ImageIcon(PainelReservaLocacao.class.getResource("/icons/Calendario16pix.png")));
 		ReservaDataDevolucaoVeiculo.getComponentToggleCalendarButton().setText("");
 		ReservaDataDevolucaoVeiculo.getComponentDateTextField().setEditable(false);
 		ReservaDataDevolucaoVeiculo.setBounds(298, 168, 182, 25);
 		this.add(ReservaDataDevolucaoVeiculo);
-		
-		JLabel lblReservaLocacaoKmAtual = new JLabel("KM Atual");
+
+		lblReservaLocacaoKmAtual = new JLabel("KM Atual");
 		lblReservaLocacaoKmAtual.setBounds(90, 219, 57, 14);
 		this.add(lblReservaLocacaoKmAtual);
-		
-		JLabel lblReservaLocacaoKmDevolucao = new JLabel("KM Devolução");
+
+		lblReservaLocacaoKmDevolucao = new JLabel("KM Devolução");
 		lblReservaLocacaoKmDevolucao.setBounds(298, 219, 105, 14);
 		this.add(lblReservaLocacaoKmDevolucao);
 
 		JSeparator separator = new JSeparator();
 		separator.setBounds(66, 287, 464, 2);
 		this.add(separator);
-									
-		try {
-			MaskFormatter mascaraKmAtual = new MaskFormatter("######");
-			MaskFormatter mascaraKmDevolucao = new MaskFormatter("######");
-		
-			txtReservaVeiculoKmAtual = new JFormattedTextField(mascaraKmAtual);
-			txtReservaVeiculoKmAtual.setBounds(90, 233, 182, 25);
-			this.add(txtReservaVeiculoKmAtual);
-			
-			txtReservaVeiculoKmDevolucao = new JFormattedTextField(mascaraKmDevolucao);
-			txtReservaVeiculoKmDevolucao.setBounds(298, 233, 182, 25);
-			this.add(txtReservaVeiculoKmDevolucao);
-		
-			btnSalvarReserva = new JButton("  Reservar");
-			btnSalvarReserva.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					LocacaoVO novaLocacao = new LocacaoVO();
-					
-					novaLocacao.setCliente((ClienteVO)cbCliente.getSelectedItem());
-					novaLocacao.setVeiculo((VeiculoVO)cbVeiculo.getSelectedItem()); 
-					novaLocacao.setDataLocacao(ReservaDataLocacaoVeiculo.getDate());
-					novaLocacao.setKmLocacao((int)txtReservaVeiculoKmAtual.getValue());
-				/*	novaLocacao.setDataEntrega(ReservaDataDevolucaoVeiculo.getDate());
-					novaLocacao.setKmLocacao(Integer.parseInt(txtReservaVeiculoKmDevolucao.getValue().toString()));;  */
-							
-					LocacaoController controller = new LocacaoController();
 
-					String mensagem = controller.salvar(novaLocacao);
-					JOptionPane.showMessageDialog(null, mensagem);
-				
-				}
-					
-			});
-			btnSalvarReserva.setIcon(new ImageIcon(PainelReservaLocacao.class.getResource("/icons/Salvar.png")));
-			btnSalvarReserva.setHorizontalAlignment(SwingConstants.LEFT);
-			btnSalvarReserva.setForeground(new Color(0, 0, 139));
-			btnSalvarReserva.setBackground(new Color(240, 248, 255));
+		txtReservaVeiculoKmAtual = new JFormattedTextField();
+		txtReservaVeiculoKmAtual.setBounds(90, 233, 182, 25);
+		this.add(txtReservaVeiculoKmAtual);
 
-			btnSalvarReserva.setBounds(144, 325, 128, 41);
-			this.add(btnSalvarReserva);
-			
-			JButton btnEditarVeiculo = new JButton("Devolver");
-			btnEditarVeiculo.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					
-					JOptionPane.showMessageDialog(null, "Passou pelo botão Devolver");
-				}
-			});
-			btnEditarVeiculo.setBounds(292, 326, 111, 41);
-			this.add(btnEditarVeiculo);
-				
-		} catch (ParseException e) {
-			JOptionPane.showMessageDialog(null, "Ocorreu um erro no sistema, entre em contato com o administrador.");
-			System.out.println("Causa da exceÃ§Ã£o: " + e.getMessage());
-	}
-	
+		txtReservaVeiculoKmDevolucao = new JFormattedTextField();
+		txtReservaVeiculoKmDevolucao.setBounds(298, 233, 182, 25);
+		this.add(txtReservaVeiculoKmDevolucao);
+
+		btnSalvarReserva = new JButton("  Reservar");
+		btnSalvarReserva.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				LocacaoVO novaLocacao = new LocacaoVO();
+
+				novaLocacao.setCliente((ClienteVO) cbCliente.getSelectedItem());
+				novaLocacao.setVeiculo((VeiculoVO) cbVeiculo.getSelectedItem());
+				novaLocacao.setDataLocacao(ReservaDataLocacaoVeiculo.getDate());
+				novaLocacao.setKmLocacao(Integer.parseInt(txtReservaVeiculoKmAtual.getText().toString()));
+				novaLocacao.setDataEntrega(ReservaDataDevolucaoVeiculo.getDate());
+				novaLocacao.setKmEntrega(Integer.parseInt(txtReservaVeiculoKmDevolucao.getText().toString()));   
+
+				LocacaoController locacaoController = new LocacaoController();
+				JOptionPane.showMessageDialog(null, locacaoController.salvar(novaLocacao));  
+
+			}
+
+		});
+
+		btnSalvarReserva.setIcon(new ImageIcon(PainelReservaLocacao.class.getResource("/icons/Salvar.png")));
+		btnSalvarReserva.setHorizontalAlignment(SwingConstants.LEFT);
+		btnSalvarReserva.setForeground(new Color(0, 0, 139));
+		btnSalvarReserva.setBackground(new Color(240, 248, 255));
+		btnSalvarReserva.setBounds(144, 325, 128, 41);
+		this.add(btnSalvarReserva);
+
+		JButton btnEditarVeiculo = new JButton("Devolver");
+		btnEditarVeiculo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				JOptionPane.showMessageDialog(null, "Passou pelo botão Devolver");
+			}
+		});
+
+		btnEditarVeiculo.setBounds(292, 326, 111, 41);
+		this.add(btnEditarVeiculo);
+
 		cbCliente = new JComboBox();
 		cbCliente.setBounds(90, 106, 182, 25);
 		this.add(cbCliente);
-		
+
 		ClienteDAO clientes = new ClienteDAO();
-		for(ClienteVO cliente: clientes.pesquisarTodos()) {
-		cbCliente.addItem(cliente);
-					
+		for (ClienteVO cliente : clientes.pesquisarTodos()) {
+			cbCliente.addItem(cliente);
+
 		}
-		
+
 		cbVeiculo = new JComboBox();
 		cbVeiculo.setBounds(298, 106, 182, 25);
 		this.add(cbVeiculo);
-		
+
 		VeiculoDAO veiculos = new VeiculoDAO();
-		for(VeiculoVO veiculo: veiculos.pesquisarTodos()) {
-		cbVeiculo.addItem(veiculo);		
-		
+		for (VeiculoVO veiculo : veiculos.pesquisarTodos()) {
+			cbVeiculo.addItem(veiculo);
+
 		}
 	}
 }
-
-
-

@@ -68,9 +68,8 @@ public class ClienteDAO {
 
 		try {
 			query.setString(1, cpf.getCpf());
-			int codigoRetorno = query.executeUpdate();
+			
 			JOptionPane.showMessageDialog(null, "Dados Excluidos com sucesso ");
-			excluiu = (codigoRetorno == Banco.CODIGO_RETORNO_SUCESSO);
 		} catch (SQLException e) {
 			System.out.println("Erro ao excluir Cliente (cpf: " + cpf + ") .\nCausa: " + e.getMessage());
 		} finally {

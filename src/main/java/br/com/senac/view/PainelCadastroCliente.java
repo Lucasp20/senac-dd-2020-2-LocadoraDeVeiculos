@@ -296,13 +296,11 @@ public class PainelCadastroCliente extends JPanel {
 			btnClienteExcluir = new JButton("Excluir");
 			btnClienteExcluir.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+					ClienteVO novoCliente = new ClienteVO();
 					
-					int resposta =0;
-					resposta = JOptionPane.showConfirmDialog(getRootPane(), "Deseja Realmente Excluir o Cadastro? ");
+					clienteVO.setCpf(txtClienteCpf.getText());
+			
 					
-					if(resposta == JOptionPane.YES_NO_OPTION) {
-						
-					}
 				}
 			});
 			btnClienteExcluir.setBackground(new Color(240, 248, 255));
@@ -328,4 +326,5 @@ public class PainelCadastroCliente extends JPanel {
 			txtCidadeCliente.setText("");
 			txtCEPCliente.setText("");
 		}
+		
 }

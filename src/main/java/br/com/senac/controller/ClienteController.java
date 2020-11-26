@@ -13,7 +13,6 @@ import br.com.senac.model.vo.ClienteVO;
 
 public class ClienteController {
 	
-	private ClienteDAO clienteDAO;
 
 	/*
 	 * 	situacao = "AQUI VÃO SER TRABALHADOS OS CONTROLLERS - apenas testandooo";
@@ -30,7 +29,10 @@ public class ClienteController {
 		situacao = "AQUI VÃO SER TRABALHADOS OS CONTROLLERS - apenas testandooo";
 		cliente = bo.salvarCliente(cliente);
 		return situacao; */
+	
+	ClienteVO clienteVO = new ClienteVO();
 	private String mensagem ="";
+	
 
 	public String cadastrarCliente(ClienteVO novoCliente) {
 		
@@ -144,8 +146,12 @@ public class ClienteController {
 		return true;
 } 
 	
+	public boolean atualizarCliente(ClienteVO novoCliente) {
+		
+		return false;
+	}
 
-	
+
 	public String gerarPlanilha(List<ClienteVO> dadosConsultados, String caminho) {
 		// TODO Auto-generated method stub
 		return null;
@@ -156,6 +162,8 @@ public class ClienteController {
 		
 		return dao.listarComSeletor(seletor);
 	}
+
+	
 
 
 	
