@@ -16,7 +16,6 @@ import br.com.senac.model.dao.Banco;
 import br.com.senac.model.seletores.ClienteSeletor;
 import br.com.senac.view.PainelRelatorioLocacao;
 
-
 public class ClienteDAO {
 
 	public ClienteVO inserir(ClienteVO cliente) {
@@ -58,20 +57,18 @@ public class ClienteDAO {
 		return cliente;
 	}
 
-	public boolean excluir(ClienteVO cpf) {
+	public String excluir(String cpf) {
 		Connection conexao = Banco.getConnection();
 
-		String sql = "DELETE FROM CLIENTE WHERE CPF = " + cpf;
+		String sql = "DELETE FROM CLIENTE WHERE CPF =?";
 
 		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
-		boolean excluiu = false;
+		String excluiu = null;
 
 		try {
-			query.setString(1, cpf.getCpf());
-			
-			JOptionPane.showMessageDialog(null, "Dados Excluidos com sucesso ");
+			query.setString(1, cpf);
 		} catch (SQLException e) {
-			System.out.println("Erro ao excluir Cliente (cpf: " + cpf + ") .\nCausa: " + e.getMessage());
+			System.out.println("Erro ao excluir o CPF (cpf: " + cpf + ").\nCausa: " + e.getMessage());
 		} finally {
 			Banco.closeStatement(query);
 			Banco.closeConnection(conexao);
@@ -84,7 +81,7 @@ public class ClienteDAO {
 
 		String sql = " UPDATE CLIENTE "
 				+ " SET NOME=?, SOBRENOME=?, CPF=?, EMAIL=?, CNH=?, TELEFONE=?, ENDERECO=?, CIDADE=?, ESTADO=?, CEP=? "
-				+ " WHERE IDCLIENTE = ? ";
+				+ " WHERE CPF = ? ";
 
 		boolean alterou = false;
 
@@ -110,26 +107,24 @@ public class ClienteDAO {
 		return alterou;
 	}
 
-	
 	public static ClienteVO pesquisarPorCpf(String cpf) {
 		String sql = " SELECT * FROM CLIENTE WHERE CPF=? ";
-		ClienteVO clienteBuscado = null;
-				
+		ClienteVO clientebuscado = null;
+
 		try (Connection conexao = Banco.getConnection();
-			PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);) {
+				PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);) {
 			consulta.setString(1, cpf);
 			ResultSet conjuntoResultante = consulta.executeQuery();
-			
-			if(conjuntoResultante.next()) {
-				clienteBuscado = contruirClienteDoResultSet(conjuntoResultante);
+
+			if (conjuntoResultante.next()) {
+				clientebuscado = contruirClienteDoResultSet(conjuntoResultante);
 			}
 		} catch (SQLException e) {
-			System.out.println("Erro ao consultar cliente por CPF (" + cpf + ") .\nCausa: " + e.getMessage());
+			System.out.println("Erro ao consultar cliente por CPF (CPF" + cpf + ") .\nCausa: " + e.getMessage());
 		}
-		
-		return clienteBuscado;
+
+		return clientebuscado;
 	}
-	
 
 	public ClienteVO pesquisarPorNome(String nome) {
 		String sql = "SELECT * FROM CLIENTE WHERE NOME=?";
@@ -172,17 +167,24 @@ public class ClienteDAO {
 		}
 		return clientesBuscados;
 	}
-	public boolean cpfJaCadastrado(ClienteVO cliente) {
-		boolean cpfcadastrado = false;
+	
+	private static ClienteVO contruirClienteDoResultSet(ResultSet conjuntoResultante) throws SQLException {
 
-		Connection conexao = Banco.getConnection();
+		ClienteVO clienteBuscado = new ClienteVO();
+		clienteBuscado.setIdCliente(conjuntoResultante.getInt("idCliente"));
+		clienteBuscado.setNome(conjuntoResultante.getString("Nome"));
+		clienteBuscado.setSobrenome(conjuntoResultante.getString("sobrenome"));
+		clienteBuscado.setCpf(conjuntoResultante.getString("cpf"));
+		clienteBuscado.setEmail(conjuntoResultante.getString("email"));
+		clienteBuscado.setCnh(conjuntoResultante.getString("cnh"));
+		clienteBuscado.setTelefone(conjuntoResultante.getString("telefone"));
+		clienteBuscado.setEndereco(conjuntoResultante.getString("endereco"));
+		clienteBuscado.setCidade(conjuntoResultante.getString("cidade"));
+		clienteBuscado.setEstado(conjuntoResultante.getString("estado"));
+		clienteBuscado.setCep(conjuntoResultante.getString("cep"));
 
-		String sql = "SELECT count(id) FROM CLIENTE WHERE CPF = ?";
+		return clienteBuscado;
 
-		if (cliente.getIdCliente() > 0) {
-			sql += "AND ID <> ? ";
-		}
-		return true;
 	}
 
 	public ArrayList<ClienteVO> listarComSeletor(ClienteSeletor seletor) {
@@ -241,22 +243,5 @@ public class ClienteDAO {
 		return sql;
 	}
 
-private static ClienteVO contruirClienteDoResultSet(ResultSet conjuntoResultante) throws SQLException{
 
-	ClienteVO clienteBuscado = new ClienteVO();
-	clienteBuscado.setIdCliente(conjuntoResultante.getInt("idCliente"));
-	clienteBuscado.setNome(conjuntoResultante.getString("Nome"));
-	clienteBuscado.setSobrenome(conjuntoResultante.getString("sobrenome"));
-	clienteBuscado.setCpf(conjuntoResultante.getString("cpf"));
-	clienteBuscado.setEmail(conjuntoResultante.getString("email"));
-	clienteBuscado.setCnh(conjuntoResultante.getString("cnh"));
-	clienteBuscado.setTelefone(conjuntoResultante.getString("telefone"));
-	clienteBuscado.setEndereco(conjuntoResultante.getString("endereco"));
-	clienteBuscado.setCidade(conjuntoResultante.getString("cidade"));
-	clienteBuscado.setEstado(conjuntoResultante.getString("estado"));
-	clienteBuscado.setCep(conjuntoResultante.getString("cep"));
-	
-	return clienteBuscado;
-
-	}
 }

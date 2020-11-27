@@ -18,6 +18,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSeparator;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.EventQueue;
 
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
@@ -40,9 +41,7 @@ import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 
 public class PainelCadastroCliente extends JPanel {
-
-	private ClienteVO clienteVO;
-	private ClienteDAO clienteDAO;
+	
 	private JLabel lblNome;
 	private JLabel lblDadosClientes;
 	private JLabel lblSobreNome;
@@ -71,11 +70,9 @@ public class PainelCadastroCliente extends JPanel {
 	private JButton btnClienteNovo;
 	private JButton btnClienteExcluir;
 
+	private ClienteDAO clienteDAO = new ClienteDAO();
+	private ClienteVO clienteVO = new ClienteVO();
 	
-	/**
-	 * Create the panel.
-	 * @throws ParseException 
-	 */
 	public PainelCadastroCliente(){
 		setLayout(null);
 		
@@ -199,7 +196,8 @@ public class PainelCadastroCliente extends JPanel {
 					txtEnderecoCliente.setEnabled(true);
 					cbEstadoCliente.setEnabled(true);
 					txtCidadeCliente.setEnabled(true);
-					txtCEPCliente.setEnabled(true);
+					txtCEPCliente.setEnabled(true);		
+					
 				}
 			});
 		
@@ -226,10 +224,9 @@ public class PainelCadastroCliente extends JPanel {
 					novoCliente.setEstado(cbEstadoCliente.getSelectedItem().toString());
 					novoCliente.setCep(txtCEPCliente.getText());   
 								
-					ClienteController veiculoController = new ClienteController();
-					JOptionPane.showMessageDialog(null, veiculoController.cadastrarCliente(novoCliente));
-				
-					
+					ClienteController clienteController = new ClienteController();
+					JOptionPane.showMessageDialog(null, clienteController.cadastrarCliente(novoCliente));
+
 				} 
 
 			});
@@ -238,7 +235,7 @@ public class PainelCadastroCliente extends JPanel {
 			btnSalvarCliente.setForeground(new Color(0, 0, 139));
 			btnSalvarCliente.setBackground(new Color(240, 248, 255));
 			btnSalvarCliente.setBounds(436, 322, 109, 41);
-			add(btnSalvarCliente);
+			this.add(btnSalvarCliente);
 			
 			btnConsultarCpfCliente = new JButton("");	
 			btnConsultarCpfCliente.addActionListener(new ActionListener() {
@@ -246,12 +243,12 @@ public class PainelCadastroCliente extends JPanel {
 					btnEditarCliente.setEnabled(true);
 					btnClienteExcluir.setEnabled(true);
 					
-					String cpf = txtClienteCpf.getText(); 
-									
+					String cpf = txtClienteCpf.getText();
+					
 					ClienteDAO dao = new ClienteDAO();
 					ClienteVO cliente = dao.pesquisarPorCpf(cpf);
 									
-					for (ClienteVO c: dao.pesquisarTodos()) {
+					for (ClienteVO c : dao.pesquisarTodos()) {
 						
 						txtNomeCliente.setText(c.getNome());
 						txtSobrenomeCliente.setText(c.getSobrenome());
@@ -262,7 +259,7 @@ public class PainelCadastroCliente extends JPanel {
 						txtEnderecoCliente.setText(c.getEndereco());
 						txtCidadeCliente.setText(c.getCidade());
 						cbEstadoCliente.setSelectedItem(c.getEstado());
-						txtCEPCliente.setText(c.getCep()); 
+						txtCEPCliente.setText(c.getCep());  
 					}
 			}
 		});   
@@ -296,10 +293,20 @@ public class PainelCadastroCliente extends JPanel {
 			btnClienteExcluir = new JButton("Excluir");
 			btnClienteExcluir.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					ClienteVO novoCliente = new ClienteVO();
+					ClienteVO excluirCliente = new ClienteVO();
 					
-					clienteVO.setCpf(txtClienteCpf.getText());
-			
+					int resposta = 0;
+					
+					resposta = JOptionPane.showConfirmDialog(getRootPane(), "Deseja realmente excluir? ");
+					if(resposta == JOptionPane.YES_OPTION) {
+						clienteVO.setCpf(txtClienteCpf.getText());
+						clienteDAO.excluir(clienteVO.getCpf());
+						
+						ClienteController clienteController = new ClienteController();
+						JOptionPane.showMessageDialog(null, clienteController.excluirCliente(excluirCliente));
+						
+						limparTela();
+					}
 					
 				}
 			});
@@ -307,7 +314,7 @@ public class PainelCadastroCliente extends JPanel {
 			btnClienteExcluir.setForeground(new Color(0, 0, 139));
 			btnClienteExcluir.setEnabled(false);
 			btnClienteExcluir.setBounds(319, 322, 109, 41);
-			add(btnClienteExcluir);
+			this.add(btnClienteExcluir);
 			
 		} catch (ParseException e) {
 			JOptionPane.showMessageDialog(null, "Ocorreu um erro no sistema, entre em contato com o administrador.");

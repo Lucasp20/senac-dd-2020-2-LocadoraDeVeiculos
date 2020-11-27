@@ -8,13 +8,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import br.com.senac.model.seletores.VeiculoSeletor;
 import br.com.senac.model.vo.ClienteVO;
 import br.com.senac.model.vo.VeiculoVO;
 
 
 public class VeiculoDAO {
-	
 
 	public VeiculoVO inserir(VeiculoVO veiculo) {
 		Connection conexao = Banco.getConnection();
@@ -25,7 +26,7 @@ public class VeiculoDAO {
 		PreparedStatement query = Banco.getPreparedStatementWithGeneratedKeys(conexao, sql);
 
 		try {
-			
+
 			query.setString(1, veiculo.getPlaca());
 			query.setString(2, veiculo.getRenavam());
 			query.setString(3, veiculo.getChassi());
@@ -35,7 +36,7 @@ public class VeiculoDAO {
 			query.setString(7, veiculo.getCor());
 			query.setString(8, veiculo.getMotor());
 			query.setString(9, veiculo.getTransmissao());
-			
+
 			int codigoRetorno = query.executeUpdate();
 
 			if (codigoRetorno == Banco.CODIGO_RETORNO_SUCESSO) {
@@ -54,121 +55,149 @@ public class VeiculoDAO {
 
 		return veiculo;
 	}
-	
-	public int excluir(int idVeiculo) {
+
+	public static String excluir(String placa) {
 		Connection conexao = Banco.getConnection();
-		String sql = " DELETE FROM VEICULO WHERE idVeiculo=? ";
-		
+
+		String sql = "DELETE FROM VEICULO WHERE PLACA=?";
+
 		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
-		int excluiu = 0;
-		
+		String excluiu = null;
+
 		try {
-			query.setInt(1, idVeiculo);
-			
-			int codigoRetorno = query.executeUpdate();
-			
+			query.setString(1, placa);
+			JOptionPane.showMessageDialog(null, "Dados Excluidos com sucesso ");
 		} catch (SQLException e) {
-			System.out.println("Erro ao excluir veiculo (id: " + idVeiculo + ") .\nCausa: " + e.getMessage());
-		}finally {
+			System.out.println("Erro ao excluir a PLACA (placa: " + placa + ").\nCausa: " + e.getMessage());
+		} finally {
 			Banco.closeStatement(query);
 			Banco.closeConnection(conexao);
 		}
-				
+
 		return excluiu;
 	}
 
-	public boolean alterar (VeiculoVO veiculo) {
-			String sql = "UPDATE VEICULO " 
-							+ "SET PLACA=?, RENAVAM=?, CHASSI=?, MARCA=?, MODELO=?, ANO=?, COR=?, MOTOR=?,TRANSMISSAO=?"
-							+ "WHERE idVeiculo=? ";
-			
-			boolean alterou = false;
-						
-			try (Connection conexao = Banco.getConnection();
+	public boolean alterar(VeiculoVO veiculo) {
+		String sql = "UPDATE VEICULO "
+				+ "SET PLACA=?, RENAVAM=?, CHASSI=?, MARCA=?, MODELO=?, ANO=?, COR=?, MOTOR=?,TRANSMISSAO=?"
+				+ "WHERE idVeiculo=? ";
+
+		boolean alterou = false;
+
+		try (Connection conexao = Banco.getConnection();
 				PreparedStatement query = Banco.getPreparedStatement(conexao, sql);) {
-				query.setString(1, veiculo.getPlaca());
-				query.setString(2, veiculo.getRenavam());
-				query.setString(3, veiculo.getChassi());
-				query.setString(4, veiculo.getMarca());
-				query.setString(5, veiculo.getModelo());
-				query.setInt(6, veiculo.getAno());
-				query.setString(7, veiculo.getCor());
-				query.setString(8, veiculo.getMotor());
-				query.setString(9, veiculo.getTransmissao());
-				
-				
-				int codigoRetorno = query.executeUpdate();
-				alterou = (codigoRetorno == Banco.CODIGO_RETORNO_SUCESSO);
-			} catch (SQLException e) {
-				System.out.println("Erro ao alterar veiculo. \nCausa: " + e.getMessage());
-			}
-					
-			return alterou;
+			query.setString(1, veiculo.getPlaca());
+			query.setString(2, veiculo.getRenavam());
+			query.setString(3, veiculo.getChassi());
+			query.setString(4, veiculo.getMarca());
+			query.setString(5, veiculo.getModelo());
+			query.setInt(6, veiculo.getAno());
+			query.setString(7, veiculo.getCor());
+			query.setString(8, veiculo.getMotor());
+			query.setString(9, veiculo.getTransmissao());
+
+			int codigoRetorno = query.executeUpdate();
+			alterou = (codigoRetorno == Banco.CODIGO_RETORNO_SUCESSO);
+		} catch (SQLException e) {
+			System.out.println("Erro ao alterar veiculo. \nCausa: " + e.getMessage());
 		}
-	
+
+		return alterou;
+	}
+
 	public static VeiculoVO pesquisarPorPlaca(String placa) {
 		String sql = " SELECT * FROM VEICULO WHERE PLACA=? ";
 		VeiculoVO veiculobuscado = null;
-		
+
 		try (Connection conexao = Banco.getConnection();
-			PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);) {
+				PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);) {
 			consulta.setString(1, placa);
 			ResultSet conjuntoResultante = consulta.executeQuery();
-			
-			if(conjuntoResultante.next()) {
+
+			if (conjuntoResultante.next()) {
 				veiculobuscado = contruirVeiculoDoResultSet(conjuntoResultante);
 			}
 		} catch (SQLException e) {
 			System.out.println("Erro ao consultar veiculo por placa (placa: " + placa + ") .\nCausa: " + e.getMessage());
 		}
-		
+
 		return veiculobuscado;
 	}
-	
+
 	public static VeiculoVO pesquisarPorMarca(String marca) {
 		String sql = " SELECT * FROM VEICULO WHERE MARCA=? ";
 		VeiculoVO veiculobuscado = null;
-		
+
 		try (Connection conexao = Banco.getConnection();
-			PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);) {
+				PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);) {
 			consulta.setString(1, marca);
 			ResultSet conjuntoResultante = consulta.executeQuery();
-			
-			if(conjuntoResultante.next()) {
+
+			if (conjuntoResultante.next()) {
 				veiculobuscado = contruirVeiculoDoResultSet(conjuntoResultante);
 			}
 		} catch (SQLException e) {
 			System.out.println("Erro ao consultar veiculo por Id (id: " + marca + ") .\nCausa: " + e.getMessage());
 		}
-		
+
 		return veiculobuscado;
 	}
-	
 
 	public static List<VeiculoVO> pesquisarTodos() {
 		Connection conexao = Banco.getConnection();
 		String sql = "SELECT * FROM VEICULO ";
 
-		PreparedStatement consulta = Banco.getPreparedStatement(conexao,  sql);
+		PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);
 		List<VeiculoVO> veiculosBuscados = new ArrayList<VeiculoVO>();
-	
-		try { ResultSet conjuntoResultante = consulta.executeQuery();
-			while(conjuntoResultante.next()) {
-			VeiculoVO veiculoBuscado = contruirVeiculoDoResultSet(conjuntoResultante);					
-			veiculosBuscados.add(veiculoBuscado);
+
+		try {
+			ResultSet conjuntoResultante = consulta.executeQuery();
+			while (conjuntoResultante.next()) {
+				VeiculoVO veiculoBuscado = contruirVeiculoDoResultSet(conjuntoResultante);
+				veiculosBuscados.add(veiculoBuscado);
 			}
 		} catch (SQLException e) {
 			System.out.println("Erro ao consultar todos os veiculos .\nCausa: " + e.getMessage());
-		}finally {			
-			Banco.closeStatement(consulta);			
+		} finally {
+			Banco.closeStatement(consulta);
 			Banco.closeConnection(conexao);
-		}	
-			return veiculosBuscados;
+		}
+		return veiculosBuscados;
 	}
 	
+	public boolean placaJaCadastrada(VeiculoVO placa) {
+		boolean jaCadastrado = false;
 
-	private static VeiculoVO contruirVeiculoDoResultSet(ResultSet conjuntoResultante) throws SQLException {
+		Connection conexao = Banco.getConnection();
+		String sql = "SELECT count(id) FROM CLIENTE WHERE PLACA = ?";
 		
+		if(placa.getIdVeiculo() > 0) {
+			sql += " AND ID <> ? ";
+		}
+		
+		PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);
+		
+		try {
+			consulta.setString(1, placa.getPlaca());
+			
+			if(placa.getIdVeiculo() > 0) {
+				consulta.setInt(2, placa.getIdVeiculo());
+			}
+			
+			ResultSet conjuntoResultante = consulta.executeQuery();
+			jaCadastrado = conjuntoResultante.next();
+		} catch (SQLException e) {
+			System.out.println("Erro ao verificar se PLACA (" + placa.getPlaca() + ") JÁ foi usado .\nCausa: " + e.getMessage());
+		}finally {
+			Banco.closeStatement(consulta);
+			Banco.closeConnection(conexao);
+		}
+		
+		return jaCadastrado;
+	}
+	
+	private static VeiculoVO contruirVeiculoDoResultSet(ResultSet conjuntoResultante) throws SQLException {
+
 		VeiculoVO veiculoBuscado = new VeiculoVO();
 		veiculoBuscado.setIdVeiculo(conjuntoResultante.getInt("idVeiculo"));
 		veiculoBuscado.setPlaca(conjuntoResultante.getString("placa"));
@@ -181,65 +210,64 @@ public class VeiculoDAO {
 		veiculoBuscado.setMotor(conjuntoResultante.getString("motor"));
 		veiculoBuscado.setChassi(conjuntoResultante.getString("chassi"));
 		veiculoBuscado.setTransmissao(conjuntoResultante.getString("transmissao"));
-				
+
 		return veiculoBuscado;
 	}
 
 	public List<VeiculoVO> listarComSeletor(VeiculoSeletor seletor) {
 		String sql = "SELECT * FROM CLIENTE ";
-		
-		if(seletor.temFiltro()) {
+
+		if (seletor.temFiltro()) {
 			sql = criarFiltros(seletor, sql);
 		}
 		Connection conexao = Banco.getConnection();
-			
+
 		PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);
 		ArrayList<VeiculoVO> veiculosBuscados = new ArrayList<VeiculoVO>();
-		
-		try { ResultSet conjuntoResultante = consulta.executeQuery();
-			while(conjuntoResultante.next()) {	
-				VeiculoVO veiculoBuscado = contruirVeiculoDoResultSet(conjuntoResultante);					
+
+		try {
+			ResultSet conjuntoResultante = consulta.executeQuery();
+			while (conjuntoResultante.next()) {
+				VeiculoVO veiculoBuscado = contruirVeiculoDoResultSet(conjuntoResultante);
 				veiculosBuscados.add(veiculoBuscado);
 			}
 		} catch (SQLException e) {
 			System.out.println("Erro ao consultar clientes com filtros .\nCausa: " + e.getMessage());
-		}finally {			
-			Banco.closeStatement(consulta);			
+		} finally {
+			Banco.closeStatement(consulta);
 			Banco.closeConnection(conexao);
 		}
 		return veiculosBuscados;
 	}
 
 	private String criarFiltros(VeiculoSeletor seletor, String sql) {
-		sql +=" WHERE ";
+		sql += " WHERE ";
 		boolean primeiro = true;
-		
-		if((seletor.getAnoFiltro() !=null)){
-			if(!primeiro) {
-				sql+= " AND ";
+
+		if ((seletor.getAnoFiltro() != null)) {
+			if (!primeiro) {
+				sql += " AND ";
 			}
 			sql += "VEICULO.ANO LIKE '%= " + seletor.getAnoFiltro() + "%'";
 			primeiro = false;
 		}
-		
-		if((seletor.getCorFiltro() !=null) && (seletor.getCorFiltro().trim().length() > 0)){
-			if(!primeiro) {
-				sql+= " AND ";
+
+		if ((seletor.getCorFiltro() != null) && (seletor.getCorFiltro().trim().length() > 0)) {
+			if (!primeiro) {
+				sql += " AND ";
 			}
 			sql += "VEICULO.COR LIKE '%= " + seletor.getCorFiltro() + "%'";
 			primeiro = false;
 		}
-		
-		if((seletor.getMarcaFiltro() !=null) && (seletor.getMarcaFiltro().trim().length() > 0)){
-			if(!primeiro) {
-				sql+= " AND ";
+
+		if ((seletor.getMarcaFiltro() != null) && (seletor.getMarcaFiltro().trim().length() > 0)) {
+			if (!primeiro) {
+				sql += " AND ";
 			}
 			sql += "VEICULO.MARCA = " + seletor.getMarcaFiltro();
 			primeiro = false;
 		}
 		return sql;
 	}
-	
-	
-}
 
+}

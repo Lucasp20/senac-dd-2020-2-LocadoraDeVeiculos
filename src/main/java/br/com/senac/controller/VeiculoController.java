@@ -6,6 +6,7 @@ import br.com.senac.constante.Mensagens;
 import br.com.senac.model.bo.VeiculoBO;
 import br.com.senac.model.dao.VeiculoDAO;
 import br.com.senac.model.seletores.VeiculoSeletor;
+import br.com.senac.model.vo.ClienteVO;
 import br.com.senac.model.vo.VeiculoVO;
 
 public class VeiculoController {
@@ -24,6 +25,7 @@ public class VeiculoController {
 		return situacao;
 		
 	 */
+	private VeiculoDAO veiculoDAO = new VeiculoDAO();
 	
 	private String mensagem = "";
 	
@@ -120,6 +122,23 @@ public class VeiculoController {
 			return false;
 		}
 		return true;
+	}
+	
+	public VeiculoVO salvar(VeiculoVO veiculo) {
+		if(veiculoDAO.placaJaCadastrada(veiculo)) {
+			mensagem = ("A placa infomada (" + veiculo.getPlaca()
+					+" ) Já foi cadastrado para outro veículo");
+	}
+		veiculoDAO.inserir(veiculo);
+		
+		return veiculo;
+		
+	}		
+	
+	public String excluirCliente(ClienteVO clienteExcluido) {
+		String excluiu = VeiculoDAO.excluir(clienteExcluido.getCpf());
+		
+		return excluiu;
 	}
 
 	public List<VeiculoVO> listarClientesFiltro(VeiculoSeletor seletor) {
