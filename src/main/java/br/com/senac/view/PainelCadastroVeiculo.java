@@ -283,9 +283,8 @@ public class PainelCadastroVeiculo extends JPanel {
 		add(btnVeiculoNovo);
 
 		btnVeiculoExcluir = new JButton("Excluir");
-		btnVeiculoExcluir.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
+		btnVeiculoExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 				int resposta = 0;
 				
 				resposta = JOptionPane.showConfirmDialog(getRootPane(), "Deseja realmente excluir? ");
