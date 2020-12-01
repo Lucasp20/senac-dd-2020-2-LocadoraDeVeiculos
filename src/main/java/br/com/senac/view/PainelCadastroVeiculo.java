@@ -289,9 +289,13 @@ public class PainelCadastroVeiculo extends JPanel {
 				
 				resposta = JOptionPane.showConfirmDialog(getRootPane(), "Deseja realmente excluir? ");
 				if(resposta == JOptionPane.YES_OPTION) {
-					veiculoVO.setPlaca(txtPlaca.getText());
-					veiculoDAO.excluir(veiculoVO.getPlaca());
 					
+					veiculoDAO.excluir(veiculoVO.getPlaca());
+					veiculoVO.setPlaca(txtPlaca.getText()); 
+					
+					VeiculoController veiculoController = new VeiculoController();
+					JOptionPane.showMessageDialog(null, "Dados Excluidos");
+										
 					limparTela();
 				}
 			}

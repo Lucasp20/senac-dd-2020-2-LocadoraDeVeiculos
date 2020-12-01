@@ -136,7 +136,7 @@ public class PainelRelatorioVeiculo extends JPanel {
 			seletor.setCorFiltro(txtCor.getText());
 			seletor.setMarcaFiltro(txtRelatorioMarca.getText());
 		
-		List<VeiculoVO> veiculos = controlador.listarClientesFiltro(seletor);
+		List<VeiculoVO> veiculos = controlador.listarVeiculosFiltro(seletor);
 		atualizarTabelaVeiculos(veiculos);
 
 	}

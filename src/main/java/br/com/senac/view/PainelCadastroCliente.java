@@ -180,7 +180,7 @@ public class PainelCadastroCliente extends JPanel {
 			txtClienteCNH.setEnabled(false);
 			txtClienteCNH.setBounds(419, 160, 135, 25);
 			this.add(txtClienteCNH);
-			
+						
 			btnEditarCliente = new JButton("Editar");
 			btnEditarCliente.setForeground(new Color(0, 0, 139));
 			btnEditarCliente.setBackground(new Color(240, 248, 255));
@@ -242,32 +242,33 @@ public class PainelCadastroCliente extends JPanel {
 				public void actionPerformed(ActionEvent arg0) {
 					btnEditarCliente.setEnabled(true);
 					btnClienteExcluir.setEnabled(true);
-					
+				
 					String cpf = txtClienteCpf.getText();
 					
 					ClienteDAO dao = new ClienteDAO();
-					ClienteVO cliente = dao.pesquisarPorCpf(cpf);
-									
-					for (ClienteVO c : dao.pesquisarTodos()) {
-						
-						txtNomeCliente.setText(c.getNome());
-						txtSobrenomeCliente.setText(c.getSobrenome());
-						txtClienteCpf.setText(c.getCpf());
-						txtEmail.setText(c.getEmail());
-						txtTelefoneCliente.setText(c.getTelefone());
-						txtClienteCNH.setText(c.getCnh());
-						txtEnderecoCliente.setText(c.getEndereco());
-						txtCidadeCliente.setText(c.getCidade());
-						cbEstadoCliente.setSelectedItem(c.getEstado());
-						txtCEPCliente.setText(c.getCep());  
+					ClienteVO c = ClienteDAO.pesquisarPorCpf(cpf);
+					
+					for(ClienteVO cliente : dao.pesquisarTodos()) {
+											
+						txtNomeCliente.setText(cliente.getNome());
+						txtSobrenomeCliente.setText(cliente.getSobrenome());
+						txtClienteCpf.setText(cliente.getCpf());
+						txtEmail.setText(cliente.getEmail());
+						txtTelefoneCliente.setText(cliente.getTelefone());
+						txtClienteCNH.setText(cliente.getCnh());
+						txtEnderecoCliente.setText(cliente.getEndereco());
+						txtCidadeCliente.setText(cliente.getCidade());
+						cbEstadoCliente.setSelectedItem(cliente.getEstado());
+						txtCEPCliente.setText(cliente.getCep());  
 					}
-			}
-		});   
+				}
+			});
 			
+		
 			btnConsultarCpfCliente.setIcon(new ImageIcon(PainelCadastroCliente.class.getResource("/icons/pesquisapequeno.png")));
 			btnConsultarCpfCliente.setBounds(555, 100, 24, 25);
-			this.add(btnConsultarCpfCliente);	
-			
+			this.add(btnConsultarCpfCliente);
+		
 			btnClienteNovo = new JButton("Novo");
 			btnClienteNovo.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -320,6 +321,7 @@ public class PainelCadastroCliente extends JPanel {
 			JOptionPane.showMessageDialog(null, "Ocorreu um erro no sistema, entre em contato com o administrador.");
 			System.out.println("Causa da exceÃ§Ã£o: " + e.getMessage());
 		}
+		
 	}
 		protected void limparTela() {
 			txtNomeCliente.setText("");

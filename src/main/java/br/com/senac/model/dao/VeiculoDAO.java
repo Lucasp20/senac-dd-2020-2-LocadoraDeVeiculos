@@ -66,7 +66,6 @@ public class VeiculoDAO {
 
 		try {
 			query.setString(1, placa);
-			JOptionPane.showMessageDialog(null, "Dados Excluidos com sucesso ");
 		} catch (SQLException e) {
 			System.out.println("Erro ao excluir a PLACA (placa: " + placa + ").\nCausa: " + e.getMessage());
 		} finally {
@@ -165,32 +164,23 @@ public class VeiculoDAO {
 		return veiculosBuscados;
 	}
 	
-	public boolean placaJaCadastrada(VeiculoVO placa) {
+	public boolean placaJaCadastrada(String placa) {
 		boolean jaCadastrado = false;
-
-		Connection conexao = Banco.getConnection();
-		String sql = "SELECT count(id) FROM CLIENTE WHERE PLACA = ?";
-		
-		if(placa.getIdVeiculo() > 0) {
-			sql += " AND ID <> ? ";
-		}
-		
-		PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);
-		
-		try {
-			consulta.setString(1, placa.getPlaca());
+	
+		String sql = "SELECT * FROM VEICULO WHERE PLACA = ?";
+	
+		try {Connection conexao = Banco.getConnection();
+			PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);
+			consulta.setString(1, placa);
+			ResultSet conjuntoResultante = consulta.executeQuery();
 			
-			if(placa.getIdVeiculo() > 0) {
-				consulta.setInt(2, placa.getIdVeiculo());
+			if(conjuntoResultante.next()) {
+				jaCadastrado = true;
 			}
 			
-			ResultSet conjuntoResultante = consulta.executeQuery();
-			jaCadastrado = conjuntoResultante.next();
 		} catch (SQLException e) {
-			System.out.println("Erro ao verificar se PLACA (" + placa.getPlaca() + ") JÁ foi usado .\nCausa: " + e.getMessage());
-		}finally {
-			Banco.closeStatement(consulta);
-			Banco.closeConnection(conexao);
+			System.out.println("Erro ao verificar placa (placa: " + placa + ").\nCausa: " + e.getMessage());
+
 		}
 		
 		return jaCadastrado;
@@ -215,7 +205,7 @@ public class VeiculoDAO {
 	}
 
 	public List<VeiculoVO> listarComSeletor(VeiculoSeletor seletor) {
-		String sql = "SELECT * FROM CLIENTE ";
+		String sql = "SELECT * FROM VEICULO ";
 
 		if (seletor.temFiltro()) {
 			sql = criarFiltros(seletor, sql);
@@ -232,7 +222,7 @@ public class VeiculoDAO {
 				veiculosBuscados.add(veiculoBuscado);
 			}
 		} catch (SQLException e) {
-			System.out.println("Erro ao consultar clientes com filtros .\nCausa: " + e.getMessage());
+			System.out.println("Erro ao consultar veiculos com filtros .\nCausa: " + e.getMessage());
 		} finally {
 			Banco.closeStatement(consulta);
 			Banco.closeConnection(conexao);

@@ -11,6 +11,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import br.com.senac.controller.ClienteController;
+import br.com.senac.model.dao.ClienteDAO;
 import br.com.senac.model.seletores.ClienteSeletor;
 import br.com.senac.model.vo.ClienteVO;
 
@@ -21,6 +22,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PainelRelatorioCliente extends JPanel {
 	private JTable tblRelatorioCliente;
@@ -50,8 +53,7 @@ public class PainelRelatorioCliente extends JPanel {
 
 		JButton btnRelatorioClientePesquisa = new JButton("Pesquisar");
 		btnRelatorioClientePesquisa.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
+				public void mouseClicked(MouseEvent arg0) {
 				consultarCliente();
 			}
 

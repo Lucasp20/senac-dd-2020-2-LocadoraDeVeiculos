@@ -132,12 +132,12 @@ public class PainelReservaLocacao extends JPanel {
 				novaLocacao.setCliente((ClienteVO) cbCliente.getSelectedItem());
 				novaLocacao.setVeiculo((VeiculoVO) cbVeiculo.getSelectedItem());
 				novaLocacao.setDataLocacao(ReservaDataLocacaoVeiculo.getDate());
-				novaLocacao.setKmLocacao(Integer.parseInt(txtReservaVeiculoKmAtual.getText()));
+				novaLocacao.setKmLocacao(Integer.parseInt(txtReservaVeiculoKmAtual.getText().toString()));
 				novaLocacao.setDataEntrega(ReservaDataDevolucaoVeiculo.getDate());
-				novaLocacao.setKmEntrega(Integer.parseInt(txtReservaVeiculoKmDevolucao.getText()));   
+				novaLocacao.setKmEntrega(Integer.parseInt(txtReservaVeiculoKmDevolucao.getText().toString()));
 
 				LocacaoController locacaoController = new LocacaoController();
-				JOptionPane.showMessageDialog(null, locacaoController.salvar(novaLocacao));  
+				JOptionPane.showMessageDialog(null, locacaoController.cadastrarLocacao(novaLocacao));  
 
 			}
 

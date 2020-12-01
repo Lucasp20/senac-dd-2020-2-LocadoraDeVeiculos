@@ -3,6 +3,7 @@ package br.com.senac.controller;
 import java.sql.SQLException;
 
 import br.com.senac.constante.Mensagens;
+import br.com.senac.model.bo.LocacaoBO;
 import br.com.senac.model.dao.LocacaoDAO;
 import br.com.senac.model.vo.LocacaoVO;
 
@@ -14,9 +15,11 @@ public class LocacaoController {
 	 * que km de de retirada
 	 * 
 	 */
+	private LocacaoBO bo = new LocacaoBO();
+	
 	private String mensagem = "";
 
-	public String salvar(LocacaoVO novaLocacao) {
+	public String cadastrarLocacao(LocacaoVO novaLocacao) {
 
 		if (validarCliente(novaLocacao) 
 				&& validarVeiculo(novaLocacao)
@@ -34,7 +37,7 @@ public class LocacaoController {
 	}
 
 	private boolean validarCliente(LocacaoVO novaLocacao) {
-		if (novaLocacao.getCliente() == null) {
+		if (novaLocacao.getCliente() == null) {				
 			mensagem = Mensagens.LOCACAO_ERRO_CLIENTE;
 			return false;
 		}
@@ -58,12 +61,13 @@ public class LocacaoController {
 	}
 
 	private boolean validarKmLocacao(LocacaoVO kmLocacao) {
-		if (kmLocacao == null ){
+		if (kmLocacao == null) {
 			mensagem = Mensagens.LOCACAO_ERRO_KMLOCACAO;
 			return false;
 		}
 		return true;
 	}
+	
 
 	private boolean validarDataEntrega(LocacaoVO novaLocacao) {
 		if (novaLocacao.getDataEntrega() == null) {

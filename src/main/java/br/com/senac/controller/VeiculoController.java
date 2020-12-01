@@ -124,25 +124,32 @@ public class VeiculoController {
 		return true;
 	}
 	
-	public VeiculoVO salvar(VeiculoVO veiculo) {
-		if(veiculoDAO.placaJaCadastrada(veiculo)) {
-			mensagem = ("A placa infomada (" + veiculo.getPlaca()
-					+" ) Já foi cadastrado para outro veículo");
+	public String placaJaCadastrada(VeiculoVO veiculo) {
+		if(veiculoDAO.placaJaCadastrada(veiculo.getPlaca())) {
+			return "A placa infomada já foi cadastrada";
 	}
 		veiculoDAO.inserir(veiculo);
 		
-		return veiculo;
+		return mensagem;
 		
 	}		
 	
-	public String excluirCliente(ClienteVO clienteExcluido) {
-		String excluiu = VeiculoDAO.excluir(clienteExcluido.getCpf());
+	public boolean atualizarVeiculo(VeiculoVO novoVeiculo) {
+
+		return false;
+	}
+	
+	public String excluirVeiculo(VeiculoVO veiculoExcluido) {
+		String excluiu = VeiculoDAO.excluir(veiculoExcluido.getPlaca());
 		
-		return excluiu;
+		
+		return excluiu; 
+		
 	}
 
-	public List<VeiculoVO> listarClientesFiltro(VeiculoSeletor seletor) {
+	public List<VeiculoVO> listarVeiculosFiltro(VeiculoSeletor seletor) {
 		VeiculoDAO dao = new VeiculoDAO();
+		
 		return dao.listarComSeletor(seletor);
 	}
 

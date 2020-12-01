@@ -120,7 +120,7 @@ public class ClienteDAO {
 				clientebuscado = contruirClienteDoResultSet(conjuntoResultante);
 			}
 		} catch (SQLException e) {
-			System.out.println("Erro ao consultar cliente por CPF (CPF" + cpf + ") .\nCausa: " + e.getMessage());
+			System.out.println("Erro ao consultar cliente por cpf (cpf" + cpf + ") .\nCausa: " + e.getMessage());
 		}
 
 		return clientebuscado;
