@@ -47,11 +47,11 @@ public class PainelRelatorioVeiculo extends JPanel {
 		setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setEnabled(false);
 		scrollPane.setBounds(10, 150, 599, 223);
 		add(scrollPane);
 		
 		tblRelatorioVeiculo = new JTable();
-		tblRelatorioVeiculo.setEnabled(false);
 		tblRelatorioVeiculo.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null},
@@ -69,9 +69,17 @@ public class PainelRelatorioVeiculo extends JPanel {
 			new String[] {
 				"Placa", "Marca", "Modelo", "Cor"
 			}
-		));
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
 		tblRelatorioVeiculo.getColumnModel().getColumn(0).setPreferredWidth(97);
 		tblRelatorioVeiculo.getColumnModel().getColumn(1).setPreferredWidth(99);
+		tblRelatorioVeiculo.getColumnModel().getColumn(2).setResizable(false);
 		tblRelatorioVeiculo.getColumnModel().getColumn(2).setPreferredWidth(102);
 		tblRelatorioVeiculo.getColumnModel().getColumn(3).setPreferredWidth(119);
 		scrollPane.setViewportView(tblRelatorioVeiculo);
@@ -93,9 +101,9 @@ public class PainelRelatorioVeiculo extends JPanel {
 		
 		JButton btnRelatorioPesquisa = new JButton("Pesquisar");
 		btnRelatorioPesquisa.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				consultarCliente();
+				consultarVeiculo();
+				
 			}
 
 			
@@ -129,7 +137,7 @@ public class PainelRelatorioVeiculo extends JPanel {
 		add(lblRelatorioVeiculo);
 
 	}
-	private void consultarCliente() {
+	private void consultarVeiculo() {
 		VeiculoController controlador = new VeiculoController();
 		VeiculoSeletor seletor = new VeiculoSeletor();
 			seletor.setAnoFiltro(txtAno.getText());

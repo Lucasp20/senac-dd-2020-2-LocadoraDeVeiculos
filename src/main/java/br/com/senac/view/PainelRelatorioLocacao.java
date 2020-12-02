@@ -7,7 +7,15 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import com.github.lgooddatepicker.components.DatePicker;
+
+import br.com.senac.controller.LocacaoController;
+import br.com.senac.controller.VeiculoController;
+import br.com.senac.model.seletores.LocacaoSeletor;
+import br.com.senac.model.seletores.VeiculoSeletor;
+import br.com.senac.model.vo.VeiculoVO;
+
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
@@ -17,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 public class PainelRelatorioLocacao extends JPanel {
 	private JTable table;
 
+	private JFormattedTextField txtNomeCliente;
 	/**
 	 * Create the panel.
 	 */
@@ -60,11 +69,17 @@ public class PainelRelatorioLocacao extends JPanel {
 		lblRelatorioLocacaoNomeCliente.setBounds(10, 11, 100, 14);
 		painelRelatorioLocacao.add(lblRelatorioLocacaoNomeCliente);
 		
-		JFormattedTextField formattedTextField = new JFormattedTextField();
-		formattedTextField.setBounds(10, 24, 188, 25);
-		painelRelatorioLocacao.add(formattedTextField);
+		txtNomeCliente = new JFormattedTextField();
+		txtNomeCliente.setBounds(10, 24, 188, 25);
+		painelRelatorioLocacao.add(txtNomeCliente);
 		
 		JButton btnRelatorioLocacaoPesquisa = new JButton("Pesquisar");
+		btnRelatorioLocacaoPesquisa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				consultarLocacao();
+			}
+
+		});
 		btnRelatorioLocacaoPesquisa.setBounds(358, 110, 112, 28);
 		painelRelatorioLocacao.add(btnRelatorioLocacaoPesquisa);
 		
@@ -107,5 +122,13 @@ public class PainelRelatorioLocacao extends JPanel {
 		table.getColumnModel().getColumn(5).setPreferredWidth(105);
 		scrollPane.setViewportView(table);
 
+	
+		}
+	
+	private void consultarLocacao() {
+		LocacaoController controller = new LocacaoController();
+		LocacaoSeletor seletor = new LocacaoSeletor();
+			seletor.setNomeClienteFiltro(txtNomeCliente.getText());
+		
 	}
 }

@@ -14,13 +14,13 @@ public class VeiculoSeletor {
 	}
 	
 public boolean temFiltro() {
-		if(this.anoFiltro != null) {
+		if((this.anoFiltro != null) && (this.anoFiltro.trim().length() > 0)) {
 			return true;
 		}
-		if(this.marcaFiltro != null) {
+		if((this.marcaFiltro != null) && (this.marcaFiltro.trim().length() > 0)) {
 			return true;
 		}
-		if(this.corFiltro != null) {
+		if((this.corFiltro != null) && (this.corFiltro.trim().length() > 0)){
 			return true;
 		}
 		return false;

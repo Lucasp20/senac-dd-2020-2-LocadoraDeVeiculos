@@ -20,13 +20,13 @@ public class ClienteSeletor {
 
 	
 	public boolean temFiltro() {
-		if(this.cidadeFiltro != null) {
+		if((this.cidadeFiltro != null) && (this.cidadeFiltro.trim().length() > 0)) {
 			return true;
 		}
-		if(this.nomeFiltro != null) {
+		if((this.nomeFiltro != null) && (this.nomeFiltro.trim().length() > 0)) {
 			return true;
 		}
-		if(this.estadoFiltro != null) {
+		if((this.estadoFiltro != null) && (this.estadoFiltro.trim().length() >0)) {
 			return true;
 		}
 		return false;

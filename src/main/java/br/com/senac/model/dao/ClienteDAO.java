@@ -213,6 +213,8 @@ public class ClienteDAO {
 		return clientesBuscados;
 	}
 
+
+	
 	private String criarFiltros(ClienteSeletor seletor, String sql) {
 		sql += " WHERE ";
 		boolean primeiro = true;
