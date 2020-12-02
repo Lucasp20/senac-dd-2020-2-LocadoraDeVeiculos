@@ -61,6 +61,7 @@ public class PainelReservaLocacao extends JPanel {
 	
 	/**
 	 * Create the panel.
+	 * @throws ParseException 
 	 */
 
 	public PainelReservaLocacao() {
@@ -116,11 +117,16 @@ public class PainelReservaLocacao extends JPanel {
 		separator.setBounds(66, 287, 464, 2);
 		this.add(separator);
 
-		txtReservaVeiculoKmAtual = new JFormattedTextField();
+		
+		try {
+		MaskFormatter mascaraKmAtual = new MaskFormatter("######");
+		MaskFormatter KmDevolucao = new MaskFormatter("######");
+		
+		txtReservaVeiculoKmAtual = new JFormattedTextField(mascaraKmAtual);
 		txtReservaVeiculoKmAtual.setBounds(90, 233, 182, 25);
 		this.add(txtReservaVeiculoKmAtual);
 
-		txtReservaVeiculoKmDevolucao = new JFormattedTextField();
+		txtReservaVeiculoKmDevolucao = new JFormattedTextField(KmDevolucao);
 		txtReservaVeiculoKmDevolucao.setBounds(298, 233, 182, 25);
 		this.add(txtReservaVeiculoKmDevolucao);
 
@@ -149,6 +155,11 @@ public class PainelReservaLocacao extends JPanel {
 		btnSalvarReserva.setBackground(new Color(240, 248, 255));
 		btnSalvarReserva.setBounds(144, 325, 128, 41);
 		this.add(btnSalvarReserva);
+		
+		} catch (ParseException e) {
+			JOptionPane.showMessageDialog(null, "Ocorreu um erro no sistema, entre em contato com o administrador.");
+			System.out.println("Causa da exceÃ§Ã£o: " + e.getMessage());
+		}
 
 		JButton btnEditarVeiculo = new JButton("Devolver");
 		btnEditarVeiculo.addMouseListener(new MouseAdapter() {

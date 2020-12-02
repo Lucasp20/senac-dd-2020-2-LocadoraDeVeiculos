@@ -9,6 +9,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.senac.model.seletores.LocacaoSeletor;
+import br.com.senac.model.seletores.VeiculoSeletor;
 import br.com.senac.model.vo.ClienteVO;
 import br.com.senac.model.vo.LocacaoVO;
 import br.com.senac.model.vo.VeiculoVO;
@@ -117,7 +119,7 @@ public class LocacaoDAO {
 			ResultSet conjuntoResultante = consulta.executeQuery();
 			
 			if(conjuntoResultante.next()) {
-				locacaoBuscada = construirClienteDoResultSet(conjuntoResultante);
+				locacaoBuscada = construirLocacaoDoResultSet(conjuntoResultante);
 			}
 		} catch (SQLException e) {
 			System.out.println("Erro ao consultar locacao por nome (" + nome + ") .\\nCausa: " + e.getMessage());
@@ -135,7 +137,7 @@ public class LocacaoDAO {
 		try {
 			ResultSet conjuntoResultante = consulta.executeQuery();
 			while(conjuntoResultante.next()) {
-				LocacaoVO locacaoBuscado = construirClienteDoResultSet(conjuntoResultante);
+				LocacaoVO locacaoBuscado = construirLocacaoDoResultSet(conjuntoResultante);
 				locacoesBuscadas.add(locacaoBuscado);
 			}
 		} catch (SQLException e) {
@@ -174,7 +176,7 @@ public class LocacaoDAO {
 		return nomeDoVeiculo;
 	}
 	
-	private LocacaoVO construirClienteDoResultSet(ResultSet conjuntoResultante) throws SQLException {
+	private LocacaoVO construirLocacaoDoResultSet(ResultSet conjuntoResultante) throws SQLException {
 		LocacaoVO locacaoBuscada = new LocacaoVO();
 		locacaoBuscada.setIdLocacao(conjuntoResultante.getInt("id"));
 		
@@ -201,4 +203,63 @@ public class LocacaoDAO {
 		
 		return locacaoBuscada;
 	}
+	
+	public List<LocacaoVO> listarComSeletor(LocacaoSeletor seletor) {
+		String sql = "SELECT * FROM LOCACAO ";
+
+		if (seletor.temFiltro()) {
+			sql = criarFiltros(seletor, sql);
+		}
+		Connection conexao = Banco.getConnection();
+
+		PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);
+		ArrayList<LocacaoVO> locacoesBuscadas = new ArrayList<LocacaoVO>();
+
+		try {
+			ResultSet conjuntoResultante = consulta.executeQuery();
+			while (conjuntoResultante.next()) {
+				LocacaoVO locacaoBuscado = construirLocacaoDoResultSet(conjuntoResultante);
+				locacoesBuscadas.add(locacaoBuscado);
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao consultar locação com filtros .\nCausa: " + e.getMessage());
+		} finally {
+			Banco.closeStatement(consulta);
+			Banco.closeConnection(conexao);
+		}
+		return locacoesBuscadas;
+	}
+
+	private String criarFiltros(LocacaoSeletor seletor, String sql) {
+		sql += " WHERE ";
+		boolean primeiro = true;
+		
+		if ((seletor.getNomeClienteFiltro() != null)) {
+			if (!primeiro) {
+				sql += " AND ";
+			}
+			sql += "LOCACAO.NOME_CLIENTE LIKE '%= " + seletor.getNomeClienteFiltro() + "%'";
+			primeiro = false;
+		}
+		if (seletor.getDataAluguel() != null) {
+			if (!primeiro) {
+				sql += " AND ";
+			}
+			sql += "LOCACAO.DATA_LOCACAO LIKE '%= " + seletor.getDataAluguel() + "%'";
+			primeiro = false;
+		}
+
+		if (seletor.getDataDevolucao() != null)  {
+			if (!primeiro) {
+				sql += " AND ";
+			}
+			sql += "VEICULO.DATA_ENTREGA LIKE '%= " + seletor.getDataDevolucao() + "%'";
+			primeiro = false;
+		}
+
+		
+		return sql;
+	}
+	
+	
 }

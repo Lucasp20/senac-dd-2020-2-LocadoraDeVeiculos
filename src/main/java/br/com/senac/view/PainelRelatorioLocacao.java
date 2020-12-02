@@ -26,6 +26,8 @@ public class PainelRelatorioLocacao extends JPanel {
 	private JTable table;
 
 	private JFormattedTextField txtNomeCliente;
+	private DatePicker DataAluguelVeiculo;
+	private DatePicker DataDevolucaoVeiculo;
 	/**
 	 * Create the panel.
 	 */
@@ -47,7 +49,7 @@ public class PainelRelatorioLocacao extends JPanel {
 		lblRelatorioLocacaoDataRetirada.setBounds(10, 61, 165, 14);
 		painelRelatorioLocacao.add(lblRelatorioLocacaoDataRetirada);
 		
-		DatePicker DataAluguelVeiculo = new DatePicker();
+		DataAluguelVeiculo = new DatePicker();
 		DataAluguelVeiculo.getComponentToggleCalendarButton().setIcon(new ImageIcon(PainelRelatorioLocacao.class.getResource("/icons/Calendario16pix.png")));
 		DataAluguelVeiculo.getComponentToggleCalendarButton().setText("");
 		DataAluguelVeiculo.getComponentDateTextField().setEditable(false);
@@ -58,7 +60,7 @@ public class PainelRelatorioLocacao extends JPanel {
 		lblRelatorioLocacaoDataDevolucao.setBounds(306, 61, 165, 14);
 		painelRelatorioLocacao.add(lblRelatorioLocacaoDataDevolucao);
 		
-		DatePicker DataDevolucaoVeiculo = new DatePicker();
+		DataDevolucaoVeiculo = new DatePicker();
 		DataDevolucaoVeiculo.getComponentToggleCalendarButton().setIcon(new ImageIcon(PainelRelatorioLocacao.class.getResource("/icons/Calendario16pix.png")));
 		DataDevolucaoVeiculo.getComponentToggleCalendarButton().setText("");
 		DataDevolucaoVeiculo.getComponentDateTextField().setEditable(false);
@@ -130,5 +132,6 @@ public class PainelRelatorioLocacao extends JPanel {
 		LocacaoSeletor seletor = new LocacaoSeletor();
 			seletor.setNomeClienteFiltro(txtNomeCliente.getText());
 		
+					
 	}
 }
