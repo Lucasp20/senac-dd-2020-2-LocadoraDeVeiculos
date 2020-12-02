@@ -19,7 +19,7 @@ public class VeiculoBO {
 		return veiculoController.atualizarVeiculo(novoVeiculo);
 	}
 	
-	public String excluirCliente(VeiculoVO veiculoExcluido) {
+	public boolean excluirCliente(String veiculoExcluido) {
 		return veiculoController.excluirVeiculo(veiculoExcluido);
 	}
 	

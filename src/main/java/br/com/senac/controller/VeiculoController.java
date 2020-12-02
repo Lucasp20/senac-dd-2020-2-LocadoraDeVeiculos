@@ -25,7 +25,8 @@ public class VeiculoController {
 		return situacao;
 		
 	 */
-	private VeiculoDAO veiculoDAO = new VeiculoDAO();
+	VeiculoDAO veiculoDAO = new VeiculoDAO();
+	VeiculoVO veiculoVO = new VeiculoVO();
 	
 	private String mensagem = "";
 	
@@ -124,26 +125,22 @@ public class VeiculoController {
 		return true;
 	}
 	
-	public String placaJaCadastrada(VeiculoVO veiculo) {
-		if(veiculoDAO.placaJaCadastrada(veiculo.getPlaca())) {
+	public String placaJaCadastrada(VeiculoVO novoVeiculo) {
+		if(veiculoDAO.placaJaCadastrada(novoVeiculo.getPlaca())) {
 			return "A placa infomada já foi cadastrada";
-	}
-		veiculoDAO.inserir(veiculo);
+		}
+			veiculoDAO.inserir(novoVeiculo);
 		
 		return mensagem;
-		
-	}		
+	}
 	
 	public boolean atualizarVeiculo(VeiculoVO novoVeiculo) {
 
 		return false;
 	}
 	
-	public String excluirVeiculo(VeiculoVO veiculoExcluido) {
-		String excluiu = VeiculoDAO.excluir(veiculoExcluido.getPlaca());
-		
-		
-		return excluiu; 
+	public boolean excluirVeiculo(String placa) {
+		return veiculoDAO.excluir(placa);
 		
 	}
 

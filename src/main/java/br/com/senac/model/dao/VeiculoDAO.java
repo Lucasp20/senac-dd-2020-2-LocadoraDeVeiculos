@@ -56,13 +56,12 @@ public class VeiculoDAO {
 		return veiculo;
 	}
 
-	public static String excluir(String placa) {
+	public boolean excluir(String placa) {
 		Connection conexao = Banco.getConnection();
-
 		String sql = "DELETE FROM VEICULO WHERE PLACA=?";
 
 		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
-		String excluiu = null;
+		boolean excluiu = false;
 
 		try {
 			query.setString(1, placa);

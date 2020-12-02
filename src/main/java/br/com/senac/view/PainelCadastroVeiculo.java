@@ -64,6 +64,7 @@ public class PainelCadastroVeiculo extends JPanel {
 	private JComboBox cbCorVeiculo;
 	private JButton btnEditarVeiculo;
 	private JButton btnVeiculoExcluir;
+	private VeiculoController controlador;
 
 	private VeiculoDAO veiculoDAO = new VeiculoDAO();
 	private VeiculoVO veiculoVO = new VeiculoVO();
@@ -197,7 +198,8 @@ public class PainelCadastroVeiculo extends JPanel {
 				novoVeiculo.setCor((String) (cbCorVeiculo.getSelectedItem()));
 				novoVeiculo.setMotor((String) (cbDadosVeiculoMotor.getSelectedItem()));
 				novoVeiculo.setTransmissao((String) cbDadosVeiculoTransmissao.getSelectedItem());
-
+				
+				
 				VeiculoController veiculoController = new VeiculoController();
 				JOptionPane.showMessageDialog(null, veiculoController.cadastrarVeiculo(novoVeiculo));
 
@@ -285,7 +287,18 @@ public class PainelCadastroVeiculo extends JPanel {
 		btnVeiculoExcluir = new JButton("Excluir");
 		btnVeiculoExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int resposta = 0;
+			
+			if(JOptionPane.showConfirmDialog(getRootPane(), "Deseja realmente excluir o cadastro do veículo? ")==0){
+				
+				if(controlador.excluirVeiculo(veiculoVO.getPlaca())) {
+					JOptionPane.showMessageDialog(null, "Veículo excluido com sucesso");
+						txtPlaca.setText("");
+						btnVeiculoExcluir.setEnabled(false);
+					
+				}
+			}
+				
+				/*	int resposta = 0;
 				
 				resposta = JOptionPane.showConfirmDialog(getRootPane(), "Deseja realmente excluir? ");
 				if(resposta == JOptionPane.YES_OPTION) {
@@ -296,8 +309,8 @@ public class PainelCadastroVeiculo extends JPanel {
 					VeiculoController veiculoController = new VeiculoController();
 					JOptionPane.showMessageDialog(null, "Dados Excluidos");
 										
-					limparTela();
-				}
+					limparTela(); 
+				} */
 			}
 		});
 		btnVeiculoExcluir.setForeground(new Color(0, 0, 139));
