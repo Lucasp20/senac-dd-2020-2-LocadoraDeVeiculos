@@ -1,11 +1,16 @@
 package br.com.senac.controller;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import br.com.senac.constante.Mensagens;
 import br.com.senac.model.bo.LocacaoBO;
 import br.com.senac.model.dao.LocacaoDAO;
+import br.com.senac.model.dao.VeiculoDAO;
+import br.com.senac.model.seletores.LocacaoSeletor;
+import br.com.senac.model.seletores.VeiculoSeletor;
 import br.com.senac.model.vo.LocacaoVO;
+import br.com.senac.model.vo.VeiculoVO;
 
 public class LocacaoController {
 	/*
@@ -83,6 +88,12 @@ public class LocacaoController {
 			return false;
 		}
 		return true;
+	}
+	
+	public List<LocacaoVO> listarLocacaoFiltro(LocacaoSeletor seletor) {
+		LocacaoDAO dao = new LocacaoDAO();
+		
+		return dao.listarComSeletor(seletor);
 	}
 
 }

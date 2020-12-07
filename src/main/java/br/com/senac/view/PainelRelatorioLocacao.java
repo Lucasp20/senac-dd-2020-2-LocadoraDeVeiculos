@@ -10,8 +10,10 @@ import com.github.lgooddatepicker.components.DatePicker;
 
 import br.com.senac.controller.LocacaoController;
 import br.com.senac.controller.VeiculoController;
+import br.com.senac.model.dao.LocacaoDAO;
 import br.com.senac.model.seletores.LocacaoSeletor;
 import br.com.senac.model.seletores.VeiculoSeletor;
+import br.com.senac.model.vo.LocacaoVO;
 import br.com.senac.model.vo.VeiculoVO;
 
 import java.awt.event.ActionListener;
@@ -23,18 +25,20 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class PainelRelatorioLocacao extends JPanel {
-	private JTable table;
+	private JTable tblRelatorioLocacao;
 
 	private JFormattedTextField txtNomeCliente;
 	private DatePicker DataAluguelVeiculo;
 	private DatePicker DataDevolucaoVeiculo;
+	private JLabel lblRelatrioDeLocao;
+	private List<br.com.senac.model.vo.LocacaoVO> dadosConsultados;
 	/**
 	 * Create the panel.
 	 */
 	public PainelRelatorioLocacao() {
 		setLayout(null);
 		
-		JLabel lblRelatrioDeLocao = new JLabel("Relatório de Locação");
+		lblRelatrioDeLocao = new JLabel("Relatório de Locação");
 		lblRelatrioDeLocao.setFont(new Font("Arial", Font.BOLD, 15));
 		lblRelatrioDeLocao.setBounds(10, 11, 175, 14);
 		add(lblRelatrioDeLocao);
@@ -93,9 +97,9 @@ public class PainelRelatorioLocacao extends JPanel {
 		scrollPane.setBounds(10, 183, 600, 186);
 		add(scrollPane);
 		
-		table = new JTable();
-		table.setEnabled(false);
-		table.setModel(new DefaultTableModel(
+		tblRelatorioLocacao = new JTable();
+		tblRelatorioLocacao.setEnabled(false);
+		tblRelatorioLocacao.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null, null, null},
 				{null, null, null, null, null, null},
@@ -118,11 +122,11 @@ public class PainelRelatorioLocacao extends JPanel {
 				return columnEditables[column];
 			}
 		});
-		table.getColumnModel().getColumn(2).setPreferredWidth(94);
-		table.getColumnModel().getColumn(3).setPreferredWidth(96);
-		table.getColumnModel().getColumn(4).setPreferredWidth(114);
-		table.getColumnModel().getColumn(5).setPreferredWidth(105);
-		scrollPane.setViewportView(table);
+		tblRelatorioLocacao.getColumnModel().getColumn(2).setPreferredWidth(94);
+		tblRelatorioLocacao.getColumnModel().getColumn(3).setPreferredWidth(96);
+		tblRelatorioLocacao.getColumnModel().getColumn(4).setPreferredWidth(114);
+		tblRelatorioLocacao.getColumnModel().getColumn(5).setPreferredWidth(105);
+		scrollPane.setViewportView(tblRelatorioLocacao);
 
 	
 		}
@@ -131,7 +135,27 @@ public class PainelRelatorioLocacao extends JPanel {
 		LocacaoController controller = new LocacaoController();
 		LocacaoSeletor seletor = new LocacaoSeletor();
 			seletor.setNomeClienteFiltro(txtNomeCliente.getText());
-		
 					
+			List<LocacaoVO> locacoes = controller.listarLocacaoFiltro(seletor);
+			atualizarTabelaLocacao(locacoes);		
+	}
+
+	private void atualizarTabelaLocacao(List<LocacaoVO> locacoes) {
+		dadosConsultados = locacoes;
+		this.limparTabela();
+		DefaultTableModel modelo = (DefaultTableModel) tblRelatorioLocacao.getModel();
+		for (LocacaoVO locacao : locacoes) {
+
+			String[] novaLinha = new String[] { locacao.getCliente() + "", locacao.getVeiculo().toString(), locacao.getDataLocacao().toString(),
+					locacao.getKmLocacao() + "", locacao.getDataEntrega() + "", locacao.getKmEntrega() + "" };
+			modelo.addRow(novaLinha);
+		}
+		
+	}
+
+	private void limparTabela() {
+		tblRelatorioLocacao.setModel(
+				new DefaultTableModel(new String[][] { { "Cliente", "Veiculo", "Data_Locacao", "KMLocacao", "Data_Entrega", "KMLocacao" }, },
+						new String[] { "Cliente", "Veiculo", "Data_Locacao", "KMLocacao", "Data_Entrega", "KMLocacao"}));
 	}
 }
