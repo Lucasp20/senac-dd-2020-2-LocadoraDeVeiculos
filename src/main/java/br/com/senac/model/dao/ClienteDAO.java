@@ -239,7 +239,7 @@ public class ClienteDAO {
 			if (!primeiro) {
 				sql += " AND ";
 			}
-			sql += "CLIENTE.ESTADO = " + seletor.getEstadoFiltro();
+			sql += "CLIENTE.ESTADO LIKE '%= " + seletor.getEstadoFiltro() + "%'";
 			primeiro = false;
 		}
 		return sql;
