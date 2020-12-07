@@ -11,20 +11,6 @@ import br.com.senac.model.vo.VeiculoVO;
 
 public class VeiculoController {
 
-	/*
-	 * 
-	 * 1 - Veiculo Deve possuir Renavam válido 11 caracteres numericos
-	 * 2 - Veiculo possuir marca, modelo e cor
-	 * 3- Veiculo possuir placa válida 3 letras 4 numeros
-	 * 
-	 * private VeiculoBO bo = new VeiculoBO();
-	
-	public String salvar(VeiculoVO novoVeiculo) {
-		String situacao;
-		situacao = "AQUI VÃO SER TRABALHADOS OS CONTROLLERS - apenas testandooo";
-		return situacao;
-		
-	 */
 	VeiculoDAO veiculoDAO = new VeiculoDAO();
 	VeiculoVO veiculoVO = new VeiculoVO();
 	
@@ -40,6 +26,7 @@ public class VeiculoController {
 				&& validarCor(novoVeiculo)
 				&& validarMotor(novoVeiculo)
 				&& validarTransmissao(novoVeiculo)) {
+		
 			VeiculoDAO veiculoDAO = new VeiculoDAO();
 			veiculoDAO.inserir(novoVeiculo);
 			
@@ -51,7 +38,8 @@ public class VeiculoController {
 
 	private boolean validarPlaca(VeiculoVO novoVeiculo) {
 		if(novoVeiculo.getPlaca().trim().length() < 3 
-				|| novoVeiculo.getPlaca().isEmpty() ) {
+				|| novoVeiculo.getPlaca().isEmpty()
+				|| novoVeiculo.getPlaca() == null) {
 			mensagem = Mensagens.VEICULO_ERRO_PLACA;
 			return false;
 		}
@@ -127,7 +115,7 @@ public class VeiculoController {
 	
 	public String placaJaCadastrada(VeiculoVO novoVeiculo) {
 		if(veiculoDAO.placaJaCadastrada(novoVeiculo.getPlaca())) {
-			return "A placa infomada já foi cadastrada";
+			mensagem = "A placa infomada já foi cadastrada";
 		}
 			veiculoDAO.inserir(novoVeiculo);
 		

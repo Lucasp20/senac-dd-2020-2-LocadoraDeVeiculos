@@ -244,7 +244,7 @@ public class PainelCadastroVeiculo extends JPanel {
 
 				VeiculoDAO dao = new VeiculoDAO();
 				VeiculoVO veiculo = dao.pesquisarPorPlaca(placa);
-
+				
 				for (VeiculoVO v : dao.pesquisarTodos()) {
 
 					txtPlaca.setText(veiculo.getPlaca());
@@ -256,7 +256,9 @@ public class PainelCadastroVeiculo extends JPanel {
 					cbCorVeiculo.setSelectedItem(veiculo.getCor());
 					cbDadosVeiculoMotor.setSelectedItem(veiculo.getMotor());
 					cbDadosVeiculoTransmissao.setSelectedItem(veiculo.getTransmissao());
+
 				}
+			
 			}
 		});
 		btnConsultarPlacaVeiculo.setIcon(new ImageIcon(PainelCadastroVeiculo.class.getResource("/icons/pesquisapequeno.png")));
