@@ -135,7 +135,7 @@ public class PainelRelatorioLocacao extends JPanel {
 		LocacaoController controller = new LocacaoController();
 		LocacaoSeletor seletor = new LocacaoSeletor();
 			seletor.setNomeClienteFiltro(txtNomeCliente.getText());
-			
+					
 			List<LocacaoVO> locacoes = controller.listarLocacaoFiltro(seletor);
 			atualizarTabelaLocacao(locacoes);		
 	}

@@ -179,7 +179,6 @@ public class LocacaoDAO {
 	private LocacaoVO construirLocacaoDoResultSet(ResultSet conjuntoResultante) throws SQLException {
 		LocacaoVO locacaoBuscada = new LocacaoVO();
 		locacaoBuscada.setIdLocacao(conjuntoResultante.getInt("id"));
-		
 		Date datalocacao = conjuntoResultante.getDate("data_locacao");
 		LocalDate dataLocacao = datalocacao.toLocalDate();
 		locacaoBuscada.setDataLocacao(dataLocacao);
@@ -234,11 +233,19 @@ public class LocacaoDAO {
 		sql += " WHERE ";
 		boolean primeiro = true;
 		
+		if(seletor.getIdCliente() >0) {
+			if(!primeiro) {
+				sql+= "AND";
+			}
+			sql += "LOCACAO.id = " + seletor.getIdCliente();
+			primeiro = false;
+		}
+		
 		if ((seletor.getNomeClienteFiltro() != null)) {
 			if (!primeiro) {
 				sql += " AND ";
 			}
-			sql += "LOCACAO.NOME_CLIENTE LIKE '%= " + seletor.getNomeClienteFiltro() + "%'";
+			sql += "LOCACAO.NOME LIKE '%= " + seletor.getNomeClienteFiltro() + "%'";
 			primeiro = false;
 		}
 		if (seletor.getDataAluguel() != null) {
@@ -253,7 +260,7 @@ public class LocacaoDAO {
 			if (!primeiro) {
 				sql += " AND ";
 			}
-			sql += "VEICULO.DATA_ENTREGA LIKE '%= " + seletor.getDataDevolucao() + "%'";
+			sql += "LOCACAO.DATA_ENTREGA LIKE '%= " + seletor.getDataDevolucao() + "%'";
 			primeiro = false;
 		}
 
