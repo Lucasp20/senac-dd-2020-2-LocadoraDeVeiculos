@@ -166,7 +166,7 @@ public class VeiculoDAO {
 	public boolean placaJaCadastrada(String placa) {
 		boolean jaCadastrado = false;
 	
-		String sql = "SELECT * FROM VEICULO WHERE PLACA = ?";
+		String sql = "SELECT * FROM VEICULO WHERE PLACA =?";
 	
 		try {Connection conexao = Banco.getConnection();
 			PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);
