@@ -25,7 +25,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class PainelRelatorioLocacao extends JPanel {
-	private JTable table;
+	private JTable tblRelatorioLocacao;
 
 	private JFormattedTextField txtNomeCliente;
 	private DatePicker DataAluguelVeiculo;
@@ -97,9 +97,9 @@ public class PainelRelatorioLocacao extends JPanel {
 		scrollPane.setBounds(10, 183, 600, 186);
 		add(scrollPane);
 		
-		table = new JTable();
-		table.setEnabled(false);
-		table.setModel(new DefaultTableModel(
+		tblRelatorioLocacao = new JTable();
+		tblRelatorioLocacao.setEnabled(false);
+		tblRelatorioLocacao.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null, null, null},
 				{null, null, null, null, null, null},
@@ -122,11 +122,11 @@ public class PainelRelatorioLocacao extends JPanel {
 				return columnEditables[column];
 			}
 		});
-		table.getColumnModel().getColumn(2).setPreferredWidth(94);
-		table.getColumnModel().getColumn(3).setPreferredWidth(96);
-		table.getColumnModel().getColumn(4).setPreferredWidth(114);
-		table.getColumnModel().getColumn(5).setPreferredWidth(105);
-		scrollPane.setViewportView(table);
+		tblRelatorioLocacao.getColumnModel().getColumn(2).setPreferredWidth(94);
+		tblRelatorioLocacao.getColumnModel().getColumn(3).setPreferredWidth(96);
+		tblRelatorioLocacao.getColumnModel().getColumn(4).setPreferredWidth(114);
+		tblRelatorioLocacao.getColumnModel().getColumn(5).setPreferredWidth(105);
+		scrollPane.setViewportView(tblRelatorioLocacao);
 
 	
 		}
@@ -143,7 +143,7 @@ public class PainelRelatorioLocacao extends JPanel {
 	private void atualizarTabelaLocacao(List<LocacaoVO> locacoes) {
 		dadosConsultados = locacoes;
 		this.limparTabela();
-		DefaultTableModel modelo = (DefaultTableModel) lblRelatrioDeLocao.getModel();
+		DefaultTableModel modelo = (DefaultTableModel) tblRelatorioLocacao.getModel();
 		for (LocacaoVO locacao : locacoes) {
 
 			String[] novaLinha = new String[] { locacao.getCliente() + "", locacao.getVeiculo().toString(), locacao.getDataLocacao().toString(),
@@ -154,7 +154,7 @@ public class PainelRelatorioLocacao extends JPanel {
 	}
 
 	private void limparTabela() {
-		lblRelatrioDeLocao.setModel(
+		tblRelatorioLocacao.setModel(
 				new DefaultTableModel(new String[][] { { "Cliente", "Veiculo", "Data_Locacao", "KMLocacao", "Data_Entrega", "KMLocacao" }, },
 						new String[] { "Cliente", "Veiculo", "Data_Locacao", "KMLocacao", "Data_Entrega", "KMLocacao"}));
 	}
