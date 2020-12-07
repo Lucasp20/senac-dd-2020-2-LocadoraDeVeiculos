@@ -223,7 +223,7 @@ public class ClienteDAO {
 			if (!primeiro) {
 				sql += " AND ";
 			}
-			sql += "CLIENTE.NOME LIKE '%= " + seletor.getNomeFiltro() + "%'";
+			sql += "CLIENTE.NOME LIKE '%" + seletor.getNomeFiltro() + "%'";
 			primeiro = false;
 		}
 
@@ -231,7 +231,7 @@ public class ClienteDAO {
 			if (!primeiro) {
 				sql += " AND ";
 			}
-			sql += "CLIENTE.CIDADE LIKE '%= " + seletor.getCidadeFiltro() + "%'";
+			sql += "CLIENTE.CIDADE LIKE '%" + seletor.getCidadeFiltro() + "%'";
 			primeiro = false;
 		}
 
@@ -239,7 +239,7 @@ public class ClienteDAO {
 			if (!primeiro) {
 				sql += " AND ";
 			}
-			sql += "CLIENTE.ESTADO LIKE '%= " + seletor.getEstadoFiltro() + "%'";
+			sql += "CLIENTE.ESTADO LIKE '%" + seletor.getEstadoFiltro() + "%'";
 			primeiro = false;
 		}
 		return sql;
