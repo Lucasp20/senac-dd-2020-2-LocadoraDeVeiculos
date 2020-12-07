@@ -10,8 +10,10 @@ import com.github.lgooddatepicker.components.DatePicker;
 
 import br.com.senac.controller.LocacaoController;
 import br.com.senac.controller.VeiculoController;
+import br.com.senac.model.dao.LocacaoDAO;
 import br.com.senac.model.seletores.LocacaoSeletor;
 import br.com.senac.model.seletores.VeiculoSeletor;
+import br.com.senac.model.vo.LocacaoVO;
 import br.com.senac.model.vo.VeiculoVO;
 
 import java.awt.event.ActionListener;
@@ -28,13 +30,15 @@ public class PainelRelatorioLocacao extends JPanel {
 	private JFormattedTextField txtNomeCliente;
 	private DatePicker DataAluguelVeiculo;
 	private DatePicker DataDevolucaoVeiculo;
+	private JLabel lblRelatrioDeLocao;
+	private List<br.com.senac.model.vo.LocacaoVO> dadosConsultados;
 	/**
 	 * Create the panel.
 	 */
 	public PainelRelatorioLocacao() {
 		setLayout(null);
 		
-		JLabel lblRelatrioDeLocao = new JLabel("Relatório de Locação");
+		lblRelatrioDeLocao = new JLabel("Relatório de Locação");
 		lblRelatrioDeLocao.setFont(new Font("Arial", Font.BOLD, 15));
 		lblRelatrioDeLocao.setBounds(10, 11, 175, 14);
 		add(lblRelatrioDeLocao);
@@ -131,7 +135,27 @@ public class PainelRelatorioLocacao extends JPanel {
 		LocacaoController controller = new LocacaoController();
 		LocacaoSeletor seletor = new LocacaoSeletor();
 			seletor.setNomeClienteFiltro(txtNomeCliente.getText());
+			
+			List<LocacaoVO> locacoes = controller.listarLocacaoFiltro(seletor);
+			atualizarTabelaLocacao(locacoes);		
+	}
+
+	private void atualizarTabelaLocacao(List<LocacaoVO> locacoes) {
+		dadosConsultados = locacoes;
+		this.limparTabela();
+		DefaultTableModel modelo = (DefaultTableModel) lblRelatrioDeLocao.getModel();
+		for (LocacaoVO locacao : locacoes) {
+
+			String[] novaLinha = new String[] { locacao.getCliente() + "", locacao.getVeiculo().toString(), locacao.getDataLocacao().toString(),
+					locacao.getKmLocacao() + "", locacao.getDataEntrega() + "", locacao.getKmEntrega() + "" };
+			modelo.addRow(novaLinha);
+		}
 		
-					
+	}
+
+	private void limparTabela() {
+		lblRelatrioDeLocao.setModel(
+				new DefaultTableModel(new String[][] { { "Cliente", "Veiculo", "Data_Locacao", "KMLocacao", "Data_Entrega", "KMLocacao" }, },
+						new String[] { "Cliente", "Veiculo", "Data_Locacao", "KMLocacao", "Data_Entrega", "KMLocacao"}));
 	}
 }

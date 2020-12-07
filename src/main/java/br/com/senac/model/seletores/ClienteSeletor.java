@@ -15,7 +15,7 @@ public class ClienteSeletor {
 	
 	public ClienteSeletor() {
 		super();
-		// TODO Auto-generated constructor stub
+	
 	}
 
 	
@@ -26,14 +26,11 @@ public class ClienteSeletor {
 		if((this.nomeFiltro != null) && (this.nomeFiltro.trim().length() > 0)) {
 			return true;
 		}
-		if((this.estadoFiltro != null) && (this.estadoFiltro.trim().length() >0)) {
+		if((this.estadoFiltro != null) && (this.estadoFiltro.trim().length() > 0)) {
 			return true;
 		}
 		return false;
 	}
-	
-	
-	
 	
 
 	public String getNomeFiltro() {

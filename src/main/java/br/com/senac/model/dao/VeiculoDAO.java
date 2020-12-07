@@ -241,7 +241,7 @@ public class VeiculoDAO {
 			primeiro = false;
 		}
 
-		if ((seletor.getCorFiltro() != null) && (seletor.getCorFiltro().trim().length() > 0)) {
+		if (seletor.getCorFiltro() != null && seletor.getCorFiltro().trim().length() > 0) {
 			if (!primeiro) {
 				sql += " AND ";
 			}
@@ -253,7 +253,7 @@ public class VeiculoDAO {
 			if (!primeiro) {
 				sql += " AND ";
 			}
-			sql += "VEICULO.MARCA = " + seletor.getMarcaFiltro();
+			sql += "VEICULO.MARCA LIKE '%= " + seletor.getMarcaFiltro() + "%'";
 			primeiro = false;
 		}
 		return sql;
