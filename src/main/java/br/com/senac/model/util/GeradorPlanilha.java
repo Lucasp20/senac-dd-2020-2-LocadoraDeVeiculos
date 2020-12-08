@@ -17,7 +17,7 @@ import br.com.senac.model.vo.ClienteVO;
 public class GeradorPlanilha {
 
 	
-	public String gerarPlanilhaProdutos(String caminhoArquivo, List<ClienteVO> clientes) {
+	public String gerarPlanilhaClientes(String caminhoArquivo, List<ClienteVO> clientes) {
 		// Criar a planilha (Workbook)
 		XSSFWorkbook planilha = new XSSFWorkbook();
 
@@ -29,7 +29,9 @@ public class GeradorPlanilha {
 		// Criar o cabeçalho (header)
 		String[] nomesColunas = { "#", "Nome", "CPF", "CNH", "Telefone", "Cidade", "Estado" };
 		criarCabecalho(nomesColunas, aba, linhaAtual);
-
+		
+		linhaAtual++;
+		
 		// Preencher as linhas com os produtos
 		criarLinhasClientes(clientes, aba, linhaAtual);
 
@@ -47,9 +49,9 @@ public class GeradorPlanilha {
 			linhaAtual.createCell(1).setCellValue(p.getNome());
 			linhaAtual.createCell(2).setCellValue(p.getCpf());
 			linhaAtual.createCell(3).setCellValue(p.getCnh());
-			linhaAtual.createCell(3).setCellValue(p.getTelefone());
-			linhaAtual.createCell(3).setCellValue(p.getCidade());
-			linhaAtual.createCell(3).setCellValue(p.getEstado());
+			linhaAtual.createCell(4).setCellValue(p.getTelefone());
+			linhaAtual.createCell(5).setCellValue(p.getCidade());
+			linhaAtual.createCell(6).setCellValue(p.getEstado());
 
 			// Converter para Date
 			// linhaAtual.createCell(4).setCellValue(new Date(p.get));

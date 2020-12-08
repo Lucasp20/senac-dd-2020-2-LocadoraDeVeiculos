@@ -8,6 +8,7 @@ import br.com.senac.constante.Mensagens;
 import br.com.senac.model.bo.ClienteBO;
 import br.com.senac.model.dao.ClienteDAO;
 import br.com.senac.model.seletores.ClienteSeletor;
+import br.com.senac.model.util.GeradorPlanilha;
 import br.com.senac.model.vo.ClienteVO;
 
 public class ClienteController {
@@ -131,10 +132,10 @@ public class ClienteController {
 	}
 
 	public String gerarPlanilha(List<ClienteVO> dadosConsultados, String caminho) {
+		GeradorPlanilha gerador = new GeradorPlanilha();
+		return gerador.gerarPlanilhaClientes(caminho, dadosConsultados);
 		
-		
-		return null;
-	}
+		}
 
 	public List<ClienteVO> listarClientesFiltro(ClienteSeletor seletor) {
 		ClienteDAO dao = new ClienteDAO();
