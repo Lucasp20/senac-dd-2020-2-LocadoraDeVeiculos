@@ -144,7 +144,7 @@ public class ClienteController {
 	public List<ClienteVO> listarClientesFiltro(ClienteSeletor seletor) {
 		ClienteDAO dao = new ClienteDAO();
 
-		return dao.listarComSeletor(seletor);
+		return dao.listarComSeletor(seletor); 
 	}
 
 }
