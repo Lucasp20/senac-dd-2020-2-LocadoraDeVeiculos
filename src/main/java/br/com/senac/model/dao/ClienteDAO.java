@@ -147,6 +147,25 @@ public class ClienteDAO {
 
 		return clientebuscado;
 	}
+	
+	private static ClienteVO contruirClienteDoResultSet(ResultSet conjuntoResultante) throws SQLException {
+
+		ClienteVO clienteBuscado = new ClienteVO();
+		clienteBuscado.setIdCliente(conjuntoResultante.getInt("idCliente"));
+		clienteBuscado.setNome(conjuntoResultante.getString("nome"));
+		clienteBuscado.setSobrenome(conjuntoResultante.getString("sobrenome"));
+		clienteBuscado.setCpf(conjuntoResultante.getString("cpf"));
+		clienteBuscado.setEmail(conjuntoResultante.getString("email"));
+		clienteBuscado.setCnh(conjuntoResultante.getString("cnh"));
+		clienteBuscado.setTelefone(conjuntoResultante.getString("telefone"));
+		clienteBuscado.setEndereco(conjuntoResultante.getString("endereco"));
+		clienteBuscado.setCidade(conjuntoResultante.getString("cidade"));
+		clienteBuscado.setEstado(conjuntoResultante.getString("estado"));
+		clienteBuscado.setCep(conjuntoResultante.getString("cep"));
+
+		return clienteBuscado;
+
+	}
 
 	public static List<ClienteVO> pesquisarTodos() {
 		Connection conexao = Banco.getConnection();
@@ -170,24 +189,6 @@ public class ClienteDAO {
 		return clientesBuscados;
 	}
 	
-	private static ClienteVO contruirClienteDoResultSet(ResultSet conjuntoResultante) throws SQLException {
-
-		ClienteVO clienteBuscado = new ClienteVO();
-		clienteBuscado.setIdCliente(conjuntoResultante.getInt("idCliente"));
-		clienteBuscado.setNome(conjuntoResultante.getString("Nome"));
-		clienteBuscado.setSobrenome(conjuntoResultante.getString("sobrenome"));
-		clienteBuscado.setCpf(conjuntoResultante.getString("cpf"));
-		clienteBuscado.setEmail(conjuntoResultante.getString("email"));
-		clienteBuscado.setCnh(conjuntoResultante.getString("cnh"));
-		clienteBuscado.setTelefone(conjuntoResultante.getString("telefone"));
-		clienteBuscado.setEndereco(conjuntoResultante.getString("endereco"));
-		clienteBuscado.setCidade(conjuntoResultante.getString("cidade"));
-		clienteBuscado.setEstado(conjuntoResultante.getString("estado"));
-		clienteBuscado.setCep(conjuntoResultante.getString("cep"));
-
-		return clienteBuscado;
-
-	}
 
 	public ArrayList<ClienteVO> listarComSeletor(ClienteSeletor seletor) {
 		String sql = "SELECT * FROM CLIENTE ";

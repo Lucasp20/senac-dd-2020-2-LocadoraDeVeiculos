@@ -24,6 +24,7 @@ import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 
 import br.com.senac.controller.ClienteController;
+import br.com.senac.model.bo.ClienteBO;
 import br.com.senac.model.dao.Banco;
 import br.com.senac.model.dao.ClienteDAO;
 import br.com.senac.model.vo.ClienteVO;
@@ -71,7 +72,8 @@ public class PainelCadastroCliente extends JPanel {
 	private JButton btnClienteExcluir;
 
 	private ClienteDAO clienteDAO = new ClienteDAO();
-	private ClienteVO clienteVO = new ClienteVO();
+	private ClienteVO cliente = new ClienteVO();
+	private ClienteBO bo = new ClienteBO();
 
 	public PainelCadastroCliente(){
 		setLayout(null);
@@ -155,7 +157,7 @@ public class PainelCadastroCliente extends JPanel {
 		JSeparator separator = new JSeparator();
 		separator.setBounds(81, 272, 473, 2);
 		this.add(separator); 
-
+		
 		try {
 			MaskFormatter mascaraCpf = new MaskFormatter("###.###.###-##");
 			MaskFormatter mascaraTelefone = new MaskFormatter("(##)#####-####");
@@ -211,8 +213,6 @@ public class PainelCadastroCliente extends JPanel {
 				public void mouseClicked(MouseEvent arg0) {
 					ClienteVO novoCliente = new ClienteVO();
 
-					String cpf = txtClienteCpf.getText().replace("-"," ").replace("."," ");
-
 					novoCliente.setNome(txtNomeCliente.getText());
 					novoCliente.setSobrenome(txtSobrenomeCliente.getText());
 					novoCliente.setCpf(txtClienteCpf.getText().replace("."," ").replace("-"," "));
@@ -236,20 +236,22 @@ public class PainelCadastroCliente extends JPanel {
 			btnSalvarCliente.setBackground(new Color(240, 248, 255));
 			btnSalvarCliente.setBounds(436, 322, 109, 41);
 			this.add(btnSalvarCliente);
-
+			
 			btnConsultarCpfCliente = new JButton("");	
 			btnConsultarCpfCliente.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					btnEditarCliente.setEnabled(true);
 					btnClienteExcluir.setEnabled(true);
 
-					String cpf = txtClienteCpf.getText();
+			/*		String cpf = txtClienteCpf.getText();
 
 					ClienteDAO dao = new ClienteDAO();
-					ClienteVO cliente = dao.pesquisarPorCpf(cpf);
+					ClienteVO cliente = dao.pesquisarPorCpf(cpf); */
+					
+					cliente = clienteDAO.pesquisarPorCpf(txtClienteCpf.getText());
 
 					if(cliente !=null) {
-
+						
 						txtNomeCliente.setText(cliente.getNome());
 						txtSobrenomeCliente.setText(cliente.getSobrenome());
 						txtClienteCpf.setText(cliente.getCpf());
@@ -261,17 +263,16 @@ public class PainelCadastroCliente extends JPanel {
 						cbEstadoCliente.setSelectedItem(cliente.getEstado());
 						txtCEPCliente.setText(cliente.getCep());  
 
-					}else {
-						limparTela();
+					}else{
+						JOptionPane.showMessageDialog(null, "Cliente não existe no banco de dados");
 					}
 				}
 			});
-
-
 			btnConsultarCpfCliente.setIcon(new ImageIcon(PainelCadastroCliente.class.getResource("/icons/pesquisapequeno.png")));
 			btnConsultarCpfCliente.setBounds(555, 100, 24, 25);
 			this.add(btnConsultarCpfCliente);
 
+				
 			btnClienteNovo = new JButton("Novo");
 			btnClienteNovo.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -303,8 +304,8 @@ public class PainelCadastroCliente extends JPanel {
 
 					resposta = JOptionPane.showConfirmDialog(getRootPane(), "Deseja realmente excluir? ");
 					if(resposta == JOptionPane.YES_OPTION) {
-						clienteDAO.excluir(clienteVO.getCpf());
-
+						clienteDAO.excluir(cliente.getCpf());
+						
 						ClienteController clienteController = new ClienteController();
 						JOptionPane.showMessageDialog(null, clienteController.excluirCliente(excluirCliente));
 
@@ -318,13 +319,13 @@ public class PainelCadastroCliente extends JPanel {
 			btnClienteExcluir.setEnabled(false);
 			btnClienteExcluir.setBounds(319, 322, 109, 41);
 			this.add(btnClienteExcluir);
-
+			
 		} catch (ParseException e) {
 			JOptionPane.showMessageDialog(null, "Ocorreu um erro no sistema, entre em contato com o administrador.");
 			System.out.println("Causa da exceÃ§Ã£o: " + e.getMessage());
 		}
-
 	}
+	
 	protected void limparTela() {
 		txtNomeCliente.setText("");
 		txtSobrenomeCliente.setText("");
@@ -337,5 +338,4 @@ public class PainelCadastroCliente extends JPanel {
 		txtCidadeCliente.setText("");
 		txtCEPCliente.setText("");
 	}
-
 }

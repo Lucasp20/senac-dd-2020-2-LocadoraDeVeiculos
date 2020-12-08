@@ -51,7 +51,7 @@ public class ClienteController {
 	}
 
 	private boolean validarCpf(ClienteVO novoCliente) {
-		if (novoCliente.getCpf().length() < 11 || novoCliente.getCpf().isEmpty()) {
+		if (novoCliente.getCpf().length() < 11 || novoCliente.getCpf().isEmpty() || novoCliente.getCpf() == null) {
 			mensagem = Mensagens.CLIENTE_ERRO_CPF;
 			return false;
 		}

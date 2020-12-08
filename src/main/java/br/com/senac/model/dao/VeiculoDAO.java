@@ -105,7 +105,7 @@ public class VeiculoDAO {
 		return alterou;
 	}
 
-	public  VeiculoVO pesquisarPorPlaca(String placa) {
+	public VeiculoVO pesquisarPorPlaca(String placa) {
 		String sql = " SELECT * FROM VEICULO WHERE PLACA=? ";
 		VeiculoVO veiculobuscado = null;
 

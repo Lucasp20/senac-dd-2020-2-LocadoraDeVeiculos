@@ -11,6 +11,7 @@ import javax.swing.text.MaskFormatter;
 import br.com.senac.constante.Mensagens;
 import br.com.senac.controller.ClienteController;
 import br.com.senac.controller.VeiculoController;
+import br.com.senac.model.bo.VeiculoBO;
 import br.com.senac.model.dao.ClienteDAO;
 import br.com.senac.model.dao.VeiculoDAO;
 import br.com.senac.model.vo.ClienteVO;
@@ -64,10 +65,13 @@ public class PainelCadastroVeiculo extends JPanel {
 	private JComboBox cbCorVeiculo;
 	private JButton btnEditarVeiculo;
 	private JButton btnVeiculoExcluir;
+	private JButton btnSalvarVeiculo;
 	private VeiculoController controlador;
+	
 
 	private VeiculoDAO veiculoDAO = new VeiculoDAO();
-	private VeiculoVO veiculoVO = new VeiculoVO();
+	private VeiculoVO veiculo = new VeiculoVO();
+	private VeiculoBO bo = new VeiculoBO();
 
 	public PainelCadastroVeiculo() throws ParseException {
 		setBounds(100, 100, 595, 410);
@@ -184,7 +188,8 @@ public class PainelCadastroVeiculo extends JPanel {
 		cbCorVeiculo.setBounds(487, 160, 66, 27);
 		add(cbCorVeiculo);
 
-		JButton btnSalvarVeiculo = new JButton(" Salvar");
+		btnSalvarVeiculo = new JButton(" Salvar");
+		btnSalvarVeiculo.setEnabled(false);
 		btnSalvarVeiculo.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
 				VeiculoVO novoVeiculo = new VeiculoVO();
@@ -217,6 +222,8 @@ public class PainelCadastroVeiculo extends JPanel {
 		btnEditarVeiculo.setEnabled(false);
 		btnEditarVeiculo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				btnSalvarVeiculo.setEnabled(true);
+				
 				txtPlaca.setEnabled(true);
 				txtRenavam.setEnabled(true);
 				txtChassi.setEnabled(true);
@@ -240,10 +247,12 @@ public class PainelCadastroVeiculo extends JPanel {
 				btnEditarVeiculo.setEnabled(true);
 				btnVeiculoExcluir.setEnabled(true);
 
-				String placa = txtPlaca.getText();
+			/*	String placa = txtPlaca.getText();
 
 				VeiculoDAO dao = new VeiculoDAO();
-				VeiculoVO veiculo = dao.pesquisarPorPlaca(placa);
+				VeiculoVO veiculo = dao.pesquisarPorPlaca(placa);*/
+				
+				veiculo = veiculoDAO.pesquisarPorPlaca(txtPlaca.getText());
 				
 				if(veiculo !=null) {
 
@@ -257,10 +266,9 @@ public class PainelCadastroVeiculo extends JPanel {
 					cbDadosVeiculoMotor.setSelectedItem(veiculo.getMotor());
 					cbDadosVeiculoTransmissao.setSelectedItem(veiculo.getTransmissao());
 				
-				}else {
-					limparTela();
+				}else{
+					JOptionPane.showMessageDialog(null, "Veículo não existe no banco de dados");
 				}
-
 			}
 		});
 		btnConsultarPlacaVeiculo.setIcon(new ImageIcon(PainelCadastroVeiculo.class.getResource("/icons/pesquisapequeno.png")));
@@ -270,6 +278,8 @@ public class PainelCadastroVeiculo extends JPanel {
 		JButton btnVeiculoNovo = new JButton("Novo");
 		btnVeiculoNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				btnSalvarVeiculo.setEnabled(true);
+				
 				txtPlaca.setEnabled(true);
 				txtRenavam.setEnabled(true);
 				txtChassi.setEnabled(true);
@@ -289,23 +299,24 @@ public class PainelCadastroVeiculo extends JPanel {
 		add(btnVeiculoNovo);
 
 		btnVeiculoExcluir = new JButton("Excluir");
-		btnVeiculoExcluir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		btnVeiculoExcluir.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent arg0) {
 				VeiculoVO excluirVeiculo = new VeiculoVO();
 
 				int resposta = 0;
 
 				resposta = JOptionPane.showConfirmDialog(getRootPane(), "Deseja realmente excluir? ");
 				if(resposta == JOptionPane.YES_OPTION) {
-					veiculoDAO.excluir(veiculoVO.getPlaca());
-	
+					veiculoDAO.excluir(veiculo.getPlaca());
+					
 					VeiculoController veiculoController = new VeiculoController();
-					JOptionPane.showMessageDialog(null, "Dados Excluidos");
+					JOptionPane.showMessageDialog(null, veiculoController.excluirVeiculo(excluirVeiculo));
 
 					limparTela(); 
 				} 
 			}
 		});
+					
 		btnVeiculoExcluir.setForeground(new Color(0, 0, 139));
 		btnVeiculoExcluir.setEnabled(false);
 		btnVeiculoExcluir.setBackground(new Color(240, 248, 255));

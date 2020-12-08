@@ -15,6 +15,7 @@ public class VeiculoController {
 	VeiculoVO veiculoVO = new VeiculoVO();
 	
 	private String mensagem = "";
+	private String mensagemExcluido ="";
 	
 	public String cadastrarVeiculo(VeiculoVO novoVeiculo) {
 		if(validarPlaca(novoVeiculo)
@@ -127,9 +128,17 @@ public class VeiculoController {
 		return false;
 	}
 	
-	public boolean excluirVeiculo(String placa) {
-		return veiculoDAO.excluir(placa);
+	public String excluirVeiculo(VeiculoVO veiculoExcluido) {
+		boolean excluiu = veiculoDAO.excluir(veiculoExcluido.getPlaca());
 		
+		if(excluiu) {
+			mensagemExcluido = "Veículo excluido com sucesso!";
+			
+		}else {
+			mensagemExcluido = "Erro ao excluir Veículo";
+		}
+		
+		return mensagemExcluido;
 	}
 
 	public List<VeiculoVO> listarVeiculosFiltro(VeiculoSeletor seletor) {
