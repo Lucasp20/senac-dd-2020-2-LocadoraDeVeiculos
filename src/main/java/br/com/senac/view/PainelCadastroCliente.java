@@ -41,7 +41,7 @@ import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 
 public class PainelCadastroCliente extends JPanel {
-	
+
 	private JLabel lblNome;
 	private JLabel lblDadosClientes;
 	private JLabel lblSobreNome;
@@ -72,115 +72,115 @@ public class PainelCadastroCliente extends JPanel {
 
 	private ClienteDAO clienteDAO = new ClienteDAO();
 	private ClienteVO clienteVO = new ClienteVO();
-	
+
 	public PainelCadastroCliente(){
 		setLayout(null);
-		
+
 		lblDadosClientes = new JLabel("Dados do Cliente");
 		lblDadosClientes.setFont(new Font("Arial", Font.BOLD, 15));
 		lblDadosClientes.setBounds(25, 42, 141, 14);
 		this.add(lblDadosClientes);
-		
+
 		lblNome = new JLabel("Nome");
 		lblNome.setBounds(81, 85, 46, 14);
 		this.add(lblNome);
-		
+
 		txtNomeCliente = new JFormattedTextField();
 		txtNomeCliente.setEnabled(false);
 		txtNomeCliente.setBounds(81, 100, 135, 25);
 		this.add(txtNomeCliente);
-		
+
 		lblSobreNome = new JLabel("Sobrenome");
 		lblSobreNome.setBounds(247, 85, 78, 14);
 		this.add(lblSobreNome);
-		
+
 		txtSobrenomeCliente = new JFormattedTextField();
 		txtSobrenomeCliente.setEnabled(false);
 		txtSobrenomeCliente.setBounds(247, 100, 135, 25);
 		this.add(txtSobrenomeCliente);
-		
+
 		lblCPF = new JLabel("CPF");
 		lblCPF.setBounds(419, 85, 46, 14);
 		this.add(lblCPF);
-						
+
 		lblEmail = new JLabel("Email");
 		lblEmail.setBounds(81, 145, 52, 14);
 		this.add(lblEmail);
-		
+
 		txtEmail = new JFormattedTextField();
 		txtEmail.setEnabled(false);
 		txtEmail.setBounds(81, 160, 135, 25);
 		this.add(txtEmail);
-		
+
 		lblTelefoneCliente = new JLabel("Telefone");
 		lblTelefoneCliente.setBounds(247, 145, 61, 14);
 		this.add(lblTelefoneCliente);
-				
+
 		lblClienteCNH = new JLabel("CNH");
 		lblClienteCNH.setBounds(419, 145, 61, 14);
 		this.add(lblClienteCNH);
-				
+
 		lblEnderecoCliente = new JLabel("Endereço");
 		lblEnderecoCliente.setBounds(81, 205, 61, 14);
 		this.add(lblEnderecoCliente);
-		
+
 		txtEnderecoCliente = new JFormattedTextField();
 		txtEnderecoCliente.setEnabled(false);
 		txtEnderecoCliente.setBounds(81, 220, 135, 25);
 		this.add(txtEnderecoCliente);
-		
+
 		lblCidadeCliente = new JLabel("Cidade");
 		lblCidadeCliente.setBounds(247, 205, 61, 14);
 		this.add(lblCidadeCliente);
-		
+
 		txtCidadeCliente = new JFormattedTextField();
 		txtCidadeCliente.setEnabled(false);
 		txtCidadeCliente.setBounds(247, 220, 135, 25);
 		this.add(txtCidadeCliente);
-		
+
 		lblEstadoCliente = new JLabel("Estado");
 		lblEstadoCliente.setBounds(419, 205, 46, 14);
 		this.add(lblEstadoCliente);
-		
+
 		cbEstadoCliente = new JComboBox();
 		cbEstadoCliente.setEnabled(false);
 		cbEstadoCliente.setModel(new DefaultComboBoxModel(new String[] {"", "RS", "RJ", "SP", "SC"}));
 		cbEstadoCliente.setBounds(419, 220, 46, 25);
 		this.add(cbEstadoCliente);
-		
+
 		JLabel lblCEPCliente = new JLabel("CEP");
 		lblCEPCliente.setBounds(475, 205, 46, 14);
 		this.add(lblCEPCliente);
-				
+
 		JSeparator separator = new JSeparator();
 		separator.setBounds(81, 272, 473, 2);
 		this.add(separator); 
-	
+
 		try {
 			MaskFormatter mascaraCpf = new MaskFormatter("###.###.###-##");
 			MaskFormatter mascaraTelefone = new MaskFormatter("(##)#####-####");
 			MaskFormatter mascaraCep = new MaskFormatter("#####-###");
 			MaskFormatter mascaraCnh = new MaskFormatter("###########");
-					
+
 			txtClienteCpf = new JFormattedTextField(mascaraCpf);
 			txtClienteCpf.setBounds(419, 100, 135, 26);
 			this.add(txtClienteCpf);
-			
+
 			txtTelefoneCliente = new JFormattedTextField(mascaraTelefone);
 			txtTelefoneCliente.setEnabled(false);
 			txtTelefoneCliente.setBounds(247, 160, 135, 25);
 			this.add(txtTelefoneCliente);
-						
+
 			txtCEPCliente = new JFormattedTextField(mascaraCep);
 			txtCEPCliente.setEnabled(false);
 			txtCEPCliente.setBounds(475, 220, 79, 25);
 			this.add(txtCEPCliente);
-			
+
 			txtClienteCNH = new JFormattedTextField(mascaraCnh);
 			txtClienteCNH.setEnabled(false);
 			txtClienteCNH.setBounds(419, 160, 135, 25);
 			this.add(txtClienteCNH);
-						
+
 			btnEditarCliente = new JButton("Editar");
 			btnEditarCliente.setForeground(new Color(0, 0, 139));
 			btnEditarCliente.setBackground(new Color(240, 248, 255));
@@ -197,22 +197,22 @@ public class PainelCadastroCliente extends JPanel {
 					cbEstadoCliente.setEnabled(true);
 					txtCidadeCliente.setEnabled(true);
 					txtCEPCliente.setEnabled(true);		
-					
+
 				}
 			});
-		
+
 			btnEditarCliente.setBounds(200, 322, 109, 41);
 			btnEditarCliente.setBackground(new Color(240, 248, 255));
 			this.add(btnEditarCliente);
-											
+
 			btnSalvarCliente = new JButton(" Salvar");
 			btnSalvarCliente.setVerticalAlignment(SwingConstants.TOP);
 			btnSalvarCliente.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent arg0) {
 					ClienteVO novoCliente = new ClienteVO();
-						
+
 					String cpf = txtClienteCpf.getText().replace("-"," ").replace("."," ");
-					
+
 					novoCliente.setNome(txtNomeCliente.getText());
 					novoCliente.setSobrenome(txtSobrenomeCliente.getText());
 					novoCliente.setCpf(txtClienteCpf.getText().replace("."," ").replace("-"," "));
@@ -223,7 +223,7 @@ public class PainelCadastroCliente extends JPanel {
 					novoCliente.setCidade(txtCidadeCliente.getText());
 					novoCliente.setEstado(cbEstadoCliente.getSelectedItem().toString());
 					novoCliente.setCep(txtCEPCliente.getText());   
-								
+
 					ClienteController clienteController = new ClienteController();
 					JOptionPane.showMessageDialog(null, clienteController.cadastrarCliente(novoCliente));
 
@@ -236,20 +236,20 @@ public class PainelCadastroCliente extends JPanel {
 			btnSalvarCliente.setBackground(new Color(240, 248, 255));
 			btnSalvarCliente.setBounds(436, 322, 109, 41);
 			this.add(btnSalvarCliente);
-			
+
 			btnConsultarCpfCliente = new JButton("");	
 			btnConsultarCpfCliente.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					btnEditarCliente.setEnabled(true);
 					btnClienteExcluir.setEnabled(true);
-				
+
 					String cpf = txtClienteCpf.getText();
-					
+
 					ClienteDAO dao = new ClienteDAO();
-					ClienteVO c = ClienteDAO.pesquisarPorCpf(cpf);
-					
-					for(ClienteVO cliente : dao.pesquisarTodos()) {
-											
+					ClienteVO cliente = dao.pesquisarPorCpf(cpf);
+
+					if(cliente !=null) {
+
 						txtNomeCliente.setText(cliente.getNome());
 						txtSobrenomeCliente.setText(cliente.getSobrenome());
 						txtClienteCpf.setText(cliente.getCpf());
@@ -260,15 +260,18 @@ public class PainelCadastroCliente extends JPanel {
 						txtCidadeCliente.setText(cliente.getCidade());
 						cbEstadoCliente.setSelectedItem(cliente.getEstado());
 						txtCEPCliente.setText(cliente.getCep());  
+
+					}else {
+						limparTela();
 					}
 				}
 			});
-			
-		
+
+
 			btnConsultarCpfCliente.setIcon(new ImageIcon(PainelCadastroCliente.class.getResource("/icons/pesquisapequeno.png")));
 			btnConsultarCpfCliente.setBounds(555, 100, 24, 25);
 			this.add(btnConsultarCpfCliente);
-		
+
 			btnClienteNovo = new JButton("Novo");
 			btnClienteNovo.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -282,7 +285,7 @@ public class PainelCadastroCliente extends JPanel {
 					cbEstadoCliente.setEnabled(true);
 					txtCidadeCliente.setEnabled(true);
 					txtCEPCliente.setEnabled(true);
-					 
+
 					limparTela();
 				}
 			});
@@ -290,24 +293,24 @@ public class PainelCadastroCliente extends JPanel {
 			btnClienteNovo.setBackground(new Color(240, 248, 255));
 			btnClienteNovo.setBounds(81, 322, 109, 41);
 			add(btnClienteNovo);
-			
+
 			btnClienteExcluir = new JButton("Excluir");
 			btnClienteExcluir.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					ClienteVO excluirCliente = new ClienteVO();
-					
+
 					int resposta = 0;
-					
+
 					resposta = JOptionPane.showConfirmDialog(getRootPane(), "Deseja realmente excluir? ");
 					if(resposta == JOptionPane.YES_OPTION) {
 						clienteDAO.excluir(clienteVO.getCpf());
-						
+
 						ClienteController clienteController = new ClienteController();
 						JOptionPane.showMessageDialog(null, clienteController.excluirCliente(excluirCliente));
-						
+
 						limparTela();
 					}
-					
+
 				}
 			});
 			btnClienteExcluir.setBackground(new Color(240, 248, 255));
@@ -315,24 +318,24 @@ public class PainelCadastroCliente extends JPanel {
 			btnClienteExcluir.setEnabled(false);
 			btnClienteExcluir.setBounds(319, 322, 109, 41);
 			this.add(btnClienteExcluir);
-			
+
 		} catch (ParseException e) {
 			JOptionPane.showMessageDialog(null, "Ocorreu um erro no sistema, entre em contato com o administrador.");
 			System.out.println("Causa da exceÃ§Ã£o: " + e.getMessage());
 		}
-		
+
 	}
-		protected void limparTela() {
-			txtNomeCliente.setText("");
-			txtSobrenomeCliente.setText("");
-			txtClienteCpf.setText("");
-			txtEmail.setText("");
-			txtClienteCNH.setText("");
-			txtTelefoneCliente.setText("");
-			txtEnderecoCliente.setText("");
-			cbEstadoCliente.setSelectedItem("");
-			txtCidadeCliente.setText("");
-			txtCEPCliente.setText("");
-		}
-		
+	protected void limparTela() {
+		txtNomeCliente.setText("");
+		txtSobrenomeCliente.setText("");
+		txtClienteCpf.setText("");
+		txtEmail.setText("");
+		txtClienteCNH.setText("");
+		txtTelefoneCliente.setText("");
+		txtEnderecoCliente.setText("");
+		cbEstadoCliente.setSelectedItem("");
+		txtCidadeCliente.setText("");
+		txtCEPCliente.setText("");
+	}
+
 }

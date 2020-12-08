@@ -109,7 +109,7 @@ public class ClienteDAO {
 		return alterou;
 	}
 
-	public static ClienteVO pesquisarPorCpf(String cpf) {
+	public ClienteVO pesquisarPorCpf(String cpf) {
 		String sql = " SELECT * FROM CLIENTE WHERE CPF=? ";
 		ClienteVO clientebuscado = null;
 
