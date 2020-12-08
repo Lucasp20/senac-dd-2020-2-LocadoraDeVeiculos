@@ -247,15 +247,15 @@ public class PainelCadastroVeiculo extends JPanel {
 				
 				if(veiculo !=null) {
 
-				txtPlaca.setText(veiculo.getPlaca());
-				txtRenavam.setText(veiculo.getRenavam());
-				txtChassi.setText(veiculo.getChassi());
-				cbMarcaVeiculo.setSelectedItem(veiculo.getMarca());
-				txtModelo.setText(veiculo.getModelo());
-				cbAnoVeiculo.setSelectedItem(veiculo.getAno());
-				cbCorVeiculo.setSelectedItem(veiculo.getCor());
-				cbDadosVeiculoMotor.setSelectedItem(veiculo.getMotor());
-				cbDadosVeiculoTransmissao.setSelectedItem(veiculo.getTransmissao());
+					txtPlaca.setText(veiculo.getPlaca());
+					txtRenavam.setText(veiculo.getRenavam());
+					txtChassi.setText(veiculo.getChassi());
+					cbMarcaVeiculo.setSelectedItem(veiculo.getMarca());
+					txtModelo.setText(veiculo.getModelo());
+					cbAnoVeiculo.setSelectedItem(veiculo.getAno());
+					cbCorVeiculo.setSelectedItem(veiculo.getCor());
+					cbDadosVeiculoMotor.setSelectedItem(veiculo.getMotor());
+					cbDadosVeiculoTransmissao.setSelectedItem(veiculo.getTransmissao());
 				
 				}else {
 					limparTela();
@@ -291,30 +291,19 @@ public class PainelCadastroVeiculo extends JPanel {
 		btnVeiculoExcluir = new JButton("Excluir");
 		btnVeiculoExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				VeiculoVO excluirVeiculo = new VeiculoVO();
 
-				if(JOptionPane.showConfirmDialog(getRootPane(), "Deseja realmente excluir o cadastro do veículo? ")==0){
-
-					if(controlador.excluirVeiculo(veiculoVO.getPlaca())) {
-						JOptionPane.showMessageDialog(null, "Veículo excluido com sucesso");
-						txtPlaca.setText("");
-						btnVeiculoExcluir.setEnabled(false);
-
-					}
-				}
-
-				/*	int resposta = 0;
+				int resposta = 0;
 
 				resposta = JOptionPane.showConfirmDialog(getRootPane(), "Deseja realmente excluir? ");
 				if(resposta == JOptionPane.YES_OPTION) {
-
 					veiculoDAO.excluir(veiculoVO.getPlaca());
-					veiculoVO.setPlaca(txtPlaca.getText()); 
-
+	
 					VeiculoController veiculoController = new VeiculoController();
 					JOptionPane.showMessageDialog(null, "Dados Excluidos");
 
 					limparTela(); 
-				} */
+				} 
 			}
 		});
 		btnVeiculoExcluir.setForeground(new Color(0, 0, 139));

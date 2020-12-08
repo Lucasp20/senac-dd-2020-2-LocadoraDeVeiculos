@@ -65,6 +65,8 @@ public class VeiculoDAO {
 
 		try {
 			query.setString(1, placa);
+			int codigoRetorno = query.executeUpdate();
+			excluiu = (codigoRetorno == Banco.CODIGO_RETORNO_SUCESSO);
 		} catch (SQLException e) {
 			System.out.println("Erro ao excluir a PLACA (placa: " + placa + ").\nCausa: " + e.getMessage());
 		} finally {
@@ -103,7 +105,7 @@ public class VeiculoDAO {
 		return alterou;
 	}
 
-	public static VeiculoVO pesquisarPorPlaca(String placa) {
+	public  VeiculoVO pesquisarPorPlaca(String placa) {
 		String sql = " SELECT * FROM VEICULO WHERE PLACA=? ";
 		VeiculoVO veiculobuscado = null;
 
