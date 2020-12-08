@@ -57,16 +57,18 @@ public class ClienteDAO {
 		return cliente;
 	}
 
-	public String excluir(String cpf) {
+	public boolean excluir(String cpf) {
 		Connection conexao = Banco.getConnection();
 
 		String sql = "DELETE FROM CLIENTE WHERE CPF =?";
 
 		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
-		String excluiu = null;
+		boolean excluiu = false;
 
 		try {
 			query.setString(1, cpf);
+			int codigoRetorno = query.executeUpdate();
+			excluiu = (codigoRetorno == Banco.CODIGO_RETORNO_SUCESSO);
 		} catch (SQLException e) {
 			System.out.println("Erro ao excluir o CPF (cpf: " + cpf + ").\nCausa: " + e.getMessage());
 		} finally {

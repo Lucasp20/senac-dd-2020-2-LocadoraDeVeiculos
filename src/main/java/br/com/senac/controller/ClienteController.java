@@ -123,9 +123,14 @@ public class ClienteController {
 	}
 
 	public String excluirCliente(ClienteVO clienteExcluido) {
-		String excluiu = clienteDAO.excluir(clienteExcluido.getCpf());
+		boolean excluiu = clienteDAO.excluir(clienteExcluido.getCpf());
 		
-		mensagemExcluido = "Cliente excluido com sucesso!";
+		if(excluiu) {
+			mensagemExcluido = "Cliente excluido com sucesso!";
+			
+		}else {
+			mensagemExcluido = "Erro ao excluir Cliente";
+		}
 		
 		return mensagemExcluido;
 	}

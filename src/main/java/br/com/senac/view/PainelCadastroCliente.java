@@ -300,7 +300,6 @@ public class PainelCadastroCliente extends JPanel {
 					
 					resposta = JOptionPane.showConfirmDialog(getRootPane(), "Deseja realmente excluir? ");
 					if(resposta == JOptionPane.YES_OPTION) {
-						clienteVO.setCpf(txtClienteCpf.getText());
 						clienteDAO.excluir(clienteVO.getCpf());
 						
 						ClienteController clienteController = new ClienteController();
