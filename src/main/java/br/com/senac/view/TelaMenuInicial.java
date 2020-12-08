@@ -27,6 +27,8 @@ public class TelaMenuInicial extends JFrame {
 	private JPanel contentPane;
 	private JMenu menuSobre;
 	private JMenuItem menuItemSobre;
+	private JMenuItem MenuItemCadastroVeiculo;
+	private JMenuItem menuItemCadastrarClientes;
 	/**
 	 * Launch the application.
 	 */
@@ -57,7 +59,7 @@ public class TelaMenuInicial extends JFrame {
 		menuClientes.setIcon(new ImageIcon(TelaMenuInicial.class.getResource("/icons/User.png")));
 		menuBar.add(menuClientes);
 		
-		JMenuItem menuItemCadastrarClientes = new JMenuItem("Cadastrar");
+		menuItemCadastrarClientes = new JMenuItem("Cadastrar");
 		menuItemCadastrarClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				PainelCadastroCliente painelCliente = new PainelCadastroCliente();

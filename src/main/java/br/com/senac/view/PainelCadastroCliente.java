@@ -24,6 +24,7 @@ import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 
 import br.com.senac.controller.ClienteController;
+import br.com.senac.controller.VeiculoController;
 import br.com.senac.model.bo.ClienteBO;
 import br.com.senac.model.dao.Banco;
 import br.com.senac.model.dao.ClienteDAO;
@@ -70,12 +71,13 @@ public class PainelCadastroCliente extends JPanel {
 	private JLabel lblEstadoCliente;
 	private JButton btnClienteNovo;
 	private JButton btnClienteExcluir;
-
+	private ClienteController controlador;
+	
 	private ClienteDAO clienteDAO = new ClienteDAO();
 	private ClienteVO cliente = new ClienteVO();
 	private ClienteBO bo = new ClienteBO();
 
-	public PainelCadastroCliente(){
+	public PainelCadastroCliente() {
 		setLayout(null);
 
 		lblDadosClientes = new JLabel("Dados do Cliente");

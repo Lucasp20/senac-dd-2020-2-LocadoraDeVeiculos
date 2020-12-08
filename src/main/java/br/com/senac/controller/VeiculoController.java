@@ -138,7 +138,7 @@ public class VeiculoController {
 			mensagemExcluido = "Erro ao excluir Veículo";
 		}
 		
-		return mensagemExcluido;
+		return mensagem;
 	}
 
 	public List<VeiculoVO> listarVeiculosFiltro(VeiculoSeletor seletor) {

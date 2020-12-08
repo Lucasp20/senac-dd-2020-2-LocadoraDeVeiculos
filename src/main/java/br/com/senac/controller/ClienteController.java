@@ -136,8 +136,7 @@ public class ClienteController {
 	}
 
 	public String gerarPlanilha(List<ClienteVO> dadosConsultados, String caminho) {
-		
-		
+				
 		return null;
 	}
 
