@@ -237,7 +237,7 @@ public class VeiculoDAO {
 			if (!primeiro) {
 				sql += " AND ";
 			}
-			sql += "VEICULO.ANO LIKE '%= " + seletor.getAnoFiltro() + "%'";
+			sql += "VEICULO.ANO LIKE '%" + seletor.getAnoFiltro() + "%'";
 			primeiro = false;
 		}
 
@@ -245,7 +245,7 @@ public class VeiculoDAO {
 			if (!primeiro) {
 				sql += " AND ";
 			}
-			sql += "VEICULO.COR LIKE '%= " + seletor.getCorFiltro() + "%'";
+			sql += "VEICULO.COR LIKE '%" + seletor.getCorFiltro() + "%'";
 			primeiro = false;
 		}
 
@@ -253,7 +253,7 @@ public class VeiculoDAO {
 			if (!primeiro) {
 				sql += " AND ";
 			}
-			sql += "VEICULO.MARCA LIKE '%= " + seletor.getMarcaFiltro() + "%'";
+			sql += "VEICULO.MARCA LIKE '%" + seletor.getMarcaFiltro() + "%'";
 			primeiro = false;
 		}
 		return sql;

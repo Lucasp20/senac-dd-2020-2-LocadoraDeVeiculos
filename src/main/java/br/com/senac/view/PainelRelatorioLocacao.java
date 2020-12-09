@@ -6,8 +6,11 @@ import java.awt.Font;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
 import com.github.lgooddatepicker.components.DatePicker;
 
+import br.com.senac.controller.ClienteController;
 import br.com.senac.controller.LocacaoController;
 import br.com.senac.controller.VeiculoController;
 import br.com.senac.model.dao.LocacaoDAO;
@@ -23,6 +26,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PainelRelatorioLocacao extends JPanel {
 	private JTable tblRelatorioLocacao;
@@ -90,6 +95,21 @@ public class PainelRelatorioLocacao extends JPanel {
 		painelRelatorioLocacao.add(btnRelatorioLocacaoPesquisa);
 		
 		JButton btnRelatorioLocacaoGerarExcel = new JButton("Gerar Excel");
+		btnRelatorioLocacaoGerarExcel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JFileChooser janelaArquivos = new JFileChooser();
+
+				int opcaoSelecionada = janelaArquivos.showSaveDialog(null);
+
+				if (opcaoSelecionada == JFileChooser.APPROVE_OPTION) {
+					String caminho = janelaArquivos.getSelectedFile().getAbsolutePath();
+					LocacaoController controller = new LocacaoController();
+					String salvouPlanilha = controller.gerarPlanilha(dadosConsultados, caminho);
+				}
+				
+			}
+		});
 		btnRelatorioLocacaoGerarExcel.setBounds(485, 110, 105, 28);
 		painelRelatorioLocacao.add(btnRelatorioLocacaoGerarExcel);
 		
@@ -112,7 +132,8 @@ public class PainelRelatorioLocacao extends JPanel {
 				{null, null, null, null, null, null},
 			},
 			new String[] {
-				"Cliente", "Marca Ve\u00EDculo", "Data da loca\u00E7\u00E3o", "KM da loca\u00E7\u00E3o", "Data da devolu\u00E7\u00E3o", "KM da devolu\u00E7\u00E3o"
+				"Cliente", "Marca Veículo", "Data da locação", "KM da locação", 
+				"Data da devolução", "KM da devolução"
 			}
 		) {
 			boolean[] columnEditables = new boolean[] {
@@ -135,6 +156,8 @@ public class PainelRelatorioLocacao extends JPanel {
 		LocacaoController controller = new LocacaoController();
 		LocacaoSeletor seletor = new LocacaoSeletor();
 			seletor.setNomeClienteFiltro(txtNomeCliente.getText());
+			seletor.setDataAluguel(DataAluguelVeiculo.getDate());
+			seletor.setDataDevolucao(DataDevolucaoVeiculo.getDate());
 					
 			List<LocacaoVO> locacoes = controller.listarLocacaoFiltro(seletor);
 			atualizarTabelaLocacao(locacoes);		

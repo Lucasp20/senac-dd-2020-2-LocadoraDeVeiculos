@@ -1,18 +1,19 @@
 package br.com.senac.model.seletores;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class LocacaoSeletor {
 
 	private int idCliente;
 	private String nomeClienteFiltro;
-	private Date dataAluguel;
-	private Date dataDevolucao;
+	private LocalDate dataAluguel;
+	private LocalDate dataDevolucao;
 	public int getIdCliente() {
 		return idCliente;
 	}
 	
-	public LocacaoSeletor(int idCliente, String nomeClienteFiltro, Date dataAluguel, Date dataDevolucao) {
+	public LocacaoSeletor(int idCliente, String nomeClienteFiltro, LocalDate dataAluguel, LocalDate dataDevolucao) {
 		super();
 		this.idCliente = idCliente;
 		this.nomeClienteFiltro = nomeClienteFiltro;
@@ -50,16 +51,16 @@ public class LocacaoSeletor {
 	public void setNomeClienteFiltro(String nomeClienteFiltro) {
 		this.nomeClienteFiltro = nomeClienteFiltro;
 	}
-	public Date getDataAluguel() {
+	public LocalDate getDataAluguel() {
 		return dataAluguel;
 	}
-	public void setDataAluguel(Date dataAluguel) {
-		this.dataAluguel = dataAluguel;
+	public void setDataAluguel(LocalDate localDate) {
+		this.dataAluguel = localDate;
 	}
-	public Date getDataDevolucao() {
+	public LocalDate getDataDevolucao() {
 		return dataDevolucao;
 	}
-	public void setDataDevolucao(Date dataDevolucao) {
+	public void setDataDevolucao(LocalDate dataDevolucao) {
 		this.dataDevolucao = dataDevolucao;
 	}
 	

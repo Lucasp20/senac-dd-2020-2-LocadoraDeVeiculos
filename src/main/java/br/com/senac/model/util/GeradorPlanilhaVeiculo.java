@@ -13,46 +13,45 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import br.com.senac.model.vo.ClienteVO;
+import br.com.senac.model.vo.VeiculoVO;
 
-public class GeradorPlanilha {
+public class GeradorPlanilhaVeiculo {
 
 	
-	public String gerarPlanilhaClientes(String caminhoArquivo, List<ClienteVO> clientes) {
+	public String gerarPlanilhaVeiculos(String caminhoArquivo, List<VeiculoVO> veiculos) {
 		// Criar a planilha (Workbook)
 		XSSFWorkbook planilha = new XSSFWorkbook();
 
 		// Criar uma aba (Sheet)
-		XSSFSheet aba = planilha.createSheet("Clientes");
+		XSSFSheet aba = planilha.createSheet("Veículo");
 
 		int linhaAtual = 0;
 
 		// Criar o cabeçalho (header)
-		String[] nomesColunas = { "#", "Nome", "CPF", "CNH", "Telefone", "Cidade", "Estado" };
+		String[] nomesColunas = { "#", "Placa", "Marca", "Modelo", "Cor" };
 		criarCabecalho(nomesColunas, aba, linhaAtual);
 		
 		linhaAtual++;
 		
 		// Preencher as linhas com os produtos
-		criarLinhasClientes(clientes, aba, linhaAtual);
+		criarLinhasVeiculos(veiculos, aba, linhaAtual);
 
 		// Salvar o arquivo gerado no disco
 		return salvarNoDisco(planilha, caminhoArquivo, ".xlsx");
 	}
 
-	private void criarLinhasClientes(List<ClienteVO> clientes, XSSFSheet aba, int posicaoLinhaAtual) {
-		for (ClienteVO p : clientes) {
+	private void criarLinhasVeiculos(List<VeiculoVO> veiculos, XSSFSheet aba, int posicaoLinhaAtual) {
+		for (VeiculoVO p : veiculos) {
 			// criar uma nova linha na planilha
 			XSSFRow linhaAtual = aba.createRow(posicaoLinhaAtual);
 
 			// Preencher as células com os atributos do Produto p
-			linhaAtual.createCell(0).setCellValue(p.getIdCliente());
-			linhaAtual.createCell(1).setCellValue(p.getNome());
-			linhaAtual.createCell(2).setCellValue(p.getCpf());
-			linhaAtual.createCell(3).setCellValue(p.getCnh());
-			linhaAtual.createCell(4).setCellValue(p.getTelefone());
-			linhaAtual.createCell(5).setCellValue(p.getCidade());
-			linhaAtual.createCell(6).setCellValue(p.getEstado());
-
+			linhaAtual.createCell(0).setCellValue(p.getIdVeiculo());
+			linhaAtual.createCell(1).setCellValue(p.getPlaca());
+			linhaAtual.createCell(2).setCellValue(p.getMarca());
+			linhaAtual.createCell(3).setCellValue(p.getModelo());
+			linhaAtual.createCell(4).setCellValue(p.getCor());
+			
 			// Converter para Date
 			// linhaAtual.createCell(4).setCellValue(new Date(p.get));
 

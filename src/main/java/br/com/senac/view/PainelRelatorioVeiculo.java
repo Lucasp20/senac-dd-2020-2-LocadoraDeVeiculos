@@ -25,6 +25,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import java.awt.Font;
@@ -112,6 +113,21 @@ public class PainelRelatorioVeiculo extends JPanel {
 		painelRelatorioVeiculo.add(btnRelatorioPesquisa);
 		
 		JButton btnRelatorioVeiculoGerarExcel = new JButton("Gerar Excel");
+		btnRelatorioVeiculoGerarExcel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				JFileChooser janelaArquivos = new JFileChooser();
+
+				int opcaoSelecionada = janelaArquivos.showSaveDialog(null);
+
+				if (opcaoSelecionada == JFileChooser.APPROVE_OPTION) {
+					String caminho = janelaArquivos.getSelectedFile().getAbsolutePath();
+					VeiculoController controller = new VeiculoController();
+					String salvouPlanilha = controller.gerarPlanilha(dadosConsultados, caminho);
+				}
+				
+			}
+		});
 		btnRelatorioVeiculoGerarExcel.setBounds(383, 42, 112, 31);
 		painelRelatorioVeiculo.add(btnRelatorioVeiculoGerarExcel);
 		

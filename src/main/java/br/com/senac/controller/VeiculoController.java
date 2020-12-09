@@ -6,6 +6,8 @@ import br.com.senac.constante.Mensagens;
 import br.com.senac.model.bo.VeiculoBO;
 import br.com.senac.model.dao.VeiculoDAO;
 import br.com.senac.model.seletores.VeiculoSeletor;
+import br.com.senac.model.util.GeradorPlanilhaCliente;
+import br.com.senac.model.util.GeradorPlanilhaVeiculo;
 import br.com.senac.model.vo.ClienteVO;
 import br.com.senac.model.vo.VeiculoVO;
 
@@ -136,6 +138,11 @@ public class VeiculoController {
 		VeiculoDAO dao = new VeiculoDAO();
 		
 		return dao.listarComSeletor(seletor);
+	}
+
+	public String gerarPlanilha(List<VeiculoVO> dadosConsultados, String caminho) {
+		GeradorPlanilhaVeiculo gerador = new GeradorPlanilhaVeiculo();
+		return gerador.gerarPlanilhaVeiculos(caminho, dadosConsultados);
 	}
 
 }

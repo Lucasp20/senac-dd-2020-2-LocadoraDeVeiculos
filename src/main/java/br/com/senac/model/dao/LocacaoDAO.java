@@ -245,14 +245,14 @@ public class LocacaoDAO {
 			if (!primeiro) {
 				sql += " AND ";
 			}
-			sql += "LOCACAO.NOME LIKE '%= " + seletor.getNomeClienteFiltro() + "%'";
+			sql += "LOCACAO.NOME LIKE '%" + seletor.getNomeClienteFiltro() + "%'";
 			primeiro = false;
 		}
 		if (seletor.getDataAluguel() != null) {
 			if (!primeiro) {
 				sql += " AND ";
 			}
-			sql += "LOCACAO.DATA_LOCACAO LIKE '%= " + seletor.getDataAluguel() + "%'";
+			sql += "LOCACAO.DATA_LOCACAO LIKE '%" + seletor.getDataAluguel() + "%'";
 			primeiro = false;
 		}
 
@@ -260,7 +260,7 @@ public class LocacaoDAO {
 			if (!primeiro) {
 				sql += " AND ";
 			}
-			sql += "LOCACAO.DATA_ENTREGA LIKE '%= " + seletor.getDataDevolucao() + "%'";
+			sql += "LOCACAO.DATA_ENTREGA LIKE '%" + seletor.getDataDevolucao() + "%'";
 			primeiro = false;
 		}
 
