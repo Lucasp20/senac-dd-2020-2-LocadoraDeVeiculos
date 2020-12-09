@@ -25,7 +25,7 @@ public class ClienteController {
 				&& validarEmail(novoCliente) && validarCnh(novoCliente) && validarTefone(novoCliente)
 				&& validarEndereco(novoCliente) && validarCidade(novoCliente) && validarEstado(novoCliente)
 				&& validarCep(novoCliente)) {
-			ClienteDAO clienteDAO = new ClienteDAO();
+			
 			clienteDAO.inserir(novoCliente);
 
 			mensagem = Mensagens.CLIENTE_SUCESSO;
@@ -51,10 +51,15 @@ public class ClienteController {
 	}
 
 	private boolean validarCpf(ClienteVO novoCliente) {
-		if (novoCliente.getCpf().length() < 11 || novoCliente.getCpf().isEmpty() || novoCliente.getCpf() == null) {
+		if (novoCliente.getCpf().length() < 11 || novoCliente.getCpf().isEmpty() || novoCliente.getCpf() == null ) {
 			mensagem = Mensagens.CLIENTE_ERRO_CPF;
 			return false;
+	
+		}else if(clienteDAO.cpfJaCadastrado(novoCliente.getCpf())) {
+			mensagem = Mensagens.CLIENTE_ERRO_CPF_EXISTE;
+			return false;
 		}
+		
 		return true;
 	}
 

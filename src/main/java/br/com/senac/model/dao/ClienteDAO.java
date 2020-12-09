@@ -60,7 +60,7 @@ public class ClienteDAO {
 	public boolean excluir(String cpf) {
 		Connection conexao = Banco.getConnection();
 
-		String sql = "DELETE FROM CLIENTE WHERE CPF =?";
+		String sql = "DELETE FROM CLIENTE WHERE CPF=?";
 
 		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
 		boolean excluiu = false;
@@ -81,7 +81,7 @@ public class ClienteDAO {
 
 	public boolean alterar(ClienteVO cliente) {
 
-		String sql = " UPDATE CLIENTE "
+		String sql = "UPDATE CLIENTE "
 				+ " SET NOME=?, SOBRENOME=?, CPF=?, EMAIL=?, CNH=?, TELEFONE=?, ENDERECO=?, CIDADE=?, ESTADO=?, CEP=? "
 				+ " WHERE CPF = ? ";
 
@@ -110,7 +110,7 @@ public class ClienteDAO {
 	}
 
 	public ClienteVO pesquisarPorCpf(String cpf) {
-		String sql = " SELECT * FROM CLIENTE WHERE CPF=? ";
+		String sql = "SELECT * FROM CLIENTE WHERE CPF=?";
 		ClienteVO clientebuscado = null;
 
 		try (Connection conexao = Banco.getConnection();
@@ -122,7 +122,7 @@ public class ClienteDAO {
 				clientebuscado = contruirClienteDoResultSet(conjuntoResultante);
 			}
 		} catch (SQLException e) {
-			System.out.println("Erro ao consultar cliente por cpf (cpf" + cpf + ") .\nCausa: " + e.getMessage());
+			System.out.println("Erro ao consultar cliente por cpf (cpf:" + cpf + ") .\nCausa: " + e.getMessage());
 		}
 
 		return clientebuscado;
@@ -142,13 +142,11 @@ public class ClienteDAO {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("Erro ao consultar cliente por nome (id: " + nome + ") .\nCausa: " + e.getMessage());
+			System.out.println("Erro ao consultar cliente por nome (nome: " + nome + ") .\nCausa: " + e.getMessage());
 		}
 
 		return clientebuscado;
 	}
-	
-
 
 	public static List<ClienteVO> pesquisarTodos() {
 		Connection conexao = Banco.getConnection();
@@ -171,7 +169,29 @@ public class ClienteDAO {
 		}
 		return clientesBuscados;
 	}
-	
+
+	public boolean cpfJaCadastrado(String cpf) {
+		boolean jaCadastrado = false;
+
+		String sql = "SELECT * FROM CLIENTE WHERE CPF=?";
+
+		try {
+			Connection conexao = Banco.getConnection();
+			PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);
+			consulta.setString(1, cpf);
+			ResultSet conjuntoResultante = consulta.executeQuery();
+			
+			if(conjuntoResultante.next()) {
+				jaCadastrado = true;
+			}
+		} catch (SQLException e) {
+				System.out.println("Erro ao verificar cpf (CPF: " + cpf + " ). \nCausa: " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return jaCadastrado;
+	}
+
 	private static ClienteVO contruirClienteDoResultSet(ResultSet conjuntoResultante) throws SQLException {
 
 		ClienteVO clienteBuscado = new ClienteVO();
@@ -190,10 +210,9 @@ public class ClienteDAO {
 		return clienteBuscado;
 
 	}
-	
 
 	public ArrayList<ClienteVO> listarComSeletor(ClienteSeletor seletor) {
-		String sql = "SELECT * FROM CLIENTE ";
+		String sql = "SELECT * FROM CLIENTE";
 
 		if (seletor.temFiltro()) {
 			sql = criarFiltros(seletor, sql);
@@ -218,8 +237,6 @@ public class ClienteDAO {
 		return clientesBuscados;
 	}
 
-
-	
 	private String criarFiltros(ClienteSeletor seletor, String sql) {
 		sql += " WHERE ";
 		boolean primeiro = true;
@@ -249,6 +266,5 @@ public class ClienteDAO {
 		}
 		return sql;
 	}
-
 
 }

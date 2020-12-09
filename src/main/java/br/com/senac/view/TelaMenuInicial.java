@@ -87,7 +87,7 @@ public class TelaMenuInicial extends JFrame {
 		menuVeiculo.setIcon(new ImageIcon(TelaMenuInicial.class.getResource("/icons/Veiculo.png")));
 		menuBar.add(menuVeiculo);
 		
-		JMenuItem MenuItemCadastroVeiculo = new JMenuItem("Cadastrar");
+		MenuItemCadastroVeiculo = new JMenuItem("Cadastrar");
 		MenuItemCadastroVeiculo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_MASK));
 		MenuItemCadastroVeiculo.setIcon(new ImageIcon(TelaMenuInicial.class.getResource("/icons/+Carro.png")));
 		MenuItemCadastroVeiculo.addActionListener(new ActionListener() {

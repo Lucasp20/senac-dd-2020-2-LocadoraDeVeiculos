@@ -54,12 +54,14 @@ public class PainelCadastroCliente extends JPanel {
 	private JFormattedTextField txtEmail;
 	private JFormattedTextField txtClienteCNH;
 	private JFormattedTextField txtEnderecoCliente;
-	private JFormattedTextField txtClienteCpf;
 	private JFormattedTextField txtCidadeCliente;
 	private JFormattedTextField txtTelefoneCliente;
+	private JFormattedTextField txtClienteCPF;
 	private JComboBox cbEstadoCliente;
 	private JFormattedTextField txtCepCliente;
+	private JLabel lblCEPCliente;
 	private JPanel contentPane;
+	private JSeparator separator;
 	private JButton btnSalvarCliente;
 	private JFormattedTextField txtCEPCliente;
 	private JButton btnEditarCliente;
@@ -152,11 +154,11 @@ public class PainelCadastroCliente extends JPanel {
 		cbEstadoCliente.setBounds(419, 220, 46, 25);
 		this.add(cbEstadoCliente);
 
-		JLabel lblCEPCliente = new JLabel("CEP");
+		lblCEPCliente = new JLabel("CEP");
 		lblCEPCliente.setBounds(475, 205, 46, 14);
 		this.add(lblCEPCliente);
 
-		JSeparator separator = new JSeparator();
+		separator = new JSeparator();
 		separator.setBounds(81, 272, 473, 2);
 		this.add(separator); 
 		
@@ -166,9 +168,10 @@ public class PainelCadastroCliente extends JPanel {
 			MaskFormatter mascaraCep = new MaskFormatter("#####-###");
 			MaskFormatter mascaraCnh = new MaskFormatter("###########");
 
-			txtClienteCpf = new JFormattedTextField(mascaraCpf);
-			txtClienteCpf.setBounds(419, 100, 135, 26);
-			this.add(txtClienteCpf);
+			txtClienteCPF = new JFormattedTextField(mascaraCpf);
+			txtClienteCPF.setText("");
+			txtClienteCPF.setBounds(419, 100, 135, 26);
+			this.add(txtClienteCPF);
 
 			txtTelefoneCliente = new JFormattedTextField(mascaraTelefone);
 			txtTelefoneCliente.setEnabled(false);
@@ -193,7 +196,7 @@ public class PainelCadastroCliente extends JPanel {
 				public void actionPerformed(ActionEvent arg0) {
 					txtNomeCliente.setEnabled(true);
 					txtSobrenomeCliente.setEnabled(true);
-					txtClienteCpf.setEnabled(true);
+					txtClienteCPF.setEnabled(true);
 					txtEmail.setEnabled(true);
 					txtClienteCNH.setEnabled(true);
 					txtTelefoneCliente.setEnabled(true);
@@ -217,7 +220,7 @@ public class PainelCadastroCliente extends JPanel {
 
 					novoCliente.setNome(txtNomeCliente.getText());
 					novoCliente.setSobrenome(txtSobrenomeCliente.getText());
-					novoCliente.setCpf(txtClienteCpf.getText().replace("."," ").replace("-"," "));
+					novoCliente.setCpf(txtClienteCPF.getText().replace("."," ").replace("-"," "));
 					novoCliente.setEmail(txtEmail.getText());
 					novoCliente.setCnh(txtClienteCNH.getText());
 					novoCliente.setTelefone(txtTelefoneCliente.getText());
@@ -244,19 +247,14 @@ public class PainelCadastroCliente extends JPanel {
 				public void actionPerformed(ActionEvent arg0) {
 					btnEditarCliente.setEnabled(true);
 					btnClienteExcluir.setEnabled(true);
-
-			/*		String cpf = txtClienteCpf.getText();
-
-					ClienteDAO dao = new ClienteDAO();
-					ClienteVO cliente = dao.pesquisarPorCpf(cpf); */
-					
-					cliente = clienteDAO.pesquisarPorCpf(txtClienteCpf.getText());
+			
+					cliente = clienteDAO.pesquisarPorCpf(txtClienteCPF.getText());
 
 					if(cliente !=null) {
 						
 						txtNomeCliente.setText(cliente.getNome());
 						txtSobrenomeCliente.setText(cliente.getSobrenome());
-						txtClienteCpf.setText(cliente.getCpf());
+						txtClienteCPF.setText(cliente.getCpf());
 						txtEmail.setText(cliente.getEmail());
 						txtTelefoneCliente.setText(cliente.getTelefone());
 						txtClienteCNH.setText(cliente.getCnh());
@@ -280,7 +278,7 @@ public class PainelCadastroCliente extends JPanel {
 				public void actionPerformed(ActionEvent e) {
 					txtNomeCliente.setEnabled(true);
 					txtSobrenomeCliente.setEnabled(true);
-					txtClienteCpf.setEnabled(true);
+					txtClienteCPF.setEnabled(true);
 					txtEmail.setEnabled(true);
 					txtClienteCNH.setEnabled(true);
 					txtTelefoneCliente.setEnabled(true);
@@ -331,7 +329,7 @@ public class PainelCadastroCliente extends JPanel {
 	protected void limparTela() {
 		txtNomeCliente.setText("");
 		txtSobrenomeCliente.setText("");
-		txtClienteCpf.setText("");
+		txtClienteCPF.setText("");
 		txtEmail.setText("");
 		txtClienteCNH.setText("");
 		txtTelefoneCliente.setText("");

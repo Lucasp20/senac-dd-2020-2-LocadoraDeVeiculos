@@ -4,6 +4,7 @@ public class Mensagens {
 	
 	/*Cadastro Veículos*/
 	public static final String VEICULO_ERRO_PLACA = "Deve Preencher O Campo Placa";
+	public static final String VEICULO_ERRO_PLACA_EXISTE = "Placa Já Existe No Sistema";
 	public static final String VEICULO_ERRO_RENAVAM = "Renavam Deve Conter 11 Caracteres Númericos";
 	public static final String VEICULO_ERRO_CHASSI = "Chassi Deve Conter 11 Caracteres Alfanúmericos";
 	public static final String VEICULO_ERRO_MARCA = "Deve Preencher O Campo Marca";
@@ -53,6 +54,7 @@ public class Mensagens {
 	public static final String CLIENTE_ERRO_NOME = "Nome deve conter ao menos três caracteres";
 	public static final String CLIENTE_ERRO_SOBRENOME = "Sobrenome deve conter ao menos três caracteres";
 	public static final String CLIENTE_ERRO_CPF = "CPF deve possuir tamanho 11 e somente números";
+	public static final String CLIENTE_ERRO_CPF_EXISTE = "CPF Já Existe No Sistema";
 	public static final String CLIENTE_ERRO_EMAIL = "Email deve conter ao menos três caracteres";
 	public static final String CLIENTE_ERRO_CNH = "CNH deve possuir tamanho 11 e somente números";
 	public static final String CLIENTE_ERRO_TELFONE = "Telefone deve possuir tamanho 11 e somente números";
