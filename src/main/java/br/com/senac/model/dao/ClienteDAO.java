@@ -57,16 +57,18 @@ public class ClienteDAO {
 		return cliente;
 	}
 
-	public String excluir(String cpf) {
+	public boolean excluir(String cpf) {
 		Connection conexao = Banco.getConnection();
 
-		String sql = "DELETE FROM CLIENTE WHERE CPF =?";
+		String sql = "DELETE FROM CLIENTE WHERE CPF=?";
 
 		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
-		String excluiu = null;
+		boolean excluiu = false;
 
 		try {
 			query.setString(1, cpf);
+			int codigoRetorno = query.executeUpdate();
+			excluiu = (codigoRetorno == Banco.CODIGO_RETORNO_SUCESSO);
 		} catch (SQLException e) {
 			System.out.println("Erro ao excluir o CPF (cpf: " + cpf + ").\nCausa: " + e.getMessage());
 		} finally {
@@ -79,7 +81,7 @@ public class ClienteDAO {
 
 	public boolean alterar(ClienteVO cliente) {
 
-		String sql = " UPDATE CLIENTE "
+		String sql = "UPDATE CLIENTE "
 				+ " SET NOME=?, SOBRENOME=?, CPF=?, EMAIL=?, CNH=?, TELEFONE=?, ENDERECO=?, CIDADE=?, ESTADO=?, CEP=? "
 				+ " WHERE CPF = ? ";
 
@@ -107,8 +109,8 @@ public class ClienteDAO {
 		return alterou;
 	}
 
-	public static ClienteVO pesquisarPorCpf(String cpf) {
-		String sql = " SELECT * FROM CLIENTE WHERE CPF=? ";
+	public ClienteVO pesquisarPorCpf(String cpf) {
+		String sql = "SELECT * FROM CLIENTE WHERE CPF=?";
 		ClienteVO clientebuscado = null;
 
 		try (Connection conexao = Banco.getConnection();
@@ -119,13 +121,15 @@ public class ClienteDAO {
 			if (conjuntoResultante.next()) {
 				clientebuscado = contruirClienteDoResultSet(conjuntoResultante);
 			}
+
 		} catch (SQLException e) {
-			System.out.println("Erro ao consultar cliente por cpf (cpf" + cpf + ") .\nCausa: " + e.getMessage());
+			System.out.println("Erro ao consultar cliente por cpf (cpf: " + cpf + ") .\nCausa: " + e.getMessage());
 		}
 
 		return clientebuscado;
 	}
-
+		
+		
 	public ClienteVO pesquisarPorNome(String nome) {
 		String sql = "SELECT * FROM CLIENTE WHERE NOME=?";
 		ClienteVO clientebuscado = null;
@@ -140,7 +144,7 @@ public class ClienteDAO {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("Erro ao consultar cliente por nome (id: " + nome + ") .\nCausa: " + e.getMessage());
+			System.out.println("Erro ao consultar cliente por nome (nome: " + nome + ") .\nCausa: " + e.getMessage());
 		}
 
 		return clientebuscado;
@@ -167,12 +171,34 @@ public class ClienteDAO {
 		}
 		return clientesBuscados;
 	}
-	
+
+	public boolean cpfJaCadastrado(String cpf) {
+		boolean jaCadastrado = false;
+
+		String sql = "SELECT * FROM CLIENTE WHERE CPF=?";
+
+		try {
+			Connection conexao = Banco.getConnection();
+			PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);
+			consulta.setString(1, cpf);
+			ResultSet conjuntoResultante = consulta.executeQuery();
+			
+			if(conjuntoResultante.next()) {
+				jaCadastrado = true;
+			}
+		} catch (SQLException e) {
+				System.out.println("Erro ao verificar cpf (CPF: " + cpf + " ). \nCausa: " + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return jaCadastrado;
+	}
+
 	private static ClienteVO contruirClienteDoResultSet(ResultSet conjuntoResultante) throws SQLException {
 
 		ClienteVO clienteBuscado = new ClienteVO();
 		clienteBuscado.setIdCliente(conjuntoResultante.getInt("idCliente"));
-		clienteBuscado.setNome(conjuntoResultante.getString("Nome"));
+		clienteBuscado.setNome(conjuntoResultante.getString("nome"));
 		clienteBuscado.setSobrenome(conjuntoResultante.getString("sobrenome"));
 		clienteBuscado.setCpf(conjuntoResultante.getString("cpf"));
 		clienteBuscado.setEmail(conjuntoResultante.getString("email"));
@@ -188,7 +214,7 @@ public class ClienteDAO {
 	}
 
 	public ArrayList<ClienteVO> listarComSeletor(ClienteSeletor seletor) {
-		String sql = "SELECT * FROM CLIENTE ";
+		String sql = "SELECT * FROM CLIENTE";
 
 		if (seletor.temFiltro()) {
 			sql = criarFiltros(seletor, sql);
@@ -213,8 +239,6 @@ public class ClienteDAO {
 		return clientesBuscados;
 	}
 
-
-	
 	private String criarFiltros(ClienteSeletor seletor, String sql) {
 		sql += " WHERE ";
 		boolean primeiro = true;
@@ -245,5 +269,5 @@ public class ClienteDAO {
 		return sql;
 	}
 
-
+	
 }

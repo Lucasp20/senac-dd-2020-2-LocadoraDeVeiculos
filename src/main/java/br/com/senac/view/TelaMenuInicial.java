@@ -27,6 +27,9 @@ public class TelaMenuInicial extends JFrame {
 	private JPanel contentPane;
 	private JMenu menuSobre;
 	private JMenuItem menuItemSobre;
+	private JMenuItem MenuItemCadastroVeiculo;
+	private JMenuItem menuItemCadastrarClientes;
+	private JMenuItem menuTeste ;
 	/**
 	 * Launch the application.
 	 */
@@ -57,7 +60,7 @@ public class TelaMenuInicial extends JFrame {
 		menuClientes.setIcon(new ImageIcon(TelaMenuInicial.class.getResource("/icons/User.png")));
 		menuBar.add(menuClientes);
 		
-		JMenuItem menuItemCadastrarClientes = new JMenuItem("Cadastrar");
+		menuItemCadastrarClientes = new JMenuItem("Cadastrar");
 		menuItemCadastrarClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				PainelCadastroCliente painelCliente = new PainelCadastroCliente();
@@ -85,7 +88,7 @@ public class TelaMenuInicial extends JFrame {
 		menuVeiculo.setIcon(new ImageIcon(TelaMenuInicial.class.getResource("/icons/Veiculo.png")));
 		menuBar.add(menuVeiculo);
 		
-		JMenuItem MenuItemCadastroVeiculo = new JMenuItem("Cadastrar");
+		MenuItemCadastroVeiculo = new JMenuItem("Cadastrar");
 		MenuItemCadastroVeiculo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_MASK));
 		MenuItemCadastroVeiculo.setIcon(new ImageIcon(TelaMenuInicial.class.getResource("/icons/+Carro.png")));
 		MenuItemCadastroVeiculo.addActionListener(new ActionListener() {
@@ -157,6 +160,16 @@ public class TelaMenuInicial extends JFrame {
 		menuItemSobre.setIcon(new ImageIcon(TelaMenuInicial.class.getResource("/icons/autores.png")));
 		menuItemSobre.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F12, 0));
 		menuSobre.add(menuItemSobre);
+		
+		menuTeste = new JMenuItem("Teste");
+		menuTeste.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Teste teste = new Teste();
+				setContentPane(teste);
+				revalidate();
+			}
+		});
+		menuSobre.add(menuTeste);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

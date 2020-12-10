@@ -26,7 +26,7 @@ public class ClienteController {
 				&& validarEmail(novoCliente) && validarCnh(novoCliente) && validarTefone(novoCliente)
 				&& validarEndereco(novoCliente) && validarCidade(novoCliente) && validarEstado(novoCliente)
 				&& validarCep(novoCliente)) {
-			ClienteDAO clienteDAO = new ClienteDAO();
+			
 			clienteDAO.inserir(novoCliente);
 
 			mensagem = Mensagens.CLIENTE_SUCESSO;
@@ -52,10 +52,15 @@ public class ClienteController {
 	}
 
 	private boolean validarCpf(ClienteVO novoCliente) {
-		if (novoCliente.getCpf().length() < 11 || novoCliente.getCpf().isEmpty()) {
+		if (novoCliente.getCpf().length() < 11 || novoCliente.getCpf().isEmpty() || novoCliente.getCpf() == null ) {
 			mensagem = Mensagens.CLIENTE_ERRO_CPF;
 			return false;
+	
+		}else if(clienteDAO.cpfJaCadastrado(novoCliente.getCpf())) {
+			mensagem = Mensagens.CLIENTE_ERRO_CPF_EXISTE;
+			return false;
 		}
+		
 		return true;
 	}
 
@@ -123,24 +128,41 @@ public class ClienteController {
 		return false;
 	}
 
-	public String excluirCliente(ClienteVO clienteExcluido) {
-		String excluiu = clienteDAO.excluir(clienteExcluido.getCpf());
+	public String excluirCliente(String cpf) {
+		ClienteBO clienteBO = new ClienteBO();
+		String mensagem = clienteBO.excluir(cpf);
 		
-		mensagemExcluido = "Cliente excluido com sucesso!";
-		
-		return mensagemExcluido;
+		return mensagem;
 	}
 
 	public String gerarPlanilha(List<ClienteVO> dadosConsultados, String caminho) {
+<<<<<<< HEAD
 		GeradorPlanilhaCliente gerador = new GeradorPlanilhaCliente();
 		return gerador.gerarPlanilhaClientes(caminho, dadosConsultados);
 		
 		}
+=======
+				
+		return null;
+	}
+>>>>>>> branch 'master' of https://github.com/Lucasp20/senac-dd-2020-2-LocadoraDeVeiculos.git
 
 	public List<ClienteVO> listarClientesFiltro(ClienteSeletor seletor) {
 		ClienteDAO dao = new ClienteDAO();
 
-		return dao.listarComSeletor(seletor);
+		return dao.listarComSeletor(seletor); 
+	}
+
+	public ClienteVO pesquisarPorCpf(String cpf) {
+		cpf = cpf.replace(".", "");
+		cpf = cpf.replace("-", "");
+		
+		return clienteDAO.pesquisarPorCpf(cpf);
+		
+	}
+
+	public void excluir(String cpf) {
+		
 	}
 
 }

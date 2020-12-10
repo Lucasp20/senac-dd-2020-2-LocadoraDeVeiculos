@@ -11,6 +11,7 @@ import javax.swing.text.MaskFormatter;
 import br.com.senac.constante.Mensagens;
 import br.com.senac.controller.ClienteController;
 import br.com.senac.controller.VeiculoController;
+import br.com.senac.model.bo.VeiculoBO;
 import br.com.senac.model.dao.ClienteDAO;
 import br.com.senac.model.dao.VeiculoDAO;
 import br.com.senac.model.vo.ClienteVO;
@@ -64,11 +65,13 @@ public class PainelCadastroVeiculo extends JPanel {
 	private JComboBox cbCorVeiculo;
 	private JButton btnEditarVeiculo;
 	private JButton btnVeiculoExcluir;
-	private VeiculoController controlador;
-
-	private VeiculoDAO veiculoDAO = new VeiculoDAO();
-	private VeiculoVO veiculoVO = new VeiculoVO();
+	private JButton btnSalvarVeiculo;
+	private VeiculoController controlador = new VeiculoController();
 	
+	private VeiculoDAO dao = new VeiculoDAO();
+	private VeiculoVO veiculo = new VeiculoVO();
+	private VeiculoBO bo = new VeiculoBO();
+
 	public PainelCadastroVeiculo() throws ParseException {
 		setBounds(100, 100, 595, 410);
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -184,7 +187,8 @@ public class PainelCadastroVeiculo extends JPanel {
 		cbCorVeiculo.setBounds(487, 160, 66, 27);
 		add(cbCorVeiculo);
 
-		JButton btnSalvarVeiculo = new JButton(" Salvar");
+		btnSalvarVeiculo = new JButton(" Salvar");
+		btnSalvarVeiculo.setEnabled(false);
 		btnSalvarVeiculo.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
 				VeiculoVO novoVeiculo = new VeiculoVO();
@@ -198,8 +202,8 @@ public class PainelCadastroVeiculo extends JPanel {
 				novoVeiculo.setCor((String) (cbCorVeiculo.getSelectedItem()));
 				novoVeiculo.setMotor((String) (cbDadosVeiculoMotor.getSelectedItem()));
 				novoVeiculo.setTransmissao((String) cbDadosVeiculoTransmissao.getSelectedItem());
-				
-				
+
+
 				VeiculoController veiculoController = new VeiculoController();
 				JOptionPane.showMessageDialog(null, veiculoController.cadastrarVeiculo(novoVeiculo));
 
@@ -217,6 +221,8 @@ public class PainelCadastroVeiculo extends JPanel {
 		btnEditarVeiculo.setEnabled(false);
 		btnEditarVeiculo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				btnSalvarVeiculo.setEnabled(true);
+				
 				txtPlaca.setEnabled(true);
 				txtRenavam.setEnabled(true);
 				txtChassi.setEnabled(true);
@@ -240,12 +246,9 @@ public class PainelCadastroVeiculo extends JPanel {
 				btnEditarVeiculo.setEnabled(true);
 				btnVeiculoExcluir.setEnabled(true);
 
-				String placa = txtPlaca.getText();
-
-				VeiculoDAO dao = new VeiculoDAO();
-				VeiculoVO veiculo = dao.pesquisarPorPlaca(placa);
+				veiculo = controlador.pesquisarPorPlaca(txtPlaca.getText());
 				
-				for (VeiculoVO v : dao.pesquisarTodos()) {
+				if(veiculo !=null) {
 
 					txtPlaca.setText(veiculo.getPlaca());
 					txtRenavam.setText(veiculo.getRenavam());
@@ -256,9 +259,10 @@ public class PainelCadastroVeiculo extends JPanel {
 					cbCorVeiculo.setSelectedItem(veiculo.getCor());
 					cbDadosVeiculoMotor.setSelectedItem(veiculo.getMotor());
 					cbDadosVeiculoTransmissao.setSelectedItem(veiculo.getTransmissao());
-
+				
+				}else{
+					JOptionPane.showMessageDialog(null, "Veículo não existe no banco de dados");
 				}
-			
 			}
 		});
 		btnConsultarPlacaVeiculo.setIcon(new ImageIcon(PainelCadastroVeiculo.class.getResource("/icons/pesquisapequeno.png")));
@@ -268,6 +272,8 @@ public class PainelCadastroVeiculo extends JPanel {
 		JButton btnVeiculoNovo = new JButton("Novo");
 		btnVeiculoNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				btnSalvarVeiculo.setEnabled(true);
+				
 				txtPlaca.setEnabled(true);
 				txtRenavam.setEnabled(true);
 				txtChassi.setEnabled(true);
@@ -287,34 +293,23 @@ public class PainelCadastroVeiculo extends JPanel {
 		add(btnVeiculoNovo);
 
 		btnVeiculoExcluir = new JButton("Excluir");
-		btnVeiculoExcluir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			
-			if(JOptionPane.showConfirmDialog(getRootPane(), "Deseja realmente excluir o cadastro do veículo? ")==0){
-				
-				if(controlador.excluirVeiculo(veiculoVO.getPlaca())) {
-					JOptionPane.showMessageDialog(null, "Veículo excluido com sucesso");
-						txtPlaca.setText("");
-						btnVeiculoExcluir.setEnabled(false);
-					
-				}
-			}
-				
-				/*	int resposta = 0;
-				
+		btnVeiculoExcluir.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent arg0) {
+								
+				int resposta = 0;
+
 				resposta = JOptionPane.showConfirmDialog(getRootPane(), "Deseja realmente excluir? ");
 				if(resposta == JOptionPane.YES_OPTION) {
+					controlador.excluirVeiculo(veiculo.getPlaca());
 					
-					veiculoDAO.excluir(veiculoVO.getPlaca());
-					veiculoVO.setPlaca(txtPlaca.getText()); 
-					
-					VeiculoController veiculoController = new VeiculoController();
-					JOptionPane.showMessageDialog(null, "Dados Excluidos");
-										
+					VeiculoBO veiculoBO = new VeiculoBO();	
+					JOptionPane.showMessageDialog(null, veiculoBO.excluir(txtPlaca.getText()));
+
 					limparTela(); 
-				} */
+				} 
 			}
 		});
+					
 		btnVeiculoExcluir.setForeground(new Color(0, 0, 139));
 		btnVeiculoExcluir.setEnabled(false);
 		btnVeiculoExcluir.setBackground(new Color(240, 248, 255));
