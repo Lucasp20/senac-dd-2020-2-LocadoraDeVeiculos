@@ -66,10 +66,9 @@ public class PainelCadastroVeiculo extends JPanel {
 	private JButton btnEditarVeiculo;
 	private JButton btnVeiculoExcluir;
 	private JButton btnSalvarVeiculo;
-	private VeiculoController controlador;
+	private VeiculoController controlador = new VeiculoController();
 	
-
-	private VeiculoDAO veiculoDAO = new VeiculoDAO();
+	private VeiculoDAO dao = new VeiculoDAO();
 	private VeiculoVO veiculo = new VeiculoVO();
 	private VeiculoBO bo = new VeiculoBO();
 
@@ -247,12 +246,7 @@ public class PainelCadastroVeiculo extends JPanel {
 				btnEditarVeiculo.setEnabled(true);
 				btnVeiculoExcluir.setEnabled(true);
 
-			/*	String placa = txtPlaca.getText();
-
-				VeiculoDAO dao = new VeiculoDAO();
-				VeiculoVO veiculo = dao.pesquisarPorPlaca(placa);*/
-				
-				veiculo = veiculoDAO.pesquisarPorPlaca(txtPlaca.getText());
+				veiculo = controlador.pesquisarPorPlaca(txtPlaca.getText());
 				
 				if(veiculo !=null) {
 
@@ -301,16 +295,15 @@ public class PainelCadastroVeiculo extends JPanel {
 		btnVeiculoExcluir = new JButton("Excluir");
 		btnVeiculoExcluir.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent arg0) {
-				VeiculoVO excluirVeiculo = new VeiculoVO();
-
+								
 				int resposta = 0;
 
 				resposta = JOptionPane.showConfirmDialog(getRootPane(), "Deseja realmente excluir? ");
 				if(resposta == JOptionPane.YES_OPTION) {
-					veiculoDAO.excluir(veiculo.getPlaca());
+					controlador.excluirVeiculo(veiculo.getPlaca());
 					
-					VeiculoController veiculoController = new VeiculoController();
-					JOptionPane.showMessageDialog(null, veiculoController.excluirVeiculo(excluirVeiculo));
+					VeiculoBO veiculoBO = new VeiculoBO();	
+					JOptionPane.showMessageDialog(null, veiculoBO.excluir(txtPlaca.getText()));
 
 					limparTela(); 
 				} 

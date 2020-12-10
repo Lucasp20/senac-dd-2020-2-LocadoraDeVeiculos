@@ -127,17 +127,11 @@ public class ClienteController {
 		return false;
 	}
 
-	public String excluirCliente(ClienteVO clienteExcluido) {
-		boolean excluiu = clienteDAO.excluir(clienteExcluido.getCpf());
+	public String excluirCliente(String cpf) {
+		ClienteBO clienteBO = new ClienteBO();
+		String mensagem = clienteBO.excluir(cpf);
 		
-		if(excluiu) {
-			mensagemExcluido = "Cliente excluido com sucesso!";
-			
-		}else {
-			mensagemExcluido = "Erro ao excluir Cliente";
-		}
-		
-		return mensagemExcluido;
+		return mensagem;
 	}
 
 	public String gerarPlanilha(List<ClienteVO> dadosConsultados, String caminho) {
@@ -149,6 +143,18 @@ public class ClienteController {
 		ClienteDAO dao = new ClienteDAO();
 
 		return dao.listarComSeletor(seletor); 
+	}
+
+	public ClienteVO pesquisarPorCpf(String cpf) {
+		cpf = cpf.replace(".", "");
+		cpf = cpf.replace("-", "");
+		
+		return clienteDAO.pesquisarPorCpf(cpf);
+		
+	}
+
+	public void excluir(String cpf) {
+		
 	}
 
 }

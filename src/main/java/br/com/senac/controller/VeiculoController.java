@@ -111,22 +111,26 @@ public class VeiculoController {
 		return false;
 	}
 
-	public String excluirVeiculo(VeiculoVO veiculoExcluido) {
-		boolean excluiu = veiculoDAO.excluir(veiculoExcluido.getPlaca());
+	public String excluirVeiculo(String placa) {
+		VeiculoBO veiculoBO = new VeiculoBO();
+		String mensagem = veiculoBO.excluir(placa);
 
-		if (excluiu) {
-			mensagemExcluido = "Veículo excluido com sucesso!";
-		} else {
-			mensagemExcluido = "Erro ao excluir Veículo";
-		}
-
-		return mensagemExcluido;
-	}
+		return mensagem;
+	} 
 
 	public List<VeiculoVO> listarVeiculosFiltro(VeiculoSeletor seletor) {
 		VeiculoDAO dao = new VeiculoDAO();
 
 		return dao.listarComSeletor(seletor);
+	}
+
+	public VeiculoVO pesquisarPorPlaca(String placa) {
+
+		return veiculoDAO.pesquisarPorPlaca(placa) ;
+	}
+
+	public void excluir(String placa) {
+		
 	}
 
 }

@@ -10,23 +10,21 @@ import br.com.senac.model.vo.ClienteVO;
 
 public class ClienteBO {
 
-	ClienteController clienteController = new ClienteController();
+	ClienteDAO dao = new ClienteDAO();
 
-
-	public String cadastrarCliente(ClienteVO novoCliente) {
-		return clienteController.cadastrarCliente(novoCliente);
-	}
-
-	public boolean atualizarCliente(ClienteVO novoCliente) {
-		return clienteController.atualizarCliente(novoCliente);
-	}
+	String mensagem = "";
 	
-	public String excluirCliente(ClienteVO clienteExcluido) {
-		return clienteController.excluirCliente(clienteExcluido);
-	}
+	public String excluir(String cpf) {
 	
-	public List<ClienteVO> listarClientesFiltro(ClienteSeletor seletor){
-		return clienteController.listarClientesFiltro(seletor);
+		boolean excluiu = dao.excluir(cpf);
+
+		if (excluiu) {
+			mensagem = "Cliente excluido com sucesso!";
+		} else {
+			mensagem = "Erro ao excluir Cliente";
+		}
+
+		return mensagem;
 	}
 	
 }

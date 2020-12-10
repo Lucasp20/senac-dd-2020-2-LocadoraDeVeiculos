@@ -29,6 +29,7 @@ public class TelaMenuInicial extends JFrame {
 	private JMenuItem menuItemSobre;
 	private JMenuItem MenuItemCadastroVeiculo;
 	private JMenuItem menuItemCadastrarClientes;
+	private JMenuItem menuTeste ;
 	/**
 	 * Launch the application.
 	 */
@@ -159,6 +160,16 @@ public class TelaMenuInicial extends JFrame {
 		menuItemSobre.setIcon(new ImageIcon(TelaMenuInicial.class.getResource("/icons/autores.png")));
 		menuItemSobre.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F12, 0));
 		menuSobre.add(menuItemSobre);
+		
+		menuTeste = new JMenuItem("Teste");
+		menuTeste.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Teste teste = new Teste();
+				setContentPane(teste);
+				revalidate();
+			}
+		});
+		menuSobre.add(menuTeste);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

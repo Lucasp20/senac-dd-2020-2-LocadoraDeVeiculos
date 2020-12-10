@@ -121,13 +121,15 @@ public class ClienteDAO {
 			if (conjuntoResultante.next()) {
 				clientebuscado = contruirClienteDoResultSet(conjuntoResultante);
 			}
+
 		} catch (SQLException e) {
-			System.out.println("Erro ao consultar cliente por cpf (cpf:" + cpf + ") .\nCausa: " + e.getMessage());
+			System.out.println("Erro ao consultar cliente por cpf (cpf: " + cpf + ") .\nCausa: " + e.getMessage());
 		}
 
 		return clientebuscado;
 	}
-
+		
+		
 	public ClienteVO pesquisarPorNome(String nome) {
 		String sql = "SELECT * FROM CLIENTE WHERE NOME=?";
 		ClienteVO clientebuscado = null;
@@ -267,4 +269,5 @@ public class ClienteDAO {
 		return sql;
 	}
 
+	
 }

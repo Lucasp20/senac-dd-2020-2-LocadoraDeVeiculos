@@ -73,9 +73,7 @@ public class PainelCadastroCliente extends JPanel {
 	private JLabel lblEstadoCliente;
 	private JButton btnClienteNovo;
 	private JButton btnClienteExcluir;
-	private ClienteController controlador;
-	
-	private ClienteDAO clienteDAO = new ClienteDAO();
+	private ClienteController controlador = new ClienteController();
 	private ClienteVO cliente = new ClienteVO();
 	private ClienteBO bo = new ClienteBO();
 
@@ -217,10 +215,10 @@ public class PainelCadastroCliente extends JPanel {
 			btnSalvarCliente.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent arg0) {
 					ClienteVO novoCliente = new ClienteVO();
-
+					
 					novoCliente.setNome(txtNomeCliente.getText());
 					novoCliente.setSobrenome(txtSobrenomeCliente.getText());
-					novoCliente.setCpf(txtClienteCPF.getText().replace("."," ").replace("-"," "));
+					novoCliente.setCpf(txtClienteCPF.getText().replace(".","").replace("-",""));
 					novoCliente.setEmail(txtEmail.getText());
 					novoCliente.setCnh(txtClienteCNH.getText());
 					novoCliente.setTelefone(txtTelefoneCliente.getText());
@@ -248,13 +246,13 @@ public class PainelCadastroCliente extends JPanel {
 					btnEditarCliente.setEnabled(true);
 					btnClienteExcluir.setEnabled(true);
 			
-					cliente = clienteDAO.pesquisarPorCpf(txtClienteCPF.getText());
+					cliente = controlador.pesquisarPorCpf(txtClienteCPF.getText());
 
 					if(cliente !=null) {
 						
+						txtClienteCPF.setText(cliente.getCpf());
 						txtNomeCliente.setText(cliente.getNome());
 						txtSobrenomeCliente.setText(cliente.getSobrenome());
-						txtClienteCPF.setText(cliente.getCpf());
 						txtEmail.setText(cliente.getEmail());
 						txtTelefoneCliente.setText(cliente.getTelefone());
 						txtClienteCNH.setText(cliente.getCnh());
@@ -298,16 +296,15 @@ public class PainelCadastroCliente extends JPanel {
 			btnClienteExcluir = new JButton("Excluir");
 			btnClienteExcluir.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					ClienteVO excluirCliente = new ClienteVO();
-
+			
 					int resposta = 0;
 
 					resposta = JOptionPane.showConfirmDialog(getRootPane(), "Deseja realmente excluir? ");
 					if(resposta == JOptionPane.YES_OPTION) {
-						clienteDAO.excluir(cliente.getCpf());
+						controlador.excluirCliente(cliente.getCpf());
 						
-						ClienteController clienteController = new ClienteController();
-						JOptionPane.showMessageDialog(null, clienteController.excluirCliente(excluirCliente));
+						ClienteBO clienteBO = new ClienteBO();
+						JOptionPane.showMessageDialog(null, clienteBO.excluir(txtClienteCPF.getText()));
 
 						limparTela();
 					}
