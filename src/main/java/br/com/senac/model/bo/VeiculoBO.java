@@ -111,7 +111,7 @@ public class VeiculoBO {
 		if (excluiu) {
 			mensagem = "Veículo excluido com sucesso!";
 		} else {
-			mensagem = "Erro ao excluir Veículo";
+			mensagem = "Erro ao excluir veículo";
 		}
 
 		return mensagem;

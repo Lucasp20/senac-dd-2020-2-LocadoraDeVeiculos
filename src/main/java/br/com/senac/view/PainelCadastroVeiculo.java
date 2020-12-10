@@ -205,8 +205,8 @@ public class PainelCadastroVeiculo extends JPanel {
 
 				
 				/*VeiculoController veiculoController = new VeiculoController();*/
-				VeiculoBO veiculoBO = new VeiculoBO();
-				JOptionPane.showMessageDialog(null, veiculoBO.cadastrarVeiculo(novoVeiculo));
+				VeiculoController clienteController = new VeiculoController();
+				JOptionPane.showMessageDialog(null, clienteController.cadastrarVeiculo(novoVeiculo));
 
 			}
 

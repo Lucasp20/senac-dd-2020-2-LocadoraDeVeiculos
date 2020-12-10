@@ -228,8 +228,8 @@ public class PainelCadastroCliente extends JPanel {
 					novoCliente.setEstado(cbEstadoCliente.getSelectedItem().toString());
 					novoCliente.setCep(txtCEPCliente.getText());   
 
-					ClienteBO clienteBO = new ClienteBO();
-					JOptionPane.showMessageDialog(null, clienteBO.cadastrarCliente(novoCliente));
+					ClienteController clienteController = new ClienteController();
+					JOptionPane.showMessageDialog(null, clienteController.cadastrarCliente(novoCliente));
 
 				} 
 

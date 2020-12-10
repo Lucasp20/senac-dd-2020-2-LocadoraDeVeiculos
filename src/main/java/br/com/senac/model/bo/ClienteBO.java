@@ -126,7 +126,7 @@ public class ClienteBO {
 		if (excluiu) {
 			mensagem = "Cliente excluido com sucesso!";
 		} else {
-			mensagem = "Erro ao excluir Cliente";
+			mensagem = "Erro ao excluir cliente";
 		}
 
 		return mensagem;
