@@ -26,6 +26,7 @@ import javax.swing.text.MaskFormatter;
 import br.com.senac.controller.ClienteController;
 import br.com.senac.controller.VeiculoController;
 import br.com.senac.model.bo.ClienteBO;
+import br.com.senac.model.bo.VeiculoBO;
 import br.com.senac.model.dao.Banco;
 import br.com.senac.model.dao.ClienteDAO;
 import br.com.senac.model.vo.ClienteVO;
@@ -227,8 +228,8 @@ public class PainelCadastroCliente extends JPanel {
 					novoCliente.setEstado(cbEstadoCliente.getSelectedItem().toString());
 					novoCliente.setCep(txtCEPCliente.getText());   
 
-					ClienteController clienteController = new ClienteController();
-					JOptionPane.showMessageDialog(null, clienteController.cadastrarCliente(novoCliente));
+					ClienteBO clienteBO = new ClienteBO();
+					JOptionPane.showMessageDialog(null, clienteBO.cadastrarCliente(novoCliente));
 
 				} 
 
