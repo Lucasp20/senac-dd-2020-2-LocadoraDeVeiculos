@@ -228,7 +228,9 @@ public class PainelCadastroCliente extends JPanel {
 							|| !cidade.substring(0,0).equals(cidade.substring(0,0).toUpperCase())) {
 								JOptionPane.showMessageDialog(null, "Nome deve iniciar com letra maiúscula.");  
 				
-					}else {*/	ClienteVO novoCliente = new ClienteVO();
+					}else {*/	
+					
+					ClienteVO novoCliente = new ClienteVO();
 											
 						novoCliente.setNome(textoFormatado(txtNomeCliente.getText()+" "));
 						novoCliente.setSobrenome(textoFormatado(txtSobrenomeCliente.getText()+" "));
