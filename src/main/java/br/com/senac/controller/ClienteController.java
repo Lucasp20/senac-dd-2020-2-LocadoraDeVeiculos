@@ -24,7 +24,6 @@ public class ClienteController {
 	}
 	
 	public boolean atualizarCliente(ClienteVO novoCliente) {
-
 		return false;
 	}
 

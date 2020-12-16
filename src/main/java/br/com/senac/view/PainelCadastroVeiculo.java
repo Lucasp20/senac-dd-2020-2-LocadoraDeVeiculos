@@ -189,27 +189,26 @@ public class PainelCadastroVeiculo extends JPanel {
 
 		btnSalvarVeiculo = new JButton(" Salvar");
 		btnSalvarVeiculo.setEnabled(false);
-		btnSalvarVeiculo.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent arg0) {
+		btnSalvarVeiculo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
 				VeiculoVO novoVeiculo = new VeiculoVO();
 
 				novoVeiculo.setPlaca(txtPlaca.getText());
 				novoVeiculo.setRenavam(txtRenavam.getText());
 				novoVeiculo.setChassi(txtChassi.getText());
 				novoVeiculo.setMarca((String) (cbMarcaVeiculo.getSelectedItem()));
-				novoVeiculo.setModelo(txtModelo.getText());
+				novoVeiculo.setModelo(txtModelo.getText().toUpperCase());
 				novoVeiculo.setAno(Integer.parseInt(cbAnoVeiculo.getSelectedItem().toString()));
 				novoVeiculo.setCor((String) (cbCorVeiculo.getSelectedItem()));
 				novoVeiculo.setMotor((String) (cbDadosVeiculoMotor.getSelectedItem()));
 				novoVeiculo.setTransmissao((String) cbDadosVeiculoTransmissao.getSelectedItem());
 
 				
-				/*VeiculoController veiculoController = new VeiculoController();*/
-				VeiculoController clienteController = new VeiculoController();
-				JOptionPane.showMessageDialog(null, clienteController.cadastrarVeiculo(novoVeiculo));
-
+			
+				VeiculoController veiculoController = new VeiculoController();
+				JOptionPane.showMessageDialog(null, veiculoController.cadastrarVeiculo(novoVeiculo));
 			}
-
 		});
 		btnSalvarVeiculo.setHorizontalAlignment(SwingConstants.LEFT);
 		btnSalvarVeiculo.setIcon(new ImageIcon(PainelCadastroVeiculo.class.getResource("/icons/Salvar.png")));
@@ -294,9 +293,8 @@ public class PainelCadastroVeiculo extends JPanel {
 		add(btnVeiculoNovo);
 
 		btnVeiculoExcluir = new JButton("Excluir");
-		btnVeiculoExcluir.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent arg0) {
-								
+		btnVeiculoExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				int resposta = 0;
 
 				resposta = JOptionPane.showConfirmDialog(getRootPane(), "Deseja realmente excluir? ");
@@ -310,7 +308,7 @@ public class PainelCadastroVeiculo extends JPanel {
 				} 
 			}
 		});
-					
+							
 		btnVeiculoExcluir.setForeground(new Color(0, 0, 139));
 		btnVeiculoExcluir.setEnabled(false);
 		btnVeiculoExcluir.setBackground(new Color(240, 248, 255));
@@ -330,4 +328,6 @@ public class PainelCadastroVeiculo extends JPanel {
 		cbDadosVeiculoMotor.setSelectedItem("");
 		cbDadosVeiculoTransmissao.setSelectedItem("");
 	}
+	
+	
 }

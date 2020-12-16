@@ -17,6 +17,8 @@ import br.com.senac.model.vo.VeiculoVO;
 
 public class LocacaoDAO {
 	
+
+	
 	public LocacaoVO inserir (LocacaoVO novaLocacao) {
 		Connection conexao = Banco.getConnection();
 		
@@ -178,7 +180,7 @@ public class LocacaoDAO {
 	
 	private LocacaoVO construirLocacaoDoResultSet(ResultSet conjuntoResultante) throws SQLException {
 		LocacaoVO locacaoBuscada = new LocacaoVO();
-		locacaoBuscada.setIdLocacao(conjuntoResultante.getInt("id"));
+		locacaoBuscada.setIdLocacao(conjuntoResultante.getInt("idCliente"));
 		Date datalocacao = conjuntoResultante.getDate("data_locacao");
 		LocalDate dataLocacao = datalocacao.toLocalDate();
 		locacaoBuscada.setDataLocacao(dataLocacao);
@@ -190,15 +192,15 @@ public class LocacaoDAO {
 					
 		//Preenche o nome do cliente
 		ClienteDAO clienteDAO = new ClienteDAO();
-		String nome = conjuntoResultante.getString("NOME");
+		String nome = conjuntoResultante.getString("nome");
 		ClienteVO nomeDoCliente = clienteDAO.pesquisarPorNome(nome);
 		locacaoBuscada.setCliente(nomeDoCliente);
 		
 		//Preenche o nome do veiculo
 		VeiculoDAO veiculoDAO = new VeiculoDAO();
-		String marca = conjuntoResultante.getString("MARCA");
+		String marca = conjuntoResultante.getString("marca");
 		VeiculoVO nomeDoVeiuclo = veiculoDAO.pesquisarPorMarca(marca);
-		locacaoBuscada.setVeiculo(nomeDoVeiuclo);
+		locacaoBuscada.setVeiculo(nomeDoVeiuclo); 
 		
 		return locacaoBuscada;
 	}
@@ -233,13 +235,7 @@ public class LocacaoDAO {
 		sql += " WHERE ";
 		boolean primeiro = true;
 		
-		if(seletor.getIdCliente() >0) {
-			if(!primeiro) {
-				sql+= "AND";
-			}
-			sql += "LOCACAO.id = " + seletor.getIdCliente();
-			primeiro = false;
-		}
+		
 		
 		if ((seletor.getNomeClienteFiltro() != null)) {
 			if (!primeiro) {

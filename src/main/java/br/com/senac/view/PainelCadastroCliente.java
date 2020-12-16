@@ -29,6 +29,7 @@ import br.com.senac.model.bo.ClienteBO;
 import br.com.senac.model.bo.VeiculoBO;
 import br.com.senac.model.dao.Banco;
 import br.com.senac.model.dao.ClienteDAO;
+import br.com.senac.model.dao.WebServiceCep;
 import br.com.senac.model.vo.ClienteVO;
 
 import javax.swing.JButton;
@@ -77,6 +78,7 @@ public class PainelCadastroCliente extends JPanel {
 	private ClienteController controlador = new ClienteController();
 	private ClienteVO cliente = new ClienteVO();
 	private ClienteBO bo = new ClienteBO();
+	
 
 	public PainelCadastroCliente() {
 		setLayout(null);
@@ -212,28 +214,41 @@ public class PainelCadastroCliente extends JPanel {
 			this.add(btnEditarCliente);
 
 			btnSalvarCliente = new JButton(" Salvar");
-			btnSalvarCliente.setVerticalAlignment(SwingConstants.TOP);
-			btnSalvarCliente.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent arg0) {
-					ClienteVO novoCliente = new ClienteVO();
+			btnSalvarCliente.setEnabled(false);
+			btnSalvarCliente.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String nome = txtNomeCliente.getText();
+					String sobrenome = txtSobrenomeCliente.getText();
+					String endereco = txtEnderecoCliente.getText();
+					String cidade = txtCidadeCliente.getText();
 					
-					novoCliente.setNome(txtNomeCliente.getText());
-					novoCliente.setSobrenome(txtSobrenomeCliente.getText());
-					novoCliente.setCpf(txtClienteCPF.getText().replace(".","").replace("-",""));
-					novoCliente.setEmail(txtEmail.getText());
-					novoCliente.setCnh(txtClienteCNH.getText());
-					novoCliente.setTelefone(txtTelefoneCliente.getText());
-					novoCliente.setEndereco(txtEnderecoCliente.getText());
-					novoCliente.setCidade(txtCidadeCliente.getText());
-					novoCliente.setEstado(cbEstadoCliente.getSelectedItem().toString());
-					novoCliente.setCep(txtCEPCliente.getText());   
-
+					
+					if(!nome.substring(0, 0).equals(nome.substring(0, 0).toUpperCase())
+							|| !sobrenome.substring(0, 0).equals(sobrenome.substring(0, 0).toUpperCase())
+							|| !endereco.substring(0, 0).equals(endereco.substring(0, 0).toUpperCase())
+							|| !cidade.substring(0, 0).equals(cidade.substring(0, 0).toUpperCase())) {
+								JOptionPane.showMessageDialog(null, "Nome deve iniciar com letra maiúscula.");
+					
+					}else {
+						ClienteVO novoCliente = new ClienteVO();
+											
+						novoCliente.setNome(textoFormatado(txtNomeCliente.getText() + " "));
+						novoCliente.setSobrenome(textoFormatado(txtSobrenomeCliente.getText() + " "));
+						novoCliente.setCpf(txtClienteCPF.getText().replace(".","").replace("-",""));
+						novoCliente.setEmail(txtEmail.getText().toLowerCase());
+						novoCliente.setCnh(txtClienteCNH.getText());
+						novoCliente.setTelefone(txtTelefoneCliente.getText());
+						novoCliente.setEndereco(textoFormatado(txtEnderecoCliente.getText() + " "));
+						novoCliente.setCidade(textoFormatado(txtCidadeCliente.getText() + " "));
+						novoCliente.setEstado(cbEstadoCliente.getSelectedItem().toString());
+						novoCliente.setCep(txtCEPCliente.getText());  
+		
 					ClienteController clienteController = new ClienteController();
 					JOptionPane.showMessageDialog(null, clienteController.cadastrarCliente(novoCliente));
-
-				} 
-
+					}
+				}
 			});
+
 			btnSalvarCliente.setIcon(new ImageIcon(PainelCadastroCliente.class.getResource("/icons/Salvar.png")));
 			btnSalvarCliente.setHorizontalAlignment(SwingConstants.LEFT);
 			btnSalvarCliente.setForeground(new Color(0, 0, 139));
@@ -275,6 +290,8 @@ public class PainelCadastroCliente extends JPanel {
 			btnClienteNovo = new JButton("Novo");
 			btnClienteNovo.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					btnSalvarCliente.setEnabled(true);
+					
 					txtNomeCliente.setEnabled(true);
 					txtSobrenomeCliente.setEnabled(true);
 					txtClienteCPF.setEnabled(true);
@@ -335,5 +352,17 @@ public class PainelCadastroCliente extends JPanel {
 		cbEstadoCliente.setSelectedItem("");
 		txtCidadeCliente.setText("");
 		txtCEPCliente.setText("");
+	}
+	
+	private String textoFormatado(String str) {
+		String[] array = str.split(" ");
+		String texto = " ";
+		for (int i = 0; i < str.split(" ").length; i++) {
+			texto += array[i].substring(0,1).toUpperCase() + array[i].substring(1).toLowerCase();
+			if (i < str.split(" ").length - 1) {
+				texto += " ";
+			}
+		}
+		return texto;
 	}
 }

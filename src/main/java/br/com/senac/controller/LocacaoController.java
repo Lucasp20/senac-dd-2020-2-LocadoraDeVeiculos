@@ -22,74 +22,11 @@ public class LocacaoController {
 	 * que km de de retirada
 	 * 
 	 */
-	private LocacaoBO bo = new LocacaoBO();
+	private LocacaoDAO locacaoDAO = new LocacaoDAO();
+	LocacaoBO locacaoBO = new LocacaoBO();
 	
-	private String mensagem = "";
-
 	public String cadastrarLocacao(LocacaoVO novaLocacao) {
-
-		if (validarCliente(novaLocacao) 
-				&& validarVeiculo(novaLocacao)
-				&& validarDataLocacao(novaLocacao)
-				&& validarKmLocacao(novaLocacao) 
-				&& validarDataEntrega(novaLocacao) 
-				&& validarKmEntrega(novaLocacao)) {
-			LocacaoDAO locacaoDAO = new LocacaoDAO();
-			locacaoDAO.inserir(novaLocacao);
-
-			mensagem = Mensagens.LOCACAO_SUCESSO;
-		}
-
-		return mensagem;
-	}
-
-	private boolean validarCliente(LocacaoVO novaLocacao) {
-		if (novaLocacao.getCliente() == null) {				
-			mensagem = Mensagens.LOCACAO_ERRO_CLIENTE;
-			return false;
-		}
-		return true;
-	}
-
-	private boolean validarVeiculo(LocacaoVO novaLocacao) {
-		if (novaLocacao.getVeiculo() == null) {
-			mensagem = Mensagens.LOCACAO_ERRO_VEICULO;
-			return false;
-		}
-		return true;
-	}
-
-	private boolean validarDataLocacao(LocacaoVO novaLocacao) {
-		if (novaLocacao.getDataLocacao() == null) {
-			mensagem = Mensagens.LOCACAO_ERRO_DATALOCACAO;
-			return false;
-		}
-		return true;
-	}
-
-	private boolean validarKmLocacao(LocacaoVO kmLocacao) {
-		if (kmLocacao == null) {
-			mensagem = Mensagens.LOCACAO_ERRO_KMLOCACAO;
-			return false;
-		}
-		return true;
-	}
-	
-
-	private boolean validarDataEntrega(LocacaoVO novaLocacao) {
-		if (novaLocacao.getDataEntrega() == null) {
-			mensagem = Mensagens.LOCACAO_ERRO_DATAENTREGA;
-			return false;
-		}
-		return true;
-	}
-
-	private boolean validarKmEntrega(LocacaoVO kmEntrega) {
-		if (kmEntrega == null ) {		
-			mensagem = Mensagens.LOCACAO_ERRO_KMENTREGA;
-			return false;
-		}
-		return true;
+		return locacaoBO.cadastrarLocacao(novaLocacao);
 	}
 	
 	public List<LocacaoVO> listarLocacaoFiltro(LocacaoSeletor seletor) {

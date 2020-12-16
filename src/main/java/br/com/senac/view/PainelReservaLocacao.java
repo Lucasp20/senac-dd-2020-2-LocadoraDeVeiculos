@@ -134,7 +134,7 @@ public class PainelReservaLocacao extends JPanel {
 		btnSalvarReserva.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
 				LocacaoVO novaLocacao = new LocacaoVO();
-
+							
 				novaLocacao.setCliente((ClienteVO) cbCliente.getSelectedItem());
 				novaLocacao.setVeiculo((VeiculoVO) cbVeiculo.getSelectedItem());
 				novaLocacao.setDataLocacao(ReservaDataLocacaoVeiculo.getDate());
@@ -144,7 +144,7 @@ public class PainelReservaLocacao extends JPanel {
 
 				LocacaoController locacaoController = new LocacaoController();
 				JOptionPane.showMessageDialog(null, locacaoController.cadastrarLocacao(novaLocacao));  
-
+				
 			}
 
 		});

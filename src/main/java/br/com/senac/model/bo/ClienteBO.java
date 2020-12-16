@@ -47,7 +47,7 @@ public class ClienteBO {
 	}
 
 	private boolean validarCpf(ClienteVO novoCliente) {
-		if (novoCliente.getCpf().length() < 11 || novoCliente.getCpf().isEmpty() || novoCliente.getCpf() == null ) {
+		if (novoCliente.getCpf().length() < 11 || novoCliente.getCpf().isEmpty()) {
 			mensagem = Mensagens.CLIENTE_ERRO_CPF;
 			return false;
 	
@@ -68,7 +68,7 @@ public class ClienteBO {
 	}
 
 	private boolean validarCnh(ClienteVO cnh) {
-		if (cnh.getCnh().trim().length() != 11 || cnh.getCnh().isEmpty()) {
+		if (cnh.getCnh().trim().length() != 15 || cnh.getCnh().isEmpty()) {
 
 			mensagem = Mensagens.CLIENTE_ERRO_CNH;
 			return false;
@@ -131,4 +131,5 @@ public class ClienteBO {
 
 		return mensagem;
 	}
-} 
+	
+}
