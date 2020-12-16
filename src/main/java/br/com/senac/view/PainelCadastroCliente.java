@@ -222,13 +222,11 @@ public class PainelCadastroCliente extends JPanel {
 					String endereco = txtEnderecoCliente.getText();
 					String cidade = txtCidadeCliente.getText();
 					
-					
 					if(!nome.substring(0, 0).equals(nome.substring(0, 0).toUpperCase())
 							|| !sobrenome.substring(0, 0).equals(sobrenome.substring(0, 0).toUpperCase())
 							|| !endereco.substring(0, 0).equals(endereco.substring(0, 0).toUpperCase())
 							|| !cidade.substring(0, 0).equals(cidade.substring(0, 0).toUpperCase())) {
 								JOptionPane.showMessageDialog(null, "Nome deve iniciar com letra maiúscula.");
-					
 					}else {
 						ClienteVO novoCliente = new ClienteVO();
 											

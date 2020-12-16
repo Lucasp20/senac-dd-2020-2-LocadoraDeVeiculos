@@ -191,23 +191,27 @@ public class PainelCadastroVeiculo extends JPanel {
 		btnSalvarVeiculo.setEnabled(false);
 		btnSalvarVeiculo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				String modelo = txtModelo.getText();
 				
+				if(!modelo.substring(0, 0).equals(modelo.substring(0, 0).toUpperCase())) {
+					JOptionPane.showMessageDialog(null, "Modelo deve iniciar com letra maiúscula.");
+				}else {
+						
 				VeiculoVO novoVeiculo = new VeiculoVO();
 
 				novoVeiculo.setPlaca(txtPlaca.getText());
 				novoVeiculo.setRenavam(txtRenavam.getText());
-				novoVeiculo.setChassi(txtChassi.getText());
+				novoVeiculo.setChassi(txtChassi.getText().toUpperCase());
 				novoVeiculo.setMarca((String) (cbMarcaVeiculo.getSelectedItem()));
-				novoVeiculo.setModelo(txtModelo.getText().toUpperCase());
+				novoVeiculo.setModelo(textoFormatado(txtModelo.getText() + " "));
 				novoVeiculo.setAno(Integer.parseInt(cbAnoVeiculo.getSelectedItem().toString()));
 				novoVeiculo.setCor((String) (cbCorVeiculo.getSelectedItem()));
 				novoVeiculo.setMotor((String) (cbDadosVeiculoMotor.getSelectedItem()));
 				novoVeiculo.setTransmissao((String) cbDadosVeiculoTransmissao.getSelectedItem());
 
-				
-			
 				VeiculoController veiculoController = new VeiculoController();
 				JOptionPane.showMessageDialog(null, veiculoController.cadastrarVeiculo(novoVeiculo));
+				}
 			}
 		});
 		btnSalvarVeiculo.setHorizontalAlignment(SwingConstants.LEFT);
@@ -328,6 +332,16 @@ public class PainelCadastroVeiculo extends JPanel {
 		cbDadosVeiculoMotor.setSelectedItem("");
 		cbDadosVeiculoTransmissao.setSelectedItem("");
 	}
-	
+	private String textoFormatado(String str) {
+		String[] array = str.split(" ");
+		String texto = " ";
+		for (int i = 0; i < str.split(" ").length; i++) {
+			texto += array[i].substring(0,1).toUpperCase() + array[i].substring(1).toLowerCase();
+			if (i < str.split(" ").length - 1) {
+				texto += " ";
+			}
+		}
+		return texto;
+	}
 	
 }

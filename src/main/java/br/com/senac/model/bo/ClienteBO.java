@@ -68,7 +68,7 @@ public class ClienteBO {
 	}
 
 	private boolean validarCnh(ClienteVO cnh) {
-		if (cnh.getCnh().trim().length() != 15 || cnh.getCnh().isEmpty()) {
+		if (cnh.getCnh().trim().length() != 11 || cnh.getCnh().isEmpty()) {
 
 			mensagem = Mensagens.CLIENTE_ERRO_CNH;
 			return false;
