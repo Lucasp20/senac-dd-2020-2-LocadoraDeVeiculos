@@ -109,19 +109,34 @@ public class PainelRelatorioCliente extends JPanel {
 		add(scrollPane);
 
 		tblRelatorioCliente = new JTable();
+		tblRelatorioCliente.setColumnSelectionAllowed(true);
+		tblRelatorioCliente.setCellSelectionEnabled(true);
+		tblRelatorioCliente.setEnabled(false);
 		tblRelatorioCliente.setModel(new DefaultTableModel(
-				new Object[][] { { null, null, null, null, null, null }, { null, null, null, null, null, null },
-						{ null, null, null, null, null, null }, { null, null, null, null, null, null },
-						{ null, null, null, null, null, null }, { null, null, null, null, null, null },
-						{ null, null, null, null, null, null }, { null, null, null, null, null, null },
-						{ null, null, null, null, null, null }, { null, null, null, null, null, null }, },
-				new String[] { "Nome", "CPF", "CNH", "Telefone", "Cidade", "Estado" }) {
-			boolean[] columnEditables = new boolean[] { false, false, false, false, false, true };
-
+			new Object[][] {
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+				{null, null, null, null, null, null},
+			},
+			new String[] {
+				"Nome", "CPF", "CNH", "Telefone", "Cidade", "Estado"
+			}
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false, false, true
+			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
 		});
+		tblRelatorioCliente.getColumnModel().getColumn(0).setResizable(false);
 		tblRelatorioCliente.getColumnModel().getColumn(0).setPreferredWidth(89);
 		tblRelatorioCliente.getColumnModel().getColumn(1).setPreferredWidth(88);
 		tblRelatorioCliente.getColumnModel().getColumn(2).setPreferredWidth(79);
@@ -138,7 +153,7 @@ public class PainelRelatorioCliente extends JPanel {
 		seletor.setCidadeFiltro(txtCidadeCliente.getText());
 		seletor.setEstadoFiltro((cbEstadoCliente.getSelectedItem().toString()));
 		seletor.setNomeFiltro(txtNomeCliente.getText());
-
+		
 		List<ClienteVO> clientes = controlador.listarClientesFiltro(seletor);
 		atualizarTabelaClientes(clientes);
 

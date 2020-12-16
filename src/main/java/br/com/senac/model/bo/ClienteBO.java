@@ -35,8 +35,8 @@ public class ClienteBO {
 			mensagem = Mensagens.CLIENTE_ERRO_NOME;
 			return false;
 		}
-		return true;
-	}
+	return true;
+}
 
 	private boolean validarSobrenome(ClienteVO novoCliente) {
 		if (novoCliente.getSobrenome().trim().length() < 3 || novoCliente.getSobrenome().isEmpty()) {
