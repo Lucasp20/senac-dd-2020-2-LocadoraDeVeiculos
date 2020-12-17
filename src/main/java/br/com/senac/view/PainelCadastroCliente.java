@@ -29,7 +29,6 @@ import br.com.senac.model.bo.ClienteBO;
 import br.com.senac.model.bo.VeiculoBO;
 import br.com.senac.model.dao.Banco;
 import br.com.senac.model.dao.ClienteDAO;
-import br.com.senac.model.dao.WebServiceCep;
 import br.com.senac.model.vo.ClienteVO;
 
 import javax.swing.JButton;
@@ -77,8 +76,6 @@ public class PainelCadastroCliente extends JPanel {
 	private JButton btnClienteExcluir;
 	private ClienteController controlador = new ClienteController();
 	private ClienteVO cliente = new ClienteVO();
-	private ClienteBO bo = new ClienteBO();
-	
 
 	public PainelCadastroCliente() {
 		setLayout(null);

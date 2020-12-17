@@ -39,5 +39,4 @@ public class LocacaoController {
 		GeradorPlanilhaLocacao gerador = new GeradorPlanilhaLocacao();
 		return gerador.gerarPlanilhaLocacao(caminho, dadosConsultados);
 	}
-
 }
