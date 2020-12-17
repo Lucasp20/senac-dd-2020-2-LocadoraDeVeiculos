@@ -37,6 +37,15 @@ public class ClienteBO {
 			mensagem = Mensagens.CLIENTE_ERRO_NOME;
 			return false;
 		}
+	
+		
+		String nomeSemNumero = novoCliente.getNome().trim();
+						
+		if(!nomeSemNumero.matches("[A-Za-z]+")) {
+			mensagem = Mensagens.CLIENTE_ERRO_NOME;
+			return false;
+		}
+		
 	return true;
 }
 		
@@ -46,6 +55,15 @@ public class ClienteBO {
 			mensagem = Mensagens.CLIENTE_ERRO_SOBRENOME;
 			return false;
 		}
+		
+		String sobrenomeSemNumero = novoCliente.getSobrenome().trim();
+		
+		if(!sobrenomeSemNumero.matches("[A-Za-z]+")) {
+			mensagem = Mensagens.CLIENTE_ERRO_SOBRENOME;
+			return false;
+		}
+		
+		
 		return true;
 	}
 
@@ -53,8 +71,16 @@ public class ClienteBO {
 		if (novoCliente.getCpf().trim().length() !=11 || novoCliente.getCpf().isEmpty() ) {
 			mensagem = Mensagens.CLIENTE_ERRO_CPF;
 			return false;
-	
-		}else if(dao.cpfJaCadastrado(novoCliente.getCpf())) {
+		}
+		
+		String cpfComLetra = novoCliente.getCpf().trim();
+		
+		if(!cpfComLetra.matches("[0-9]+")) {
+			mensagem = Mensagens.CLIENTE_ERRO_CPF;
+			return false;
+		}
+		
+		else if(dao.cpfJaCadastrado(novoCliente.getCpf())) {
 			mensagem = Mensagens.CLIENTE_ERRO_CPF_EXISTE;
 			return false;
 		}
@@ -76,6 +102,13 @@ public class ClienteBO {
 			mensagem = Mensagens.CLIENTE_ERRO_CNH;
 			return false;
 		}
+		String cnhComLetra = cnh.getCnh().trim();
+		
+		if(!cnhComLetra.matches("[0-9]+")) {
+			mensagem = Mensagens.CLIENTE_ERRO_CNH;
+			return false;
+		}
+		
 		return true;
 	}
 
@@ -85,6 +118,15 @@ public class ClienteBO {
 			mensagem = Mensagens.CLIENTE_ERRO_TELFONE;
 			return false;
 		}
+		
+		String telefoneComLetra = telefone.getTelefone().trim();
+		
+		if(!telefoneComLetra.matches("[0-9]+")) {
+			mensagem = Mensagens.CLIENTE_ERRO_TELFONE;
+			return false;
+		}
+		
+		
 		return true;
 	}
 
@@ -101,6 +143,14 @@ public class ClienteBO {
 			mensagem = Mensagens.CLIENTE_ERRO_CIDADE;
 			return false;
 		}
+		
+		String cidadeSemNumero = novoCliente.getCidade().trim();
+		
+		if(!cidadeSemNumero.matches("[A-Za-z]+")) {
+			mensagem = Mensagens.CLIENTE_ERRO_CIDADE;
+			return false;
+		}
+		
 		return true;
 	}
 
@@ -109,6 +159,13 @@ public class ClienteBO {
 			mensagem = Mensagens.CLIENTE_ERRO_ESTADO;
 			return false;
 		}
+		String estadoSemNumero = novoCliente.getEstado().trim();
+		
+		if(!estadoSemNumero.matches("[A-Za-z]+")) {
+			mensagem = Mensagens.CLIENTE_ERRO_ESTADO;
+			return false;
+		}
+		
 		return true;
 	}
 
