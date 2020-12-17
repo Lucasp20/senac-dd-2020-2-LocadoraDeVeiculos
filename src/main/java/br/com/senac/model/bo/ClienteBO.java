@@ -16,14 +16,14 @@ public class ClienteBO {
 	ClienteDAO dao = new ClienteDAO();
 
 	String mensagem = "";
-	
+
 	public String cadastrarCliente(ClienteVO novoCliente) {
 
 		if (validarNome(novoCliente) && validarSobrenome(novoCliente) && validarCpf(novoCliente)
 				&& validarEmail(novoCliente) && validarCnh(novoCliente) && validarTefone(novoCliente)
 				&& validarEndereco(novoCliente) && validarCidade(novoCliente) && validarEstado(novoCliente)
 				&& validarCep(novoCliente)) {
-			
+
 			dao.inserir(novoCliente);
 
 			mensagem = Mensagens.CLIENTE_SUCESSO;
@@ -37,54 +37,42 @@ public class ClienteBO {
 			mensagem = Mensagens.CLIENTE_ERRO_NOME;
 			return false;
 		}
-	
-		
 		String nomeSemNumero = novoCliente.getNome().trim();
-						
-		if(!nomeSemNumero.matches("[A-Za-z]+")) {
-			mensagem = Mensagens.CLIENTE_ERRO_NOME;
+
+		if (!nomeSemNumero.matches("[A-Za-z\u00C0-\u00FF]+")) {
+			mensagem = Mensagens.CLIENTE_ERRO_NOME_NUMERO;
 			return false;
 		}
 		
-	return true;
-}
-		
+		return true;
+	}
 
 	private boolean validarSobrenome(ClienteVO novoCliente) {
 		if (novoCliente.getSobrenome().trim().length() < 3 || novoCliente.getSobrenome().isEmpty()) {
 			mensagem = Mensagens.CLIENTE_ERRO_SOBRENOME;
 			return false;
 		}
-		
+
 		String sobrenomeSemNumero = novoCliente.getSobrenome().trim();
-		
-		if(!sobrenomeSemNumero.matches("[A-Za-z]+")) {
-			mensagem = Mensagens.CLIENTE_ERRO_SOBRENOME;
+
+		if (!sobrenomeSemNumero.matches("[ A-Za-z\u00C0-\u00FF]+")) {
+			mensagem = Mensagens.CLIENTE_ERRO_SOBRENOME_NUMERO;
 			return false;
 		}
-		
-		
+
 		return true;
 	}
 
 	private boolean validarCpf(ClienteVO novoCliente) {
-		if (novoCliente.getCpf().trim().length() !=11 || novoCliente.getCpf().isEmpty() ) {
+		if (novoCliente.getCpf().trim().length() != 11 || novoCliente.getCpf().isEmpty()) {
 			mensagem = Mensagens.CLIENTE_ERRO_CPF;
 			return false;
 		}
-		
-		String cpfComLetra = novoCliente.getCpf().trim();
-		
-		if(!cpfComLetra.matches("[0-9]+")) {
-			mensagem = Mensagens.CLIENTE_ERRO_CPF;
-			return false;
-		}
-		
-		else if(dao.cpfJaCadastrado(novoCliente.getCpf())) {
+		else if (dao.cpfJaCadastrado(novoCliente.getCpf())) {
 			mensagem = Mensagens.CLIENTE_ERRO_CPF_EXISTE;
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -102,31 +90,22 @@ public class ClienteBO {
 			mensagem = Mensagens.CLIENTE_ERRO_CNH;
 			return false;
 		}
-		String cnhComLetra = cnh.getCnh().trim();
-		
-		if(!cnhComLetra.matches("[0-9]+")) {
-			mensagem = Mensagens.CLIENTE_ERRO_CNH;
-			return false;
-		}
-		
+		/*
+		 * String cnhComLetra = cnh.getCnh().trim();
+		 * 
+		 * if(!cnhComLetra.matches("[0-9]+")) { mensagem = Mensagens.CLIENTE_ERRO_CNH;
+		 * return false; }
+		 */
+
 		return true;
 	}
 
 	private boolean validarTefone(ClienteVO telefone) {
 		if (telefone.getTelefone().trim().length() != 14 || telefone.getTelefone().isEmpty()) {
+			mensagem = Mensagens.CLIENTE_ERRO_TELFONE;
+			return false;
+		}
 
-			mensagem = Mensagens.CLIENTE_ERRO_TELFONE;
-			return false;
-		}
-		
-		String telefoneComLetra = telefone.getTelefone().trim();
-		
-		if(!telefoneComLetra.matches("[0-9]+")) {
-			mensagem = Mensagens.CLIENTE_ERRO_TELFONE;
-			return false;
-		}
-		
-		
 		return true;
 	}
 
@@ -143,14 +122,14 @@ public class ClienteBO {
 			mensagem = Mensagens.CLIENTE_ERRO_CIDADE;
 			return false;
 		}
-		
+
 		String cidadeSemNumero = novoCliente.getCidade().trim();
-		
-		if(!cidadeSemNumero.matches("[A-Za-z]+")) {
-			mensagem = Mensagens.CLIENTE_ERRO_CIDADE;
+
+		if (!cidadeSemNumero.matches("[ A-Za-z\u00C0-\u00FF]+")) {
+			mensagem = Mensagens.CLIENTE_ERRO_CIDADE_NUMERO;
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -160,27 +139,25 @@ public class ClienteBO {
 			return false;
 		}
 		String estadoSemNumero = novoCliente.getEstado().trim();
-		
-		if(!estadoSemNumero.matches("[A-Za-z]+")) {
+
+		if (!estadoSemNumero.matches("[A-Za-z]+")) {
 			mensagem = Mensagens.CLIENTE_ERRO_ESTADO;
 			return false;
 		}
-		
+
 		return true;
 	}
 
 	private boolean validarCep(ClienteVO cep) {
 		if (cep.getCep().trim().length() < 8 || cep.getCep().isEmpty()) {
-
 			mensagem = Mensagens.CLIENTE_ERRO_CEP;
 			return false;
 		}
 		return true;
 	}
 
-	
 	public String excluir(String cpf) {
-	
+
 		boolean excluiu = dao.excluir(cpf);
 
 		if (excluiu) {
@@ -191,5 +168,5 @@ public class ClienteBO {
 
 		return mensagem;
 	}
-	
+
 }

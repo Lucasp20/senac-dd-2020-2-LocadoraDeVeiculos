@@ -51,18 +51,22 @@ public class Mensagens {
 	public static final String ANO_2020 = "2020";
 	
 	/*Cadastro Cliente*/
-	public static final String CLIENTE_ERRO_NOME = "Nome deve conter ao menos três caracteres";
-	public static final String CLIENTE_ERRO_SOBRENOME = "Sobrenome deve conter ao menos três caracteres";
-	public static final String CLIENTE_ERRO_CPF = "CPF deve possuir tamanho 11 e somente números";
-	public static final String CLIENTE_ERRO_CPF_EXISTE = "CPF Já Existe No Sistema";
-	public static final String CLIENTE_ERRO_EMAIL = "Email deve conter ao menos três caracteres";
-	public static final String CLIENTE_ERRO_CNH = "CNH deve possuir tamanho 11 e somente números";
-	public static final String CLIENTE_ERRO_TELFONE = "Telefone deve possuir tamanho 11 e somente números";
-	public static final String CLIENTE_ERRO_ENDERECO = "Campo Estado Deve Ser Preenchido";
-	public static final String CLIENTE_ERRO_CIDADE = "Cidade deve conter ao menos três caracteres";
-	public static final String CLIENTE_ERRO_ESTADO = "Deve preencher o campo estado";
-	public static final String CLIENTE_ERRO_CEP = "CEP deve possuir 8 caracteres númericos";
-	public static final String CLIENTE_SUCESSO = "Cliente cadastrado com sucesso";
+	public static final String CLIENTE_ERRO_NOME = "Nome deve conter ao menos três caracteres.";
+	public static final String CLIENTE_ERRO_NOME_NUMERO = "Nome não pode conter números.";
+	public static final String CLIENTE_ERRO_SOBRENOME = "Sobrenome deve conter ao menos três caracteres.";
+	public static final String CLIENTE_ERRO_SOBRENOME_NUMERO = "Sobrenome não pode conter números.";
+	public static final String CLIENTE_ERRO_CPF = "CPF deve possuir tamanho 11 e somente números.";
+	public static final String CLIENTE_ERRO_CPF_EXISTE = "CPF Já Existe No Sistema.";
+	public static final String CLIENTE_ERRO_EMAIL = "Email deve conter ao menos três caracteres.";
+	public static final String CLIENTE_ERRO_CNH = "CNH deve possuir tamanho 11 e somente números.";
+	public static final String CLIENTE_ERRO_TELFONE = "Telefone deve possuir tamanho 11 e somente números.";
+	public static final String CLIENTE_ERRO_ENDERECO = "Campo Estado Deve Ser Preenchido.";
+	public static final String CLIENTE_ERRO_ENDERECO_NUMERO = "Campo estado não deve conter números.";
+	public static final String CLIENTE_ERRO_CIDADE = "Cidade deve conter ao menos três caracteres.";
+	public static final String CLIENTE_ERRO_CIDADE_NUMERO = "Campo cidade não deve conter números.";
+	public static final String CLIENTE_ERRO_ESTADO = "Deve preencher o campo estado.";
+	public static final String CLIENTE_ERRO_CEP = "CEP deve possuir 8 caracteres númericos.";
+	public static final String CLIENTE_SUCESSO = "Cliente cadastrado com sucesso.";
 	
 	
 	
