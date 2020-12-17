@@ -15,17 +15,13 @@ public class LocacaoBO {
 	 * 
 	 */
 	private LocacaoDAO dao = new LocacaoDAO();
-	
+
 	private String mensagem = "";
 
 	public String cadastrarLocacao(LocacaoVO novaLocacao) {
 
-		if (validarCliente(novaLocacao) 
-				&& validarVeiculo(novaLocacao)
-				&& validarDataLocacao(novaLocacao)
-				&& validarKmLocacao(novaLocacao) 
-				&& validarDataEntrega(novaLocacao) 
-				&& validarKmEntrega(novaLocacao)) {
+		if (validarCliente(novaLocacao) && validarVeiculo(novaLocacao) && validarDataLocacao(novaLocacao)
+				&& validarKmLocacao(novaLocacao) && validarDataEntrega(novaLocacao) && validarKmEntrega(novaLocacao)) {
 			LocacaoDAO locacaoDAO = new LocacaoDAO();
 			locacaoDAO.inserir(novaLocacao);
 
@@ -36,7 +32,7 @@ public class LocacaoBO {
 	}
 
 	private boolean validarCliente(LocacaoVO novaLocacao) {
-		if (novaLocacao.getCliente() == null) {				
+		if (novaLocacao.getCliente() == null) {
 			mensagem = Mensagens.LOCACAO_ERRO_CLIENTE;
 			return false;
 		}
@@ -66,7 +62,6 @@ public class LocacaoBO {
 		}
 		return true;
 	}
-	
 
 	private boolean validarDataEntrega(LocacaoVO novaLocacao) {
 		if (novaLocacao.getDataEntrega() == null) {
@@ -77,14 +72,17 @@ public class LocacaoBO {
 	}
 
 	private boolean validarKmEntrega(LocacaoVO kmEntrega) {
-		if (kmEntrega == null ) {		
+		if (kmEntrega == null) {
 			mensagem = Mensagens.LOCACAO_ERRO_KMENTREGA;
 			return false;
 		}
+
+		if (kmEntrega.getKmLocacao() < kmEntrega.getKmEntrega()) {
+			mensagem = Mensagens.LOCACAO_ERRO_KMENTREGA;
+			return false;
+		}
+
 		return true;
 	}
 
-
-	
-	
 }
