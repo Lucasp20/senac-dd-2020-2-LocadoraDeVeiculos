@@ -38,12 +38,12 @@ public class ClienteBO {
 			return false;
 		}
 		String nomeSemNumero = novoCliente.getNome().trim();
-				
+
 		if (!nomeSemNumero.matches("[A-Za-z\u00C0-\u00FF]+")) {
 			mensagem = Mensagens.CLIENTE_ERRO_NOME_NUMERO;
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -67,8 +67,7 @@ public class ClienteBO {
 		if (novoCliente.getCpf().trim().length() != 11 || novoCliente.getCpf().isEmpty()) {
 			mensagem = Mensagens.CLIENTE_ERRO_CPF;
 			return false;
-		}
-		else if (dao.cpfJaCadastrado(novoCliente.getCpf())) {
+		} else if (dao.cpfJaCadastrado(novoCliente.getCpf())) {
 			mensagem = Mensagens.CLIENTE_ERRO_CPF_EXISTE;
 			return false;
 		}
@@ -161,7 +160,7 @@ public class ClienteBO {
 		boolean excluiu = dao.excluir(cpf);
 
 		if (excluiu) {
-			mensagem = "Cliente excluido com sucesso!";
+			mensagem = Mensagens.CLIENTE_SUCESSO_EXCLUIR;
 		} else {
 			mensagem = "Erro ao excluir cliente";
 		}

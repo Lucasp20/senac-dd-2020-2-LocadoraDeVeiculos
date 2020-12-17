@@ -68,6 +68,9 @@ public class Mensagens {
 	public static final String CLIENTE_ERRO_CEP = "CEP deve possuir 8 caracteres númericos.";
 	public static final String CLIENTE_SUCESSO = "Cliente cadastrado com sucesso.";
 	
+	/*Excluir Cliente*/
+	public static final String CLIENTE_ERRO_EXCLUIR = "Erro ao excluir Cliente.";
+	public static final String CLIENTE_SUCESSO_EXCLUIR = "Cliente excluido com sucesso.";
 	
 	
 	/*Reserva de locação*/
