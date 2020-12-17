@@ -68,9 +68,8 @@ public class PainelCadastroVeiculo extends JPanel {
 	private JButton btnSalvarVeiculo;
 	private VeiculoController controlador = new VeiculoController();
 	
-	private VeiculoDAO dao = new VeiculoDAO();
 	private VeiculoVO veiculo = new VeiculoVO();
-	private VeiculoBO bo = new VeiculoBO();
+
 
 	public PainelCadastroVeiculo() throws ParseException {
 		setBounds(100, 100, 595, 410);

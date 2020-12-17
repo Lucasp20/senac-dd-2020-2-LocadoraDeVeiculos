@@ -49,11 +49,10 @@ public class ClienteController {
 	}
 
 	public ClienteVO pesquisarPorCpf(String cpf) {
-		cpf = cpf.replace(".", "");
-		cpf = cpf.replace("-", "");
+		cpf = cpf.replace(".","");
+		cpf = cpf.replace("-","");
 		
 		return clienteDAO.pesquisarPorCpf(cpf);
-		
 	} 
 	
 	public void excluir(String cpf) {

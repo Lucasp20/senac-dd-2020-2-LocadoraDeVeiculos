@@ -3,6 +3,8 @@ package br.com.senac.model.bo;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import br.com.senac.constante.Mensagens;
 import br.com.senac.controller.ClienteController;
 import br.com.senac.model.dao.ClienteDAO;
@@ -37,6 +39,7 @@ public class ClienteBO {
 		}
 	return true;
 }
+		
 
 	private boolean validarSobrenome(ClienteVO novoCliente) {
 		if (novoCliente.getSobrenome().trim().length() < 3 || novoCliente.getSobrenome().isEmpty()) {
@@ -47,7 +50,7 @@ public class ClienteBO {
 	}
 
 	private boolean validarCpf(ClienteVO novoCliente) {
-		if (novoCliente.getCpf().length() < 11 || novoCliente.getCpf().isEmpty()) {
+		if (novoCliente.getCpf().trim().length() !=11 || novoCliente.getCpf().isEmpty() ) {
 			mensagem = Mensagens.CLIENTE_ERRO_CPF;
 			return false;
 	
