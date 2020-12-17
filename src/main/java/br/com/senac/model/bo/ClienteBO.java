@@ -38,7 +38,7 @@ public class ClienteBO {
 			return false;
 		}
 		String nomeSemNumero = novoCliente.getNome().trim();
-
+				
 		if (!nomeSemNumero.matches("[A-Za-z\u00C0-\u00FF]+")) {
 			mensagem = Mensagens.CLIENTE_ERRO_NOME_NUMERO;
 			return false;

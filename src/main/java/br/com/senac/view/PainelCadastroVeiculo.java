@@ -201,12 +201,12 @@ public class PainelCadastroVeiculo extends JPanel {
 				novoVeiculo.setPlaca(txtPlaca.getText());
 				novoVeiculo.setRenavam(txtRenavam.getText());
 				novoVeiculo.setChassi(txtChassi.getText().toUpperCase());
-				novoVeiculo.setMarca((String) (cbMarcaVeiculo.getSelectedItem()));
+				novoVeiculo.setMarca((String)(cbMarcaVeiculo.getSelectedItem()));
 				novoVeiculo.setModelo(textoFormatado(txtModelo.getText() + " "));
 				novoVeiculo.setAno(Integer.parseInt(cbAnoVeiculo.getSelectedItem().toString()));
-				novoVeiculo.setCor((String) (cbCorVeiculo.getSelectedItem()));
-				novoVeiculo.setMotor((String) (cbDadosVeiculoMotor.getSelectedItem()));
-				novoVeiculo.setTransmissao((String) cbDadosVeiculoTransmissao.getSelectedItem());
+				novoVeiculo.setCor((String)(cbCorVeiculo.getSelectedItem()));
+				novoVeiculo.setMotor((String)(cbDadosVeiculoMotor.getSelectedItem()));
+				novoVeiculo.setTransmissao((String)cbDadosVeiculoTransmissao.getSelectedItem());
 
 				VeiculoController veiculoController = new VeiculoController();
 				JOptionPane.showMessageDialog(null, veiculoController.cadastrarVeiculo(novoVeiculo));
