@@ -77,8 +77,8 @@ public class LocacaoBO {
 			return false;
 		}
 
-		if (kmEntrega.getKmLocacao() < kmEntrega.getKmEntrega()) {
-			mensagem = Mensagens.LOCACAO_ERRO_KMENTREGA;
+		if (kmEntrega.getKmLocacao() > kmEntrega.getKmEntrega()) {
+			mensagem = "ERROO KMDEVOLUÇÃO não pode ser menor que O KMLOCAÇÃO";
 			return false;
 		}
 
